@@ -1,0 +1,31 @@
+.container{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--spacing-container);
+
+    @include media-breakpoint-down(sm) {
+        max-width: 100%;
+    }
+    
+    @include media-breakpoint-between(sm,md) {
+        max-width: $breakpoints-sm;
+    }
+    
+    @include media-breakpoint-between(md,lg) {
+        max-width: $breakpoints-md;
+    }
+    
+    @include media-breakpoint-between(lg,xl) {
+        max-width: $breakpoints-lg;
+    }
+    
+    @include media-breakpoint-between(xl,xxl) {
+        max-width: $breakpoints-xl;
+    }
+    
+    @include media-breakpoint-up(xxl) {
+        max-width: $breakpoints-xxl;
+    }
+}
+
