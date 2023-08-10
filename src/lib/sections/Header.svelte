@@ -53,7 +53,7 @@
 </section>
 
 <style lang="scss">
-  @import "../../styles/base/mixins.scss";
+  @import "../styles/base/mixins.scss";
 
   .header {
     position: relative;

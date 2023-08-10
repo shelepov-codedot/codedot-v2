@@ -29,8 +29,6 @@
 </main>
 <Footer/>
 
-<style lang="scss">
-  :global {
-    @import '../styles/styles.scss';
-  }
+<style global lang="scss">
+  @import '../lib/styles/styles.scss';
 </style>

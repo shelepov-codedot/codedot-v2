@@ -46,7 +46,7 @@
 </section>
 
 <style lang="scss">
-  @import "../../styles/base/mixins.scss";
+  @import "../styles/base/mixins.scss";
 
   .footer {
     padding: 100px 0;
