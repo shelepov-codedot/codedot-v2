@@ -4,45 +4,42 @@
       <img src="../icons/logo.svg" alt="logo img" />
     </div>
     <div class="header__content">
-      <a target="_blank" href='https://shopify.com/' class="header__shopify">
+      <a target="_blank" href="https://shopify.com/" class="header__shopify">
         <div class="header__shopify-logo">
           <img src="../icons/shopify.svg" alt="shopify img" />
         </div>
         <div class="header__shopify-text">Shopify dev</div>
       </a>
       <div class="header__nav">
-        <a href='/' class="header__nav-item">Cases</a>
+        <a href="/" class="header__nav-item">Cases</a>
         <div class="header__nav-item dropdown">
           <p>Services</p>
           <div class="header__nav-item-icon" />
           <div class="header__nav-dropdown-content">
             <div class="header__nav-dropdown-content-wrapper">
               <div class="header__nav-dropdown-content-list">
-                <a href='/' class="header__nav-item">Web Development</a>
-                <a href='/' class="header__nav-item">E-Commerce</a>
-                <a href='/' class="header__nav-item">UI/UX design</a>
-                <a href='/' class="header__nav-item">Mobile Development</a>
-                <a href='/' class="header__nav-item">
-                  Shopify/Shopify plus development
-                </a>
-                <a href='/' class="header__nav-item">Jamstack</a>
-                <a href='/' class="header__nav-item">Cross-Platform development</a>
-                <a href='/' class="header__nav-item">Game development</a>
-                <a href='/' class="header__nav-item">Computer VisionDevelopment</a>
-                <a href='/' class="header__nav-item">Custom Software development</a>
-                <a href='/' class="header__nav-item">Project management</a>
-                <a href='/' class="header__nav-item">Startup and MVP Services</a>
+                <a href="/" class="header__nav-item">Web Development</a>
+                <a href="/" class="header__nav-item">E-Commerce</a>
+                <a href="/" class="header__nav-item">UI/UX design</a>
+                <a href="/" class="header__nav-item">Mobile Development</a>
+                <a href="/" class="header__nav-item"> Shopify/Shopify plus development </a>
+                <a href="/" class="header__nav-item">Jamstack</a>
+                <a href="/" class="header__nav-item">Cross-Platform development</a>
+                <a href="/" class="header__nav-item">Game development</a>
+                <a href="/" class="header__nav-item">Computer VisionDevelopment</a>
+                <a href="/" class="header__nav-item">Custom Software development</a>
+                <a href="/" class="header__nav-item">Project management</a>
+                <a href="/" class="header__nav-item">Startup and MVP Services</a>
               </div>
               <div class="header__nav-dropdown-link">
                 <p>All services</p>
                 <span class="arrow" />
               </div>
             </div>
-            
           </div>
         </div>
-        <a href='/' class="header__nav-item">About us</a>
-        <a href='/' class="header__nav-item">Careers</a>
+        <a href="/" class="header__nav-item">About us</a>
+        <a href="/" class="header__nav-item">Careers</a>
       </div>
       <div class="header__btn">
         Get in touch <span class="header__btn-icon" />
@@ -53,23 +50,15 @@
 </section>
 
 <style lang="scss">
-  @import "../styles/base/mixins.scss";
+  @import '../styles/base/mixins.scss';
 
   .header {
     position: relative;
-    max-width: 1920px;
-    width: 100%;
     margin: 0 auto;
     z-index: 5;
-
-
-    @include media-breakpoint-down(xl) {
-      padding: 20px;
-    }
-
-    @include media-breakpoint-up(xl) {
-      padding: 20px 60px;
-    }
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0 60px;
 
     &__wrapper {
       display: flex;
@@ -241,8 +230,8 @@
       color: #212121;
 
       &::after {
-        content: "";
-        content: "";
+        content: '';
+        content: '';
         width: 100%;
         height: 1px;
         background: #212121;
@@ -250,7 +239,7 @@
       }
 
       &::before {
-        content: "";
+        content: '';
         width: 100%;
         height: 1px;
         background: #212121;
@@ -283,8 +272,8 @@
       margin-left: 8px;
 
       &::after {
-        content: "";
-        content: "";
+        content: '';
+        content: '';
         width: 100%;
         height: 1px;
         background: #006185;
@@ -292,7 +281,7 @@
       }
 
       &::before {
-        content: "";
+        content: '';
         width: 100%;
         height: 1px;
         background: #006185;
