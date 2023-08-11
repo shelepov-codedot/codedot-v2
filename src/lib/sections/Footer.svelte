@@ -2,7 +2,7 @@
   import Arrow from "../components/icons/arrow.svelte";
 
 
-  console.log("footer")
+  console.log("footer");
 </script>
 
 <section class="footer">
