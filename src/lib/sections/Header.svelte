@@ -58,7 +58,31 @@
     z-index: 5;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin: 0 60px;
+
+    @include media-breakpoint-down(md) {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    @include media-breakpoint-between(md, lg) {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+
+    @include media-breakpoint-between(lg, xl) {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      margin-left: 60px;
+      margin-right: 60px;
+    }
 
     &__wrapper {
       display: flex;
