@@ -56,6 +56,14 @@ a {
   border-radius: 40px;
 }
 
+.btn--fullwidth{
+  width: 100%;
+}
+
 .btn__icon {
   padding-left: 8px;
+}
+
+.btn__icon-arrow--rotate{
+  transform: rotate(-45deg);
 }
