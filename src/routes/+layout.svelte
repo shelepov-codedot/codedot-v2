@@ -7,6 +7,9 @@
   import Cases from '../lib/sections/Cases.svelte'
   import Text from '../lib/sections/Text.svelte'
   import Services from '../lib/sections/Services.svelte'
+  import Technologies from '../lib/sections/Technologies.svelte'
+  import Review from '../lib/sections/Review.svelte'
+
   export let data
 </script>
 
@@ -17,7 +20,9 @@
   <!-- <Counters /> -->
   <!-- <Cases /> -->
   <!-- <Text /> -->
-  <Services />
+  <!-- <Services /> -->
+  <!-- <Technologies /> -->
+  <Review />
 </main>
 
 <!-- <Footer /> -->
