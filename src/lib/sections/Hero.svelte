@@ -1,6 +1,5 @@
-
 <section class="hero">
-  <div class="hero__background" >
+  <div class="hero__background">
     <div class="hero__background-img-wrapper">
       <img src="../images/hero_back.png" alt="hero__background" class="hero__background-img" />
     </div>
@@ -61,7 +60,15 @@
 
   .hero {
     height: 100%;
-    padding-bottom: 56px;
+    position: relative;
+
+    @include media-breakpoint-down(xl) {
+      padding-bottom: 40px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding-bottom: 60px;
+    }
     &__mobile-wrapper {
       @include media-breakpoint-up(lg) {
         display: contents;
@@ -76,8 +83,8 @@
     &__background {
       position: absolute;
       width: 100%;
-      height: 1080px;
-      top: 0;
+      height: calc(100% + 106px);
+      top: -106px;
       left: 0;
     }
 

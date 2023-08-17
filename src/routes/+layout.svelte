@@ -9,6 +9,7 @@
   import Services from '../lib/sections/Services.svelte'
   import Technologies from '../lib/sections/Technologies.svelte'
   import Review from '../lib/sections/Review.svelte'
+  import Code from '../lib/sections/Code.svelte'
 
   export let data
 </script>
@@ -16,13 +17,14 @@
 <!-- <Header /> -->
 <main>
   <!-- <Hero /> -->
-  <!-- <Dignity /> -->
+  <Dignity />
   <!-- <Counters /> -->
   <!-- <Cases /> -->
   <!-- <Text /> -->
   <!-- <Services /> -->
   <!-- <Technologies /> -->
-  <Review />
+  <!-- <Review /> -->
+  <!-- <Code /> -->
 </main>
 
 <!-- <Footer /> -->

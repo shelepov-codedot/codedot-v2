@@ -1,7 +1,6 @@
 .container {
   position: relative;
   width: 100%;
-
   &:not(&--swiper) {
     margin: 0 auto;
     padding: 0 var(--spacing-container);
