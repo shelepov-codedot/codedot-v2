@@ -10,14 +10,18 @@
   import Technologies from '../lib/sections/Technologies.svelte'
   import Review from '../lib/sections/Review.svelte'
   import Code from '../lib/sections/Code.svelte'
+  import AboutHero from '../lib/sections/AboutHero.svelte'
+  import Roadmap from '../lib/sections/Roadmap.svelte'
 
   export let data
+
+  console.log(data)
 </script>
 
 <!-- <Header /> -->
 <main>
   <!-- <Hero /> -->
-  <Dignity />
+  <!-- <Dignity /> -->
   <!-- <Counters /> -->
   <!-- <Cases /> -->
   <!-- <Text /> -->
@@ -25,6 +29,8 @@
   <!-- <Technologies /> -->
   <!-- <Review /> -->
   <!-- <Code /> -->
+  <!-- <AboutHero /> -->
+  <Roadmap />
 </main>
 
 <!-- <Footer /> -->

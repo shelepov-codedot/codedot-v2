@@ -81,19 +81,19 @@
             </p>
           </swiper-slide>
           <swiper-slide class="services__item">
-            <p class="services__name">Web<br />Development</p>
+            <p class="services__name">Project<br />management</p>
             <p class="services__text">
               We supply web development services to businesses and startups in different industries.
             </p>
           </swiper-slide>
           <swiper-slide class="services__item">
-            <p class="services__name">Mobile <br />Application</p>
+            <p class="services__name">PWA <br />Development<br />Services</p>
             <p class="services__text">
               We supply web development services to businesses and startups in different industries.
             </p>
           </swiper-slide>
           <swiper-slide class="services__item">
-            <p class="services__name">Game<br />Development</p>
+            <p class="services__name">Cross-Platform <br />development</p>
             <p class="services__text">
               We supply web development services to businesses and startups in different industries.
             </p>

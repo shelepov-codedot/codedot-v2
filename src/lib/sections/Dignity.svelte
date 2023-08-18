@@ -6,7 +6,7 @@
       <svg
         width="100%"
         height="100%"
-        viewBox="0 0 1414 1898"
+        viewBox="0 0 1644 1898"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -20,23 +20,29 @@
     </div>
     <div class="dignity__text-wrapper">
       <div class="dignity__item">
-        <h2 class="dignity__name">Quality.</h2>
+        <p class="dignity__name">Quality.</p>
         <p class="dignity__text">
           We are a go-to tech company providing a full-cycle of mobile and web application
           development, solutions to UX/UI design problems, business solutions for e-commerce and
           project management.
         </p>
       </div>
+      <div class="dignity__item-img-wrapper">
+        <img src="../images/dignity.svg" alt="" class="dignity__item-img" />
+      </div>
       <div class="dignity__item">
-        <h2 class="dignity__name">Creativity.</h2>
+        <p class="dignity__name">Creativity.</p>
         <p class="dignity__text">
           We always focus on technical orientation to give you superior quality. Our team consists
           of developers who are able to work with a variety of technologies, such as: Shopify, JS,
           Gatsby.js, React and so on.
         </p>
       </div>
+      <div class="dignity__item-img-wrapper">
+        <img src="../images/dignity2.svg" alt="" class="dignity__item-img" />
+      </div>
       <div class="dignity__item">
-        <h2 class="dignity__name">Productivity.</h2>
+        <p class="dignity__name">Productivity.</p>
         <p class="dignity__text">
           Codedot Team is here to transform and expand your business through e-commerce and
           marketplaces.
@@ -47,48 +53,139 @@
 </section>
 
 <style lang="scss">
+  @import '../styles/base/mixins.scss';
   .dignity {
     margin-top: 80px;
     position: relative;
 
+    &__background {
+      @include media-breakpoint-down(lg) {
+        display: none;
+      }
+    }
+
     &__text-wrapper {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
-      position: absolute;
-      top: 0;
       height: 100%;
       width: 100%;
+
+      @include media-breakpoint-up(lg) {
+        position: absolute;
+        justify-content: space-around;
+        top: 0;
+      }
     }
 
     &__name {
       font-size: 105px;
       font-weight: 600;
       width: max-content;
+
+      @include media-breakpoint-down(lg) {
+        font-size: 40px;
+      }
+
+      @include media-breakpoint-between(lg, xl) {
+        font-size: 60px;
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        font-size: 80px;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        font-size: 105px;
+      }
     }
 
     &__text {
-      font-size: 18px;
+      @include media-breakpoint-down(md) {
+        font-size: 14px;
+      }
+
+      @include media-breakpoint-up(md) {
+        font-size: 18px;
+      }
     }
 
     &__item {
       display: flex;
       flex-direction: column;
 
-      &:nth-child(1) .dignity__text {
-        width: 379px;
+      &:nth-child(1) {
+        @include media-breakpoint-between(lg, xl) {
+          transform: translateY(-32px);
+        }
+        @include media-breakpoint-between(xl, xxl) {
+          transform: translateY(-53px);
+        }
+
+        @include media-breakpoint-up(xxl) {
+          transform: translateY(-80px);
+        }
       }
 
-      &:nth-child(2) {
+      &:nth-child(1) .dignity__text {
+        @include media-breakpoint-up(lg) {
+          width: 379px;
+        }
+      }
+
+      &:nth-child(3) {
         align-self: flex-end;
       }
 
-      &:nth-child(2) .dignity__text {
-        width: 509px;
+      &:nth-child(3) .dignity__text {
+        @include media-breakpoint-up(lg) {
+          width: 509px;
+        }
+      }
+
+      &:nth-child(5) {
+        @include media-breakpoint-between(lg, xl) {
+          transform: translateY(20px) translateX(5px);
+        }
+        @include media-breakpoint-between(xl, xxl) {
+          transform: translateY(35px);
+        }
+        @include media-breakpoint-up(xxl) {
+          transform: translateY(50px) translateX(10px);
+        }
       }
 
       &:nth-child(3) .dignity__text {
-        width: 632px;
+        @include media-breakpoint-up(lg) {
+          width: 632px;
+        }
+      }
+
+      @include media-breakpoint-down(lg) {
+        &:not(&:last-of-type) {
+          margin-bottom: 40px;
+        }
+      }
+    }
+
+    &__item-img-wrapper {
+      @include media-breakpoint-down(lg) {
+        position: relative;
+        width: 100%;
+        height: 305px;
+        margin-bottom: 40px;
+      }
+      @include media-breakpoint-up(lg) {
+        display: none;
+      }
+    }
+
+    &__item-img {
+      @include media-breakpoint-down(lg) {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
       }
     }
   }
