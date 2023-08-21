@@ -11,7 +11,8 @@
   .code {
     padding: 150px 0;
     overflow: hidden;
-
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     &__text {
       display: flex;
       align-items: center;

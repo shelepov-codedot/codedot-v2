@@ -12,13 +12,13 @@
   import Code from '../lib/sections/Code.svelte'
   import AboutHero from '../lib/sections/AboutHero.svelte'
   import Roadmap from '../lib/sections/Roadmap.svelte'
-
+  import OurMission from '../lib/sections/OurMission.svelte'
   export let data
 
   console.log(data)
 </script>
 
-<!-- <Header /> -->
+<Header />
 <main>
   <!-- <Hero /> -->
   <!-- <Dignity /> -->
@@ -27,13 +27,15 @@
   <!-- <Text /> -->
   <!-- <Services /> -->
   <!-- <Technologies /> -->
-  <!-- <Review /> -->
-  <!-- <Code /> -->
-  <!-- <AboutHero /> -->
+
+  <AboutHero />
   <Roadmap />
+  <OurMission />
+  <Review />
+  <Code />
 </main>
 
-<!-- <Footer /> -->
+<Footer />
 
 <style global lang="scss">
   @import '../lib/styles/styles.scss';
