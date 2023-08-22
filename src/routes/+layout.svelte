@@ -13,12 +13,14 @@
   import AboutHero from '../lib/sections/AboutHero.svelte'
   import Roadmap from '../lib/sections/Roadmap.svelte'
   import OurMission from '../lib/sections/OurMission.svelte'
-  export let data
+  import CasesPage from '../lib/sections/CasesPage.svelte'
+  import Careers from '../lib/sections/Careers.svelte'
+  import Jobs from '../lib/sections/Jobs.svelte'
 
-  console.log(data)
+  export let data
 </script>
 
-<Header />
+<!-- <Header /> -->
 <main>
   <!-- <Hero /> -->
   <!-- <Dignity /> -->
@@ -28,14 +30,17 @@
   <!-- <Services /> -->
   <!-- <Technologies /> -->
 
-  <AboutHero />
-  <Roadmap />
-  <OurMission />
-  <Review />
-  <Code />
+  <!-- <AboutHero /> -->
+  <!-- <Roadmap /> -->
+  <!-- <OurMission /> -->
+  <!-- <Review /> -->
+  <!-- <Code /> -->
+  <!-- <CasesPage /> -->
+  <!-- <Careers /> -->
+  <Jobs />
 </main>
 
-<Footer />
+<!-- <Footer /> -->
 
 <style global lang="scss">
   @import '../lib/styles/styles.scss';

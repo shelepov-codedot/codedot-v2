@@ -78,7 +78,6 @@
     }
 
     &__name {
-      font-size: 105px;
       font-weight: 600;
       width: max-content;
 
