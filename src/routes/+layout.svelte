@@ -16,6 +16,10 @@
   import CasesPage from '../lib/sections/CasesPage.svelte'
   import Careers from '../lib/sections/Careers.svelte'
   import Jobs from '../lib/sections/Jobs.svelte'
+  import Benefits from '../lib/sections/Benefits.svelte'
+  import ServiceHero from '../lib/sections/ServicePage/ServiceHero.svelte'
+  import Offer from '../lib/sections/ServicePage/Offer.svelte'
+  import Digital from '../lib/sections/ServicePage/Digital.svelte'
 
   export let data
 </script>
@@ -29,7 +33,6 @@
   <!-- <Text /> -->
   <!-- <Services /> -->
   <!-- <Technologies /> -->
-
   <!-- <AboutHero /> -->
   <!-- <Roadmap /> -->
   <!-- <OurMission /> -->
@@ -37,7 +40,11 @@
   <!-- <Code /> -->
   <!-- <CasesPage /> -->
   <!-- <Careers /> -->
-  <Jobs />
+  <!-- <Jobs /> -->
+  <!-- <Benefits /> -->
+  <!-- <ServiceHero /> -->
+  <!-- <Offer /> -->
+  <Digital />
 </main>
 
 <!-- <Footer /> -->

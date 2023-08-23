@@ -111,7 +111,10 @@
       position: relative;
       display: flex;
       align-items: center;
-      width: 582px;
+
+      @include media-breakpoint-up(md) {
+        width: 582px;
+      }
     }
 
     &__cannot-wrapper {
@@ -128,11 +131,18 @@
       border-radius: 40px;
       background-color: black;
       color: white;
-      padding: 6px 50px 6px 20px;
       font-family: Wix Madefor Display;
       font-size: 14px;
       text-transform: uppercase;
       font-weight: 700;
+
+      @include media-breakpoint-down(sm) {
+        padding: 6px 40px 6px 20px;
+      }
+
+      @include media-breakpoint-up(sm) {
+        padding: 6px 50px 6px 20px;
+      }
 
       &::after {
         position: absolute;
@@ -146,10 +156,16 @@
     }
 
     &__cannot {
-      font-size: 20px;
       font-weight: 700;
       text-align: center;
       margin-bottom: 40px;
+
+      @include media-breakpoint-down(md) {
+        font-size: 16px;
+      }
+      @include media-breakpoint-up(md) {
+        font-size: 20px;
+      }
     }
 
     &__search {
@@ -164,7 +180,14 @@
       color: white;
       background-color: black;
       border-radius: 40px;
-      font-size: 14px;
+
+      @include media-breakpoint-down(md) {
+        font-size: 12px;
+      }
+
+      @include media-breakpoint-up(md) {
+        font-size: 14px;
+      }
     }
 
     &__search-btn {
@@ -191,6 +214,14 @@
       display: grid;
       gap: 40px;
 
+      @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr;
+      }
+
+      @include media-breakpoint-between(md, lg) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       @include media-breakpoint-up(lg) {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -202,13 +233,25 @@
       justify-content: space-between;
       background-color: #fafafa;
       border-radius: 40px;
-      height: 320px;
-      padding: 40px;
+
+      @include media-breakpoint-down(lg) {
+        padding: 20px;
+        height: 300px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding: 40px;
+        height: 320px;
+      }
     }
 
     &__name {
       font-weight: 700;
       padding-top: 20px;
+
+      @include media-breakpoint-down(lg) {
+        font-size: 24px;
+      }
 
       @include media-breakpoint-between(lg, xl) {
         font-size: 32px;
@@ -220,8 +263,15 @@
     }
 
     &__requirements-text {
-      font-size: 18px;
       color: #838383;
+
+      @include media-breakpoint-down(md) {
+        font-size: 14px;
+      }
+
+      @include media-breakpoint-up(md) {
+        font-size: 18px;
+      }
     }
   }
 </style>
