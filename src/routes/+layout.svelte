@@ -23,6 +23,7 @@
   import Expect from '../lib/sections/ServicePage/Expect.svelte'
   import JobHero from '../lib/sections/JobPage/JobHero.svelte'
   import JobText from '../lib/sections/JobPage/JobText.svelte'
+  import OurService from '../lib/sections/OurService/OurService.svelte'
 
   export let data
 </script>
@@ -50,7 +51,8 @@
   <!-- <Digital /> -->
   <!-- <Expect /> -->
   <!-- <JobHero /> -->
-  <JobText />
+  <!-- <JobText /> -->
+  <!-- <OurService /> -->
 </main>
 
 <!-- <Footer /> -->
