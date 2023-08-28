@@ -24,6 +24,11 @@
   import JobHero from '../lib/sections/JobPage/JobHero.svelte'
   import JobText from '../lib/sections/JobPage/JobText.svelte'
   import OurService from '../lib/sections/OurService/OurService.svelte'
+  import ProjectHero from '../lib/sections/ProjectPage/ProjectHero.svelte'
+  import ProjectImages from '../lib/sections/ProjectPage/ProjectImages.svelte'
+  import ProjectTextImage from '../lib/sections/ProjectPage/ProjectTextImage.svelte'
+  import ProjectText from '../lib/sections/ProjectPage/ProjectText.svelte'
+  import ProjectGallery from '../lib/sections/ProjectPage/ProjectGallery.svelte'
 
   export let data
 </script>
@@ -53,6 +58,11 @@
   <!-- <JobHero /> -->
   <!-- <JobText /> -->
   <!-- <OurService /> -->
+  <!-- <ProjectHero /> -->
+  <!-- <ProjectImages /> -->
+  <!-- <ProjectTextImage /> -->
+  <!-- <ProjectText /> -->
+  <ProjectGallery />
 </main>
 
 <!-- <Footer /> -->
