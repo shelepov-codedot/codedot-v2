@@ -130,7 +130,7 @@
           </div>
           <div class="job-text__input-wrapper job-text__input-wrapper--textarea">
             <label for="comments" class="job-text__input-name">Comments</label>
-            <textarea name="comments" id="" rows="9" class="job-text__input" />
+            <textarea name="comments" id="comments" rows="9" class="job-text__input" />
           </div>
           <div class="job-text__file-input">
             <img src="../icons/Paper.svg" alt="" lass="job-text__file-icon" />

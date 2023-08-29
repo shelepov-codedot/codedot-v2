@@ -26,8 +26,21 @@
 
     &__text {
       text-align: center;
-      font-size: 40px;
-      line-height: 60px;
+
+      @include media-breakpoint-down(md) {
+        font-size: 24px;
+        line-height: 36px;
+      }
+
+      @include media-breakpoint-between(md, xl) {
+        font-size: 32px;
+        line-height: 48px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        font-size: 40px;
+        line-height: 60px;
+      }
     }
   }
 </style>

@@ -29,12 +29,14 @@
   import ProjectTextImage from '../lib/sections/ProjectPage/ProjectTextImage.svelte'
   import ProjectText from '../lib/sections/ProjectPage/ProjectText.svelte'
   import ProjectGallery from '../lib/sections/ProjectPage/ProjectGallery.svelte'
+  import Modal from '../lib/sections/Modal.svelte'
 
   export let data
 </script>
 
 <!-- <Header /> -->
 <main>
+  <Modal />
   <!-- <Hero /> -->
   <!-- <Dignity /> -->
   <!-- <Counters /> -->
@@ -59,10 +61,10 @@
   <!-- <JobText /> -->
   <!-- <OurService /> -->
   <!-- <ProjectHero /> -->
-  <!-- <ProjectImages /> -->
+  <ProjectImages />
   <!-- <ProjectTextImage /> -->
   <!-- <ProjectText /> -->
-  <ProjectGallery />
+  <!-- <ProjectGallery /> -->
 </main>
 
 <!-- <Footer /> -->
