@@ -1,75 +1,147 @@
 <script>
   import { onMount } from 'svelte'
 
-  let curSelect, active
+  let curSelect, active, fileInput, statusError, activeModal, cross
+  let curValue = 'Select your industry'
+  let errorText,
+    textName = ''
 
+  activeModal = true
   onMount(() => {
     curSelect.addEventListener('click', () => {
       active = !active
     })
+
+    cross.addEventListener('click', () => {
+      activeModal = false
+    })
+
+    fileInput.addEventListener('change', () => {
+      const selectedFiles = fileInput.files[0]
+      const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
+      if (selectedFiles) {
+        if (
+          selectedFilesFormat != 'pdf' &&
+          selectedFilesFormat != 'docx' &&
+          selectedFilesFormat != 'doc'
+        ) {
+          textName = ''
+          errorText = 'Data format not supported'
+          fileInput.value = null
+          fileInput.disabled = !fileInput.disabled
+          statusError = !statusError
+
+          setTimeout(() => {
+            statusError = !statusError
+            fileInput.disabled = !fileInput.disabled
+          }, 4000)
+        } else {
+          if (selectedFiles.size >= 5 * 1024 * 1024) {
+            textName = ''
+            fileInput.value = null
+            fileInput.disabled = !fileInput.disabled
+            statusError = !statusError
+            errorText = 'File size is larger than allowed'
+
+            setTimeout(() => {
+              statusError = !statusError
+              fileInput.disabled = !fileInput.disabled
+            }, 4000)
+          } else {
+            textName = fileInput.files[0].name
+          }
+        }
+      }
+    })
   })
+
+  const useSelect = (e) => {
+    curValue = e.target.textContent
+    active = !active
+  }
 </script>
 
-<section class="modal">
-  <form action="#" class="modal__wrapper">
-    <span class="modal__cross" />
-    <h2 class="modal__title">Let’s discuss your project</h2>
-    <div class="modal__items">
-      <div class="modal__input-wrapper">
-        <label for="industry" class="modal__label">Industry</label>
-        <div name="industry" class="modal__input" bind:this={curSelect}>
-          <span class="modal__input-value">Select your industry</span>
-          <span class="modal__input-icon" />
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+
+{#if activeModal}
+  <section class="modal">
+    <form action="#" class="modal__wrapper">
+      <span class="modal__cross" bind:this={cross} />
+      <h2 class="modal__title">Let’s discuss your project</h2>
+      <div class="modal__items">
+        <div class="modal__input-wrapper">
+          <label for="industry" class="modal__label">Industry</label>
+          <div class="modal__input" bind:this={curSelect}>
+            <span class="modal__input-value" name="industry">{curValue}</span>
+            <span class="modal__input-icon" />
+          </div>
+          <div class={active ? 'modal__input-list modal__input-list--active' : 'modal__input-list'}>
+            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>E-commerce</span>
+            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}
+              >Web-development</span
+            >
+            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>UI,UX design</span>
+          </div>
         </div>
-        <div class={active ? 'modal__input-list modal__input-list--active' : 'modal__input-list'}>
-          <span class="modal__input-list-item">E-commerce</span>
-          <span class="modal__input-list-item">Web-development</span>
-          <span class="modal__input-list-item">UI,UX design</span>
-          <span class="modal__input-list-item">E-commerce</span>
-          <span class="modal__input-list-item">UI,UX design</span>
-          <span class="modal__input-list-item">E-commerce</span>
+        <div class="modal__input-wrapper">
+          <label for="name" class="modal__label">Name</label>
+          <input type="text" name="name" class="modal__input" />
+        </div>
+        <div class="modal__input-wrapper">
+          <label for="phone" class="modal__label">Phone</label>
+          <input type="text" name="phone" class="modal__input" />
+        </div>
+        <div class="modal__input-wrapper">
+          <label for="email" class="modal__label">Corporate Email</label>
+          <input type="email" name="email" class="modal__input" />
+        </div>
+        <div class="modal__input-wrapper">
+          <label for="requirements" class="modal__label">Project requirements</label>
+          <textarea name="requirements" id="requirements" rows="10" class="modal__input" />
+        </div>
+        <div class="modal__file-input">
+          <input
+            type="file"
+            name="file"
+            id="file"
+            class="modal__file"
+            accept=".doc, .docx,.pdf"
+            bind:this={fileInput}
+          />
+          <img src="../icons/Paper.svg" alt="" class="modal__file-icon" />
+
+          <label for="file" class="modal__file-text-wrapper">
+            {#if textName == ''}
+              <span>DROP YOUR CV HERE, OR BROWSE</span>
+              <span>Supports: DOC, DOCX, PDF, max size 5 Mb</span>
+            {/if}
+            {#if textName}
+              <span>{textName}</span>
+            {/if}
+          </label>
+        </div>
+        <div class="modal__checkbox-wrapper">
+          <div class="modal__checkbox">
+            <input type="checkbox" name="checkbox" id="checkbox" />
+            <label for="checkbox" class="modal__checkbox-box" />
+          </div>
+          <label for="checkbox" class="modal__checkbox-text">
+            I want to protect my data by signing an NDA.
+          </label>
         </div>
       </div>
-      <div class="modal__input-wrapper">
-        <label for="name" class="modal__label">Name</label>
-        <input type="text" name="name" class="modal__input" />
-      </div>
-      <div class="modal__input-wrapper">
-        <label for="phone" class="modal__label">Phone</label>
-        <input type="text" name="phone" class="modal__input" />
-      </div>
-      <div class="modal__input-wrapper">
-        <label for="email" class="modal__label">Corporate Email</label>
-        <input type="email" name="email" class="modal__input" />
-      </div>
-      <div class="modal__input-wrapper">
-        <label for="requirements" class="modal__label">Project requirements</label>
-        <textarea name="requirements" id="requirements" rows="10" class="modal__input" />
-      </div>
-      <div class="modal__file-input">
-        <img src="../icons/Paper.svg" alt="" lass="modal__file-icon" />
-        <div class="modal__file-text-wrapper">
-          <span>DROP YOUR CV HERE, OR BROWSE</span>
-          <span>Supports: DOC, DOCX, PDF, max size 5 Mb</span>
-        </div>
-      </div>
-      <div class="modal__checkbox-wrapper">
-        <div class="modal__checkbox">
-          <input type="checkbox" name="checkbox" id="checkbox" />
-          <label for="checkbox" class="modal__checkbox-box" />
-        </div>
-        <label for="checkbox" class="modal__checkbox-text">
-          I want to protect my data by signing an NDA.
-        </label>
-      </div>
+      <button type="submit" class="btn btn--fullwidth">Send request</button>
+      <span class="modal__text">
+        This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service
+        apply.
+      </span>
+    </form>
+    <span class="modal__background" />
+    <div class={statusError ? 'modal__notice modal__notice--active' : 'modal__notice'}>
+      {errorText}
     </div>
-    <button type="submit" class="btn btn--fullwidth">Send request</button>
-    <span class="modal__text">
-      This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
-    </span>
-  </form>
-  <span class="modal__background" />
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
@@ -82,6 +154,35 @@
     width: 100%;
     height: 100%;
     z-index: 12;
+
+    &__notice {
+      position: fixed;
+      bottom: 0px;
+      font-size: 18px;
+      color: white;
+      font-weight: 600;
+      background-color: rgb(255, 0, 0);
+      z-index: 10;
+      transition: 1s ease-in-out;
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        padding: 20px;
+        left: -120%;
+      }
+
+      @include media-breakpoint-up(sm) {
+        padding: 30px;
+        border-radius: 0 20px 20px 0;
+        padding-right: 120px;
+        left: -100%;
+      }
+
+      &--active {
+        display: block;
+        left: 0;
+      }
+    }
 
     &__cross {
       cursor: pointer;
@@ -182,6 +283,19 @@
       }
     }
 
+    &__file {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    &__file:disabled ~ &__file-text-wrapper,
+    &__file:disabled ~ &__file-icon {
+      opacity: 0.5;
+    }
+
     &__background {
       position: fixed;
       top: 0;
@@ -208,6 +322,7 @@
       margin-bottom: 5px;
       font-size: 16px;
       line-height: 24px;
+      width: max-content;
     }
 
     &__input-wrapper {
@@ -237,6 +352,21 @@
       &:nth-child(1) .modal__input {
         z-index: 5;
       }
+
+      &:nth-child(1) .modal__label,
+      &:nth-child(2) .modal__label,
+      &:nth-child(3) .modal__label,
+      &:nth-child(4) .modal__label {
+        position: relative;
+
+        &::after {
+          position: absolute;
+          top: 0;
+          right: -10px;
+          content: '*';
+          color: red;
+        }
+      }
     }
 
     &__input {
@@ -264,6 +394,7 @@
     }
 
     &__input-list {
+      overflow: hidden;
       display: none;
       padding-top: 50px;
       z-index: 2;
@@ -293,6 +424,10 @@
       &:not(&:last-of-type) {
         border-bottom: 1px solid rgb(186, 186, 186);
       }
+
+      &:hover {
+        background-color: #e9f6fb;
+      }
     }
 
     &__input-value {
@@ -305,6 +440,7 @@
       padding-top: 40px;
       padding-bottom: 40px;
       display: flex;
+      position: relative;
       align-items: center;
       justify-content: center;
       border: 1px dashed #006185;

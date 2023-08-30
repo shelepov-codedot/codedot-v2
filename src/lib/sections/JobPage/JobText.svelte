@@ -1,4 +1,50 @@
-<script></script>
+<script>
+  import { onMount } from 'svelte'
+
+  let fileInput, statusError
+  let errorText,
+    textName = ''
+
+  onMount(() => {
+    fileInput.addEventListener('change', () => {
+      const selectedFiles = fileInput.files[0]
+      const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
+      if (selectedFiles) {
+        if (
+          selectedFilesFormat != 'pdf' &&
+          selectedFilesFormat != 'docx' &&
+          selectedFilesFormat != 'doc'
+        ) {
+          textName = ''
+          errorText = 'Data format not supported'
+          fileInput.value = null
+          fileInput.disabled = !fileInput.disabled
+          statusError = !statusError
+
+          setTimeout(() => {
+            statusError = !statusError
+            fileInput.disabled = !fileInput.disabled
+          }, 4000)
+        } else {
+          if (selectedFiles.size >= 5 * 1024 * 1024) {
+            textName = ''
+            fileInput.value = null
+            fileInput.disabled = !fileInput.disabled
+            statusError = !statusError
+            errorText = 'File size is larger than allowed'
+
+            setTimeout(() => {
+              statusError = !statusError
+              fileInput.disabled = !fileInput.disabled
+            }, 4000)
+          } else {
+            textName = fileInput.files[0].name
+          }
+        }
+      }
+    })
+  })
+</script>
 
 <section class="job-text">
   <div class="container">
@@ -133,16 +179,31 @@
             <textarea name="comments" id="comments" rows="9" class="job-text__input" />
           </div>
           <div class="job-text__file-input">
+            <input
+              type="file"
+              bind:this={fileInput}
+              class="job-text__file"
+              accept=".doc, .docx,.pdf"
+              name="file"
+            />
             <img src="../icons/Paper.svg" alt="" lass="job-text__file-icon" />
             <div class="job-text__file-text-wrapper">
-              <span>DROP YOUR CV HERE, OR BROWSE</span>
-              <span>Supports: DOC, DOCX, PDF, max size 5 Mb</span>
+              {#if textName === ''}
+                <span>DROP YOUR CV HERE, OR BROWSE</span>
+                <span>Supports: DOC, DOCX, PDF, max size 5 Mb</span>
+              {/if}
+              {#if textName !== ''}
+                <span>{textName}</span>
+              {/if}
             </div>
           </div>
           <button type="submit" class="btn btn--fullwidth">Apply</button>
         </div>
       </form>
     </div>
+  </div>
+  <div class={statusError ? 'job-text__notice job-text__notice--active' : 'job-text__notice'}>
+    {errorText}
   </div>
 </section>
 
@@ -158,6 +219,35 @@
 
       @include media-breakpoint-up(lg) {
         grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    &__notice {
+      position: fixed;
+      bottom: 0px;
+      font-size: 18px;
+      color: white;
+      font-weight: 600;
+      background-color: rgb(255, 0, 0);
+      z-index: 10;
+      transition: 1s ease-in-out;
+
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+        padding: 20px;
+        left: -120%;
+      }
+
+      @include media-breakpoint-up(sm) {
+        padding: 30px;
+        border-radius: 0 20px 20px 0;
+        padding-right: 120px;
+        left: -100%;
+      }
+
+      &--active {
+        display: block;
+        left: 0;
       }
     }
 
@@ -213,6 +303,18 @@
       @include media-breakpoint-up(md) {
         padding: 40px;
       }
+    }
+
+    &__file {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    &__file:disabled ~ &__file-text-wrapper,
+    &__file:disabled ~ &__file-icon {
+      opacity: 0.5;
     }
 
     &__job-name {
@@ -287,6 +389,7 @@
     }
 
     &__file-input {
+      position: relative;
       padding-top: 40px;
       padding-bottom: 40px;
       display: flex;

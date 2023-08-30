@@ -36,7 +36,7 @@
 
 <!-- <Header /> -->
 <main>
-  <Modal />
+  <!-- <Modal /> -->
   <!-- <Hero /> -->
   <!-- <Dignity /> -->
   <!-- <Counters /> -->
@@ -58,13 +58,15 @@
   <!-- <Digital /> -->
   <!-- <Expect /> -->
   <!-- <JobHero /> -->
-  <!-- <JobText /> -->
+
   <!-- <OurService /> -->
   <!-- <ProjectHero /> -->
-  <ProjectImages />
+  <!-- <ProjectImages /> -->
   <!-- <ProjectTextImage /> -->
   <!-- <ProjectText /> -->
   <!-- <ProjectGallery /> -->
+
+  <JobText />
 </main>
 
 <!-- <Footer /> -->
