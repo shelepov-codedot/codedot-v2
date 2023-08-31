@@ -31,13 +31,23 @@
   import ProjectGallery from '../lib/sections/ProjectPage/ProjectGallery.svelte'
   import Modal from '../lib/sections/Modal.svelte'
 
+  let activeModal = false
+
+  function handleClick() {
+    activeModal = true
+  }
+
+  function closeModal() {
+    activeModal = false
+  }
+
   export let data
 </script>
 
 <!-- <Header /> -->
 <main>
-  <!-- <Modal /> -->
-  <!-- <Hero /> -->
+  <Modal {activeModal} {closeModal} />
+  <Hero {handleClick} />
   <!-- <Dignity /> -->
   <!-- <Counters /> -->
   <!-- <Cases /> -->
@@ -69,7 +79,7 @@
   <JobText />
 </main>
 
-<!-- <Footer /> -->
+<Footer {handleClick} />
 
 <style global lang="scss">
   @import '../lib/styles/styles.scss';

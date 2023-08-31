@@ -1,5 +1,6 @@
 <script>
-  import Arrow from "../components/icons/arrow.svelte";
+  export let handleClick
+  import Arrow from '../components/icons/arrow.svelte'
 </script>
 
 <section class="footer">
@@ -7,24 +8,24 @@
     <div class="footer__wrapper">
       <div class="footer__content">
         <div class="footer__socials-nav">
-          <a href='/' class="footer__socials-nav-item">
+          <a href="/" class="footer__socials-nav-item">
             <img src="../icons/Facebook.png" alt="social image" />
           </a>
-          <a href='/' class="footer__socials-nav-item">
+          <a href="/" class="footer__socials-nav-item">
             <img src="../icons/Twitter.png" alt="social image" />
           </a>
-          <a href='/' class="footer__socials-nav-item">
+          <a href="/" class="footer__socials-nav-item">
             <img src="../icons/Instagram.png" alt="social image" />
           </a>
-          <a href='/' class="footer__socials-nav-item">
+          <a href="/" class="footer__socials-nav-item">
             <img src="../icons/LinkedIn.png" alt="social image" />
           </a>
         </div>
         <div class="footer__text">Want to work with us?</div>
-        <div class="footer__btn">Contact us</div>
+        <button class="btn" on:click={handleClick}>Contact us</button>
         <div class="footer__copyright">
           <span>© 2023 Codedot Agency.</span>
-          <span>All Rights Reserved — <a href='/' class="link">Privacy policy</a></span>
+          <span>All Rights Reserved — <a href="/" class="link">Privacy policy</a></span>
         </div>
       </div>
       <div class="footer__right-side">
@@ -46,7 +47,7 @@
 </section>
 
 <style lang="scss">
-  @import "../styles/base/mixins.scss";
+  @import '../styles/base/mixins.scss';
 
   .footer {
     padding: 100px 0;

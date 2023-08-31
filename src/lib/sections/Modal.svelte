@@ -1,21 +1,13 @@
 <script>
   import { onMount } from 'svelte'
+  export let activeModal, closeModal
 
-  let curSelect, active, fileInput, statusError, activeModal, cross
+  let active, fileInput, statusError
   let curValue = 'Select your industry'
   let errorText,
     textName = ''
 
-  activeModal = true
   onMount(() => {
-    curSelect.addEventListener('click', () => {
-      active = !active
-    })
-
-    cross.addEventListener('click', () => {
-      activeModal = false
-    })
-
     fileInput.addEventListener('change', () => {
       const selectedFiles = fileInput.files[0]
       const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
@@ -59,6 +51,10 @@
     curValue = e.target.textContent
     active = !active
   }
+
+  const selectValue = () => {
+    active = !active
+  }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -66,12 +62,13 @@
 {#if activeModal}
   <section class="modal">
     <form action="#" class="modal__wrapper">
-      <span class="modal__cross" bind:this={cross} />
+      <span class="modal__cross" on:click={closeModal} />
       <h2 class="modal__title">Let’s discuss your project</h2>
       <div class="modal__items">
         <div class="modal__input-wrapper">
           <label for="industry" class="modal__label">Industry</label>
-          <div class="modal__input" bind:this={curSelect}>
+          <input type="hidden" name="industry" id="industry" value={curValue.toLocaleLowerCase()} />
+          <div class="modal__input" on:click={selectValue}>
             <span class="modal__input-value" name="industry">{curValue}</span>
             <span class="modal__input-icon" />
           </div>

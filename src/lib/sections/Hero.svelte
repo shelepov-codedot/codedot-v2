@@ -1,3 +1,7 @@
+<script>
+  export let handleClick
+</script>
+
 <section class="hero">
   <div class="hero__background">
     <div class="hero__background-img-wrapper">
@@ -44,11 +48,12 @@
         </div>
         <div class="hero__discuss-inner">
           <p class="hero__discuss-text">Creative Design and <br />Development Agency.</p>
-          <a href="#" class="btn"
-            >Discuss the project <span class="btn__icon"
-              ><img src="../icons/arrow-btn.svg" alt="" /></span
-            ></a
-          >
+          <button class="btn" on:click={handleClick}>
+            Discuss the project
+            <span class="btn__icon">
+              <img src="../icons/arrow-btn.svg" alt="" />
+            </span>
+          </button>
         </div>
       </div>
     </div>
