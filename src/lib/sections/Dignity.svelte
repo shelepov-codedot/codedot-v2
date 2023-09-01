@@ -83,28 +83,35 @@
 
       @include media-breakpoint-down(lg) {
         font-size: 40px;
+        line-height: 60px;
+        margin-bottom: 5px;
       }
 
       @include media-breakpoint-between(lg, xl) {
         font-size: 60px;
+        line-height: 90px;
       }
 
       @include media-breakpoint-between(xl, xxl) {
         font-size: 80px;
+        line-height: 120px;
       }
 
       @include media-breakpoint-up(xxl) {
         font-size: 105px;
+        line-height: 170px;
       }
     }
 
     &__text {
       @include media-breakpoint-down(md) {
         font-size: 14px;
+        line-height: 21px;
       }
 
       @include media-breakpoint-up(md) {
         font-size: 18px;
+        line-height: 27px;
       }
     }
 
@@ -127,12 +134,15 @@
 
       &:nth-child(1) .dignity__text {
         @include media-breakpoint-up(lg) {
-          width: 379px;
+          width: 436px;
         }
       }
 
       &:nth-child(3) {
         align-self: flex-end;
+        @include media-breakpoint-up(xl) {
+          transform: translateX(-52px) translateY(-10px);
+        }
       }
 
       &:nth-child(3) .dignity__text {
@@ -155,13 +165,19 @@
 
       &:nth-child(3) .dignity__text {
         @include media-breakpoint-up(lg) {
-          width: 632px;
+          width: 440px;
         }
       }
 
       @include media-breakpoint-down(lg) {
         &:not(&:last-of-type) {
-          margin-bottom: 40px;
+          transform: translate(-4px, 5px);
+          margin-bottom: 35px;
+        }
+
+        &:last-of-type {
+          transform: translateX(-4px);
+          margin-bottom: 35px;
         }
       }
     }
@@ -171,7 +187,7 @@
         position: relative;
         width: 100%;
         height: 305px;
-        margin-bottom: 40px;
+        margin-bottom: 15px;
       }
       @include media-breakpoint-up(lg) {
         display: none;

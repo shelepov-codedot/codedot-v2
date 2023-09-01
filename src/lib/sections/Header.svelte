@@ -57,11 +57,15 @@
     margin: 0 auto;
     z-index: 5;
     padding-top: 20px;
-    padding-bottom: 20px;
 
     @include media-breakpoint-down(md) {
       margin-left: 20px;
       margin-right: 20px;
+      padding-bottom: 16px;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding-bottom: 20px;
     }
 
     @include media-breakpoint-between(md, lg) {
@@ -98,7 +102,7 @@
       }
 
       @include media-breakpoint-up(xl) {
-        padding: 0px 80px;
+        padding: 6px 80px;
       }
     }
 
@@ -184,7 +188,7 @@
           .header__nav-dropdown-content {
             visibility: visible;
             opacity: 1;
-            transform: translate(-40%, 0%);
+            transform: translate(-37%, 0%);
           }
         }
 
@@ -193,7 +197,7 @@
             visibility: hidden;
             opacity: 0;
             pointer-events: none;
-            transform: translate(-40%, -50%);
+            transform: translate(-37%, -50%);
           }
         }
       }
@@ -204,13 +208,14 @@
       top: 0;
       left: 0;
       width: auto;
-      padding-top: 100%;
+      padding-top: 107%;
       z-index: 5;
       transition: 0.5s;
     }
 
     &__nav-dropdown-content-wrapper {
       border-radius: 40px;
+      backdrop-filter: blur(10);
       border: 1px solid rgba(255, 255, 255, 0.5);
       background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(25px);

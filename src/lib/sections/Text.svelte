@@ -74,12 +74,18 @@
 
       @include media-breakpoint-up(md) {
         justify-content: space-evenly;
+        padding-top: 135px;
+        padding-bottom: 135px;
       }
     }
 
     &__svg {
-      @include media-breakpoint-down(md) {
-        padding: 280px 0 320px 0;
+      @include media-breakpoint-down(sm) {
+        padding: 290px 0 370px 0;
+      }
+
+      @include media-breakpoint-between(sm, md) {
+        padding: 170px 0 215px 0;
       }
     }
 
@@ -92,13 +98,14 @@
       }
 
       @include media-breakpoint-up(md) {
-        width: 55%;
+        width: 56%;
         align-self: flex-end;
         text-align: end;
       }
 
       @include media-breakpoint-down(xl) {
         font-size: 24px;
+        line-height: 36px;
       }
 
       @include media-breakpoint-between(xl, xxl) {
@@ -107,6 +114,7 @@
 
       @include media-breakpoint-up(xxl) {
         font-size: 40px;
+        line-height: 60px;
       }
     }
   }

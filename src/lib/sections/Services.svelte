@@ -119,10 +119,20 @@
         align-items: flex-start;
       }
 
-      @include media-breakpoint-up(md) {
-        margin-right: 80px;
+      @include media-breakpoint-between(md, xxl) {
         align-items: center;
         justify-content: center;
+      }
+
+      @include media-breakpoint-up(md) {
+        margin-right: 80px;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        transform: translateX(-48px);
+        padding-top: 77px;
+        margin-right: 34px;
+        align-items: center;
       }
     }
 
@@ -233,10 +243,15 @@
 
     &__btns {
       display: flex;
+      padding-top: 30px;
     }
 
     &__btn--next &__btn-icon {
       transform: rotate(-45deg);
+    }
+
+    &__btn--prev {
+      margin-right: 10px;
     }
 
     &__btn--prev &__btn-icon {
@@ -268,8 +283,8 @@
       }
 
       @include media-breakpoint-up(xxl) {
-        width: 116px;
-        height: 116px;
+        width: 92px;
+        height: 80px;
       }
     }
   }

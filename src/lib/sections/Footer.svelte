@@ -22,7 +22,7 @@
           </a>
         </div>
         <div class="footer__text">Want to work with us?</div>
-        <button class="btn" on:click={handleClick}>Contact us</button>
+        <button class="footer__btn" on:click={handleClick}>Contact us</button>
         <div class="footer__copyright">
           <span>© 2023 Codedot Agency.</span>
           <span>All Rights Reserved — <a href="/" class="link">Privacy policy</a></span>
@@ -77,7 +77,8 @@
     &__btn {
       border-radius: 40px;
       background: #006185;
-
+      border: none;
+      outline: none;
       text-align: center;
       width: fit-content;
       color: #fff;

@@ -71,8 +71,12 @@
       padding-bottom: 40px;
     }
 
+    @include media-breakpoint-down(md) {
+    }
+
     @include media-breakpoint-up(xl) {
       padding-bottom: 60px;
+      padding-top: 20px;
     }
     &__mobile-wrapper {
       @include media-breakpoint-up(lg) {
@@ -88,8 +92,8 @@
     &__background {
       position: absolute;
       width: 100%;
-      height: calc(100% + 106px);
-      top: -106px;
+      height: calc(100% + 125px);
+      top: -125px;
       left: 0;
     }
 
@@ -114,7 +118,6 @@
       display: flex;
       flex-direction: column;
       border: 1px solid #fff;
-      border-radius: 40px;
 
       backdrop-filter: blur(10px);
 
@@ -122,6 +125,7 @@
         padding-left: 20px;
         padding-right: 20px;
         padding-top: 20px;
+        border-radius: 30px;
         padding-bottom: 20px;
       }
 
@@ -130,6 +134,7 @@
         padding-right: 40px;
         padding-top: 20px;
         padding-bottom: 20px;
+        border-radius: 40px;
       }
 
       @include media-breakpoint-down(lg) {
@@ -144,6 +149,7 @@
         padding-right: 60px;
         margin-left: 40px;
         margin-right: 40px;
+        border-radius: 40px;
       }
 
       @include media-breakpoint-up(xl) {
@@ -153,6 +159,7 @@
         padding-right: 80px;
         margin-left: 60px;
         margin-right: 60px;
+        border-radius: 40px;
       }
     }
 
@@ -200,12 +207,18 @@
 
     &__tag {
       text-transform: uppercase;
-      padding: 8px 20px;
       border: 1px solid black;
       margin-bottom: 20px;
       border-radius: 40px;
       width: max-content;
 
+      @include media-breakpoint-down(sm) {
+        padding: 3px 8px;
+      }
+
+      @include media-breakpoint-up(sm) {
+        padding: 8px 20px;
+      }
       @include media-breakpoint-down(md) {
         margin-bottom: 10px;
       }
@@ -216,7 +229,13 @@
     }
 
     &__tag:not(&__tag:last-of-type) {
-      margin-right: 20px;
+      @include media-breakpoint-down(md) {
+        margin-right: 13px;
+      }
+
+      @include media-breakpoint-up(md) {
+        margin-right: 20px;
+      }
     }
 
     &__tag-name {
@@ -247,19 +266,28 @@
 
     &__img-wrapper {
       position: relative;
-      border-radius: 40px;
 
       width: 100%;
       overflow: hidden;
 
-      @include media-breakpoint-down(lg) {
+      @include media-breakpoint-down(sm) {
+        order: 2;
+        height: 201px;
+        margin-top: 36px;
+        margin-bottom: 40px;
+        border-radius: 30px;
+      }
+
+      @include media-breakpoint-between(sm, lg) {
         order: 2;
         height: 201px;
         margin-top: 40px;
         margin-bottom: 40px;
+        border-radius: 40px;
       }
 
       @include media-breakpoint-up(lg) {
+        border-radius: 40px;
         height: 328px;
       }
 
@@ -295,7 +323,13 @@
       display: flex;
       flex-direction: column;
 
-      @include media-breakpoint-down(lg) {
+      @include media-breakpoint-down(sm) {
+        order: 1;
+
+        margin-top: 14px;
+      }
+
+      @include media-breakpoint-between(sm, lg) {
         order: 1;
         margin-top: 25px;
       }
@@ -311,22 +345,27 @@
 
       @include media-breakpoint-down(sm) {
         font-size: 30px;
+        line-height: 30px;
       }
 
       @include media-breakpoint-between(sm, md) {
         font-size: 40px;
+        line-height: 40px;
       }
 
       @include media-breakpoint-between(md, lg) {
         font-size: 60px;
+        line-height: 60px;
       }
 
       @include media-breakpoint-between(lg, xl) {
         font-size: 80px;
+        line-height: 80px;
       }
 
       @include media-breakpoint-up(xl) {
         font-size: 105px;
+        line-height: 110px;
       }
     }
 
@@ -334,10 +373,17 @@
       color: #006185;
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     &__tagline:nth-child(odd) {
-      filter: blur(5px);
+      @include media-breakpoint-down(xl) {
+        filter: blur(2px);
+      }
+
+      @include media-breakpoint-up(xl) {
+        filter: blur(5px);
+      }
     }
 
     &__word {
@@ -404,6 +450,7 @@
 
       @include media-breakpoint-up(lg) {
         align-items: end;
+        transform: translateY(34px);
       }
     }
 

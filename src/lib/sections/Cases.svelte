@@ -82,7 +82,7 @@
           </div>
         </div>
       </div>
-      <a href="#" class="btn btn--fullwidth">
+      <a href="#" class="btn btn--fullwidth btn--cases">
         View all cases
         <span class="btn__icon">
           <img
@@ -100,7 +100,15 @@
   @import '../styles/base/mixins.scss';
 
   .cases {
-    margin-bottom: 40px;
+    @include media-breakpoint-down(lg) {
+      margin-top: 89px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 218px;
+      margin-bottom: 40px;
+    }
+
     &__wrapper {
       display: flex;
       flex-direction: column;
@@ -109,9 +117,17 @@
     &__title {
       font-weight: 600;
       text-align: center;
-      margin-bottom: 80px;
+
       @include media-breakpoint-down(md) {
         font-size: 40px;
+      }
+
+      @include media-breakpoint-down(lg) {
+        margin-bottom: 31px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 57px;
       }
 
       @include media-breakpoint-between(md, lg) {
@@ -283,17 +299,18 @@
       align-items: center;
       justify-content: space-between;
       position: absolute;
-      border-radius: 40px;
       border: 1px solid #ffffff33;
       backdrop-filter: blur(15px);
       z-index: 10;
 
       @include media-breakpoint-down(md) {
         padding: 20px;
+        border-radius: 30px;
       }
 
       @include media-breakpoint-up(md) {
         padding: 40px;
+        border-radius: 40px;
       }
 
       @include media-breakpoint-down(lg) {
@@ -312,10 +329,14 @@
     &__name {
       color: #ffffff;
       font-weight: 600;
-      padding-bottom: 10px;
 
       @include media-breakpoint-down(sm) {
         font-size: 24px;
+        transform: translateY(-5px);
+      }
+
+      @include media-breakpoint-up(sm) {
+        padding-bottom: 10px;
       }
 
       @include media-breakpoint-between(sm, lg) {
@@ -329,7 +350,6 @@
 
     &__tag {
       color: #ffffff;
-      padding: 8px 12px;
       width: max-content;
       text-align: center;
       border: 1px solid white;
@@ -341,6 +361,14 @@
 
       @include media-breakpoint-between(sm, lg) {
         font-size: 14px;
+      }
+
+      @include media-breakpoint-down(md) {
+        padding: 4px 10px;
+      }
+
+      @include media-breakpoint-up(md) {
+        padding: 8px 12px;
       }
 
       @include media-breakpoint-up(lg) {

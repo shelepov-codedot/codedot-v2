@@ -47,12 +47,22 @@
 <!-- <Header /> -->
 <main>
   <Modal {activeModal} {closeModal} />
-  <Hero {handleClick} />
+  <!-- <Hero {handleClick} /> -->
+  <!-- ++ -->
+
   <!-- <Dignity /> -->
+  <!-- ++ -->
+
   <!-- <Counters /> -->
+  <!-- ++ -->
+
   <!-- <Cases /> -->
+  <!-- ++ -->
+
   <!-- <Text /> -->
-  <!-- <Services /> -->
+  <!-- ++ -->
+
+  <Services />
   <!-- <Technologies /> -->
   <!-- <AboutHero /> -->
   <!-- <Roadmap /> -->
@@ -68,7 +78,6 @@
   <!-- <Digital /> -->
   <!-- <Expect /> -->
   <!-- <JobHero /> -->
-
   <!-- <OurService /> -->
   <!-- <ProjectHero /> -->
   <!-- <ProjectImages /> -->

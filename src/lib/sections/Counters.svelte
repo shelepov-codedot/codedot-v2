@@ -26,16 +26,16 @@
   .counters {
     background-color: #e9f6fb;
     border-radius: 40px;
-    
+
     &__wrapper {
       @include media-breakpoint-down(lg) {
-        padding-top: 100px;
+        padding-top: 77px;
         padding-bottom: 100px;
       }
 
       @include media-breakpoint-up(lg) {
-        padding-top: 124px;
-        padding-bottom: 124px;
+        padding-top: 80px;
+        padding-bottom: 104px;
       }
     }
 
@@ -54,9 +54,16 @@
       align-items: center;
       justify-content: center;
 
+      @include media-breakpoint-up(xxl) {
+        &:nth-child(2) {
+          padding-left: 245px;
+          padding-right: 245px;
+        }
+      }
+
       @include media-breakpoint-down(md) {
         &:not(&:last-of-type) {
-          margin-bottom: 100px;
+          margin-bottom: 77px;
         }
       }
     }
@@ -66,7 +73,7 @@
 
       @include media-breakpoint-down(md) {
         font-size: 80px;
-        line-height: 120px;
+        line-height: 100px;
       }
 
       @include media-breakpoint-between(md, lg) {
@@ -76,7 +83,7 @@
 
       @include media-breakpoint-up(lg) {
         font-size: 105px;
-        line-height: 157.7px;
+        line-height: 150px;
       }
     }
 
@@ -92,6 +99,7 @@
       }
 
       @include media-breakpoint-up(lg) {
+        transform: translateY(-10px);
         font-size: 32px;
         line-height: 48px;
       }

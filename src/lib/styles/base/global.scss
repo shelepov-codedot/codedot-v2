@@ -1,3 +1,5 @@
+@import './mixins.scss';
+
 * {
   font-family: var(--typography-fontFamily);
   scroll-behavior: smooth;
@@ -55,16 +57,30 @@ a {
   border: none;
   color: white;
   border-radius: 40px;
-}
 
-.btn--fullwidth {
-  width: 100%;
-}
+  font-size: 16px;
 
-.btn__icon {
-  padding-left: 8px;
-}
+  &--fullwidth {
+    width: 100%;
+  }
 
-.btn__icon-arrow--rotate {
-  transform: rotate(-45deg);
+  &__icon {
+    padding-left: 8px;
+  }
+
+  &__icon-arrow--rotate {
+    transform: rotate(-45deg);
+  }
+
+  &--cases {
+    @include media-breakpoint-down(md) {
+      padding: 9px;
+      font-size: 20px;
+    }
+
+    @include media-breakpoint-up(md) {
+      padding: 26px;
+      font-size: 24px;
+    }
+  }
 }

@@ -310,6 +310,7 @@
       opacity: 0;
       width: 100%;
       height: 100%;
+      cursor: pointer;
     }
 
     &__file:disabled ~ &__file-text-wrapper,
@@ -411,6 +412,7 @@
     &__file-text-wrapper {
       display: flex;
       flex-direction: column;
+      cursor: pointer;
 
       span:first-of-type {
         position: relative;

@@ -1,51 +1,48 @@
 <script>
-  import { onMount } from 'svelte'
   export let activeModal, closeModal
 
-  let active, fileInput, statusError
+  let active, statusError
   let curValue = 'Select your industry'
   let errorText,
     textName = ''
 
-  onMount(() => {
-    fileInput.addEventListener('change', () => {
-      const selectedFiles = fileInput.files[0]
-      const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
-      if (selectedFiles) {
-        if (
-          selectedFilesFormat != 'pdf' &&
-          selectedFilesFormat != 'docx' &&
-          selectedFilesFormat != 'doc'
-        ) {
-          textName = ''
-          errorText = 'Data format not supported'
-          fileInput.value = null
-          fileInput.disabled = !fileInput.disabled
+  const selectFile = (e) => {
+    const selectedFiles = e.target.files[0]
+    const selectedFilesFormat = e.target.files[0].name.split('.').splice(-1, 1)[0]
+    if (selectedFiles) {
+      if (
+        selectedFilesFormat != 'pdf' &&
+        selectedFilesFormat != 'docx' &&
+        selectedFilesFormat != 'doc'
+      ) {
+        textName = ''
+        errorText = 'Data format not supported'
+        e.target.value = null
+        e.target.disabled = !e.target.disabled
+        statusError = !statusError
+
+        setTimeout(() => {
           statusError = !statusError
+          e.target.disabled = !e.target.disabled
+        }, 4000)
+      } else {
+        if (selectedFiles.size >= 5 * 1024 * 1024) {
+          textName = ''
+          e.target.value = null
+          e.target.disabled = !e.target.disabled
+          statusError = !statusError
+          errorText = 'File size is larger than allowed'
 
           setTimeout(() => {
             statusError = !statusError
-            fileInput.disabled = !fileInput.disabled
+            e.target.disabled = !e.target.disabled
           }, 4000)
         } else {
-          if (selectedFiles.size >= 5 * 1024 * 1024) {
-            textName = ''
-            fileInput.value = null
-            fileInput.disabled = !fileInput.disabled
-            statusError = !statusError
-            errorText = 'File size is larger than allowed'
-
-            setTimeout(() => {
-              statusError = !statusError
-              fileInput.disabled = !fileInput.disabled
-            }, 4000)
-          } else {
-            textName = fileInput.files[0].name
-          }
+          textName = e.target.files[0].name
         }
       }
-    })
-  })
+    }
+  }
 
   const useSelect = (e) => {
     curValue = e.target.textContent
@@ -74,9 +71,9 @@
           </div>
           <div class={active ? 'modal__input-list modal__input-list--active' : 'modal__input-list'}>
             <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>E-commerce</span>
-            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}
-              >Web-development</span
-            >
+            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>
+              Web-development
+            </span>
             <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>UI,UX design</span>
           </div>
         </div>
@@ -103,7 +100,7 @@
             id="file"
             class="modal__file"
             accept=".doc, .docx,.pdf"
-            bind:this={fileInput}
+            on:change={(e) => selectFile(e)}
           />
           <img src="../icons/Paper.svg" alt="" class="modal__file-icon" />
 
@@ -454,6 +451,7 @@
     &__file-text-wrapper {
       display: flex;
       flex-direction: column;
+      cursor: pointer;
 
       span:first-of-type {
         position: relative;
