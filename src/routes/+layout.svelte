@@ -47,43 +47,49 @@
 <!-- <Header /> -->
 <main>
   <Modal {activeModal} {closeModal} />
-  <!-- <Hero {handleClick} /> -->
+  <Hero {handleClick} />
   <!-- ++ -->
 
-  <!-- <Dignity /> -->
+  <Dignity />
   <!-- ++ -->
 
-  <!-- <Counters /> -->
+  <Counters />
   <!-- ++ -->
 
-  <!-- <Cases /> -->
+  <Cases />
   <!-- ++ -->
 
-  <!-- <Text /> -->
+  <Text />
   <!-- ++ -->
 
   <Services />
-  <!-- <Technologies /> -->
-  <!-- <AboutHero /> -->
-  <!-- <Roadmap /> -->
-  <!-- <OurMission /> -->
-  <!-- <Review /> -->
-  <!-- <Code /> -->
-  <!-- <CasesPage /> -->
-  <!-- <Careers /> -->
-  <!-- <Jobs /> -->
-  <!-- <Benefits /> -->
-  <!-- <ServiceHero /> -->
-  <!-- <Offer /> -->
-  <!-- <Digital /> -->
-  <!-- <Expect /> -->
-  <!-- <JobHero /> -->
-  <!-- <OurService /> -->
-  <!-- <ProjectHero /> -->
-  <!-- <ProjectImages /> -->
-  <!-- <ProjectTextImage /> -->
-  <!-- <ProjectText /> -->
-  <!-- <ProjectGallery /> -->
+
+  <Technologies />
+  <!-- ++ -->
+
+  <Review />
+  <!-- ++ -->
+
+  <AboutHero />
+  <Roadmap />
+  <OurMission />
+
+  <Code />
+  <CasesPage />
+  <Careers />
+  <Jobs />
+  <Benefits />
+  <ServiceHero />
+  <Offer />
+  <Digital />
+  <Expect />
+  <JobHero />
+  <OurService />
+  <ProjectHero />
+  <ProjectImages />
+  <ProjectTextImage />
+  <ProjectText />
+  <ProjectGallery />
 
   <JobText />
 </main>

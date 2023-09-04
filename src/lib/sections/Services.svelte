@@ -1,7 +1,6 @@
 <script>
   import { onMount } from 'svelte'
   import { register } from 'swiper/element/bundle'
-
   register()
 
   const spaceBetween = 40
@@ -37,6 +36,9 @@
 
     // and now initialize it
     swiperEl.initialize()
+
+    window.addEventListener('resize', updateMarginLeft)
+    window.addEventListener('load', updateMarginLeft)
   })
 </script>
 

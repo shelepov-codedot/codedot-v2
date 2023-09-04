@@ -112,8 +112,20 @@
     border-radius: 40px;
 
     &__wrapper {
-      padding-top: 250px;
-      padding-bottom: 250px;
+      @include media-breakpoint-down(md) {
+        padding-top: 90px;
+        padding-bottom: 100px;
+      }
+
+      @include media-breakpoint-between(md, xl) {
+        padding-top: 120px;
+        padding-bottom: 170px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding-top: 219px;
+        padding-bottom: 267px;
+      }
     }
 
     &__title {
@@ -128,11 +140,11 @@
       }
 
       @include media-breakpoint-down(lg) {
-        margin-bottom: 60px;
+        margin-bottom: 31px;
       }
 
       @include media-breakpoint-up(lg) {
-        margin-bottom: 80px;
+        margin-bottom: 54px;
       }
 
       @include media-breakpoint-between(lg, xl) {
@@ -162,8 +174,8 @@
 
       @include media-breakpoint-up(lg) {
         grid-template-columns: 35% 65%;
-        padding-top: 30px;
-        padding-bottom: 30px;
+        padding-top: 25px;
+        padding-bottom: 33px;
       }
     }
 
@@ -176,10 +188,12 @@
 
       @include media-breakpoint-down(md) {
         font-size: 28px;
+        line-height: 42px;
       }
 
       @include media-breakpoint-up(md) {
         font-size: 40px;
+        line-height: 60px;
       }
 
       @include media-breakpoint-between(sm, lg) {
@@ -201,14 +215,20 @@
     &__stack-item {
       @include media-breakpoint-down(sm) {
         margin-right: 20px;
+        font-size: 14px;
+        line-height: 21px;
       }
 
       @include media-breakpoint-between(sm, lg) {
         margin-right: 30px;
+        font-size: 14px;
+        line-height: 21px;
       }
 
       @include media-breakpoint-up(lg) {
         margin-left: 40px;
+        font-size: 16px;
+        line-height: 24px;
       }
     }
   }

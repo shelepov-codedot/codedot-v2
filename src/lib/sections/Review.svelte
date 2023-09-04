@@ -168,7 +168,7 @@
       }
 
       @include media-breakpoint-up(xl) {
-        padding: 80px 100px;
+        padding: 88px 142px;
       }
     }
 
@@ -179,7 +179,7 @@
       }
 
       @include media-breakpoint-up(lg) {
-        width: 76px;
+        width: 104px;
         height: 76px;
       }
       filter: brightness(0);
@@ -212,8 +212,8 @@
           top: -20px;
         }
         @include media-breakpoint-up(md) {
-          left: -40px;
-          top: -40px;
+          left: 0px;
+          top: -35px;
         }
       }
 
@@ -223,8 +223,8 @@
           bottom: -20px;
         }
         @include media-breakpoint-up(md) {
-          right: -40px;
-          bottom: -40px;
+          right: 0px;
+          bottom: -80px;
         }
 
         transform: rotate(180deg);
@@ -242,6 +242,7 @@
 
       @include media-breakpoint-up(lg) {
         font-size: 48px;
+        line-height: 70px;
         text-indent: 100px;
       }
     }
