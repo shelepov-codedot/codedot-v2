@@ -44,7 +44,7 @@
   export let data
 </script>
 
-<!-- <Header /> -->
+<Header />
 <main>
   <Modal {activeModal} {closeModal} />
   <Hero {handleClick} />
