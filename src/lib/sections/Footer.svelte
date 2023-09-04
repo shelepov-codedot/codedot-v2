@@ -38,8 +38,7 @@
             <span class="bold">welcome</span>@code.dot
           </div>
 
-          <!-- <Arrow width={100} height={3}/> -->
-          <div class="arrow footer__blur-box-arrow" />
+          <a href="#" class="arrow footer__blur-box-arrow" />
         </div>
       </div>
     </div>
@@ -50,7 +49,7 @@
   @import '../styles/base/mixins.scss';
 
   .footer {
-    padding: 100px 0;
+    padding: 112px 0;
 
     &__wrapper {
       display: grid;
@@ -61,6 +60,7 @@
 
       @include media-breakpoint-up(xl) {
         grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
       }
     }
 
@@ -68,10 +68,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-
-      @include media-breakpoint-up(xl) {
-        margin-right: 40px;
-      }
     }
 
     &__btn {
@@ -98,7 +94,14 @@
     &__socials-nav {
       display: flex;
       align-items: center;
-      margin-bottom: 100px;
+
+      @include media-breakpoint-down(lg) {
+        margin-bottom: 60px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 100px;
+      }
     }
 
     &__socials-nav-item {
@@ -154,16 +157,25 @@
     &__copyright {
       color: #838383;
       text-align: center;
-      font-size: 14px;
+
       font-style: normal;
       font-weight: 400;
-      line-height: 21px;
 
       @include media-breakpoint-down(xl) {
         margin-top: 60px;
         margin-bottom: 60px;
         display: flex;
         flex-direction: column;
+      }
+
+      @include media-breakpoint-down(lg) {
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        font-size: 14px;
+        line-height: 21px;
       }
 
       @include media-breakpoint-up(xl) {
@@ -176,6 +188,9 @@
     }
 
     &__right-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
       border-radius: 40px;
       width: 100%;
@@ -187,6 +202,7 @@
 
       @include media-breakpoint-up(xl) {
         min-height: 600px;
+        transform: translateY(-12px);
       }
     }
 
@@ -218,9 +234,7 @@
         padding: 20px;
       }
       @include media-breakpoint-up(xl) {
-        bottom: 40px;
         border-radius: 40px;
-        left: 40px;
         width: calc(100% - 80px);
         padding: 42px 40px;
       }
@@ -229,12 +243,18 @@
     &__blur-box-text {
       color: #006185;
 
-      @include media-breakpoint-down(xl) {
+      @include media-breakpoint-down(lg) {
         font-size: 16px;
         line-height: 24px;
+        margin-right: 20px;
       }
 
-      @include media-breakpoint-up(xl) {
+      @include media-breakpoint-between(xl, xxl) {
+        font-size: 32px;
+        line-height: 48px;
+      }
+
+      @include media-breakpoint-up(xxl) {
         font-size: 48px;
         line-height: 72px;
       }
@@ -248,7 +268,26 @@
       }
     }
 
-    &__blur-box-arrow {
+    .arrow {
+      @include media-breakpoint-down(lg) {
+        width: 30px;
+        height: 30px;
+      }
+
+      @include media-breakpoint-between(lg, xl) {
+        width: 45px;
+        height: 45px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        width: 75px;
+        height: 75px;
+      }
+
+      transform: rotate(-45deg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.9002 12L4.5 12" stroke="%23006185" stroke-linecap="square"/><path d="M13.4502 5.97541L19.5002 11.9994L13.4502 18.0244" stroke="%23006185" stroke-linecap="square"/></svg>');
     }
   }
 </style>

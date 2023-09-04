@@ -29,6 +29,14 @@
   @import '../styles/base/mixins.scss';
 
   .about-hero {
+    @include media-breakpoint-down(lg) {
+      padding-top: 109px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 196px;
+      padding-bottom: 100px;
+    }
     &__title-wrapper {
       display: flex;
       flex-direction: column;
@@ -38,7 +46,7 @@
       @include media-breakpoint-down(md) {
         font-size: 40px;
         &:nth-child(1) {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
         }
       }
 
@@ -81,7 +89,7 @@
       }
 
       @include media-breakpoint-down(lg) {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
 
       @include media-breakpoint-between(lg, xl) {
@@ -166,6 +174,7 @@
       @include media-breakpoint-down(sm) {
         width: 100%;
         font-size: 14px;
+        line-height: 21px;
       }
       @include media-breakpoint-between(sm, lg) {
         font-size: 16px;

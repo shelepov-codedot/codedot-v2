@@ -44,57 +44,62 @@
   export let data
 </script>
 
-<Header />
+<!-- <Header /> -->
 <main>
   <Modal {activeModal} {closeModal} />
-  <Hero {handleClick} />
+  <!-- <Hero {handleClick} /> -->
   <!-- ++ -->
 
-  <Dignity />
+  <!-- <Dignity /> -->
   <!-- ++ -->
 
-  <Counters />
+  <!-- <Counters /> -->
   <!-- ++ -->
 
-  <Cases />
+  <!-- <Cases /> -->
   <!-- ++ -->
 
-  <Text />
+  <!-- <Text /> -->
   <!-- ++ -->
 
-  <Services />
+  <!-- <Services /> -->
 
-  <Technologies />
+  <!-- <Technologies /> -->
   <!-- ++ -->
 
-  <Review />
+  <!-- <Review /> -->
   <!-- ++ -->
 
-  <AboutHero />
+  <!-- <Code /> -->
+  <!-- ++ -->
+
+  <!-- <AboutHero /> -->
+  <!-- ++ -->
+
   <Roadmap />
-  <OurMission />
+  <!-- <OurMission /> -->
 
-  <Code />
-  <CasesPage />
-  <Careers />
-  <Jobs />
-  <Benefits />
-  <ServiceHero />
-  <Offer />
-  <Digital />
-  <Expect />
-  <JobHero />
-  <OurService />
-  <ProjectHero />
-  <ProjectImages />
-  <ProjectTextImage />
-  <ProjectText />
-  <ProjectGallery />
+  <!-- <CasesPage /> -->
+  <!-- <Careers /> -->
+  <!-- <Jobs /> -->
+  <!-- <Benefits /> -->
+  <!-- <ServiceHero /> -->
+  <!-- <Offer /> -->
+  <!-- <Digital /> -->
+  <!-- <Expect /> -->
+  <!-- <JobHero /> -->
+  <!-- <OurService /> -->
+  <!-- <ProjectHero /> -->
+  <!-- <ProjectImages /> -->
+  <!-- <ProjectTextImage /> -->
+  <!-- <ProjectText /> -->
+  <!-- <ProjectGallery /> -->
 
-  <JobText />
+  <!-- <JobText /> -->
 </main>
 
-<Footer {handleClick} />
+<!-- <Footer {handleClick} /> -->
+<!-- ++ -->
 
 <style global lang="scss">
   @import '../lib/styles/styles.scss';

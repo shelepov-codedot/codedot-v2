@@ -149,6 +149,12 @@
       user-select: none;
     }
 
+    &__btns {
+      @include media-breakpoint-down(lg) {
+        margin-top: 5px;
+      }
+    }
+
     &__btn--next &__btn-icon {
       transform: rotate(-45deg);
       user-select: none;
@@ -161,7 +167,7 @@
 
     &__item {
       @include media-breakpoint-down(md) {
-        padding: 20px;
+        padding: 16px 20px;
       }
       @include media-breakpoint-between(md, xl) {
         padding: 40px;
@@ -174,8 +180,8 @@
 
     &__btn-icon {
       @include media-breakpoint-down(lg) {
-        width: 40px;
-        height: 40px;
+        width: 65px;
+        height: 50px;
       }
 
       @include media-breakpoint-up(lg) {
@@ -212,19 +218,19 @@
           top: -20px;
         }
         @include media-breakpoint-up(md) {
-          left: 0px;
-          top: -35px;
+          left: -40px;
+          top: -40px;
         }
       }
 
       &::after {
         @include media-breakpoint-down(md) {
-          right: -20px;
-          bottom: -20px;
+          right: -18px;
+          bottom: -18px;
         }
         @include media-breakpoint-up(md) {
-          right: 0px;
-          bottom: -80px;
+          right: -40px;
+          bottom: -40px;
         }
 
         transform: rotate(180deg);
@@ -232,12 +238,14 @@
 
       @include media-breakpoint-down(sm) {
         font-size: 28px;
-        text-indent: 50px;
+        line-height: 42px;
+        text-indent: 20px;
       }
 
       @include media-breakpoint-between(sm, lg) {
         font-size: 30px;
-        text-indent: 50px;
+        line-height: 45px;
+        text-indent: 60px;
       }
 
       @include media-breakpoint-up(lg) {
@@ -248,8 +256,15 @@
     }
 
     &__user-wrapper {
+      @include media-breakpoint-down(lg) {
+        transform: translateX(-20px);
+        margin-top: 40px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-top: 85px;
+      }
       display: flex;
-      margin-top: 80px;
     }
 
     &__user-img-wrapper {
@@ -292,7 +307,7 @@
 
       @include media-breakpoint-up(md) {
         font-size: 24px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
     }
 
@@ -303,6 +318,13 @@
 
       @include media-breakpoint-up(md) {
         font-size: 20px;
+      }
+    }
+
+    &__jobtitle {
+      @include media-breakpoint-up(md) {
+        font-size: 20px;
+        line-height: 30px;
       }
     }
   }

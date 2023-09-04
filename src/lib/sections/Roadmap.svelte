@@ -122,14 +122,6 @@
       display: flex;
       flex-direction: column;
 
-      @include media-breakpoint-between(lg, xl) {
-        gap: 20px;
-      }
-
-      @include media-breakpoint-up(xl) {
-        gap: 50px;
-      }
-
       &:not(&:last-of-type) {
         @include media-breakpoint-between(lg, xl) {
           margin-bottom: 180px;
@@ -143,7 +135,7 @@
         }
       }
 
-      &:nth-child(1) {
+      &:nth-child(1) .roadmap__text {
         @include media-breakpoint-between(lg, xl) {
           width: 330px;
         }
@@ -153,7 +145,7 @@
         }
 
         @include media-breakpoint-up(xxl) {
-          width: 577px;
+          width: 440px;
         }
       }
 
@@ -174,7 +166,7 @@
         }
       }
 
-      &:nth-child(5) {
+      &:nth-child(5) .roadmap__text {
         @include media-breakpoint-between(lg, xl) {
           width: 283px;
         }
@@ -184,7 +176,7 @@
         }
 
         @include media-breakpoint-up(xxl) {
-          width: 495px;
+          width: 465px;
         }
       }
 
@@ -192,7 +184,9 @@
         @include media-breakpoint-up(lg) {
           align-self: flex-end;
         }
+      }
 
+      &:nth-child(7) .roadmap__text {
         @include media-breakpoint-between(lg, xl) {
           width: 430px;
         }
@@ -202,7 +196,7 @@
         }
 
         @include media-breakpoint-up(xxl) {
-          width: 753px;
+          width: 460px;
         }
       }
 
@@ -244,7 +238,7 @@
       position: relative;
       z-index: 2;
       background-color: white;
-
+      width: max-content;
       @include media-breakpoint-down(lg) {
         font-size: 40px;
       }
@@ -252,6 +246,10 @@
       @include media-breakpoint-between(lg, xl) {
         font-size: 60px;
         line-height: 45px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 32px;
       }
 
       @include media-breakpoint-between(xl, xxl) {
@@ -267,6 +265,7 @@
 
     &__text {
       font-size: 18px;
+      line-height: 27px;
     }
 
     &__background-img-wrapper {
@@ -286,6 +285,7 @@
 
         @include media-breakpoint-up(xxl) {
           height: 1150px;
+          transform: translate(-8px, 0);
         }
       }
 
@@ -302,7 +302,7 @@
 
         @include media-breakpoint-up(xxl) {
           height: 734px;
-          transform: translateX(-140px) translateY(-230px);
+          transform: translateX(-140px) translateY(-202px);
         }
       }
       &:nth-of-type(3) {
@@ -318,7 +318,7 @@
 
         @include media-breakpoint-up(xxl) {
           height: 852px;
-          transform: translateX(192px) translateY(-332px);
+          transform: translateX(192px) translateY(-310px);
         }
       }
 
@@ -335,7 +335,7 @@
 
         @include media-breakpoint-up(xxl) {
           height: 918px;
-          transform: translateX(-20px) translateY(-435px);
+          transform: translateX(-20px) translateY(-393px);
         }
       }
 
@@ -351,8 +351,8 @@
         }
 
         @include media-breakpoint-up(xxl) {
-          height: 1074px;
-          transform: translateX(45px) translateY(-535px);
+          height: 1093px;
+          transform: translateX(45px) translateY(-452px);
         }
       }
     }
