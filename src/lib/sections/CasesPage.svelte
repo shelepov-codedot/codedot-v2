@@ -1,29 +1,27 @@
 <script>
   import { onMount } from 'svelte'
   import { register } from 'swiper/element/bundle'
+  import Offer from './ServicePage/Offer.svelte'
 
   register()
 
   onMount(() => {
     const swiperElTags = document.querySelector('.casespage__filtertag-wrapper')
 
-    // swiper parameters
     const swiperParams = {
+      slidesPerView: 'auto',
+
       breakpoints: {
         0: {
-          slidesPerView: 2.25,
           spaceBetween: 10,
         },
         768: {
-          slidesPerView: 3.25,
           spaceBetween: 20,
         },
         992: {
-          slidesPerView: 4.25,
           spaceBetween: 30,
         },
         1280: {
-          slidesPerView: 5,
           spaceBetween: 40,
         },
       },
@@ -32,10 +30,8 @@
       },
     }
 
-    // now we need to assign all parameters to Swiper element
     Object.assign(swiperElTags, swiperParams)
 
-    // and now initialize it
     swiperElTags.initialize()
   })
 </script>
@@ -274,12 +270,12 @@
 
       @include media-breakpoint-down(lg) {
         overflow-y: hidden;
-        margin-top: 20px;
+        margin-top: 11px;
         margin-bottom: 40px;
       }
 
       @include media-breakpoint-up(lg) {
-        margin-top: 55px;
+        margin-top: 28px;
         margin-bottom: 80px;
       }
     }
@@ -291,20 +287,30 @@
       text-wrap: nowrap;
       user-select: none;
       text-align: center;
+      width: max-content;
 
       &--active {
         background-color: black;
         color: #ffffff;
       }
 
-      @include media-breakpoint-down(sm) {
+      @include media-breakpoint-down(md) {
         font-size: 12px;
-        padding: 6px 0;
+        padding: 7px 18px;
       }
 
-      @include media-breakpoint-up(sm) {
+      @include media-breakpoint-between(md, xl) {
         font-size: 16px;
-        padding: 18px 0;
+        padding: 14px 36px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        font-size: 16px;
+        padding: 12px 32px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding: 19px 72px;
       }
     }
 
@@ -470,11 +476,17 @@
       z-index: 10;
 
       @include media-breakpoint-down(md) {
-        padding: 20px;
+        padding-top: 9px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
       }
 
       @include media-breakpoint-up(md) {
-        padding: 40px;
+        padding-top: 26px;
+        padding-right: 40px;
+        padding-left: 40px;
+        padding-bottom: 40px;
       }
 
       @include media-breakpoint-down(lg) {
@@ -493,24 +505,27 @@
     &__name {
       color: #ffffff;
       font-weight: 600;
-      padding-bottom: 10px;
 
       @include media-breakpoint-down(sm) {
         font-size: 24px;
+        line-height: 36px;
       }
 
       @include media-breakpoint-between(sm, lg) {
         font-size: 32px;
+        line-height: 48px;
       }
 
       @include media-breakpoint-up(lg) {
         font-size: 40px;
+        line-height: 60px;
+        padding-bottom: 5px;
       }
     }
 
     &__tag {
       color: #ffffff;
-      padding: 8px 12px;
+
       width: max-content;
       text-align: center;
       border: 1px solid white;
@@ -522,6 +537,14 @@
 
       @include media-breakpoint-between(sm, lg) {
         font-size: 14px;
+      }
+
+      @include media-breakpoint-down(md) {
+        padding: 5px 12px;
+      }
+
+      @include media-breakpoint-up(md) {
+        padding: 2px 12px;
       }
 
       @include media-breakpoint-up(lg) {

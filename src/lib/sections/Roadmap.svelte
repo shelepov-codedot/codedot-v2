@@ -92,9 +92,20 @@
   @import '../styles/base/mixins.scss';
 
   .roadmap {
-    padding: 250px 0;
     position: relative;
     overflow: hidden;
+
+    @include media-breakpoint-down(md) {
+      padding: 90px 0;
+    }
+
+    @include media-breakpoint-between(md, xl) {
+      padding: 170px 0;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding: 250px 0;
+    }
 
     &__wrapper {
       position: relative;
@@ -124,7 +135,7 @@
 
       &:not(&:last-of-type) {
         @include media-breakpoint-between(lg, xl) {
-          margin-bottom: 180px;
+          margin-bottom: 145px;
         }
         @include media-breakpoint-between(xl, xxl) {
           margin-bottom: 305px;
@@ -211,6 +222,7 @@
 
         @include media-breakpoint-up(xxl) {
           width: 477px;
+          margin-bottom: 450px;
         }
       }
 
@@ -219,6 +231,12 @@
           align-self: flex-end;
         }
 
+        @include media-breakpoint-up(xxl) {
+          transform: translateY(-30px);
+        }
+      }
+
+      &:nth-child(11) .roadmap__name {
         @include media-breakpoint-between(lg, xl) {
           width: 485px;
         }
@@ -229,6 +247,22 @@
 
         @include media-breakpoint-up(xxl) {
           width: 864px;
+          line-height: 132px;
+          margin-bottom: 10px;
+        }
+      }
+
+      &:nth-child(11) .roadmap__text {
+        @include media-breakpoint-between(lg, xl) {
+          width: 485px;
+        }
+
+        @include media-breakpoint-between(xl, xxl) {
+          width: 646px;
+        }
+
+        @include media-breakpoint-up(xxl) {
+          width: 440px;
         }
       }
     }
@@ -238,9 +272,14 @@
       position: relative;
       z-index: 2;
       background-color: white;
-      width: max-content;
+
       @include media-breakpoint-down(lg) {
         font-size: 40px;
+        margin-bottom: 10px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        width: max-content;
       }
 
       @include media-breakpoint-between(lg, xl) {
@@ -264,8 +303,20 @@
     }
 
     &__text {
-      font-size: 18px;
-      line-height: 27px;
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      @include media-breakpoint-between(sm, lg) {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        font-size: 18px;
+        line-height: 27px;
+      }
     }
 
     &__background-img-wrapper {
@@ -369,7 +420,7 @@
       @include media-breakpoint-down(lg) {
         width: 100%;
         height: 100%;
-        margin: 40px 0;
+        margin: 37px 0;
       }
 
       @include media-breakpoint-up(lg) {

@@ -45,6 +45,13 @@
   @import '../styles/base/mixins.scss';
 
   .benefits {
+    @include media-breakpoint-down(lg) {
+      padding-top: 90px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 220px;
+    }
     &__title {
       font-weight: 600;
 
@@ -57,12 +64,12 @@
       }
 
       @include media-breakpoint-down(lg) {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         order: 0;
       }
 
       @include media-breakpoint-up(lg) {
-        margin-bottom: 80px;
+        margin-bottom: 50px;
       }
 
       @include media-breakpoint-between(lg, xl) {
@@ -86,7 +93,8 @@
 
       @include media-breakpoint-down(lg) {
         width: 100%;
-        margin-bottom: 40px;
+        padding-top: 10px;
+        margin-bottom: 30px;
         order: 3;
       }
 
@@ -96,16 +104,16 @@
 
       @include media-breakpoint-between(lg, xl) {
         width: 80%;
-        transform: translate(44px, -35px);
+        transform: translate(44px, -50px);
       }
 
       @include media-breakpoint-between(xl, xxl) {
         width: 80%;
-        transform: translate(15px, -29px);
+        transform: translate(15px, -45px);
       }
 
       @include media-breakpoint-up(xxl) {
-        transform: translate(50px, -40px);
+        transform: translate(60px, -55px);
       }
     }
 
@@ -127,7 +135,7 @@
       flex-direction: column;
 
       @include media-breakpoint-down(lg) {
-        margin-bottom: 40px;
+        margin-bottom: 30px;
       }
 
       @include media-breakpoint-up(lg) {
@@ -174,7 +182,14 @@
 
     &__name {
       font-weight: 600;
-      padding-bottom: 20px;
+
+      @include media-breakpoint-down(lg) {
+        padding-bottom: 17px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-bottom: 20px;
+      }
 
       @include media-breakpoint-down(xxl) {
         font-size: 24px;
@@ -188,10 +203,12 @@
     &__text {
       @include media-breakpoint-down(xl) {
         font-size: 14px;
+        line-height: 21px;
       }
 
       @include media-breakpoint-up(xl) {
         font-size: 18px;
+        line-height: 27px;
       }
     }
   }

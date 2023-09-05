@@ -46,11 +46,25 @@
   @import '../../styles/base/mixins.scss';
 
   .offer {
+    @include media-breakpoint-down(xl) {
+      padding-top: 90px;
+      padding-bottom: 90px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding-bottom: 216px;
+      padding-top: 216px;
+    }
     &__title {
       font-weight: 600;
 
       @include media-breakpoint-down(lg) {
         font-size: 40px;
+        margin-bottom: 25px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 50px;
       }
 
       @include media-breakpoint-between(lg, xl) {
@@ -64,8 +78,6 @@
       @include media-breakpoint-up(xxl) {
         font-size: 105px;
       }
-
-      margin-bottom: 50px;
 
       @include media-breakpoint-up(lg) {
         width: 940px;
@@ -96,6 +108,7 @@
 
       @include media-breakpoint-down(md) {
         padding: 20px;
+        height: 300px;
       }
 
       @include media-breakpoint-up(md) {
@@ -105,10 +118,13 @@
 
     &__name {
       font-weight: 700;
-      margin-bottom: 40px;
-
       @include media-breakpoint-down(lg) {
+        margin-bottom: 20px;
         font-size: 24px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 40px;
       }
 
       @include media-breakpoint-between(lg, xxl) {
@@ -125,14 +141,17 @@
 
       @include media-breakpoint-down(lg) {
         font-size: 14px;
+        line-height: 21px;
       }
 
       @include media-breakpoint-between(lg, xxl) {
         font-size: 16px;
+        line-height: 24px;
       }
 
       @include media-breakpoint-up(xxl) {
         font-size: 18px;
+        line-height: 27px;
       }
     }
   }

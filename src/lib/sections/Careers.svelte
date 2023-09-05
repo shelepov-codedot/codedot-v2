@@ -51,8 +51,20 @@
       width: 100%;
       position: relative;
 
-      @include media-breakpoint-down(md) {
-        padding: 90px 0 140px 0;
+      @include media-breakpoint-down(sm) {
+        padding: 81px 0 130px 0;
+      }
+
+      @include media-breakpoint-between(sm, md) {
+        padding: 20px 0 100px 0;
+      }
+
+      @include media-breakpoint-between(md, xl) {
+        height: 600px;
+      }
+
+      @include media-breakpoint-up(md) {
+        padding-top: 50px;
       }
     }
     &__img {
@@ -85,6 +97,25 @@
       @include media-breakpoint-up(md) {
         align-self: flex-end;
         width: 380px;
+      }
+
+      @include media-breakpoint-down(md) {
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      @include media-breakpoint-between(md, xl) {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        font-size: 18px;
+        line-height: 27px;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        padding-bottom: 45px;
       }
     }
   }

@@ -11,7 +11,7 @@
         <div class="job-hero__info-wrapper">
           <span class="job-hero__salary">From <b>500</b> to <b>1200 $</b></span>
           <div class="job-hero__conditions">Full time; English B2+</div>
-          <a href="#" class="btn">
+          <a href="#" class="btn job-hero__btn">
             Apply for this job
             <span class="btn__icon">
               <img src="../icons/arrow-btn.svg" alt="" />
@@ -36,10 +36,16 @@
   @import '../../styles/base/mixins.scss';
 
   .job-hero {
-    padding-top: 100px;
+    @include media-breakpoint-down(lg) {
+      padding-top: 124px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 205px;
+    }
 
     &__exp {
-      padding: 6px 20px 6px 20px;
+      padding: 8px 20px;
       color: white;
       background-color: black;
       border-radius: 40px;
@@ -54,6 +60,7 @@
     }
 
     &__title {
+      text-transform: uppercase;
       @include media-breakpoint-down(md) {
         font-size: 40px;
       }
@@ -67,11 +74,11 @@
       }
 
       @include media-breakpoint-down(md) {
-        margin-top: 25px;
+        margin-top: 14px;
       }
 
       @include media-breakpoint-up(md) {
-        margin-top: 45px;
+        margin-top: 5px;
       }
 
       @include media-breakpoint-between(xl, xxl) {
@@ -95,17 +102,28 @@
       }
     }
 
+    &__btn {
+      @include media-breakpoint-down(md) {
+        padding: 12px 50px;
+        width: unset;
+      }
+
+      @include media-breakpoint-up(md) {
+        padding: 18px 72px;
+      }
+    }
+
     &__conditions {
       @include media-breakpoint-down(lg) {
         margin-top: 10px;
         font-size: 14px;
-        margin-bottom: 40px;
+        margin-bottom: 38px;
       }
 
       @include media-breakpoint-up(lg) {
         margin-top: 20px;
         font-size: 32px;
-        margin-bottom: 80px;
+        margin-bottom: 75px;
       }
     }
 
@@ -115,11 +133,11 @@
 
       @include media-breakpoint-down(lg) {
         flex-direction: column;
-        margin-top: 20px;
+        margin-top: 5px;
       }
 
       @include media-breakpoint-up(lg) {
-        margin-top: 50px;
+        margin-top: 45px;
       }
     }
 
@@ -144,13 +162,29 @@
     }
 
     &__text-title {
-      font-size: 36px;
+      @include media-breakpoint-down(md) {
+        font-size: 24px;
+        line-height: 29px;
+      }
+
+      @include media-breakpoint-up(md) {
+        font-size: 36px;
+      }
+
       font-weight: 600;
     }
 
     &__text {
       margin-top: 20px;
-      font-size: 18px;
+      @include media-breakpoint-down(md) {
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      @include media-breakpoint-up(md) {
+        font-size: 18px;
+        line-height: 27px;
+      }
     }
   }
 </style>

@@ -7,7 +7,7 @@
         <h1 class="service-hero__title">MVP<br /> DEVELOPMENT</h1>
         <div class="service-hero__subtext-wrapper">
           <p class="service-hero__subtext">from idea to development and support</p>
-          <a href="#" class="btn"
+          <a href="#" class="btn service-hero__btn"
             >Discuss the project <span class="btn__icon"
               ><img src="../icons/arrow-btn.svg" alt="" /></span
             ></a
@@ -35,7 +35,16 @@
   @import '../../styles/base/mixins.scss';
 
   .service-hero {
+    @include media-breakpoint-down(lg) {
+      padding-top: 107px;
+    }
+    @include media-breakpoint-up(lg) {
+      padding-top: 155px;
+    }
     &__title {
+      @include media-breakpoint-down(sm) {
+        word-wrap: break-word;
+      }
       @include media-breakpoint-down(md) {
         font-size: 40px;
         &:nth-child(1) {
@@ -63,18 +72,24 @@
 
       @include media-breakpoint-up(xxl) {
         font-size: 210px;
+        line-height: 230px;
       }
 
       font-weight: 600;
     }
 
     &__subtext-wrapper {
-      margin-top: 55px;
       display: flex;
       justify-content: space-between;
 
       @include media-breakpoint-down(md) {
         flex-direction: column;
+        margin-top: 30px;
+      }
+
+      @include media-breakpoint-up(md) {
+        align-items: center;
+        margin-top: 45px;
       }
     }
 
@@ -85,7 +100,7 @@
 
       @include media-breakpoint-down(md) {
         font-size: 14px;
-        margin-bottom: 40px;
+        margin-bottom: 45px;
       }
     }
 
@@ -108,6 +123,20 @@
       }
     }
 
+    &__btn {
+      @include media-breakpoint-down(md) {
+        width: unset;
+        padding: 13px 30px;
+      }
+      @include media-breakpoint-between(md, xl) {
+        padding: 13px 30px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding: 20px 70px;
+      }
+    }
+
     &__img {
       position: absolute;
       top: 0;
@@ -127,7 +156,7 @@
       }
 
       @include media-breakpoint-up(md) {
-        padding-top: 80px;
+        padding-top: 75px;
       }
     }
 

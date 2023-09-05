@@ -85,6 +85,15 @@
   @import '../styles/base/mixins.scss';
 
   .jobs {
+    @include media-breakpoint-down(xl) {
+      padding-top: 90px;
+      padding-bottom: 90px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      padding-top: 236px;
+      padding-bottom: 236px;
+    }
     &__title {
       font-weight: 600;
 
@@ -106,11 +115,19 @@
     }
 
     &__search-wrapper {
-      margin-top: 80px;
-      margin-bottom: 40px;
       position: relative;
       display: flex;
       align-items: center;
+
+      @include media-breakpoint-down(md) {
+        margin-top: 30px;
+        margin-bottom: 40px;
+      }
+
+      @include media-breakpoint-up(md) {
+        margin-top: 58px;
+        margin-bottom: 40px;
+      }
 
       @include media-breakpoint-up(md) {
         width: 582px;
@@ -176,7 +193,7 @@
     }
 
     &__exp {
-      padding: 6px 20px 6px 20px;
+      padding: 8px 30px 8px 20px;
       color: white;
       background-color: black;
       border-radius: 40px;
@@ -235,19 +252,28 @@
       border-radius: 40px;
 
       @include media-breakpoint-down(lg) {
-        padding: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        padding-top: 27px;
         height: 300px;
       }
 
       @include media-breakpoint-up(lg) {
-        padding: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 40px;
+        padding-top: 47px;
         height: 320px;
       }
     }
 
     &__name {
       font-weight: 700;
-      padding-top: 20px;
+
+      @include media-breakpoint-down(md) {
+        padding-top: 26px;
+      }
 
       @include media-breakpoint-down(lg) {
         font-size: 24px;
@@ -255,6 +281,10 @@
 
       @include media-breakpoint-between(lg, xl) {
         font-size: 32px;
+      }
+
+      @include media-breakpoint-up(md) {
+        padding-top: 27px;
       }
 
       @include media-breakpoint-up(xl) {

@@ -31,11 +31,11 @@
       }
 
       @include media-breakpoint-between(sm, lg) {
-        padding: 150px 0;
+        padding: 152px 0;
       }
 
       @include media-breakpoint-up(lg) {
-        padding: 250px 0;
+        padding: 252px 0;
       }
     }
     &__text {
@@ -43,11 +43,13 @@
 
       @include media-breakpoint-down(md) {
         font-size: 24px;
+        line-height: 36px;
         width: 100%;
       }
 
       @include media-breakpoint-up(md) {
         font-size: 40px;
+        line-height: 60px;
         width: 70%;
       }
     }
