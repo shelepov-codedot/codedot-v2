@@ -67,7 +67,7 @@
 </section>
 
 <!-- Вариация 2, секция 1. Актуально для мобильного разрешения -->
-<section class="project-images project-images--small">
+<!-- <section class="project-images project-images--small">
   <div class="container">
     <div class="project-images__wrapper">
       <p class="project-images__text">
@@ -102,10 +102,10 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- Вариация 2, секция 2. Актуально для мобильного разрешения-->
-<section class="project-images project-images--less project-images--smaller">
+<!-- <section class="project-images project-images--less project-images--smaller">
   <div class="container">
     <div class="project-images__wrapper">
       <p class="project-images__text">
@@ -130,10 +130,10 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- Вариация 3, секция 1. Вместо заголовока обычный текст  -->
-<section class="project-images project-images--text">
+<!-- <section class="project-images project-images--text">
   <div class="container">
     <div class="project-images__wrapper">
       <p class="project-images__text">
@@ -172,10 +172,10 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- Вариация 4, секция 1. Вместо заголовока обычный текст  -->
-<section class="project-images project-images--less project-images--text">
+<!-- <section class="project-images project-images--less project-images--text">
   <div class="container">
     <div class="project-images__wrapper">
       <p class="project-images__text">
@@ -204,12 +204,21 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';
 
   .project-images {
+    @include media-breakpoint-down(lg) {
+      padding-top: 90px;
+      padding-bottom: 90px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 220px;
+      padding-bottom: 220px;
+    }
     &__wrapper {
       display: flex;
       flex-direction: column;
@@ -226,8 +235,9 @@
     }
     &__text {
       @include media-breakpoint-down(md) {
-        margin-bottom: 40px;
+        margin-bottom: 31px;
         font-size: 40px;
+        line-height: 48px;
       }
 
       @include media-breakpoint-between(md, lg) {
@@ -243,10 +253,11 @@
       @include media-breakpoint-up(xl) {
         margin-bottom: 150px;
         font-size: 105px;
+        line-height: 127px;
       }
 
       @include media-breakpoint-up(xxl) {
-        margin-bottom: 250px;
+        margin-bottom: 224px;
       }
     }
 
@@ -256,7 +267,7 @@
       justify-content: space-between;
 
       @include media-breakpoint-down(md) {
-        gap: 30px;
+        gap: 20px;
       }
 
       @include media-breakpoint-up(md) {
@@ -298,7 +309,7 @@
 
           @include media-breakpoint-up(xxl) {
             height: 320px;
-            width: 28%;
+            width: 31%;
           }
         }
 
@@ -320,7 +331,7 @@
 
           @include media-breakpoint-up(xxl) {
             height: 810px;
-            width: 69%;
+            width: 66%;
           }
         }
 

@@ -132,6 +132,15 @@
   @import '../../styles/base/mixins.scss';
 
   .our-services {
+    @include media-breakpoint-down(lg) {
+      padding-top: 108px;
+      padding-bottom: 108px;
+    }
+    @include media-breakpoint-up(lg) {
+      padding-top: 197px;
+      padding-bottom: 197px;
+    }
+
     &__title {
       @include media-breakpoint-down(md) {
         font-size: 40px;
@@ -170,15 +179,20 @@
       }
 
       @include media-breakpoint-down(lg) {
-        margin-top: 40px;
+        margin-top: 29px;
       }
 
       @include media-breakpoint-up(lg) {
         margin-top: 85px;
       }
 
-      @include media-breakpoint-up(xl) {
-        grid-template-columns: repeat(4, 1fr);
+      @include media-breakpoint-between(xl, xxl) {
+        grid-template-columns: repeat(4, 275px);
+        justify-content: space-between;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        grid-template-columns: repeat(4, 380px);
       }
     }
 

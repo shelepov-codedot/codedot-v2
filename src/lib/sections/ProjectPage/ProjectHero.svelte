@@ -74,7 +74,7 @@
       width: 100%;
 
       @include media-breakpoint-down(sm) {
-        height: 700px;
+        height: 767px;
       }
 
       @include media-breakpoint-between(sm, lg) {
@@ -103,14 +103,14 @@
       background-color: white;
 
       @include media-breakpoint-down(md) {
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: 34px;
+        padding-bottom: 60px;
         border-radius: 30px 30px 0px 0px;
       }
 
       @include media-breakpoint-up(md) {
         padding-top: 60px;
-        padding-bottom: 60px;
+        padding-bottom: 75px;
         border-radius: 40px 40px 0px 0px;
       }
     }
@@ -130,7 +130,7 @@
 
       &:first-of-type {
         @include media-breakpoint-down(md) {
-          margin-bottom: 20px;
+          margin-bottom: 14px;
         }
 
         @include media-breakpoint-between(md, lg) {
@@ -147,7 +147,7 @@
       @include media-breakpoint-down(md) {
         font-size: 24px;
         font-weight: 600;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
       }
 
       @include media-breakpoint-up(md) {

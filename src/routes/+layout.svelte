@@ -106,12 +106,21 @@
   <!-- ++ -->
 
   <!-- <Expect /> -->
+  <!-- ++ -->
 
   <!-- <OurService /> -->
+  <!-- ++ -->
+
   <!-- <ProjectHero /> -->
+  <!-- ++ -->
+
   <!-- <ProjectImages /> -->
-  <!-- <ProjectTextImage /> -->
+  <!-- ++ -->
+
+  <ProjectTextImage />
+
   <!-- <ProjectText /> -->
+
   <!-- <ProjectGallery /> -->
 
   <!-- <JobText /> -->
