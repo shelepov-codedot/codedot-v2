@@ -34,15 +34,29 @@
 
   .project-gallery {
     &__wrapper {
-      padding-top: 250px;
-      padding-bottom: 250px;
+      @include media-breakpoint-down(lg) {
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-top: 250px;
+        padding-bottom: 250px;
+      }
     }
 
     &__items {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 40px;
+
+      @include media-breakpoint-down(lg) {
+        gap: 20px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        gap: 40px;
+      }
     }
 
     &__img-wrapper {

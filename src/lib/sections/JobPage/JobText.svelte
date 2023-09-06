@@ -71,7 +71,7 @@
             <li>— Producing as a limited amount of documentation as possible</li>
             <li>
               — Being part of crucial project decisions: designing architecture, choosing frameworks
-              and tools
+              and tools sds sda
             </li>
           </ul>
           <p />
@@ -176,7 +176,7 @@
           </div>
           <div class="job-text__input-wrapper job-text__input-wrapper--textarea">
             <label for="comments" class="job-text__input-name">Comments</label>
-            <textarea name="comments" id="comments" rows="9" class="job-text__input" />
+            <textarea name="comments" id="comments" class="job-text__input" />
           </div>
           <div class="job-text__file-input">
             <input
@@ -211,14 +211,23 @@
   @import '../../styles/base/mixins.scss';
 
   .job-text {
-    padding: 250px 0;
+    @include media-breakpoint-up(lg) {
+      padding: 207px 0;
+    }
     &__wrapper {
       position: relative;
       display: grid;
-      gap: 40px;
+
+      @include media-breakpoint-down(xl) {
+        gap: 10px;
+      }
 
       @include media-breakpoint-up(lg) {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include media-breakpoint-up(xl) {
+        gap: 40px;
       }
     }
 
@@ -253,7 +262,7 @@
 
     &__item {
       &:not(&:last-of-type) {
-        margin-bottom: 40px;
+        margin-bottom: 80px;
       }
     }
 
@@ -283,11 +292,23 @@
     }
 
     &__list li {
-      font-size: 18px;
+      @include media-breakpoint-between(md, xl) {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        font-size: 18px;
+        line-height: 27px;
+      }
 
       &:not(&:last-of-type) {
-        margin-bottom: 10px;
+        margin-bottom: 16px;
       }
+    }
+
+    &__text-wrapper {
+      margin-top: 42px;
     }
 
     &__form {
@@ -334,9 +355,11 @@
 
     &__inputs {
       display: grid;
-      gap: 20px;
 
-      @include media-breakpoint-up(md) {
+      column-gap: 20px;
+      row-gap: 35px;
+
+      @include media-breakpoint-up(xl) {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -359,9 +382,13 @@
     }
 
     &__input-wrapper--textarea {
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(xl) {
         grid-column-start: 1;
         grid-column-end: 3;
+      }
+
+      .job-text__input {
+        height: 170px;
       }
     }
 
@@ -377,8 +404,12 @@
         padding: 15px 15px;
       }
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-between(lg, xl) {
         padding: 15px 25px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding: 19px 25px;
       }
     }
 
@@ -392,7 +423,7 @@
     &__file-input {
       position: relative;
       padding-top: 40px;
-      padding-bottom: 40px;
+      padding-bottom: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -403,7 +434,7 @@
         padding-right: 20px;
       }
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(xl) {
         grid-column-start: 1;
         grid-column-end: 3;
       }
@@ -449,7 +480,8 @@
   }
 
   .btn {
-    @include media-breakpoint-up(md) {
+    padding: 17px 30px;
+    @include media-breakpoint-up(xl) {
       grid-column-start: 1;
       grid-column-end: 3;
     }

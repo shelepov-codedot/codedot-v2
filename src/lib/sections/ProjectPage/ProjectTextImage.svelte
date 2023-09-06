@@ -22,6 +22,14 @@
   @import '../../styles/base/mixins.scss';
 
   .project-text-image {
+    @include media-breakpoint-down(lg) {
+      padding-top: 89px;
+      padding-bottom: 89px;
+    }
+    @include media-breakpoint-up(lg) {
+      padding-top: 219px;
+      padding-bottom: 250px;
+    }
     &__wrapper {
       display: flex;
       flex-direction: column;
@@ -65,13 +73,18 @@
     }
 
     &__text {
+      @include media-breakpoint-down(md) {
+        font-size: 14px;
+        line-height: 21px;
+      }
+
       @include media-breakpoint-between(md, lg) {
         font-size: 16px;
         line-height: 24px;
       }
 
       @include media-breakpoint-down(lg) {
-        margin-top: 40px;
+        margin-top: 28px;
       }
       @include media-breakpoint-up(lg) {
         width: 520px;
@@ -110,7 +123,7 @@
       }
 
       @include media-breakpoint-up(lg) {
-        margin-top: 100px;
+        margin-top: 68px;
       }
 
       @include media-breakpoint-up(xxl) {

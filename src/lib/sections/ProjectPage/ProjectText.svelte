@@ -17,8 +17,22 @@
 
   .project-text {
     &__wrapper {
-      padding-top: 250px;
-      padding-bottom: 250px;
+      @include media-breakpoint-down(md) {
+        padding: 100px 0;
+      }
+      @include media-breakpoint-between(md, lg) {
+        padding: 100px;
+      }
+      @include media-breakpoint-between(lg, xl) {
+        padding: 250px 100px;
+      }
+
+      @include media-breakpoint-between(xl, xxl) {
+        padding: 250px 150px;
+      }
+      @include media-breakpoint-up(xxl) {
+        padding: 250px 255px;
+      }
       display: flex;
       align-items: center;
       justify-content: center;

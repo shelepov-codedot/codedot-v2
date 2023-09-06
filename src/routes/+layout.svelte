@@ -102,6 +102,7 @@
 
   <!-- <Digital /> -->
   <!-- ++ -->
+
   <!-- <JobHero /> -->
   <!-- ++ -->
 
@@ -117,13 +118,15 @@
   <!-- <ProjectImages /> -->
   <!-- ++ -->
 
-  <ProjectTextImage />
+  <!-- <ProjectTextImage /> -->
+  <!-- ++ -->
 
   <!-- <ProjectText /> -->
+  <!-- ++ -->
 
   <!-- <ProjectGallery /> -->
 
-  <!-- <JobText /> -->
+  <JobText />
 </main>
 
 <!-- <Footer {handleClick} /> -->
