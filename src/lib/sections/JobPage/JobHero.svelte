@@ -169,6 +169,7 @@
 
       @include media-breakpoint-up(md) {
         font-size: 36px;
+        //test
       }
 
       font-weight: 600;
