@@ -44,9 +44,11 @@
   export let data
 </script>
 
-<!-- <Header /> -->
+<Header />
 <main>
   <Modal {activeModal} {closeModal} />
+  <!-- ++ -->
+
   <!-- <Hero {handleClick} /> -->
   <!-- ++ -->
 
@@ -63,6 +65,7 @@
   <!-- ++ -->
 
   <!-- <Services /> -->
+  <!-- ++ -->
 
   <!-- <Technologies /> -->
   <!-- ++ -->
@@ -125,8 +128,10 @@
   <!-- ++ -->
 
   <!-- <ProjectGallery /> -->
+  <!-- ++ -->
 
-  <JobText />
+  <!-- <JobText /> -->
+  <!-- ++ -->
 </main>
 
 <!-- <Footer {handleClick} /> -->

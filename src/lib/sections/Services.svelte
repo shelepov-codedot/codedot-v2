@@ -43,7 +43,7 @@
 </script>
 
 <section class="services">
-  <div class="container container--swiper">
+  <div class="container">
     <div class="services__wrapper">
       <div class="services__title-wrapper">
         <h2 class="services__title">Services</h2>
@@ -110,6 +110,14 @@
   @import '../styles/base/mixins.scss';
 
   .services {
+    @include media-breakpoint-down(lg) {
+      padding: 90px 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: 250px 0;
+    }
+
     position: relative;
 
     &__title-wrapper {
@@ -131,9 +139,8 @@
       }
 
       @include media-breakpoint-up(xxl) {
-        transform: translateX(-48px);
         padding-top: 77px;
-        margin-right: 34px;
+        margin-right: 80px;
         align-items: center;
       }
     }
@@ -142,7 +149,8 @@
       font-weight: 600;
 
       @include media-breakpoint-down(md) {
-        font-size: 30px;
+        font-size: 40px;
+
         margin-bottom: 30px;
       }
 
@@ -166,9 +174,14 @@
       display: flex;
       position: relative;
       min-width: 0;
-
+      overflow: unset;
       @include media-breakpoint-down(md) {
         flex-direction: column;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-left: 45px;
+        width: calc(100% + (100vw - var(--container-width)) / 2 + var(--spacing-container));
       }
     }
 
@@ -200,7 +213,7 @@
       font-weight: 700;
 
       @include media-breakpoint-down(md) {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       @include media-breakpoint-between(md, xl) {
@@ -245,7 +258,14 @@
 
     &__btns {
       display: flex;
-      padding-top: 30px;
+
+      @include media-breakpoint-down(lg) {
+        padding-left: 15px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-top: 30px;
+      }
     }
 
     &__btn--next &__btn-icon {
@@ -253,7 +273,12 @@
     }
 
     &__btn--prev {
-      margin-right: 10px;
+      @include media-breakpoint-down(lg) {
+        margin-right: 25px;
+      }
+      @include media-breakpoint-up(lg) {
+        margin-right: 10px;
+      }
     }
 
     &__btn--prev &__btn-icon {

@@ -183,7 +183,7 @@
               type="file"
               bind:this={fileInput}
               class="job-text__file"
-              accept=".doc, .docx,.pdf"
+              accept=" .doc, .docx, .pdf"
               name="file"
             />
             <img src="../icons/Paper.svg" alt="" lass="job-text__file-icon" />
@@ -211,6 +211,9 @@
   @import '../../styles/base/mixins.scss';
 
   .job-text {
+    @include media-breakpoint-down(lg) {
+      padding: 100px 0;
+    }
     @include media-breakpoint-up(lg) {
       padding: 207px 0;
     }
@@ -218,7 +221,11 @@
       position: relative;
       display: grid;
 
-      @include media-breakpoint-down(xl) {
+      @include media-breakpoint-down(lg) {
+        gap: 21px;
+      }
+
+      @include media-breakpoint-between(lg, xl) {
         gap: 10px;
       }
 
@@ -262,7 +269,12 @@
 
     &__item {
       &:not(&:last-of-type) {
-        margin-bottom: 80px;
+        @include media-breakpoint-down(lg) {
+          margin-bottom: 39px;
+        }
+        @include media-breakpoint-up(lg) {
+          margin-bottom: 80px;
+        }
       }
     }
 
@@ -292,6 +304,11 @@
     }
 
     &__list li {
+      @include media-breakpoint-down(md) {
+        font-size: 14px;
+        line-height: 21px;
+      }
+
       @include media-breakpoint-between(md, xl) {
         font-size: 16px;
         line-height: 24px;
@@ -308,7 +325,9 @@
     }
 
     &__text-wrapper {
-      margin-top: 42px;
+      @include media-breakpoint-up(lg) {
+        margin-top: 42px;
+      }
     }
 
     &__form {
@@ -342,7 +361,14 @@
     &__job-name {
       font-weight: 600;
       text-align: center;
-      margin-bottom: 40px;
+
+      @include media-breakpoint-down(lg) {
+        margin-bottom: 21px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 40px;
+      }
 
       @include media-breakpoint-down(md) {
         font-size: 24px;
@@ -356,8 +382,14 @@
     &__inputs {
       display: grid;
 
-      column-gap: 20px;
-      row-gap: 35px;
+      @include media-breakpoint-down(lg) {
+        row-gap: 22px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        row-gap: 35px;
+        column-gap: 20px;
+      }
 
       @include media-breakpoint-up(xl) {
         grid-template-columns: repeat(2, 1fr);
@@ -388,7 +420,13 @@
       }
 
       .job-text__input {
-        height: 170px;
+        @include media-breakpoint-down(lg) {
+          height: 142px;
+        }
+
+        @include media-breakpoint-up(lg) {
+          height: 170px;
+        }
       }
     }
 
@@ -400,8 +438,8 @@
       resize: none;
       outline: 0;
 
-      @include media-breakpoint-down(md) {
-        padding: 15px 15px;
+      @include media-breakpoint-down(lg) {
+        padding: 20px 15px;
       }
 
       @include media-breakpoint-between(lg, xl) {
@@ -423,7 +461,6 @@
     &__file-input {
       position: relative;
       padding-top: 40px;
-      padding-bottom: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -432,6 +469,14 @@
       @include media-breakpoint-down(md) {
         padding-left: 20px;
         padding-right: 20px;
+      }
+
+      @include media-breakpoint-down(lg) {
+        padding-bottom: 45px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-bottom: 30px;
       }
 
       @include media-breakpoint-up(xl) {
@@ -451,6 +496,7 @@
         font-weight: 480;
         @include media-breakpoint-down(sm) {
           font-size: 14px;
+          word-break: break-all;
         }
 
         @include media-breakpoint-up(sm) {

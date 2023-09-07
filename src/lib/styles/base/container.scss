@@ -9,26 +9,32 @@
 
   @include media-breakpoint-down(sm) {
     max-width: 100%;
+    --container-width: 100%;
   }
 
   @include media-breakpoint-between(sm, md) {
     max-width: $breakpoints-sm;
+    --container-width: 480px;
   }
 
   @include media-breakpoint-between(md, lg) {
     max-width: $breakpoints-md;
+    --container-width: 768px;
   }
 
   @include media-breakpoint-between(lg, xl) {
     max-width: $breakpoints-lg;
+    --container-width: 992px;
   }
 
   @include media-breakpoint-between(xl, xxl) {
     max-width: $breakpoints-xl;
+    --container-width: 1280px;
   }
 
   @include media-breakpoint-up(xxl) {
     max-width: $breakpoints-xxl;
+    --container-width: 1692px;
   }
 
   &--swiper {
