@@ -8,13 +8,18 @@
     active = !active
     body = document.querySelector('body')
 
-    active ? (body.style.overflow = 'hidden') : (body.style.overflow = 'unset')
+    active ? (body.style.overflow = 'hidden') : (body.style.overflow = 'auto')
   }
 
   onMount(() => {
     curWidth = window.innerWidth
+
     window.addEventListener('resize', () => {
       curWidth = window.innerWidth
+
+      if (curWidth >= 1280 && active) {
+        active = !active
+      }
     })
   })
 </script>
@@ -71,49 +76,52 @@
       </div>
     {/if}
 
-    <div class="header__mobile-btn" on:click={openMenu} />
+    <div class="header__mobile-btn-wrapper" on:click={openMenu}>
+      <div class="header__mobile-btn" />
+    </div>
   </div>
   {#if curWidth < 1280}
     <div class={active ? 'header__content header__content--active' : 'header__content'}>
-      <div class="header__mobile-contents">
-        <a target="_blank" href="https://shopify.com/" class="header__shopify">
-          <div class="header__shopify-logo">
-            <img src="../icons/shopify.svg" alt="shopify img" />
-          </div>
-          <div class="header__shopify-text">Shopify dev</div>
-        </a>
-        <div class="header__nav">
-          <a href="/" class="header__nav-item">Cases</a>
-          <div class="header__nav-item dropdown">
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <p>Services</p>
-            <div class="header__nav-item-icon" />
-            <div class="header__nav-dropdown-content">
-              <div class="header__nav-dropdown-content-wrapper">
-                <div class="header__nav-dropdown-content-list">
-                  <a href="/" class="header__nav-item">Web Development</a>
-                  <a href="/" class="header__nav-item">E-Commerce</a>
-                  <a href="/" class="header__nav-item">UI/UX design</a>
-                  <a href="/" class="header__nav-item">Mobile Development</a>
-                  <a href="/" class="header__nav-item"> Shopify/Shopify plus development </a>
-                  <a href="/" class="header__nav-item">Jamstack</a>
-                  <a href="/" class="header__nav-item">Cross-Platform development</a>
-                  <a href="/" class="header__nav-item">Game development</a>
-                  <a href="/" class="header__nav-item">Computer VisionDevelopment</a>
-                  <a href="/" class="header__nav-item">Custom Software development</a>
-                  <a href="/" class="header__nav-item">Project management</a>
-                  <a href="/" class="header__nav-item">Startup and MVP Services</a>
-                </div>
-                <div class="header__nav-dropdown-link">
-                  <p>All services</p>
-                  <span class="arrow" />
-                </div>
+      <span class="header__cross" on:click={openMenu}>
+        <span class="header__cross-btn" />
+      </span>
+      <a target="_blank" href="https://shopify.com/" class="header__shopify">
+        <div class="header__shopify-logo">
+          <img src="../icons/shopify.svg" alt="shopify img" />
+        </div>
+        <div class="header__shopify-text">Shopify dev</div>
+      </a>
+      <div class="header__nav">
+        <a href="/" class="header__nav-item">Cases</a>
+        <div class="header__nav-item dropdown">
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
+          <p>Services</p>
+          <div class="header__nav-item-icon" />
+          <div class="header__nav-dropdown-content">
+            <div class="header__nav-dropdown-content-wrapper">
+              <div class="header__nav-dropdown-content-list">
+                <a href="/" class="header__nav-item">Web Development</a>
+                <a href="/" class="header__nav-item">E-Commerce</a>
+                <a href="/" class="header__nav-item">UI/UX design</a>
+                <a href="/" class="header__nav-item">Mobile Development</a>
+                <a href="/" class="header__nav-item"> Shopify/Shopify plus development </a>
+                <a href="/" class="header__nav-item">Jamstack</a>
+                <a href="/" class="header__nav-item">Cross-Platform development</a>
+                <a href="/" class="header__nav-item">Game development</a>
+                <a href="/" class="header__nav-item">Computer VisionDevelopment</a>
+                <a href="/" class="header__nav-item">Custom Software development</a>
+                <a href="/" class="header__nav-item">Project management</a>
+                <a href="/" class="header__nav-item">Startup and MVP Services</a>
+              </div>
+              <div class="header__nav-dropdown-link">
+                <p>All services</p>
+                <span class="arrow" />
               </div>
             </div>
           </div>
-          <a href="/" class="header__nav-item">About us</a>
-          <a href="/" class="header__nav-item">Careers</a>
         </div>
+        <a href="/" class="header__nav-item">About us</a>
+        <a href="/" class="header__nav-item">Careers</a>
       </div>
       <div class="header__btn">
         Get in touch <span class="header__btn-icon" />
@@ -130,8 +138,10 @@
   @import '../styles/base/mixins.scss';
 
   .header {
+    position: sticky;
+    top: 0;
     margin: 0 auto;
-    z-index: 5;
+    z-index: 12;
     padding-top: 20px;
 
     @include media-breakpoint-down(md) {
@@ -219,16 +229,44 @@
       }
     }
 
+    &__cross {
+      position: absolute;
+      top: 36px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    &__cross-btn {
+      position: relative;
+      width: 20px;
+      height: 2px;
+      background-color: black;
+      transform: rotate(45deg);
+
+      &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        transform: rotate(90deg);
+      }
+    }
+
     &__content {
       display: flex;
-      border-radius: 0 20px 20px 0;
+      border-radius: 20px 0px 0px 20px;
 
       @include media-breakpoint-down(xl) {
-        justify-content: space-between;
-        width: 280px;
+        width: 230px;
         background-color: rgb(218 244 254);
         top: 0px;
-        left: -100%;
+        right: -100%;
         z-index: 10;
         position: fixed;
         flex-direction: column;
@@ -236,13 +274,13 @@
         transition: 0.5s ease-in-out;
         overflow: auto;
         height: 100%;
-        padding-top: 40px;
+        padding-top: 80px;
         padding-left: 30px;
         padding-right: 20px;
         padding-bottom: 40px;
 
         &--active {
-          left: 0px;
+          right: 0px;
         }
       }
 
@@ -463,6 +501,10 @@
       align-items: center;
       cursor: pointer;
 
+      @include media-breakpoint-down(xl) {
+        margin-top: 50px;
+      }
+
       @include media-breakpoint-up(xl) {
         margin-left: 60px;
       }
@@ -510,12 +552,17 @@
       }
     }
 
-    &__mobile-contents {
+    &__mobile-btn-wrapper {
       @include media-breakpoint-down(xl) {
-        display: block;
+        display: flex;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        align-items: center;
+        justify-content: center;
       }
       @include media-breakpoint-up(xl) {
-        display: contents;
+        display: none;
       }
     }
   }

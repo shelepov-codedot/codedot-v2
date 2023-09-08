@@ -6,6 +6,10 @@
   let errorText,
     textName = ''
 
+  if (activeModal) {
+    console.log(document.querySelector('body'))
+  }
+
   const selectFile = (e) => {
     const selectedFiles = e.target.files[0]
     const selectedFilesFormat = e.target.files[0].name.split('.').splice(-1, 1)[0]

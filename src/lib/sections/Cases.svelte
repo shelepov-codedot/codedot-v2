@@ -105,8 +105,8 @@
     }
 
     @include media-breakpoint-up(lg) {
-      margin-top: 218px;
-      margin-bottom: 40px;
+      padding-top: 225px;
+      margin-bottom: 225px;
     }
 
     &__wrapper {

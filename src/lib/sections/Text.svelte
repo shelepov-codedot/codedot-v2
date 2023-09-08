@@ -54,6 +54,11 @@
   }
 
   .text {
+    @include media-breakpoint-up(lg) {
+      padding-top: 40px;
+      padding-bottom: 30px;
+    }
+
     position: relative;
 
     &__wrapper {
@@ -74,7 +79,7 @@
 
       @include media-breakpoint-up(md) {
         justify-content: space-evenly;
-        padding-top: 135px;
+        padding-top: 155px;
         padding-bottom: 135px;
       }
     }

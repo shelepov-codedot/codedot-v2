@@ -55,7 +55,10 @@
 <style lang="scss">
   @import '../styles/base/mixins.scss';
   .dignity {
-    margin-top: 80px;
+    @include media-breakpoint-up(lg) {
+      margin-top: 80px;
+      margin-bottom: 385px;
+    }
     position: relative;
 
     &__background {

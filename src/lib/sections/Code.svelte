@@ -9,7 +9,11 @@
   @import '../styles/base/mixins.scss';
 
   .code {
-    padding: 150px 0;
+    @include media-breakpoint-up(lg) {
+      padding-top: 150px;
+      padding-bottom: 40px;
+    }
+
     overflow: hidden;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
