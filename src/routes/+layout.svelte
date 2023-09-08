@@ -47,95 +47,65 @@
 <Header />
 <main>
   <Modal {activeModal} {closeModal} />
-  <!-- ++ -->
 
-  <!-- <Hero {handleClick} /> -->
-  <!-- ++ -->
+  <Hero {handleClick} />
 
-  <!-- <Dignity /> -->
-  <!-- ++ -->
+  <Dignity />
 
-  <!-- <Counters /> -->
-  <!-- ++ -->
+  <Counters />
 
-  <!-- <Cases /> -->
-  <!-- ++ -->
+  <Cases />
 
-  <!-- <Text /> -->
-  <!-- ++ -->
+  <Text />
 
-  <!-- <Services /> -->
-  <!-- ++ -->
+  <Services />
 
-  <!-- <Technologies /> -->
-  <!-- ++ -->
+  <Technologies />
 
-  <!-- <Review /> -->
-  <!-- ++ -->
+  <Review />
 
-  <!-- <Code /> -->
-  <!-- ++ -->
+  <Code />
 
   <!-- <AboutHero /> -->
-  <!-- ++ -->
 
   <!-- <Roadmap /> -->
-  <!-- ++ -->
 
   <!--<OurMission /> -->
-  <!-- ++ -->
 
   <!-- <CasesPage /> -->
-  <!-- ++ -->
 
   <!-- <Careers /> -->
-  <!-- ++ -->
 
   <!-- <Jobs /> -->
-  <!-- ++ -->
 
   <!-- <Benefits /> -->
-  <!-- ++ -->
 
   <!-- <ServiceHero /> -->
-  <!-- ++ -->
 
   <!-- <Offer /> -->
-  <!-- ++ -->
 
   <!-- <Digital /> -->
-  <!-- ++ -->
 
   <!-- <JobHero /> -->
-  <!-- ++ -->
 
   <!-- <Expect /> -->
-  <!-- ++ -->
 
   <!-- <OurService /> -->
-  <!-- ++ -->
 
   <!-- <ProjectHero /> -->
-  <!-- ++ -->
 
   <!-- <ProjectImages /> -->
-  <!-- ++ -->
 
   <!-- <ProjectTextImage /> -->
-  <!-- ++ -->
 
   <!-- <ProjectText /> -->
-  <!-- ++ -->
 
   <!-- <ProjectGallery /> -->
-  <!-- ++ -->
 
   <!-- <JobText /> -->
-  <!-- ++ -->
 </main>
 
-<!-- <Footer {handleClick} /> -->
-<!-- ++ -->
+<Footer {handleClick} />
 
 <style global lang="scss">
   @import '../lib/styles/styles.scss';

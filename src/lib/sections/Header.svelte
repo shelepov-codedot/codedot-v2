@@ -1,21 +1,26 @@
 <script>
   import { onMount } from 'svelte'
 
-  let active, menu, curWidth
+  let active, curWidth
+  let body
 
   const openMenu = () => {
-    active = true
+    active = !active
+    body = document.querySelector('body')
+
+    active ? (body.style.overflow = 'hidden') : (body.style.overflow = 'unset')
   }
 
   onMount(() => {
     curWidth = window.innerWidth
-
     window.addEventListener('resize', () => {
       curWidth = window.innerWidth
     })
   })
 </script>
 
+<!-- svelte-ignore security-anchor-rel-noreferrer -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <section class="header">
   <div class="header__wrapper">
     <div class="header__logo">
@@ -65,61 +70,66 @@
         </div>
       </div>
     {/if}
-    {#if curWidth < 1280}
-      {#if active}
-        <div class="header__content">
-          <a target="_blank" href="https://shopify.com/" class="header__shopify">
-            <div class="header__shopify-logo">
-              <img src="../icons/shopify.svg" alt="shopify img" />
-            </div>
-            <div class="header__shopify-text">Shopify dev</div>
-          </a>
-          <div class="header__nav">
-            <a href="/" class="header__nav-item">Cases</a>
-            <div class="header__nav-item dropdown">
-              <p>Services</p>
-              <div class="header__nav-item-icon" />
-              <div class="header__nav-dropdown-content">
-                <div class="header__nav-dropdown-content-wrapper">
-                  <div class="header__nav-dropdown-content-list">
-                    <a href="/" class="header__nav-item">Web Development</a>
-                    <a href="/" class="header__nav-item">E-Commerce</a>
-                    <a href="/" class="header__nav-item">UI/UX design</a>
-                    <a href="/" class="header__nav-item">Mobile Development</a>
-                    <a href="/" class="header__nav-item"> Shopify/Shopify plus development </a>
-                    <a href="/" class="header__nav-item">Jamstack</a>
-                    <a href="/" class="header__nav-item">Cross-Platform development</a>
-                    <a href="/" class="header__nav-item">Game development</a>
-                    <a href="/" class="header__nav-item">Computer VisionDevelopment</a>
-                    <a href="/" class="header__nav-item">Custom Software development</a>
-                    <a href="/" class="header__nav-item">Project management</a>
-                    <a href="/" class="header__nav-item">Startup and MVP Services</a>
-                  </div>
-                  <div class="header__nav-dropdown-link">
-                    <p>All services</p>
-                    <span class="arrow" />
-                  </div>
+
+    <div class="header__mobile-btn" on:click={openMenu} />
+  </div>
+  {#if curWidth < 1280}
+    <div class={active ? 'header__content header__content--active' : 'header__content'}>
+      <div class="header__mobile-contents">
+        <a target="_blank" href="https://shopify.com/" class="header__shopify">
+          <div class="header__shopify-logo">
+            <img src="../icons/shopify.svg" alt="shopify img" />
+          </div>
+          <div class="header__shopify-text">Shopify dev</div>
+        </a>
+        <div class="header__nav">
+          <a href="/" class="header__nav-item">Cases</a>
+          <div class="header__nav-item dropdown">
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <p>Services</p>
+            <div class="header__nav-item-icon" />
+            <div class="header__nav-dropdown-content">
+              <div class="header__nav-dropdown-content-wrapper">
+                <div class="header__nav-dropdown-content-list">
+                  <a href="/" class="header__nav-item">Web Development</a>
+                  <a href="/" class="header__nav-item">E-Commerce</a>
+                  <a href="/" class="header__nav-item">UI/UX design</a>
+                  <a href="/" class="header__nav-item">Mobile Development</a>
+                  <a href="/" class="header__nav-item"> Shopify/Shopify plus development </a>
+                  <a href="/" class="header__nav-item">Jamstack</a>
+                  <a href="/" class="header__nav-item">Cross-Platform development</a>
+                  <a href="/" class="header__nav-item">Game development</a>
+                  <a href="/" class="header__nav-item">Computer VisionDevelopment</a>
+                  <a href="/" class="header__nav-item">Custom Software development</a>
+                  <a href="/" class="header__nav-item">Project management</a>
+                  <a href="/" class="header__nav-item">Startup and MVP Services</a>
+                </div>
+                <div class="header__nav-dropdown-link">
+                  <p>All services</p>
+                  <span class="arrow" />
                 </div>
               </div>
             </div>
-            <a href="/" class="header__nav-item">About us</a>
-            <a href="/" class="header__nav-item">Careers</a>
           </div>
-          <div class="header__btn">
-            Get in touch <span class="header__btn-icon" />
-          </div>
+          <a href="/" class="header__nav-item">About us</a>
+          <a href="/" class="header__nav-item">Careers</a>
         </div>
-      {/if}
-    {/if}
-    <div class="header__mobile-btn" on:click={openMenu} />
-  </div>
+      </div>
+      <div class="header__btn">
+        Get in touch <span class="header__btn-icon" />
+      </div>
+    </div>
+    <div
+      class={active ? 'header__background header__background--active' : 'header__background'}
+      on:click={openMenu}
+    />
+  {/if}
 </section>
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
 
   .header {
-    position: relative;
     margin: 0 auto;
     z-index: 5;
     padding-top: 20px;
@@ -152,6 +162,25 @@
     @include media-breakpoint-up(xl) {
       margin-left: 60px;
       margin-right: 60px;
+    }
+
+    &__background {
+      position: fixed;
+      background-color: #21212157;
+      height: 100%;
+      width: 100%;
+      transition: 0.3s ease-in-out;
+      top: 0;
+      opacity: 0;
+      left: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      &--active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+      }
     }
 
     &__wrapper {
@@ -193,19 +222,28 @@
     &__content {
       display: flex;
       border-radius: 0 20px 20px 0;
+
       @include media-breakpoint-down(xl) {
+        justify-content: space-between;
         width: 280px;
         background-color: rgb(218 244 254);
-        top: -21px;
-        left: -41px;
-        position: absolute;
+        top: 0px;
+        left: -100%;
+        z-index: 10;
+        position: fixed;
         flex-direction: column;
         align-items: flex-start;
-        height: 100vh;
+        transition: 0.5s ease-in-out;
+        overflow: auto;
+        height: 100%;
         padding-top: 40px;
-        padding-left: 50px;
+        padding-left: 30px;
         padding-right: 20px;
         padding-bottom: 40px;
+
+        &--active {
+          left: 0px;
+        }
       }
 
       @include media-breakpoint-up(xl) {
@@ -270,11 +308,16 @@
       font-weight: 400;
       line-height: 150%;
       cursor: pointer;
-      padding: 20px 0;
+
       z-index: 2;
 
       @include media-breakpoint-down(xl) {
         width: 100%;
+        padding: 5px 0;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding: 20px 0;
       }
 
       &.dropdown {
@@ -310,37 +353,46 @@
     }
 
     &__nav-dropdown-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: auto;
-      padding-top: 107%;
-      z-index: 5;
-      transition: 0.5s;
-
       @include media-breakpoint-down(xl) {
+        display: none;
+      }
+      @include media-breakpoint-up(xl) {
         opacity: 1;
         visibility: visible;
+        padding-top: 107%;
         transform: translateY(-50%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: auto;
+        z-index: 5;
+        transition: 0.5s;
       }
     }
 
     &__nav-dropdown-content-wrapper {
-      border-radius: 40px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(25px);
-      padding: 20px;
-
       @include media-breakpoint-down(xl) {
-        display: none;
+        background-color: white;
+      }
+      @include media-breakpoint-up(xl) {
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(25px);
+        padding: 20px;
       }
     }
 
     &__nav-dropdown-content-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      margin-bottom: 40px;
+      @include media-breakpoint-down(xl) {
+        display: flex;
+        flex-direction: column;
+      }
+      @include media-breakpoint-up(xl) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 40px;
+      }
 
       .header__nav-item {
         @include media-breakpoint-up(xl) {
@@ -364,23 +416,22 @@
     }
 
     &__nav-item-icon {
-      position: relative;
-      width: 7px;
-      height: 6px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-
-      color: #212121;
-
       @include media-breakpoint-down(xl) {
-        transform: rotate(180deg);
+        display: none;
       }
 
       @include media-breakpoint-up(xl) {
         transform: rotate(270deg);
         margin-top: 5px;
         margin-left: 8px;
+        position: relative;
+        width: 7px;
+        height: 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        color: #212121;
       }
       &::after {
         content: '';
@@ -456,6 +507,15 @@
 
       @include media-breakpoint-up(xl) {
         display: none;
+      }
+    }
+
+    &__mobile-contents {
+      @include media-breakpoint-down(xl) {
+        display: block;
+      }
+      @include media-breakpoint-up(xl) {
+        display: contents;
       }
     }
   }

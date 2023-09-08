@@ -145,10 +145,6 @@
   @import '../styles/base/mixins.scss';
 
   .modal {
-    @include media-breakpoint-down(lg) {
-      padding-top: 90px;
-      padding-bottom: 90px;
-    }
     display: flex;
     align-items: center;
     justify-content: center;
@@ -156,6 +152,7 @@
     width: 100%;
     height: 100%;
     z-index: 12;
+    top: 0;
 
     &__notice {
       position: fixed;

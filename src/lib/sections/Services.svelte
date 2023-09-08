@@ -37,8 +37,8 @@
     // and now initialize it
     swiperEl.initialize()
 
-    window.addEventListener('resize', updateMarginLeft)
-    window.addEventListener('load', updateMarginLeft)
+    // window.addEventListener('resize', updateMarginLeft)
+    // window.addEventListener('load', updateMarginLeft)
   })
 </script>
 
