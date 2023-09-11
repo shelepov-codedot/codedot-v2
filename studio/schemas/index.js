@@ -1,3 +1,7 @@
-import pet from './pet';
+import dignity from './sections/dignity'
+import hero from './sections/hero'
 
-export const schemaTypes = [pet]
+// import sections from './sections';
+// import test from './test';
+
+export const schemaTypes = [hero, dignity]

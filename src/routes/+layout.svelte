@@ -50,27 +50,27 @@
 
   <Hero {handleClick} />
 
-  <Dignity />
+  <!-- <Dignity /> -->
 
-  <Counters />
+  <!-- <Counters /> -->
 
-  <Cases />
+  <!-- <Cases /> -->
 
-  <Text />
+  <!-- <Text /> -->
 
-  <Services />
+  <!-- <Services /> -->
 
-  <Technologies />
+  <!-- <Technologies /> -->
 
-  <Review />
+  <!-- <Review /> -->
 
-  <Code />
+  <!-- <Code /> -->
 
   <!-- <AboutHero /> -->
 
   <!-- <Roadmap /> -->
 
-  <!--<OurMission /> -->
+  <!-- <OurMission /> -->
 
   <!-- <CasesPage /> -->
 
