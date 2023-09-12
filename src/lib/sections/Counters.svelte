@@ -1,25 +1,44 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="counters">
-  <div class="container">
-    <div class="counters__wrapper">
-      <div class="counters__items">
-        <div class="counters__item">
-          <span class="counters__number">100+</span>
-          <div class="counters__text">orders</div>
-        </div>
-        <div class="counters__item">
-          <span class="counters__number">80+</span>
-          <div class="counters__text">ready orders</div>
-        </div>
-        <div class="counters__item">
-          <span class="counters__number">100+</span>
-          <div class="counters__text">happy clients</div>
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Counters"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+{#if data}
+  <section class="counters">
+    <div class="container">
+      <div class="counters__wrapper">
+        <div class="counters__items">
+          {#each data.countersItems as counter}
+            <div class="counters__item">
+              <span class="counters__number">{counter.number}</span>
+              <div class="counters__text">{counter.text}</div>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

@@ -16,7 +16,7 @@ export default {
     },
     {
       title: 'Image',
-      name: 'poster',
+      name: 'Image',
       type: 'image',
     },
   ],

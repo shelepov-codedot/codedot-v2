@@ -1,20 +1,20 @@
 export default {
-  name: 'Dignity',
+  name: 'Counters',
   type: 'document',
-  title: 'Dignity',
+  title: 'Counters',
   fields: [
     {
-      name: 'dignityItems',
+      name: 'countersItems',
       type: 'array',
-      title: 'DignityItems',
+      title: 'CountersItems',
       of: [
         {
           title: 'Item',
           name: 'Item',
           type: 'object',
           fields: [
-            {name: 'Name', type: 'string', title: 'Item name'},
-            {name: 'Text', type: 'string', title: 'Item text'},
+            {name: 'number', type: 'string', title: 'Item number'},
+            {name: 'text', type: 'string', title: 'Item text'},
           ],
         },
       ],

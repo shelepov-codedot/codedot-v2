@@ -1,7 +1,8 @@
+import cases from './sections/cases'
+import counters from './sections/counters'
 import dignity from './sections/dignity'
 import hero from './sections/hero'
+import services from './sections/services'
+import techologies from './sections/techologies'
 
-// import sections from './sections';
-// import test from './test';
-
-export const schemaTypes = [hero, dignity]
+export const schemaTypes = [hero, dignity, counters, cases, services, techologies]

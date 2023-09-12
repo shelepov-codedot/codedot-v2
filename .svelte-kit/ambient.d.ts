@@ -70,6 +70,7 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const npm_package_dependencies_swiper: string;
 	export const npm_package_dependencies__sanity_client: string;
+	export const npm_package_dependencies__sanity_image_url: string;
 	export const npm_package_description: string;
 	export const npm_package_devDependencies_sass: string;
 	export const npm_package_devDependencies_svelte: string;
@@ -195,6 +196,7 @@ declare module '$env/dynamic/private' {
 		npm_node_execpath: string;
 		npm_package_dependencies_swiper: string;
 		npm_package_dependencies__sanity_client: string;
+		npm_package_dependencies__sanity_image_url: string;
 		npm_package_description: string;
 		npm_package_devDependencies_sass: string;
 		npm_package_devDependencies_svelte: string;

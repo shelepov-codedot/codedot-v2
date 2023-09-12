@@ -1,21 +1,21 @@
-import { createClient } from '@sanity/client'
+// import { createClient } from '@sanity/client'
 
-export async function _getProps() {
-  const client = createClient({
-    projectId: 'c6ki8epl',
-    dataset: 'production',
-    useCdn: true,
-  })
+// export async function _getProps() {
+//   const client = createClient({
+//     projectId: 'c6ki8epl',
+//     dataset: 'production',
+//     useCdn: true,
+//   })
 
-  const query = `*[_type=="Hero"]`
-  const section = await client.fetch(query)
+//   const query = `*[_type=="Hero"]`
+//   const section = await client.fetch(query)
 
-  console.log(section)
+//   console.log(section)
 
-  return {
-    body: {
-      section,
-    },
-  }
-}
-_getProps()
+//   return {
+//     body: {
+//       section,
+//     },
+//   }
+// }
+// _getProps()

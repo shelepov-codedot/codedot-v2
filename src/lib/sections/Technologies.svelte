@@ -1,108 +1,54 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="technologies">
-  <div class="container">
-    <div class="technologies__wrapper">
-      <h2 class="technologies__title">Technologies</h2>
-      <div class="technologies__items">
-        <div class="technologies__item">
-          <p class="technologies__name">Front-end</p>
-          <div class="technologies__stack">
-            <span class="technologies__stack-item">React</span>
-            <span class="technologies__stack-item">Gatsby</span>
-            <span class="technologies__stack-item">NextJS</span>
-            <span class="technologies__stack-item">Vue</span>
-            <span class="technologies__stack-item">NuxtJS</span>
-            <span class="technologies__stack-item">TypeScript</span>
-            <span class="technologies__stack-item">JavaScript</span>
-            <span class="technologies__stack-item">Svelte</span>
-            <span class="technologies__stack-item">HTML</span>
-            <span class="technologies__stack-item">CSS</span>
-            <span class="technologies__stack-item">Emotion</span>
-            <span class="technologies__stack-item">Linaria</span>
-            <span class="technologies__stack-item">MaterialUI</span>
-            <span class="technologies__stack-item">Bootstrap</span>
-            <span class="technologies__stack-item">ChakraUI</span>
-            <span class="technologies__stack-item">Pixi.js</span>
-            <span class="technologies__stack-item">Haxe</span>
-          </div>
-        </div>
-        <div class="technologies__item">
-          <p class="technologies__name">Back-end</p>
-          <div class="technologies__stack">
-            <span class="technologies__stack-item">PHP</span>
-            <span class="technologies__stack-item">Symfony</span>
-            <span class="technologies__stack-item">Yii2</span>
-            <span class="technologies__stack-item">Laravel</span>
-            <span class="technologies__stack-item">Node.js</span>
-            <span class="technologies__stack-item">Express</span>
-            <span class="technologies__stack-item">NestJS</span>
-            <span class="technologies__stack-item">Python</span>
-            <span class="technologies__stack-item">Django</span>
-            <span class="technologies__stack-item">C++</span>
-            <span class="technologies__stack-item">Liquid</span>
-          </div>
-        </div>
-        <div class="technologies__item">
-          <p class="technologies__name">Mobile</p>
-          <div class="technologies__stack">
-            <span class="technologies__stack-item">React Native</span>
-            <span class="technologies__stack-item">Pixi.js</span>
-            <span class="technologies__stack-item">Haxe</span>
-            <span class="technologies__stack-item">Electron.js</span>
-          </div>
-        </div>
-        <div class="technologies__item">
-          <p class="technologies__name">Game Engine</p>
-          <div class="technologies__stack">
-            <span class="technologies__stack-item">Unreal engine</span>
-            <span class="technologies__stack-item">Unity</span>
-          </div>
-        </div>
-        <div class="technologies__item">
-          <p class="technologies__name">Headless CMS</p>
-          <div class="technologies__stack">
-            <span class="technologies__stack-item">Contentful</span>
-            <span class="technologies__stack-item">Strapi</span>
-            <span class="technologies__stack-item">Sanity</span>
-            <span class="technologies__stack-item">Netlify</span>
-            <span class="technologies__stack-item">Dato</span>
-            <span class="technologies__stack-item">WordPress (Atlas)</span>
-            <span class="technologies__stack-item">Shopify</span>
-          </div>
-        </div>
-        <div class="technologies__item">
-          <p class="technologies__name">e-Commerce Platform</p>
-          <div class="technologies__stack">
-            <span class="technologies__stack-item">Shopify</span>
-            <span class="technologies__stack-item">Shopify plus</span>
-            <span class="technologies__stack-item">Hydrogen</span>
-            <span class="technologies__stack-item">Medusa.js</span>
-            <span class="technologies__stack-item">Commercetools</span>
-          </div>
-        </div>
-        <div class="technologies__item">
-          <p class="technologies__name">Other</p>
-          <div class="technologies__stack">
-            <span class="technologies__stack-item">Rest API</span>
-            <span class="technologies__stack-item">GraphQL</span>
-            <span class="technologies__stack-item">GROQ</span>
-            <span class="technologies__stack-item">Docker</span>
-            <span class="technologies__stack-item">Kubernetes</span>
-            <span class="technologies__stack-item">Apollo</span>
-            <span class="technologies__stack-item">Webpack</span>
-            <span class="technologies__stack-item">Gulp</span>
-            <span class="technologies__stack-item">Docker</span>
-            <span class="technologies__stack-item">Storybook</span>
-            <span class="technologies__stack-item">Babel</span>
-            <span class="technologies__stack-item">yarn</span>
-            <span class="technologies__stack-item">npm</span>
-          </div>
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Technologies"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+
+  setTimeout(() => {
+    console.log(data)
+  }, 1000)
+</script>
+
+{#if data}
+  <section class="technologies">
+    <div class="container">
+      <div class="technologies__wrapper">
+        <h2 class="technologies__title">Technologies</h2>
+        <div class="technologies__items">
+          {#each data.technologiesList as item}
+            <div class="technologies__item">
+              <p class="technologies__name">{item.name}</p>
+
+              <div class="technologies__stack">
+                {#each item.subtechnologiesList as subtech}
+                  <span class="technologies__stack-item">{subtech}</span>
+                {/each}
+              </div>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

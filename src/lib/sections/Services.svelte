@@ -1,15 +1,36 @@
 <script>
+  import { createClient } from '@sanity/client'
   import { onMount } from 'svelte'
   import { register } from 'swiper/element/bundle'
+
+  let data, swiperEl
+
   register()
 
-  const spaceBetween = 40
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Services"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
 
   onMount(() => {
-    const swiperEl = document.querySelector('.services__swiper-wrapper')
-
-    // swiper parameters
     const swiperParams = {
+      observer: true,
+      observeParents: true,
+      observeSlideChildren: true,
       slidesPerView: 1,
       breakpoints: {
         0: {
@@ -26,85 +47,56 @@
         nextEl: '.services__btn--next',
         prevEl: '.services__btn--prev',
       },
-      on: {
-        init() {},
-      },
     }
 
-    // now we need to assign all parameters to Swiper element
-    Object.assign(swiperEl, swiperParams)
-
-    // and now initialize it
-    swiperEl.initialize()
-
-    // window.addEventListener('resize', updateMarginLeft)
-    // window.addEventListener('load', updateMarginLeft)
+    setTimeout(() => {
+      if (data) {
+        Object.assign(swiperEl, swiperParams)
+        swiperEl.initialize()
+      }
+    }, 100)
   })
+
+  const spaceBetween = 40
 </script>
 
-<section class="services">
-  <div class="container">
-    <div class="services__wrapper">
-      <div class="services__title-wrapper">
-        <h2 class="services__title">Services</h2>
-        <div class="services__btns">
-          <button class="services__btn services__btn--prev">
-            <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
-          </button>
-          <button class="services__btn services__btn--next">
-            <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
-          </button>
+{#if data}
+  <section class="services">
+    <div class="container">
+      <div class="services__wrapper">
+        <div class="services__title-wrapper">
+          <h2 class="services__title">Services</h2>
+          <div class="services__btns">
+            <button class="services__btn services__btn--prev">
+              <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
+            </button>
+            <button class="services__btn services__btn--next">
+              <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
+            </button>
+          </div>
+        </div>
+
+        <div class="services__swiper-container">
+          <swiper-container
+            slides-per-view="3"
+            space-between={spaceBetween}
+            class="services__swiper-wrapper"
+            navigation="true"
+            init="false"
+            bind:this={swiperEl}
+          >
+            {#each data.services as service}
+              <swiper-slide class="services__item">
+                <p class="services__name">{service.name}</p>
+                <p class="services__text">{service.text}</p>
+              </swiper-slide>
+            {/each}
+          </swiper-container>
         </div>
       </div>
-      <div class="services__swiper-container">
-        <swiper-container
-          slides-per-view="3"
-          space-between={spaceBetween}
-          class="services__swiper-wrapper"
-          navigation="true"
-          init="false"
-        >
-          <swiper-slide class="services__item">
-            <p class="services__name">Web<br />Development</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">Mobile <br />Application</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">Game<br />Development</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">Project<br />management</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">PWA <br />Development<br />Services</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">Cross-Platform <br />development</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-        </swiper-container>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

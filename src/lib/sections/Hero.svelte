@@ -1,64 +1,91 @@
 <script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
+
   export let handleClick
+
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="Hero"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
 </script>
 
-<section class="hero">
-  <div class="hero__background">
-    <div class="hero__background-img-wrapper">
-      <img src="../images/hero_back.png" alt="hero__background" class="hero__background-img" />
+{#if data}
+  <section class="hero">
+    <div class="hero__background">
+      <div class="hero__background-img-wrapper">
+        <img src="../images/hero_back.png" alt="hero__background" class="hero__background-img" />
+      </div>
     </div>
-  </div>
-  <div class="hero__wrapper">
-    <div class="hero__mobile-wrapper">
-      <div class="hero__description-wrapper">
-        <div class="hero__description">
-          <p class="hero__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras.
-          </p>
-          <div class="hero__tag-wrapper">
-            <div class="hero__tag">
-              <div class="hero__tag-name">Web development</div>
-            </div>
-            <div class="hero__tag">
-              <div class="hero__tag-name">JAMStack</div>
-            </div>
-            <div class="hero__tag">
-              <div class="hero__tag-name">eCommerce</div>
+    <div class="hero__wrapper">
+      <div class="hero__mobile-wrapper">
+        <div class="hero__description-wrapper">
+          <div class="hero__description">
+            <p class="hero__text">
+              {data.Text}
+            </p>
+            <div class="hero__tag-wrapper">
+              {#each data.taglist as tag}
+                <div class="hero__tag">
+                  <div class="hero__tag-name">{tag}</div>
+                </div>
+              {/each}
             </div>
           </div>
+          <div class="hero__img-wrapper">
+            <img src={urlFor(data.Image)} alt="" class="hero__img" />
+          </div>
         </div>
-        <div class="hero__img-wrapper">
-          <img src="../images/hero_image.png" alt="" class="hero__img" />
-        </div>
-      </div>
-      <div class="hero__discuss-wrapper">
-        <div class="hero__tagline-wrapper">
-          <p class="hero__tagline">We will take</p>
-          <p class="hero__tagline">
-            <span class="hero__word">
-              Y<span class="hero__letter"
-                ><img src="../images/big_o.svg" alt="" class="hero__letter-img" /></span
-              >
-              ur &nbsp;
-            </span>
-            business
-          </p>
-          <p class="hero__tagline">To the next level</p>
-        </div>
-        <div class="hero__discuss-inner">
-          <p class="hero__discuss-text">Creative Design and <br />Development Agency.</p>
-          <button class="btn" on:click={handleClick}>
-            Discuss the project
-            <span class="btn__icon">
-              <img src="../icons/arrow-btn.svg" alt="" />
-            </span>
-          </button>
+        <div class="hero__discuss-wrapper">
+          <div class="hero__tagline-wrapper">
+            <p class="hero__tagline">We will take</p>
+            <p class="hero__tagline">
+              <span class="hero__word">
+                Y
+                <span class="hero__letter">
+                  <img src="../images/big_o.svg" alt="" class="hero__letter-img" />
+                </span>
+                ur &nbsp;
+              </span>
+              business
+            </p>
+            <p class="hero__tagline">To the next level</p>
+          </div>
+          <div class="hero__discuss-inner">
+            <p class="hero__discuss-text">Creative Design and <br />Development Agency.</p>
+            <button class="btn" on:click={handleClick}>
+              Discuss the project
+              <span class="btn__icon">
+                <img src="../icons/arrow-btn.svg" alt="" />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
