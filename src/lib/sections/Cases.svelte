@@ -33,7 +33,7 @@
   <section class="cases">
     <div class="container">
       <div class="cases__wrapper">
-        <h2 class="cases__title">Cases</h2>
+        <h2 class="cases__title">{data.title}</h2>
         <div class="cases__items-wrapper">
           <div class="cases__items cases__items--left">
             {#each data.casesList as caseItem, index}

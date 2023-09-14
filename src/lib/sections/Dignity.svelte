@@ -21,10 +21,6 @@
   }
 
   _getProps().then((res) => (data = res.body.section[0]))
-
-  setTimeout(() => {
-    console.log(data)
-  }, 1000)
 </script>
 
 {#if data}

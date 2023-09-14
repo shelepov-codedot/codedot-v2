@@ -1,8 +1,19 @@
 export default {
+  preview: {
+    select: {
+      title: 'sectionTitle',
+    },
+  },
+
   name: 'Counters',
   type: 'document',
   title: 'Counters',
   fields: [
+    {
+      name: 'sectionTitle',
+      type: 'string',
+      title: 'Title',
+    },
     {
       name: 'countersItems',
       type: 'array',

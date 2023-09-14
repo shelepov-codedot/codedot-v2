@@ -14,7 +14,7 @@
     })
 
     builder = imageUrlBuilder(client)
-    const query = `*[_type=="Hero"]`
+    const query = `*[_type=="hero"]`
     const section = await client.fetch(query)
 
     return {
@@ -35,7 +35,11 @@
   <section class="hero">
     <div class="hero__background">
       <div class="hero__background-img-wrapper">
-        <img src="../images/hero_back.png" alt="hero__background" class="hero__background-img" />
+        <img
+          src={urlFor(data.backgroundImage)}
+          alt="hero__background"
+          class="hero__background-img"
+        />
       </div>
     </div>
     <div class="hero__wrapper">

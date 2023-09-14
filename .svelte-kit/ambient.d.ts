@@ -69,7 +69,11 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
 	export const npm_package_dependencies_swiper: string;
+	export const npm_package_dependencies__sanity_cli: string;
 	export const npm_package_dependencies__sanity_client: string;
+	export const npm_package_dependencies__sanity_core: string;
+	export const npm_package_dependencies__sanity_default_layout: string;
+	export const npm_package_dependencies__sanity_default_login: string;
 	export const npm_package_dependencies__sanity_image_url: string;
 	export const npm_package_description: string;
 	export const npm_package_devDependencies_sass: string;
@@ -195,7 +199,11 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
 		npm_package_dependencies_swiper: string;
+		npm_package_dependencies__sanity_cli: string;
 		npm_package_dependencies__sanity_client: string;
+		npm_package_dependencies__sanity_core: string;
+		npm_package_dependencies__sanity_default_layout: string;
+		npm_package_dependencies__sanity_default_login: string;
 		npm_package_dependencies__sanity_image_url: string;
 		npm_package_description: string;
 		npm_package_devDependencies_sass: string;

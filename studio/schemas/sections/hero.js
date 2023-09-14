@@ -1,11 +1,22 @@
 export default {
-  name: 'Hero',
+  preview: {
+    select: {
+      title: 'sectionTitle',
+    },
+  },
+
+  name: 'hero',
   type: 'document',
   title: 'Hero',
   fields: [
     {
-      name: 'Text',
+      name: 'sectionTitle',
       type: 'string',
+      title: 'Title',
+    },
+    {
+      name: 'Text',
+      type: 'text',
       title: 'Text',
     },
     {
@@ -17,6 +28,11 @@ export default {
     {
       title: 'Image',
       name: 'Image',
+      type: 'image',
+    },
+    {
+      title: 'BackgroundImage',
+      name: 'backgroundImage',
       type: 'image',
     },
   ],

@@ -17,7 +17,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sanity/cli": "^3.16.4",
 		"@sanity/client": "^6.4.0",
+		"@sanity/core": "^2.36.2",
+		"@sanity/default-layout": "^2.36.2",
+		"@sanity/default-login": "^2.36.2",
 		"@sanity/image-url": "^1.0.2",
 		"swiper": "^10.1.0"
 	}

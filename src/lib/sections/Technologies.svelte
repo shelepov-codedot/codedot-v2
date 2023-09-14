@@ -21,17 +21,13 @@
   }
 
   _getProps().then((res) => (data = res.body.section[0]))
-
-  setTimeout(() => {
-    console.log(data)
-  }, 1000)
 </script>
 
 {#if data}
   <section class="technologies">
     <div class="container">
       <div class="technologies__wrapper">
-        <h2 class="technologies__title">Technologies</h2>
+        <h2 class="technologies__title">{data.title}</h2>
         <div class="technologies__items">
           {#each data.technologiesList as item}
             <div class="technologies__item">

@@ -7,6 +7,8 @@
 
   register()
 
+  const spaceBetween = 40
+
   export async function _getProps() {
     const client = createClient({
       projectId: 'c6ki8epl',
@@ -24,40 +26,43 @@
     }
   }
 
-  _getProps().then((res) => (data = res.body.section[0]))
-
-  onMount(() => {
-    const swiperParams = {
-      observer: true,
-      observeParents: true,
-      observeSlideChildren: true,
-      slidesPerView: 1,
-      breakpoints: {
-        0: {
-          slidesPerView: 1,
-        },
-        992: {
-          slidesPerView: 2,
-        },
-        1692: {
-          slidesPerView: 3,
-        },
+  const swiperParams = {
+    observer: true,
+    observeParents: true,
+    observeSlideChildren: true,
+    slidesPerView: 1,
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
       },
-      navigation: {
-        nextEl: '.services__btn--next',
-        prevEl: '.services__btn--prev',
+      992: {
+        slidesPerView: 2,
       },
-    }
+      1692: {
+        slidesPerView: 3,
+      },
+    },
+    navigation: {
+      nextEl: '.services__btn--next',
+      prevEl: '.services__btn--prev',
+    },
+  }
 
-    setTimeout(() => {
-      if (data) {
+  onMount(async () => {
+    const res = await _getProps()
+    data = res.body.section[0]
+
+    console.log(data)
+
+    if (data) {
+      const initializeSwiper = () => {
         Object.assign(swiperEl, swiperParams)
         swiperEl.initialize()
       }
-    }, 100)
-  })
 
-  const spaceBetween = 40
+      requestAnimationFrame(initializeSwiper)
+    }
+  })
 </script>
 
 {#if data}

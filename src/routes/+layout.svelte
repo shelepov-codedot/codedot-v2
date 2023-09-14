@@ -48,23 +48,23 @@
 <main>
   <Modal {activeModal} {closeModal} />
 
-  <!-- <Hero {handleClick} /> -->
+  <Hero {handleClick} />
 
-  <!-- <Dignity /> -->
-
-  <!-- <Counters /> -->
+  <Dignity />
 
   <Cases />
 
-  <!-- <Text /> -->
+  <Counters />
+
+  <Text />
 
   <Services />
 
   <Technologies />
 
-  <!-- <Review /> -->
+  <Review />
 
-  <!-- <Code /> -->
+  <Code />
 
   <!-- <AboutHero /> -->
 
