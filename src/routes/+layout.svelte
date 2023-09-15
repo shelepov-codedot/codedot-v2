@@ -40,15 +40,14 @@
   function closeModal() {
     activeModal = false
   }
-
-  export let data
 </script>
 
 <Header />
 <main>
+  <!-- HOMEPAGE -->
   <Modal {activeModal} {closeModal} />
 
-  <Hero {handleClick} />
+  <!--<Hero {handleClick} />
 
   <Dignity />
 
@@ -64,21 +63,40 @@
 
   <Review />
 
-  <Code />
+  <Code /> -->
 
-  <!-- <AboutHero /> -->
+  <!-- END HOMEPAGE -->
 
-  <!-- <Roadmap /> -->
+  <!-- ABOUT US -->
+  <!-- 
+  <AboutHero />
 
-  <!-- <OurMission /> -->
+  <Roadmap />
 
-  <!-- <CasesPage /> -->
+  <Counters />
 
-  <!-- <Careers /> -->
+  <OurMission />
 
-  <!-- <Jobs /> -->
+  <Review /> -->
 
-  <!-- <Benefits /> -->
+  <!-- END ABOUT US -->
+
+  <!-- CASES PAGE -->
+  <!-- 
+  <CasesPage />
+  <Code /> -->
+
+  <!-- END CASES -->
+
+  <!-- CAREERS PAGE -->
+
+  <Careers />
+
+  <Jobs />
+
+  <Benefits />
+
+  <!-- CAREERS END -->
 
   <!-- <ServiceHero /> -->
 

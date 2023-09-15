@@ -1,85 +1,63 @@
 <script>
+  import { createClient } from '@sanity/client'
+
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Jobs"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
 </script>
 
-<section class="jobs">
-  <div class="container">
-    <div class="jobs__wrapper">
-      <h2 class="jobs__title">Current job openings</h2>
-      <div class="jobs__search-wrapper">
-        <input type="text" class="jobs__search" placeholder="Find your role..." />
-        <button class="jobs__search-btn"><img src="../icons/Search.svg" alt="" /></button>
-      </div>
-      <div class="jobs__items">
-        <div class="jobs__item">
-          <div class="jobs__name-wrapper">
-            <span class="jobs__exp">2+ Years Experiens</span>
-            <p class="jobs__name">Front-end developer</p>
-          </div>
-          <div class="jobs__requirements">
-            <span class="jobs__requirements-text">English B1+; Office work</span>
-            <a href="#" class="jobs__btn">
-              <img src="../icons/arrow-btn.svg" alt="" class="jobs__icon" />
-            </a>
-          </div>
+{#if data}
+  <section class="jobs">
+    <div class="container">
+      <div class="jobs__wrapper">
+        <h2 class="jobs__title">{data.jobsTitle}</h2>
+        <div class="jobs__search-wrapper">
+          <input type="text" class="jobs__search" placeholder="Find your role..." />
+          <button class="jobs__search-btn"><img src="../icons/Search.svg" alt="" /></button>
         </div>
-        <div class="jobs__item">
-          <div class="jobs__name-wrapper">
-            <span class="jobs__exp">2+ Years Experiens</span>
-            <p class="jobs__name">Back-end developer</p>
-          </div>
-          <div class="jobs__requirements">
-            <span class="jobs__requirements-text">English B1+; Office work</span>
-            <a href="#" class="jobs__btn">
-              <img src="../icons/arrow-btn.svg" alt="" class="jobs__icon" />
-            </a>
-          </div>
-        </div>
-        <div class="jobs__item">
-          <div class="jobs__name-wrapper">
-            <span class="jobs__exp">2+ Years Experiens</span>
-            <p class="jobs__name">Senior Fullstack Developer</p>
-          </div>
-          <div class="jobs__requirements">
-            <span class="jobs__requirements-text">English B1+; Office work</span>
-            <a href="#" class="jobs__btn">
-              <img src="../icons/arrow-btn.svg" alt="" class="jobs__icon" />
-            </a>
-          </div>
-        </div>
-        <div class="jobs__item">
-          <div class="jobs__name-wrapper">
-            <span class="jobs__exp">2+ Years Experiens</span>
-            <p class="jobs__name">Senior Node.js Developer</p>
-          </div>
-          <div class="jobs__requirements">
-            <span class="jobs__requirements-text">English B1+; Office work</span>
-            <a href="#" class="jobs__btn">
-              <img src="../icons/arrow-btn.svg" alt="" class="jobs__icon" />
-            </a>
-          </div>
-        </div>
-        <div class="jobs__item">
-          <div class="jobs__name-wrapper">
-            <span class="jobs__exp">2+ Years Experiens</span>
-            <p class="jobs__name">Junior Node.js Developer</p>
-          </div>
-          <div class="jobs__requirements">
-            <span class="jobs__requirements-text">English B1+; Office work</span>
-            <a href="#" class="jobs__btn">
-              <img src="../icons/arrow-btn.svg" alt="" class="jobs__icon" />
-            </a>
-          </div>
-        </div>
-        <div class="jobs__item">
-          <div class="jobs__cannot-wrapper">
-            <p class="jobs__cannot">CANNOT FIND A SUITABLE VACANCY? DROP US A LINE</p>
-            <a href="#" class="jobs__cannot-link">welcome@code.dot</a>
+        <div class="jobs__items">
+          {#each data.jobsItems as jobItem}
+            <div class="jobs__item">
+              <div class="jobs__name-wrapper">
+                <span class="jobs__exp">{jobItem.jobExp}</span>
+                <p class="jobs__name">{jobItem.jobName}</p>
+              </div>
+              <div class="jobs__requirements">
+                <span class="jobs__requirements-text">{jobItem.jobRequirements}</span>
+                <a href={jobItem.jobLink} class="jobs__btn">
+                  <img src="../icons/arrow-btn.svg" alt="" class="jobs__icon" />
+                </a>
+              </div>
+            </div>
+          {/each}
+          <div class="jobs__item">
+            <div class="jobs__cannot-wrapper">
+              <p class="jobs__cannot">CANNOT FIND A SUITABLE VACANCY? DROP US A LINE</p>
+              <a href="#" class="jobs__cannot-link">welcome@code.dot</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

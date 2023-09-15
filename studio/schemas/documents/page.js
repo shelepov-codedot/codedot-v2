@@ -1,5 +1,3 @@
-import {MasterDetailIcon} from '@sanity/icons'
-
 export default {
   name: 'page',
   type: 'document',

@@ -3,6 +3,7 @@ export default {
   name: 'pageSection',
   type: 'reference',
   to: [
+    {type: 'Header'},
     {type: 'hero'},
     {type: 'Cases'},
     {type: 'Counters'},
@@ -10,5 +11,13 @@ export default {
     {type: 'Services'},
     {type: 'Technologies'},
     {type: 'Review'},
+    {type: 'Code'},
+    {type: 'Footer'},
+    {type: 'AboutHero'},
+    {type: 'Roadmap'},
+    {type: 'OurMission'},
+    {type: 'Careers'},
+    {type: 'Jobs'},
+    {type: 'Benefits'},
   ],
 }

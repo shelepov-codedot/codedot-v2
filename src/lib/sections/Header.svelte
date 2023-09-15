@@ -1,7 +1,9 @@
 <script>
   import { onMount } from 'svelte'
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-  let active, curWidth
+  let active, curWidth, data, builder
   let body
 
   const openMenu = () => {
@@ -22,117 +24,137 @@
       }
     })
   })
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="Header"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
 </script>
 
 <!-- svelte-ignore security-anchor-rel-noreferrer -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<section class="header">
-  <div class="header__wrapper">
-    <div class="header__logo">
-      <img src="../icons/logo.svg" alt="logo img" />
-    </div>
-    {#if curWidth >= 1280}
-      <div class="header__content">
-        <a target="_blank" href="https://shopify.com/" class="header__shopify">
-          <div class="header__shopify-logo">
-            <img src="../icons/shopify.svg" alt="shopify img" />
+
+{#if data}
+  <header class="header">
+    <div class="header__wrapper">
+      <div class="header__logo">
+        <img src={urlFor(data.logoHeader)} alt="logo img" />
+      </div>
+      {#if curWidth >= 1280}
+        <div class="header__content">
+          <a target="_blank" href={data.shopifyItem.shopifyLink} class="header__shopify">
+            <div class="header__shopify-logo">
+              <img src={urlFor(data.shopifyItem.shopifyIcon)} alt="shopify img" />
+            </div>
+            <div class="header__shopify-text">{data.shopifyItem.shopifyText}</div>
+          </a>
+          <div class="header__nav">
+            {#each data.navItems as navItem}
+              {#if !navItem.navSubItems}
+                <a href={navItem.navItemLink} class="header__nav-item">{navItem.navItemName}</a>
+              {/if}
+              {#if navItem.navSubItems}
+                <div class="header__nav-item dropdown">
+                  <p>{navItem.navItemName}</p>
+                  <div class="header__nav-item-icon" />
+                  <div class="header__nav-dropdown-content">
+                    <div class="header__nav-dropdown-content-wrapper">
+                      <div class="header__nav-dropdown-content-list">
+                        {#each navItem.navSubItems as navSubItem}
+                          <a href={navSubItem.navSubItemLink} class="header__nav-item"
+                            >{navSubItem.navSubItemName}</a
+                          >
+                        {/each}
+                      </div>
+                      <div class="header__nav-dropdown-link">
+                        <p>All {navItem.navItemName.toLowerCase()}</p>
+                        <span class="arrow" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {/if}
+            {/each}
           </div>
-          <div class="header__shopify-text">Shopify dev</div>
+          <div class="header__btn">
+            {data.button.buttonText} <span class="header__btn-icon" />
+          </div>
+        </div>
+      {/if}
+
+      <div class="header__mobile-btn-wrapper" on:click={openMenu}>
+        <div class="header__mobile-btn" />
+      </div>
+    </div>
+    {#if curWidth < 1280}
+      <div class={active ? 'header__content header__content--active' : 'header__content'}>
+        <span class="header__cross" on:click={openMenu}>
+          <span class="header__cross-btn" />
+        </span>
+        <a target="_blank" href={data.shopifyItem.shopifyLink} class="header__shopify">
+          <div class="header__shopify-logo">
+            <img src={urlFor(data.shopifyItem.shopifyIcon)} alt="shopify img" />
+          </div>
+          <div class="header__shopify-text">{data.shopifyItem.shopifyText}</div>
         </a>
         <div class="header__nav">
-          <a href="/" class="header__nav-item">Cases</a>
-          <div class="header__nav-item dropdown">
-            <p>Services</p>
-            <div class="header__nav-item-icon" />
-            <div class="header__nav-dropdown-content">
-              <div class="header__nav-dropdown-content-wrapper">
-                <div class="header__nav-dropdown-content-list">
-                  <a href="/" class="header__nav-item">Web Development</a>
-                  <a href="/" class="header__nav-item">E-Commerce</a>
-                  <a href="/" class="header__nav-item">UI/UX design</a>
-                  <a href="/" class="header__nav-item">Mobile Development</a>
-                  <a href="/" class="header__nav-item"> Shopify/Shopify plus development </a>
-                  <a href="/" class="header__nav-item">Jamstack</a>
-                  <a href="/" class="header__nav-item">Cross-Platform development</a>
-                  <a href="/" class="header__nav-item">Game development</a>
-                  <a href="/" class="header__nav-item">Computer VisionDevelopment</a>
-                  <a href="/" class="header__nav-item">Custom Software development</a>
-                  <a href="/" class="header__nav-item">Project management</a>
-                  <a href="/" class="header__nav-item">Startup and MVP Services</a>
-                </div>
-                <div class="header__nav-dropdown-link">
-                  <p>All services</p>
-                  <span class="arrow" />
+          {#each data.navItems as navItem}
+            {#if !navItem.navSubItems}
+              <a href={navItem.navItemLink} class="header__nav-item">{navItem.navItemName}</a>
+            {/if}
+            {#if navItem.navSubItems}
+              <div class="header__nav-item dropdown">
+                <p>{navItem.navItemName}</p>
+                <div class="header__nav-item-icon" />
+                <div class="header__nav-dropdown-content">
+                  <div class="header__nav-dropdown-content-wrapper">
+                    <div class="header__nav-dropdown-content-list">
+                      {#each navItem.navSubItems as navSubItem}
+                        <a href={navSubItem.navSubItemLink} class="header__nav-item"
+                          >{navSubItem.navSubItemName}</a
+                        >
+                      {/each}
+                    </div>
+                    <div class="header__nav-dropdown-link">
+                      <p>All {navItem.navItemName.toLowerCase()}</p>
+                      <span class="arrow" />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <a href="/" class="header__nav-item">About us</a>
-          <a href="/" class="header__nav-item">Careers</a>
+            {/if}
+          {/each}
         </div>
         <div class="header__btn">
-          Get in touch <span class="header__btn-icon" />
+          {data.button.buttonText} <span class="header__btn-icon" />
         </div>
       </div>
+      <div
+        class={active ? 'header__background header__background--active' : 'header__background'}
+        on:click={openMenu}
+      />
     {/if}
-
-    <div class="header__mobile-btn-wrapper" on:click={openMenu}>
-      <div class="header__mobile-btn" />
-    </div>
-  </div>
-  {#if curWidth < 1280}
-    <div class={active ? 'header__content header__content--active' : 'header__content'}>
-      <span class="header__cross" on:click={openMenu}>
-        <span class="header__cross-btn" />
-      </span>
-      <a target="_blank" href="https://shopify.com/" class="header__shopify">
-        <div class="header__shopify-logo">
-          <img src="../icons/shopify.svg" alt="shopify img" />
-        </div>
-        <div class="header__shopify-text">Shopify dev</div>
-      </a>
-      <div class="header__nav">
-        <a href="/" class="header__nav-item">Cases</a>
-        <div class="header__nav-item dropdown">
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <p>Services</p>
-          <div class="header__nav-item-icon" />
-          <div class="header__nav-dropdown-content">
-            <div class="header__nav-dropdown-content-wrapper">
-              <div class="header__nav-dropdown-content-list">
-                <a href="/" class="header__nav-item">Web Development</a>
-                <a href="/" class="header__nav-item">E-Commerce</a>
-                <a href="/" class="header__nav-item">UI/UX design</a>
-                <a href="/" class="header__nav-item">Mobile Development</a>
-                <a href="/" class="header__nav-item"> Shopify/Shopify plus development </a>
-                <a href="/" class="header__nav-item">Jamstack</a>
-                <a href="/" class="header__nav-item">Cross-Platform development</a>
-                <a href="/" class="header__nav-item">Game development</a>
-                <a href="/" class="header__nav-item">Computer VisionDevelopment</a>
-                <a href="/" class="header__nav-item">Custom Software development</a>
-                <a href="/" class="header__nav-item">Project management</a>
-                <a href="/" class="header__nav-item">Startup and MVP Services</a>
-              </div>
-              <div class="header__nav-dropdown-link">
-                <p>All services</p>
-                <span class="arrow" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <a href="/" class="header__nav-item">About us</a>
-        <a href="/" class="header__nav-item">Careers</a>
-      </div>
-      <div class="header__btn">
-        Get in touch <span class="header__btn-icon" />
-      </div>
-    </div>
-    <div
-      class={active ? 'header__background header__background--active' : 'header__background'}
-      on:click={openMenu}
-    />
-  {/if}
-</section>
+  </header>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

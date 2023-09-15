@@ -45,8 +45,6 @@
     const res = await _getProps()
     data = res.body.section[0]
 
-    console.log(data)
-
     if (data) {
       const initializeSwiper = () => {
         Object.assign(swiperElSecond, swiperSecondParams)

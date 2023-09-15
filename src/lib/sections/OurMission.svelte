@@ -1,22 +1,52 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<section class="ourmission">
-  <div class="container">
-    <div class="ourmission__wrapper">
-      <p class="ourmission__text">
-        <strong>Our mission</strong> is to turn ideas into impressive digital products that change
-        the world.
-        <strong>Our vision</strong>
-        is that our products will be used by millions of people around the world.
-        <strong>Our Values:</strong>
-        сontinuous growth, reliability, open-minded
-      </p>
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="OurMission"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+
+  setTimeout(() => {
+    console.log(data)
+  }, 1000)
+</script>
+
+{#if data}
+  <section class="ourmission">
+    <div class="container">
+      <div class="ourmission__wrapper">
+        <p class="ourmission__text">
+          {data.missionText}
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="ourmission__img-wrapper">
-    <img src="../images/ourmission.png" alt="" class="ourmission__img" />
-  </div>
-</section>
+    <div class="ourmission__img-wrapper">
+      <img src={urlFor(data.missionImage)} alt="" class="ourmission__img" />
+    </div>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
