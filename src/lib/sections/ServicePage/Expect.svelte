@@ -1,51 +1,61 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="expect">
-  <div class="expect__img-wrapper">
-    <img src="../images/expect.svg" alt="" class="expect__img" />
-  </div>
-  <div class="container">
-    <div class="expect__wrapper">
-      <div class="expect__title-wrapper">
-        <h2 class="expect__title">What you can expect</h2>
-        <p class="expect__subtitle">
-          Rely on our team and on mutual partnerships. One of our values is reliability. Experts in
-          development will work on your project and will provide you with the best result.
-        </p>
-      </div>
-      <div class="expect__items">
-        <div class="expect__item-img-wrapper">
-          <img src="../images/expect-1.svg" alt="" class="expect__item-img" />
-        </div>
-        <div class="expect__item">
-          <p class="expect__text">
-            Development, testing, release, and support of your product. Modernization of
-            architecture. Cloud Native and Microservices application development.
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Expect"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+
+  setTimeout(() => {
+    console.log(data)
+  }, 1000)
+</script>
+
+{#if data}
+  <section class="expect">
+    <div class="expect__img-wrapper">
+      <img src="../images/expect.svg" alt="" class="expect__img" />
+    </div>
+    <div class="container">
+      <div class="expect__wrapper">
+        <div class="expect__title-wrapper">
+          <h2 class="expect__title">{data.expectTitle}</h2>
+          <p class="expect__subtitle">
+            {data.expectSubText}
           </p>
         </div>
-        <div class="expect__item-img-wrapper">
-          <img src="../images/expect-2.svg" alt="" class="expect__item-img" />
-        </div>
-        <div class="expect__item">
-          <p class="expect__text">
-            We constantly monitor trends in development and update our skills. Thus, professionals
-            with all the skills and qualities confirmed by real experience will work on your
-            project.
-          </p>
-        </div>
-        <div class="expect__item-img-wrapper">
-          <img src="../images/expect-3.svg" alt="" class="expect__item-img" />
-        </div>
-        <div class="expect__item">
-          <p class="expect__text">
-            A strategic approach based on indicators allows you to see your actual results in
-            numbers.
-          </p>
+        <div class="expect__items">
+          {#each data.expectItems as expectItem, index}
+            <div class="expect__item-img-wrapper">
+              <img src="../images/expect-{index + 1}.svg" alt="" class="expect__item-img" />
+            </div>
+            <div class="expect__item">
+              <p class="expect__text">
+                {expectItem.expectText}
+              </p>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';

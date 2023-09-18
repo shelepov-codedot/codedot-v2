@@ -1,46 +1,51 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="offer">
-  <div class="container">
-    <div class="offer__wrapper">
-      <h2 class="offer__title">Ready to offer you our services</h2>
-      <div class="offer__items">
-        <div class="offer__item">
-          <p class="offer__name">MVP Development</p>
-          <p class="offer__text">
-            By creating stable and flexible code, we work faster, trying to make your full-fledged
-            product high-quality when developing MVP. We will work on your product from idea to
-            support.
-          </p>
-        </div>
-        <div class="offer__item">
-          <p class="offer__name">MVP Improvement</p>
-          <p class="offer__text">
-            We collect all the necessary information and use it immediately after the first launch
-            of your MVP solution, then we use an improvement strategy. This is necessary in order to
-            make all the changes qualitatively and make the product as adaptive to the market as
-            possible.
-          </p>
-        </div>
-        <div class="offer__item">
-          <p class="offer__name">Market Analysis</p>
-          <p class="offer__text">
-            We use qualitative and quantitative methods to assess market needs, conduct competitor
-            research and SWOT analysis, and provide you with reports and strategic ideas.
-          </p>
-        </div>
-        <div class="offer__item">
-          <p class="offer__name">MVP Consulting</p>
-          <p class="offer__text">
-            One of the fundamentals of MVP functionality is to choose the most profitable technology
-            stack for MVP software development. We will advise you on your project and provide all
-            the information.
-          </p>
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Offer"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+
+  setTimeout(() => {
+    console.log(data)
+  }, 1000)
+</script>
+
+{#if data}
+  <section class="offer">
+    <div class="container">
+      <div class="offer__wrapper">
+        <h2 class="offer__title">{data.offerTitle}</h2>
+        <div class="offer__items">
+          {#each data.offerItems as offerItem}
+            <div class="offer__item">
+              <p class="offer__name">{offerItem.offerName}</p>
+              <p class="offer__text">
+                {offerItem.offerText}
+              </p>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';

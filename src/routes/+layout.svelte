@@ -90,25 +90,41 @@
 
   <!-- CAREERS PAGE -->
 
-  <Careers />
+  <!-- <Careers />
 
   <Jobs />
 
-  <Benefits />
+  <Benefits /> 
+
+  <Code /> -->
 
   <!-- CAREERS END -->
 
-  <!-- <ServiceHero /> -->
+  <!-- SERVICE PAGE -->
 
-  <!-- <Offer /> -->
+  <!-- <ServiceHero />
 
-  <!-- <Digital /> -->
+  <Offer />
 
-  <!-- <JobHero /> -->
+  <Digital />
 
-  <!-- <Expect /> -->
+  <Expect /> -->
 
-  <!-- <OurService /> -->
+  <!-- END SERVICE PAGE -->
+
+  <!-- JOB PAGE -->
+
+  <!-- <JobHero /> 
+
+  <JobText /> -->
+
+  <!-- END JOB PAGE -->
+
+  <!-- OURSERVICE PAGE -->
+
+  <OurService />
+
+  <!-- END OURSERVICE PAGE -->
 
   <!-- <ProjectHero /> -->
 
@@ -119,8 +135,6 @@
   <!-- <ProjectText /> -->
 
   <!-- <ProjectGallery /> -->
-
-  <!-- <JobText /> -->
 </main>
 
 <Footer {handleClick} />

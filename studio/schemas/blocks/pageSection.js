@@ -19,5 +19,12 @@ export default {
     {type: 'Careers'},
     {type: 'Jobs'},
     {type: 'Benefits'},
+    {type: 'ServiceHero'},
+    {type: 'Offer'},
+    {type: 'Digital'},
+    {type: 'Expect'},
+    {type: 'JobHero'},
+    {type: 'JobText'},
+    {type: 'OurServices'},
   ],
 }
