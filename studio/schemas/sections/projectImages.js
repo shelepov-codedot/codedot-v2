@@ -27,6 +27,8 @@ export default {
         list: [
           {title: 'TitleLeft', value: 'titleLeft'},
           {title: 'TitleRight', value: 'titleRight'},
+          {title: 'TextLeft', value: 'textLeft'},
+          {title: 'TextRight', value: 'textRight'},
         ],
         layout: 'radio',
       },
