@@ -1,22 +1,53 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<section class="project-text-image">
-  <div class="container">
-    <div class="project-text-image__wrapper">
-      <div class="project-text-image__text-wrapper">
-        <p class="project-text-image__name">1. Tavalingar makroktig</p>
-        <p class="project-text-image__text">
-          Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-          psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis gigabyst att
-          tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack.
-        </p>
-      </div>
-      <div class="project-text-image__img-wrapper">
-        <img src="../images/cases4.png" alt="" class="project-text-image__img" />
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="ProjectTextImage"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps()
+    .then((res) => (data = res.body.section[0]))
+    .then((res) => console.log(res))
+</script>
+
+{#if data}
+  <section class="project-text-image">
+    <div class="container">
+      <div class="project-text-image__wrapper">
+        <div class="project-text-image__text-wrapper">
+          <p class="project-text-image__name">{data.projectTitle}</p>
+          <p class="project-text-image__text">
+            {data.projectText}
+          </p>
+        </div>
+        <div class="project-text-image__img-wrapper">
+          <img src={urlFor(data.projectImage)} alt="" class="project-text-image__img" />
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';

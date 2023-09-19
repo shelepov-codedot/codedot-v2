@@ -24,6 +24,10 @@ import jobs from './sections/jobs'
 import offer from './sections/offer'
 import ourMission from './sections/ourMission'
 import ourServices from './sections/ourServices'
+import projectHero from './sections/projectHero'
+import projectImages from './sections/projectImages'
+import projectText from './sections/projectText'
+import projectTextImage from './sections/projectTextImage'
 import review from './sections/review'
 import roadmap from './sections/roadmap'
 import serviceHero from './sections/serviceHero'
@@ -63,4 +67,8 @@ export const schemaTypes = [
   jobHero,
   jobText,
   ourServices,
+  projectHero,
+  projectTextImage,
+  projectText,
+  projectImages,
 ]

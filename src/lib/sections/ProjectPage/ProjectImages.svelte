@@ -1,210 +1,257 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<!-- Вариация 1, секция 1 -->
-<section class="project-images">
-  <div class="container">
-    <div class="project-images__wrapper">
-      <p class="project-images__text">
-        Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
-      </p>
-      <div class="project-images__items">
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases1.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases2.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases3.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases4.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases5.png" alt="" class="project-images__img" />
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="ProjectImages"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps()
+    .then((res) => (data = res.body.section[0]))
+    .then((res) => {
+      console.log(res)
+    })
+</script>
+
+{#if data}
+  <!-- Вариация 1, секция 1 -->
+  {#if data.genre == 'western'}
+    <section class="project-images">
+      <div class="container">
+        <div class="project-images__wrapper">
+          <p class="project-images__text">
+            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
+          </p>
+          <div class="project-images__items">
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases1.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases2.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases3.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases4.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases5.png" alt="" class="project-images__img" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  {/if}
 
-<!-- Вариация 1, секция 2-->
-<section class="project-images project-images--less">
-  <div class="container">
-    <div class="project-images__wrapper">
-      <p class="project-images__text">
-        Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
-      </p>
-      <div class="project-images__items">
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases1.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases2.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases3.png" alt="" class="project-images__img" />
+  <!-- Вариация 1, секция 2-->
+  {#if data.genre == 'ss'}
+    <section class="project-images project-images--less">
+      <div class="container">
+        <div class="project-images__wrapper">
+          <p class="project-images__text">
+            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
+          </p>
+          <div class="project-images__items">
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases1.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases2.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases3.png" alt="" class="project-images__img" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  {/if}
 
-<!-- Вариация 2, секция 1. Актуально для мобильного разрешения -->
-<!-- <section class="project-images project-images--small">
-  <div class="container">
-    <div class="project-images__wrapper">
-      <p class="project-images__text">
-        Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
-      </p>
-      <div class="project-images__items">
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases1.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases2.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases3.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases4.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases5.png" alt="" class="project-images__img" />
+  <!-- Вариация 2, секция 1. Актуально для мобильного разрешения -->
+  {#if data.genre == 'sss'}
+    <section class="project-images project-images--small">
+      <div class="container">
+        <div class="project-images__wrapper">
+          <p class="project-images__text">
+            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
+          </p>
+          <div class="project-images__items">
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases1.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases2.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases3.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases4.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases5.png" alt="" class="project-images__img" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section> -->
+    </section>
+  {/if}
 
-<!-- Вариация 2, секция 2. Актуально для мобильного разрешения-->
-<!-- <section class="project-images project-images--less project-images--smaller">
-  <div class="container">
-    <div class="project-images__wrapper">
-      <p class="project-images__text">
-        Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
-      </p>
-      <div class="project-images__items">
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases1.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases2.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases3.png" alt="" class="project-images__img" />
+  <!-- Вариация 2, секция 2. Актуально для мобильного разрешения-->
+  {#if data.genre == 'ssss'}
+    <section class="project-images project-images--less project-images--smaller">
+      <div class="container">
+        <div class="project-images__wrapper">
+          <p class="project-images__text">
+            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
+          </p>
+          <div class="project-images__items">
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases1.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases2.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases3.png" alt="" class="project-images__img" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section> -->
+    </section>
+  {/if}
 
-<!-- Вариация 3, секция 1. Вместо заголовока обычный текст  -->
-<!-- <section class="project-images project-images--text">
-  <div class="container">
-    <div class="project-images__wrapper">
-      <p class="project-images__text">
-        Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-        psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis gigabyst att
-        tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack. Tavalingar
-        makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde psykocentrism
-        tar och nack.
-      </p>
-      <div class="project-images__items">
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases1.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases2.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases3.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases4.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases5.png" alt="" class="project-images__img" />
+  <!-- Вариация 3, секция 1. Вместо заголовока обычный текст  -->
+  {#if data.genre == 'sssss'}
+    <section class="project-images project-images--text">
+      <div class="container">
+        <div class="project-images__wrapper">
+          <p class="project-images__text">
+            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
+            psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis gigabyst att
+            tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack. Tavalingar
+            makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
+            psykocentrism tar och nack.
+          </p>
+          <div class="project-images__items">
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases1.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases2.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases3.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases4.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases5.png" alt="" class="project-images__img" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section> -->
+    </section>
+  {/if}
 
-<!-- Вариация 4, секция 1. Вместо заголовока обычный текст  -->
-<!-- <section class="project-images project-images--less project-images--text">
-  <div class="container">
-    <div class="project-images__wrapper">
-      <p class="project-images__text">
-        Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-        psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis gigabyst att
-        tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack. Tavalingar
-        makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde psykocentrism
-        tar och nack.
-      </p>
-      <div class="project-images__items">
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases1.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases2.png" alt="" class="project-images__img" />
-          </div>
-        </div>
-        <div class="project-images__item">
-          <div class="project-images__img-wrapper">
-            <img src="../images/cases3.png" alt="" class="project-images__img" />
+  <!-- Вариация 4, секция 1. Вместо заголовока обычный текст  -->
+  {#if data.genre == 'sassss'}
+    <section class="project-images project-images--less project-images--text">
+      <div class="container">
+        <div class="project-images__wrapper">
+          <p class="project-images__text">
+            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
+            psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis gigabyst att
+            tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack. Tavalingar
+            makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
+            psykocentrism tar och nack.
+          </p>
+          <div class="project-images__items">
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases1.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases2.png" alt="" class="project-images__img" />
+              </div>
+            </div>
+            <div class="project-images__item">
+              <div class="project-images__img-wrapper">
+                <img src="../images/cases3.png" alt="" class="project-images__img" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section> -->
+    </section>
+  {/if}
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';

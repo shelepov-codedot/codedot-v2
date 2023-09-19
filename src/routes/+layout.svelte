@@ -122,13 +122,13 @@
 
   <!-- OURSERVICE PAGE -->
 
-  <OurService />
+  <!-- <OurService /> -->
 
   <!-- END OURSERVICE PAGE -->
 
   <!-- <ProjectHero /> -->
 
-  <!-- <ProjectImages /> -->
+  <ProjectImages />
 
   <!-- <ProjectTextImage /> -->
 

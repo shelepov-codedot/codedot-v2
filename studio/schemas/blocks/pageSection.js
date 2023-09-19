@@ -26,5 +26,9 @@ export default {
     {type: 'JobHero'},
     {type: 'JobText'},
     {type: 'OurServices'},
+    {type: 'ProjectHero'},
+    {type: 'ProjectTextImage'},
+    {type: 'ProjectText'},
+    {type: 'ProjectImages'},
   ],
 }

@@ -68,6 +68,7 @@
     }
 
     &__title {
+      text-transform: uppercase;
       @include media-breakpoint-down(md) {
         font-size: 40px;
       }

@@ -1,16 +1,39 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="project-text">
-  <div class="container">
-    <div class="project-text__wrapper">
-      <p class="project-text__text">
-        Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-        psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis gigabyst att
-        tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack.
-      </p>
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="ProjectText"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+{#if data}
+  <section class="project-text">
+    <div class="container">
+      <div class="project-text__wrapper">
+        <p class="project-text__text">
+          {data.projectText}
+        </p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';
