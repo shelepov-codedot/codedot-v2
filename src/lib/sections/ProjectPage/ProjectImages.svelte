@@ -35,39 +35,21 @@
 
 {#if data}
   <!-- Вариация 1, секция 1 -->
-  {#if data.genre == 'western'}
+  {#if data.variation == 'titleLeft'}
     <section class="project-images">
       <div class="container">
         <div class="project-images__wrapper">
           <p class="project-images__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
+            {data.projectText}
           </p>
           <div class="project-images__items">
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases1.png" alt="" class="project-images__img" />
+            {#each data.projectImagesItems as image}
+              <div class="project-images__item">
+                <div class="project-images__img-wrapper">
+                  <img src={urlFor(image)} alt="" class="project-images__img" />
+                </div>
               </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases2.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases3.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases4.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases5.png" alt="" class="project-images__img" />
-              </div>
-            </div>
+            {/each}
           </div>
         </div>
       </div>
@@ -75,29 +57,23 @@
   {/if}
 
   <!-- Вариация 1, секция 2-->
-  {#if data.genre == 'ss'}
+  {#if data.variation == 'titleRight'}
     <section class="project-images project-images--less">
       <div class="container">
         <div class="project-images__wrapper">
           <p class="project-images__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
+            {data.projectText}
           </p>
           <div class="project-images__items">
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases1.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases2.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases3.png" alt="" class="project-images__img" />
-              </div>
-            </div>
+            {#each data.projectImagesItems as image, index}
+              {#if index <= 2}
+                <div class="project-images__item">
+                  <div class="project-images__img-wrapper">
+                    <img src={urlFor(image)} alt="" class="project-images__img" />
+                  </div>
+                </div>
+              {/if}
+            {/each}
           </div>
         </div>
       </div>
@@ -105,12 +81,12 @@
   {/if}
 
   <!-- Вариация 2, секция 1. Актуально для мобильного разрешения -->
-  {#if data.genre == 'sss'}
+  {#if data.variation == 'titleLeftSmallImg'}
     <section class="project-images project-images--small">
       <div class="container">
         <div class="project-images__wrapper">
           <p class="project-images__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
+            {data.projectText}
           </p>
           <div class="project-images__items">
             <div class="project-images__item">
@@ -145,29 +121,23 @@
   {/if}
 
   <!-- Вариация 2, секция 2. Актуально для мобильного разрешения-->
-  {#if data.genre == 'ssss'}
+  {#if data.variation == 'titleRightSmallImg'}
     <section class="project-images project-images--less project-images--smaller">
       <div class="container">
         <div class="project-images__wrapper">
           <p class="project-images__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana.
+            {data.projectText}
           </p>
           <div class="project-images__items">
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases1.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases2.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases3.png" alt="" class="project-images__img" />
-              </div>
-            </div>
+            {#each data.projectImagesItems as image, index}
+              {#if index <= 2}
+                <div class="project-images__item">
+                  <div class="project-images__img-wrapper">
+                    <img src={urlFor(image)} alt="" class="project-images__img" />
+                  </div>
+                </div>
+              {/if}
+            {/each}
           </div>
         </div>
       </div>
@@ -175,16 +145,12 @@
   {/if}
 
   <!-- Вариация 3, секция 1. Вместо заголовока обычный текст  -->
-  {#if data.genre == 'sssss'}
+  {#if data.variation == 'textLeft'}
     <section class="project-images project-images--text">
       <div class="container">
         <div class="project-images__wrapper">
           <p class="project-images__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis gigabyst att
-            tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack. Tavalingar
-            makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack.
+            {data.projectText}
           </p>
           <div class="project-images__items">
             <div class="project-images__item">
@@ -219,33 +185,23 @@
   {/if}
 
   <!-- Вариация 4, секция 1. Вместо заголовока обычный текст  -->
-  {#if data.genre == 'sassss'}
+  {#if data.variation == 'textRight'}
     <section class="project-images project-images--less project-images--text">
       <div class="container">
         <div class="project-images__wrapper">
           <p class="project-images__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis gigabyst att
-            tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack. Tavalingar
-            makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack.
+            {data.projectText}
           </p>
           <div class="project-images__items">
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases1.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases2.png" alt="" class="project-images__img" />
-              </div>
-            </div>
-            <div class="project-images__item">
-              <div class="project-images__img-wrapper">
-                <img src="../images/cases3.png" alt="" class="project-images__img" />
-              </div>
-            </div>
+            {#each data.projectImagesItems as image, index}
+              {#if index <= 2}
+                <div class="project-images__item">
+                  <div class="project-images__img-wrapper">
+                    <img src={urlFor(image)} alt="" class="project-images__img" />
+                  </div>
+                </div>
+              {/if}
+            {/each}
           </div>
         </div>
       </div>

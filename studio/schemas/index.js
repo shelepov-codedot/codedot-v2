@@ -24,6 +24,7 @@ import jobs from './sections/jobs'
 import offer from './sections/offer'
 import ourMission from './sections/ourMission'
 import ourServices from './sections/ourServices'
+import projectGallery from './sections/projectGallery'
 import projectHero from './sections/projectHero'
 import projectImages from './sections/projectImages'
 import projectText from './sections/projectText'
@@ -71,4 +72,5 @@ export const schemaTypes = [
   projectTextImage,
   projectText,
   projectImages,
+  projectGallery,
 ]

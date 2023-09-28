@@ -30,5 +30,6 @@ export default {
     {type: 'ProjectTextImage'},
     {type: 'ProjectText'},
     {type: 'ProjectImages'},
+    {type: 'ProjectGallery'},
   ],
 }

@@ -1,33 +1,55 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<section class="project-gallery">
-  <div class="container">
-    <div class="project-gallery__wrapper">
-      <div class="project-gallery__items">
-        <div class="project-gallery__item">
-          <div class="project-gallery__img-wrapper">
-            <img src="../images/cases1.png" alt="" class="project-gallery__img" />
-          </div>
-        </div>
-        <div class="project-gallery__item">
-          <div class="project-gallery__img-wrapper">
-            <img src="../images/cases2.png" alt="" class="project-gallery__img" />
-          </div>
-        </div>
-        <div class="project-gallery__item">
-          <div class="project-gallery__img-wrapper">
-            <img src="../images/cases3.png" alt="" class="project-gallery__img" />
-          </div>
-        </div>
-        <div class="project-gallery__item">
-          <div class="project-gallery__img-wrapper">
-            <img src="../images/cases4.png" alt="" class="project-gallery__img" />
-          </div>
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="ProjectGallery"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps()
+    .then((res) => (data = res.body.section[0]))
+    .then((res) => {
+      console.log(res)
+    })
+</script>
+
+{#if data}
+  <section class="project-gallery">
+    <div class="container">
+      <div class="project-gallery__wrapper">
+        <div class="project-gallery__items">
+          {#each data.projectImages as image}
+            <div class="project-gallery__item">
+              <div class="project-gallery__img-wrapper">
+                <img src={urlFor(image)} alt="" class="project-gallery__img" />
+              </div>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';
@@ -91,8 +113,8 @@
         }
       }
 
-      &:nth-child(2),
-      &:nth-child(3) {
+      &:nth-child(3n + 2),
+      &:nth-child(3n + 3) {
         @include media-breakpoint-between(md, lg) {
           width: 47.2%;
           height: 400px;
@@ -114,7 +136,7 @@
         }
       }
 
-      &:nth-child(4) {
+      &:nth-child(3n + 4) {
         width: 100%;
         height: 810px;
 

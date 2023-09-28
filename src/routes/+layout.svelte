@@ -31,21 +31,21 @@
   import ProjectGallery from '../lib/sections/ProjectPage/ProjectGallery.svelte'
   import Modal from '../lib/sections/Modal.svelte'
 
-  let activeModal = false
+  // let activeModal = false
 
-  function handleClick() {
-    activeModal = true
-  }
+  // function handleClick() {
+  //   activeModal = true
+  // }
 
-  function closeModal() {
-    activeModal = false
-  }
+  // function closeModal() {
+  //   activeModal = false
+  // }
 </script>
 
-<Header />
+<!-- <Header /> -->
 <main>
   <!-- HOMEPAGE -->
-  <Modal {activeModal} {closeModal} />
+  <!-- <Modal {activeModal} {closeModal} /> -->
 
   <!--<Hero {handleClick} />
 
@@ -128,7 +128,7 @@
 
   <!-- <ProjectHero /> -->
 
-  <ProjectImages />
+  <!-- <ProjectImages /> -->
 
   <!-- <ProjectTextImage /> -->
 
@@ -137,7 +137,7 @@
   <!-- <ProjectGallery /> -->
 </main>
 
-<Footer {handleClick} />
+<!-- <Footer {handleClick} /> -->
 
 <style global lang="scss">
   @import '../lib/styles/styles.scss';

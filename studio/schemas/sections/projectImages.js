@@ -25,10 +25,12 @@ export default {
       type: 'string',
       options: {
         list: [
-          {title: 'TitleLeft', value: 'titleLeft'},
-          {title: 'TitleRight', value: 'titleRight'},
-          {title: 'TextLeft', value: 'textLeft'},
-          {title: 'TextRight', value: 'textRight'},
+          {title: 'Title Left', value: 'titleLeft', type: 'string'},
+          {title: 'Title Right', value: 'titleRight', type: 'string'},
+          {title: 'Title Left with small images', value: 'titleLeftSmallImg', type: 'string'},
+          {title: 'Title Right with small images', value: 'titleRightSmallImg', type: 'string'},
+          {title: 'Text Left', value: 'textLeft', type: 'string'},
+          {title: 'Text Right', value: 'textRight', type: 'string'},
         ],
         layout: 'radio',
       },

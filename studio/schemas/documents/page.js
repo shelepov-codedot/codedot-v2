@@ -9,7 +9,6 @@ export default {
       references: 'i18n_refs',
     },
   },
-
   fields: [
     {
       name: 'i18n_lang',
