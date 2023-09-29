@@ -1,100 +1,95 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<section class="cases">
-  <div class="container">
-    <div class="cases__wrapper">
-      <h2 class="cases__title">Cases</h2>
-      <div class="cases__items-wrapper">
-        <div class="cases__items cases__items--left">
-          <div class="cases__item">
-            <div class="cases__img-wrapper">
-              <img src="../images/cases1.png" alt="cases" class="cases__img" />
-            </div>
-            <div class="cases__text-wrapper">
-              <div class="cases__text-inner">
-                <p class="cases__name">TTSWTRS</p>
-                <p class="cases__tag">Ecommerce Development</p>
-              </div>
-              <a href="#"><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a>
-            </div>
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="Cases"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+{#if data}
+  <section class="cases">
+    <div class="container">
+      <div class="cases__wrapper">
+        <h2 class="cases__title">{data.title}</h2>
+        <div class="cases__items-wrapper">
+          <div class="cases__items cases__items--left">
+            {#each data.casesList as caseItem, index}
+              {#if index % 2 == 0}
+                <div class="cases__item">
+                  <div class="cases__img-wrapper">
+                    <img src={urlFor(caseItem.image)} alt="cases" class="cases__img" />
+                  </div>
+                  <div class="cases__text-wrapper">
+                    <div class="cases__text-inner">
+                      <p class="cases__name">{caseItem.name}</p>
+                      <p class="cases__tag">{caseItem.category}</p>
+                    </div>
+                    <a href="#"
+                      ><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a
+                    >
+                  </div>
+                </div>
+              {/if}
+            {/each}
           </div>
-          <div class="cases__item">
-            <div class="cases__img-wrapper">
-              <img src="../images/cases3.png" alt="cases" class="cases__img" />
-            </div>
-            <div class="cases__text-wrapper">
-              <div class="cases__text-inner">
-                <p class="cases__name">BRU beer</p>
-                <p class="cases__tag">Ecommerce Development</p>
-              </div>
-              <a href="#"><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a>
-            </div>
-          </div>
-          <div class="cases__item">
-            <div class="cases__img-wrapper">
-              <img src="../images/cases5.png" alt="cases" class="cases__img" />
-            </div>
-            <div class="cases__text-wrapper">
-              <div class="cases__text-inner">
-                <p class="cases__name">Dunn’s</p>
-                <p class="cases__tag">Web Development</p>
-              </div>
-              <a href="#"><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a>
-            </div>
-          </div>
-        </div>
-        <div class="cases__items cases__items--right">
-          <div class="cases__item">
-            <div class="cases__img-wrapper">
-              <img src="../images/cases2.png" alt="cases" class="cases__img" />
-            </div>
-            <div class="cases__text-wrapper">
-              <div class="cases__text-inner">
-                <p class="cases__name">Spenco</p>
-                <p class="cases__tag">Web Development</p>
-              </div>
-              <a href="#"><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a>
-            </div>
-          </div>
-          <div class="cases__item">
-            <div class="cases__img-wrapper">
-              <img src="../images/cases4.png" alt="cases" class="cases__img" />
-            </div>
-            <div class="cases__text-wrapper">
-              <div class="cases__text-inner">
-                <p class="cases__name">Atomic</p>
-                <p class="cases__tag">Web Development</p>
-              </div>
-              <a href="#"><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a>
-            </div>
-          </div>
-          <div class="cases__item">
-            <div class="cases__img-wrapper">
-              <img src="../images/cases6.png" alt="cases" class="cases__img" />
-            </div>
-            <div class="cases__text-wrapper">
-              <div class="cases__text-inner">
-                <p class="cases__name">YB</p>
-                <p class="cases__tag">Mobile Development</p>
-              </div>
-              <a href="#"><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a>
-            </div>
+          <div class="cases__items cases__items--right">
+            {#each data.casesList as caseItem, index}
+              {#if index % 2 != 0}
+                <div class="cases__item">
+                  <div class="cases__img-wrapper">
+                    <img src={urlFor(caseItem.image)} alt="cases" class="cases__img" />
+                  </div>
+                  <div class="cases__text-wrapper">
+                    <div class="cases__text-inner">
+                      <p class="cases__name">{caseItem.name}</p>
+                      <p class="cases__tag">{caseItem.category}</p>
+                    </div>
+                    <a href="#"
+                      ><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a
+                    >
+                  </div>
+                </div>
+              {/if}
+            {/each}
           </div>
         </div>
+        <a href="#" class="btn btn--fullwidth btn--cases">
+          View all cases
+          <span class="btn__icon">
+            <img
+              src="../icons/arrow-btn.svg"
+              alt=""
+              class="btn__icon-arrow btn__icon-arrow--rotate"
+            />
+          </span>
+        </a>
       </div>
-      <a href="#" class="btn btn--fullwidth btn--cases">
-        View all cases
-        <span class="btn__icon">
-          <img
-            src="../icons/arrow-btn.svg"
-            alt=""
-            class="btn__icon-arrow btn__icon-arrow--rotate"
-          />
-        </span>
-      </a>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
@@ -105,8 +100,8 @@
     }
 
     @include media-breakpoint-up(lg) {
-      margin-top: 218px;
-      margin-bottom: 40px;
+      padding-top: 225px;
+      margin-bottom: 225px;
     }
 
     &__wrapper {

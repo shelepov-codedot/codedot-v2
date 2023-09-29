@@ -1,15 +1,43 @@
 <script>
+  import { createClient } from '@sanity/client'
+
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Code"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
 </script>
 
-<section class="code">
-  <span class="code__text"> Code with love ♥</span>
-</section>
+{#if data}
+  <section class="code">
+    <p class="code__text">{data.codeText}</p>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
 
   .code {
-    padding: 150px 0;
+    @include media-breakpoint-up(lg) {
+      padding-top: 150px;
+      padding-bottom: 40px;
+    }
+
     overflow: hidden;
     border-top: 1px solid black;
     border-bottom: 1px solid black;

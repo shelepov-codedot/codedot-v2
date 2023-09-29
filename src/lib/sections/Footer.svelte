@@ -1,49 +1,71 @@
 <script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
+
   export let handleClick
-  import Arrow from '../components/icons/arrow.svelte'
+
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="Footer"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
 </script>
 
-<section class="footer">
-  <div class="container">
-    <div class="footer__wrapper">
-      <div class="footer__content">
-        <div class="footer__socials-nav">
-          <a href="/" class="footer__socials-nav-item">
-            <img src="../icons/Facebook.png" alt="social image" />
-          </a>
-          <a href="/" class="footer__socials-nav-item">
-            <img src="../icons/Twitter.png" alt="social image" />
-          </a>
-          <a href="/" class="footer__socials-nav-item">
-            <img src="../icons/Instagram.png" alt="social image" />
-          </a>
-          <a href="/" class="footer__socials-nav-item">
-            <img src="../icons/LinkedIn.png" alt="social image" />
-          </a>
-        </div>
-        <div class="footer__text">Want to work with us?</div>
-        <button class="footer__btn" on:click={handleClick}>Contact us</button>
-        <div class="footer__copyright">
-          <span>© 2023 Codedot Agency.</span>
-          <span>All Rights Reserved — <a href="/" class="link">Privacy policy</a></span>
-        </div>
-      </div>
-      <div class="footer__right-side">
-        <div class="footer__right-side-backgorund">
-          <!-- svelte-ignore a11y-img-redundant-alt -->
-          <img src="../images/footer.png" alt="image" />
-        </div>
-        <div class="footer__blur-box">
-          <div class="footer__blur-box-text">
-            <span class="bold">welcome</span>@code.dot
+{#if data}
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__wrapper">
+        <div class="footer__content">
+          <div class="footer__socials-nav">
+            {#each data.socailItems as socialItem}
+              <a href={socialItem.link} class="footer__socials-nav-item">
+                <img src={urlFor(socialItem.socialIcon)} alt="social image" />
+              </a>
+            {/each}
           </div>
-
-          <a href="#" class="arrow footer__blur-box-arrow" />
+          <div class="footer__text">{data.textFooter}</div>
+          <button class="footer__btn" on:click={handleClick}>Contact us</button>
+          <div class="footer__copyright">
+            <span>© 2023 Codedot Agency.</span>
+            <span>All Rights Reserved — <a href="/" class="link">Privacy policy</a></span>
+          </div>
+        </div>
+        <div class="footer__right-side">
+          <div class="footer__right-side-backgorund">
+            <!-- svelte-ignore a11y-img-redundant-alt -->
+            <img src={urlFor(data.imageAside)} alt="image" />
+          </div>
+          <div class="footer__blur-box">
+            <div class="footer__blur-box-text">
+              {data.email}
+            </div>
+            <a href="#" class="arrow footer__blur-box-arrow" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

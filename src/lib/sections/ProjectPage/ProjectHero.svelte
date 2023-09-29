@@ -1,42 +1,68 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<section class="project-hero">
-  <div class="project-hero__background-wrapper">
-    <img src="../images/proj.png" alt="" class="project-hero__background" />
-  </div>
-  <div class="project-hero__wrapper">
-    <div class="project-hero__inner">
-      <div class="container"><h1 class="project-hero__title">TTSWTRS</h1></div>
-      <div class="project-hero__description">
-        <div class="container">
-          <div class="project-hero__items">
-            <div class="project-hero__item">
-              <p class="project-hero__name">Task</p>
-              <p class="project-hero__text">
-                Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade
-                sonde psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis
-                gigabyst att tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack.
-              </p>
-            </div>
-            <div class="project-hero__item">
-              <p class="project-hero__name">Solution</p>
-              <p class="project-hero__text">
-                Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade
-                sonde psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras. Polyvovis
-                gigabyst att tehet ifall kamäll vana. Ponas hörade sonde psykocentrism tar och nack.
-              </p>
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="ProjectHero"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps()
+    .then((res) => (data = res.body.section[0]))
+    .then((res) => console.log(res))
+</script>
+
+{#if data}
+  <section class="project-hero">
+    <div class="project-hero__background-wrapper">
+      <img src={urlFor(data.backgroundImage)} alt="" class="project-hero__background" />
+    </div>
+    <div class="project-hero__wrapper">
+      <div class="project-hero__inner">
+        <div class="container"><h1 class="project-hero__title">{data.projectTitle}</h1></div>
+        <div class="project-hero__description">
+          <div class="container">
+            <div class="project-hero__items">
+              {#each data.projectTextItems as textItem}
+                <div class="project-hero__item">
+                  <p class="project-hero__name">{textItem.projectTextName}</p>
+                  <p class="project-hero__text">
+                    {textItem.projectText}
+                  </p>
+                </div>
+              {/each}
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';
 
   .project-hero {
+    top: -118px;
     position: relative;
     &__title {
       text-transform: uppercase;

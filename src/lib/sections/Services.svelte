@@ -1,115 +1,118 @@
 <script>
+  import { createClient } from '@sanity/client'
   import { onMount } from 'svelte'
   import { register } from 'swiper/element/bundle'
+
+  let data, swiperEl
+
   register()
 
   const spaceBetween = 40
 
-  onMount(() => {
-    const swiperEl = document.querySelector('.services__swiper-wrapper')
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
 
-    // swiper parameters
-    const swiperParams = {
-      slidesPerView: 1,
-      breakpoints: {
-        0: {
-          slidesPerView: 1,
-        },
-        992: {
-          slidesPerView: 2,
-        },
-        1692: {
-          slidesPerView: 3,
-        },
-      },
-      navigation: {
-        nextEl: '.services__btn--next',
-        prevEl: '.services__btn--prev',
-      },
-      on: {
-        init() {},
+    const query = `*[_type=="Services"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
       },
     }
+  }
 
-    // now we need to assign all parameters to Swiper element
-    Object.assign(swiperEl, swiperParams)
+  const swiperParams = {
+    observer: true,
+    observeParents: true,
+    observeSlideChildren: true,
+    slidesPerView: 1,
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+      },
+      992: {
+        slidesPerView: 2,
+      },
+      1692: {
+        slidesPerView: 3,
+      },
+    },
+    navigation: {
+      nextEl: '.services__btn--next',
+      prevEl: '.services__btn--prev',
+    },
+  }
 
-    // and now initialize it
-    swiperEl.initialize()
+  onMount(async () => {
+    const res = await _getProps()
+    data = res.body.section[0]
 
-    window.addEventListener('resize', updateMarginLeft)
-    window.addEventListener('load', updateMarginLeft)
+    if (data) {
+      const initializeSwiper = () => {
+        Object.assign(swiperEl, swiperParams)
+        swiperEl.initialize()
+      }
+
+      requestAnimationFrame(initializeSwiper)
+    }
   })
 </script>
 
-<section class="services">
-  <div class="container container--swiper">
-    <div class="services__wrapper">
-      <div class="services__title-wrapper">
-        <h2 class="services__title">Services</h2>
-        <div class="services__btns">
-          <button class="services__btn services__btn--prev">
-            <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
-          </button>
-          <button class="services__btn services__btn--next">
-            <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
-          </button>
+{#if data}
+  <section class="services">
+    <div class="container">
+      <div class="services__wrapper">
+        <div class="services__title-wrapper">
+          <h2 class="services__title">Services</h2>
+          <div class="services__btns">
+            <button class="services__btn services__btn--prev">
+              <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
+            </button>
+            <button class="services__btn services__btn--next">
+              <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
+            </button>
+          </div>
+        </div>
+
+        <div class="services__swiper-container">
+          <swiper-container
+            slides-per-view="3"
+            space-between={spaceBetween}
+            class="services__swiper-wrapper"
+            navigation="true"
+            init="false"
+            bind:this={swiperEl}
+          >
+            {#each data.services as service}
+              <swiper-slide class="services__item">
+                <p class="services__name">{service.name}</p>
+                <p class="services__text">{service.text}</p>
+              </swiper-slide>
+            {/each}
+          </swiper-container>
         </div>
       </div>
-      <div class="services__swiper-container">
-        <swiper-container
-          slides-per-view="3"
-          space-between={spaceBetween}
-          class="services__swiper-wrapper"
-          navigation="true"
-          init="false"
-        >
-          <swiper-slide class="services__item">
-            <p class="services__name">Web<br />Development</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">Mobile <br />Application</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">Game<br />Development</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">Project<br />management</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">PWA <br />Development<br />Services</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-          <swiper-slide class="services__item">
-            <p class="services__name">Cross-Platform <br />development</p>
-            <p class="services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </swiper-slide>
-        </swiper-container>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
 
   .services {
+    @include media-breakpoint-down(lg) {
+      padding: 90px 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding: 250px 0;
+    }
+
     position: relative;
 
     &__title-wrapper {
@@ -131,9 +134,8 @@
       }
 
       @include media-breakpoint-up(xxl) {
-        transform: translateX(-48px);
         padding-top: 77px;
-        margin-right: 34px;
+        margin-right: 80px;
         align-items: center;
       }
     }
@@ -142,7 +144,8 @@
       font-weight: 600;
 
       @include media-breakpoint-down(md) {
-        font-size: 30px;
+        font-size: 40px;
+
         margin-bottom: 30px;
       }
 
@@ -166,9 +169,14 @@
       display: flex;
       position: relative;
       min-width: 0;
-
+      overflow: unset;
       @include media-breakpoint-down(md) {
         flex-direction: column;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-left: 45px;
+        width: calc(100% + (100vw - var(--container-width)) / 2 + var(--spacing-container));
       }
     }
 
@@ -200,7 +208,7 @@
       font-weight: 700;
 
       @include media-breakpoint-down(md) {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       @include media-breakpoint-between(md, xl) {
@@ -245,7 +253,14 @@
 
     &__btns {
       display: flex;
-      padding-top: 30px;
+
+      @include media-breakpoint-down(lg) {
+        padding-left: 15px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-top: 30px;
+      }
     }
 
     &__btn--next &__btn-icon {
@@ -253,7 +268,12 @@
     }
 
     &__btn--prev {
-      margin-right: 10px;
+      @include media-breakpoint-down(lg) {
+        margin-right: 25px;
+      }
+      @include media-breakpoint-up(lg) {
+        margin-right: 10px;
+      }
     }
 
     &__btn--prev &__btn-icon {

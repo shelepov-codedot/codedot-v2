@@ -1,61 +1,84 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="dignity">
-  <div class="container">
-    <div class="dignity__background">
-      <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 1644 1898"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          id="animated-path"
-          d="M370 232.813C1060 421.964 1047.49 89.2251 1007.49 320.277C967.494 551.329 1026 1873.49 508.501 1069C-9.00046 264.508 60 648 596.5 772.5C1134.74 897.404 1721.55 -869.626 1226 566C735.5 1987 860.743 2167.5 624 1590.5C261.499 706.995 -223.803 670.975 116.198 1125.9L508.501 1611.94"
-          stroke="#212121"
-          stroke-linecap="round"
-        />
-      </svg>
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Dignity"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+{#if data}
+  <section class="dignity">
+    <div class="container">
+      <div class="dignity__background">
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 1644 1898"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            id="animated-path"
+            d="M370 232.813C1060 421.964 1047.49 89.2251 1007.49 320.277C967.494 551.329 1026 1873.49 508.501 1069C-9.00046 264.508 60 648 596.5 772.5C1134.74 897.404 1721.55 -869.626 1226 566C735.5 1987 860.743 2167.5 624 1590.5C261.499 706.995 -223.803 670.975 116.198 1125.9L508.501 1611.94"
+            stroke="#212121"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+      <div class="dignity__text-wrapper">
+        <div class="dignity__item">
+          <p class="dignity__name">{data.dignityItems[0].Name}</p>
+          <p class="dignity__text">
+            {data.dignityItems[0].Text}
+          </p>
+        </div>
+        <div class="dignity__item-img-wrapper">
+          <img src="../images/dignity.svg" alt="" class="dignity__item-img" />
+        </div>
+        <div class="dignity__item">
+          <p class="dignity__name">{data.dignityItems[1].Name}</p>
+          <p class="dignity__text">
+            {data.dignityItems[1].Text}
+          </p>
+        </div>
+        <div class="dignity__item-img-wrapper">
+          <img src="../images/dignity2.svg" alt="" class="dignity__item-img" />
+        </div>
+        <div class="dignity__item">
+          <p class="dignity__name">{data.dignityItems[2].Name}</p>
+          <p class="dignity__text">
+            {data.dignityItems[2].Text}
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="dignity__text-wrapper">
-      <div class="dignity__item">
-        <p class="dignity__name">Quality.</p>
-        <p class="dignity__text">
-          We are a go-to tech company providing a full-cycle of mobile and web application
-          development, solutions to UX/UI design problems, business solutions for e-commerce and
-          project management.
-        </p>
-      </div>
-      <div class="dignity__item-img-wrapper">
-        <img src="../images/dignity.svg" alt="" class="dignity__item-img" />
-      </div>
-      <div class="dignity__item">
-        <p class="dignity__name">Creativity.</p>
-        <p class="dignity__text">
-          We always focus on technical orientation to give you superior quality. Our team consists
-          of developers who are able to work with a variety of technologies, such as: Shopify, JS,
-          Gatsby.js, React and so on.
-        </p>
-      </div>
-      <div class="dignity__item-img-wrapper">
-        <img src="../images/dignity2.svg" alt="" class="dignity__item-img" />
-      </div>
-      <div class="dignity__item">
-        <p class="dignity__name">Productivity.</p>
-        <p class="dignity__text">
-          Codedot Team is here to transform and expand your business through e-commerce and
-          marketplaces.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
   .dignity {
-    margin-top: 80px;
+    @include media-breakpoint-up(lg) {
+      margin-top: 80px;
+      margin-bottom: 385px;
+    }
     position: relative;
 
     &__background {

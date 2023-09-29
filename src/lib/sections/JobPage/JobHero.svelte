@@ -1,36 +1,64 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="job-hero">
-  <div class="container">
-    <div class="job-hero__wrapper">
-      <div class="job-hero__title-wrapper">
-        <span class="job-hero__exp">5+ years experience</span>
-        <h1 class="job-hero__title">Senior Fullstack Developer</h1>
-      </div>
-      <div class="job-hero__text-main">
-        <div class="job-hero__info-wrapper">
-          <span class="job-hero__salary">From <b>500</b> to <b>1200 $</b></span>
-          <div class="job-hero__conditions">Full time; English B2+</div>
-          <a href="#" class="btn job-hero__btn">
-            Apply for this job
-            <span class="btn__icon">
-              <img src="../icons/arrow-btn.svg" alt="" />
-            </span>
-          </a>
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="JobHero"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+<svelte:head>
+  {#if data}
+    <title>{data.jobHeroTitle}</title>
+  {/if}
+</svelte:head>
+
+{#if data}
+  <section class="job-hero">
+    <div class="container">
+      <div class="job-hero__wrapper">
+        <div class="job-hero__title-wrapper">
+          <span class="job-hero__exp">{data.jobExperience}</span>
+          <h1 class="job-hero__title">{data.jobHeroTitle}</h1>
         </div>
-        <div class="job-hero__text-wrapper">
-          <p class="job-hero__text-title">Working with us</p>
-          <p class="job-hero__text">
-            The Codedot team employs only experienced specialists. Each of our employees strives for
-            constant self-development and growth: they read professional literature, attend courses,
-            watch lectures and participate in seminars. We always keep our hands on the pulse: we
-            monitor the latest trends, monitor changes in search engine algorithms.
-          </p>
+        <div class="job-hero__text-main">
+          <div class="job-hero__info-wrapper">
+            <span class="job-hero__salary">{data.jobSalary}</span>
+            <div class="job-hero__conditions">{data.jobConditions}</div>
+            <a href="#" class="btn job-hero__btn">
+              {data.jobBtn}
+              <span class="btn__icon">
+                <img src="../icons/arrow-btn.svg" alt="" />
+              </span>
+            </a>
+          </div>
+          <div class="job-hero__text-wrapper">
+            <p class="job-hero__text-title">{data.jobTextObject.jobTextName}</p>
+            <p class="job-hero__text">
+              {data.jobTextObject.jobText}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';
@@ -169,6 +197,7 @@
 
       @include media-breakpoint-up(md) {
         font-size: 36px;
+        //test
       }
 
       font-weight: 600;

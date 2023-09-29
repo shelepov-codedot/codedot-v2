@@ -1,45 +1,50 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="benefits">
-  <div class="container">
-    <div class="benefits__wrapper">
-      <div class="benefits__img-wrapper">
-        <img src="../images/Benefits.svg" alt="" class="benefits__img" />
-      </div>
-      <h2 class="benefits__title">Benefits</h2>
-      <div class="benefits__items">
-        <div class="benefits__item">
-          <p class="benefits__name">Friendly team</p>
-          <p class="benefits__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack.
-          </p>
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Benefits"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+{#if data}
+  <section class="benefits">
+    <div class="container">
+      <div class="benefits__wrapper">
+        <div class="benefits__img-wrapper">
+          <img src="../images/Benefits.svg" alt="" class="benefits__img" />
         </div>
-        <div class="benefits__item">
-          <p class="benefits__name">Work on international projects</p>
-          <p class="benefits__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack.
-          </p>
-        </div>
-        <div class="benefits__item">
-          <p class="benefits__name">Personal growth</p>
-          <p class="benefits__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack.
-          </p>
-        </div>
-        <div class="benefits__item">
-          <p class="benefits__name">Permanent support</p>
-          <p class="benefits__text">
-            Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-            psykocentrism tar och nack.
-          </p>
+        <h2 class="benefits__title">{data.title}</h2>
+        <div class="benefits__items">
+          {#each data.benefitsItems as benefitItem}
+            <div class="benefits__item">
+              <p class="benefits__name">{benefitItem.itemName}</p>
+              <p class="benefits__text">
+                {benefitItem.itemText}
+              </p>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

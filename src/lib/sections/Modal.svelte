@@ -6,6 +6,10 @@
   let errorText,
     textName = ''
 
+  if (activeModal) {
+    console.log(document.querySelector('body'))
+  }
+
   const selectFile = (e) => {
     const selectedFiles = e.target.files[0]
     const selectedFilesFormat = e.target.files[0].name.split('.').splice(-1, 1)[0]
@@ -91,7 +95,11 @@
         </div>
         <div class="modal__input-wrapper">
           <label for="requirements" class="modal__label">Project requirements</label>
-          <textarea name="requirements" id="requirements" rows="10" class="modal__input" />
+          <textarea
+            name="requirements"
+            id="requirements"
+            class="modal__input modal__input--textarea"
+          />
         </div>
         <div class="modal__file-input">
           <input
@@ -148,6 +156,7 @@
     width: 100%;
     height: 100%;
     z-index: 12;
+    top: 0;
 
     &__notice {
       position: fixed;
@@ -304,11 +313,13 @@
       grid-template-columns: 1fr 1fr;
 
       @include media-breakpoint-down(md) {
-        gap: 20px;
+        column-gap: 20px;
+        row-gap: 24px;
       }
 
       @include media-breakpoint-up(md) {
-        gap: 30px;
+        column-gap: 30px;
+        row-gap: 36px;
       }
     }
 
@@ -374,6 +385,15 @@
       border: none;
       outline: none;
       background-color: white;
+
+      &--textarea {
+        @include media-breakpoint-down(lg) {
+          height: 140px;
+        }
+        @include media-breakpoint-up(lg) {
+          height: 170px;
+        }
+      }
     }
 
     &__input-icon {
@@ -431,8 +451,6 @@
     }
 
     &__file-input {
-      padding-top: 40px;
-      padding-bottom: 40px;
       display: flex;
       position: relative;
       align-items: center;
@@ -442,6 +460,16 @@
       @include media-breakpoint-down(md) {
         padding-left: 20px;
         padding-right: 20px;
+      }
+
+      @include media-breakpoint-down(lg) {
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-top: 40px;
+        padding-bottom: 30px;
       }
 
       grid-column-start: 1;
@@ -499,7 +527,6 @@
       display: flex;
       grid-column-start: 1;
       grid-column-end: 3;
-      margin-bottom: 30px;
 
       @include media-breakpoint-down(sm) {
         align-items: flex-start;
@@ -507,6 +534,14 @@
 
       @include media-breakpoint-up(sm) {
         align-items: center;
+      }
+
+      @include media-breakpoint-down(lg) {
+        margin-bottom: 15px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 30px;
       }
     }
 
@@ -539,7 +574,15 @@
     }
 
     .btn {
-      margin-bottom: 30px;
+      @include media-breakpoint-down(lg) {
+        margin-bottom: 40px;
+        padding: 14px 30px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 39px;
+        padding: 18px 30px;
+      }
     }
   }
 </style>

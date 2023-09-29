@@ -9,6 +9,8 @@ export default defineConfig({
 
   projectId: 'c6ki8epl',
   dataset: 'production',
+  apiVersion: '2021-08-31', // use a UTC date string
+  token: 'sanity-auth-token', // or leave blank for unauthenticated usage
 
   plugins: [deskTool(), visionTool()],
 

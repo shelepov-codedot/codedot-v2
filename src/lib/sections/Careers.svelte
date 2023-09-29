@@ -1,21 +1,49 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
 
-<section class="careers">
-  <div class="careers__inner">
-    <div class="container">
-      <div class="careers__wrapper">
-        <h1 class="careers__title">Careers</h1>
-        <p class="careers__text">
-          Tavalingar makroktig. Polyvovis gigabyst att tehet ifall kamäll vana. Ponas hörade sonde
-          psykocentrism tar och nack. Rähak begeheten ultrasad fena, tiras.
-        </p>
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Careers"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+
+  setTimeout(() => {
+    console.log(data)
+  }, 1000)
+</script>
+
+{#if data}
+  <section class="careers">
+    <div class="careers__inner">
+      <div class="container">
+        <div class="careers__wrapper">
+          <h1 class="careers__title">{data.careersTitle}</h1>
+          <p class="careers__text">
+            {data.careersText}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="careers__img-wrapper">
-    <img src="../images/careers.svg" alt="" class="careers__img" />
-  </div>
-</section>
+    <div class="careers__img-wrapper">
+      <img src="../images/careers.svg" alt="" class="careers__img" />
+    </div>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

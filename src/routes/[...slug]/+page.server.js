@@ -1,56 +1,18 @@
+import { createClient } from '@sanity/client'
 
-import {createClient} from "@sanity/client";
-import { headerQuery } from '$lib/graphql/sections/header'
+export async function _getProps() {
+  const client = createClient({
+    projectId: 'c6ki8epl',
+    dataset: 'production',
+    useCdn: true,
+  })
 
-const client = createClient({
-  projectId: "c6ki8epl",
-  dataset: "production",
-  apiVersion: "2021-10-21",
-  useCdn: false
-});
+  const query = `*[_type=="Cases"]`
+  const section = await client.fetch(query)
 
-const query = (slug) => `
-{
-  pageCollection(where: {
-    url: "${slug}"
-  } limit: 1) {
-    items {
-      seo {
-        titleTemplate
-        title
-        description
-        keywords
-        image {
-          url
-          fileName
-          description
-          width
-          height
-        }
-        ogype
-        twittercard
-      }
-      name
-      url
-      sectionsCollection (limit:90) {
-         items{
-          ${headerQuery}
-        }
-      }
-    }
+  return {
+    body: {
+      section,
+    },
   }
 }
-`
-
-// export async function load({ params }) {
-//   const data = await client.fetch(`*[_type == "pet"]`);
-//   const data = await client.fetch(query(`/${params.slug}`));
-
-//   if (data) {
-//     return data;
-//   }
-//   return {
-//     status: 500,
-//     body: new Error("Internal Server Error")
-//   };
-// }

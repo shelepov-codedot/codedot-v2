@@ -1,29 +1,59 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<section class="about-hero">
-  <div class="container">
-    <div class="about-hero__wrapper">
-      <div class="about-hero__title-wrapper">
-        <div class="about-hero__title-inner">
-          <h1 class="about-hero__title">WHO ARE</h1>
-          <div class="about-hero__title-img-wrapper">
-            <img src="../images/about-img-1.png" alt="" class="about-hero__title-img" />
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="AboutHero"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+{#if data}
+  <section class="about-hero">
+    <div class="container">
+      <div class="about-hero__wrapper">
+        <div class="about-hero__title-wrapper">
+          <div class="about-hero__title-inner">
+            <h1 class="about-hero__title">{data.topName}</h1>
+            <div class="about-hero__title-img-wrapper">
+              <img src={urlFor(data.topImage)} alt="" class="about-hero__title-img" />
+            </div>
+          </div>
+          <div class="about-hero__title-inner">
+            <p class="about-hero__text">
+              {data.textBottom}
+            </p>
+            <h1 class="about-hero__title">{data.bottomName}</h1>
           </div>
         </div>
-        <div class="about-hero__title-inner">
-          <p class="about-hero__text">
-            Discover who we are: read more about the history of Codedot and its values, meet our
-            team, and check out CodedotTeam pictures.
-          </p>
-          <h1 class="about-hero__title">CODEDOT?</h1>
+        <div class="about-hero__img-wrapper">
+          <img src={urlFor(data.bottomImage)} alt="" class="about-hero__img" />
         </div>
       </div>
-      <div class="about-hero__img-wrapper">
-        <img src="../images/about-img-2.png" alt="" class="about-hero__img" />
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';

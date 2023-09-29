@@ -1,109 +1,116 @@
 <script>
+  import { createClient } from '@sanity/client'
   import { onMount } from 'svelte'
   import { register } from 'swiper/element/bundle'
+  import imageUrlBuilder from '@sanity/image-url'
+
+  let data, swiperElSecond, builder
 
   register()
 
-  onMount(() => {
-    const swiperElSecond = document.querySelector('.reviews__swiper-wrapper')
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
 
-    // swiper parameters
-    const swiperParams = {
-      slidesPerView: 1,
-      navigation: {
-        nextEl: '.reviews__btn--next',
-        prevEl: '.reviews__btn--prev',
-      },
-      on: {
-        init() {},
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="Review"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
       },
     }
+  }
 
-    // now we need to assign all parameters to Swiper element
-    Object.assign(swiperElSecond, swiperParams)
+  const swiperSecondParams = {
+    observer: true,
+    observeParents: true,
+    observeSlideChildren: true,
+    slidesPerView: 1,
+    navigation: {
+      nextEl: '.reviews__btn--next',
+      prevEl: '.reviews__btn--prev',
+    },
+  }
 
-    // and now initialize it
-    swiperElSecond.initialize()
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  onMount(async () => {
+    const res = await _getProps()
+    data = res.body.section[0]
+
+    if (data) {
+      const initializeSwiper = () => {
+        Object.assign(swiperElSecond, swiperSecondParams)
+        swiperElSecond.initialize()
+      }
+
+      requestAnimationFrame(initializeSwiper)
+    }
   })
 </script>
 
-<section class="reviews">
-  <div class="container">
-    <div class="reviews__wrapper">
-      <div class="reviews__title-wrapper">
-        <h2 class="reviews__title">Our Clients</h2>
-        <div class="reviews__btns">
-          <button class="reviews__btn reviews__btn--prev">
-            <img src="../icons/arrow-btn.svg" alt="" class="reviews__btn-icon" />
-          </button>
-          <button class="reviews__btn reviews__btn--next">
-            <img src="../icons/arrow-btn.svg" alt="" class="reviews__btn-icon" />
-          </button>
+{#if data}
+  <section class="reviews">
+    <div class="container">
+      <div class="reviews__wrapper">
+        <div class="reviews__title-wrapper">
+          <h2 class="reviews__title">Our Clients</h2>
+          <div class="reviews__btns">
+            <button class="reviews__btn reviews__btn--prev">
+              <img src="../icons/arrow-btn.svg" alt="" class="reviews__btn-icon" />
+            </button>
+            <button class="reviews__btn reviews__btn--next">
+              <img src="../icons/arrow-btn.svg" alt="" class="reviews__btn-icon" />
+            </button>
+          </div>
+        </div>
+        <div class="reviews__swiper-container">
+          <swiper-container
+            slides-per-view="1"
+            class="reviews__swiper-wrapper"
+            navigation="true"
+            space-between="100"
+            init="false"
+            bind:this={swiperElSecond}
+          >
+            {#each data.reviewItems as review}
+              <swiper-slide class="reviews__item">
+                <p class="reviews__text">
+                  {review.reviewText}
+                </p>
+                <div class="reviews__user-wrapper">
+                  <div class="reviews__user-img-wrapper">
+                    <img src={urlFor(review.reviewImg)} alt="" class="reviews__user-img" />
+                  </div>
+                  <div class="reviews__user-data">
+                    <span class="reviews__name"> {review.reviewAuthor}</span>
+                    <span class="reviews__jobtitle">{review.reviewJob}</span>
+                  </div>
+                </div>
+              </swiper-slide>
+            {/each}
+          </swiper-container>
         </div>
       </div>
-      <div class="reviews__swiper-container">
-        <swiper-container
-          slides-per-view="1"
-          class="reviews__swiper-wrapper"
-          navigation="true"
-          space-between="100"
-          init="false"
-        >
-          <swiper-slide class="reviews__item">
-            <p class="reviews__text">
-              Very talented team, fantastic React skills, completed all allocated tasks on time.
-              Would highly recommend & looking forward together in the future.
-            </p>
-            <div class="reviews__user-wrapper">
-              <div class="reviews__user-img-wrapper">
-                <img src="../images/user.png" alt="" class="reviews__user-img" />
-              </div>
-              <div class="reviews__user-data">
-                <span class="reviews__name">Dean M.</span>
-                <span class="reviews__jobtitle">Product Manager</span>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="reviews__item">
-            <p class="reviews__text">
-              Very talented team, fantastic React skills, completed all allocated tasks on time.
-              Would highly recommend & looking forward together in the future.
-            </p>
-            <div class="reviews__user-wrapper">
-              <div class="reviews__user-img-wrapper">
-                <img src="../images/user.png" alt="" class="reviews__user-img" />
-              </div>
-              <div class="reviews__user-data">
-                <span class="reviews__name">Dean M.</span>
-                <span class="reviews__jobtitle">Product Manager</span>
-              </div>
-            </div>
-          </swiper-slide>
-          <swiper-slide class="reviews__item">
-            <p class="reviews__text">
-              Very talented team, fantastic React skills, completed all allocated tasks on time.
-              Would highly recommend & looking forward together in the future.
-            </p>
-            <div class="reviews__user-wrapper">
-              <div class="reviews__user-img-wrapper">
-                <img src="../images/user.png" alt="" class="reviews__user-img" />
-              </div>
-              <div class="reviews__user-data">
-                <span class="reviews__name">Dean M.</span>
-                <span class="reviews__jobtitle">Product Manager</span>
-              </div>
-            </div>
-          </swiper-slide>
-        </swiper-container>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
 
   .reviews {
+    @include media-breakpoint-up(lg) {
+      padding-top: 223px;
+      padding-bottom: 30px;
+    }
     &__title {
       font-weight: 600;
 
@@ -286,6 +293,7 @@
 
     &__user-img {
       position: absolute;
+      object-fit: cover;
       width: 100%;
       height: 100%;
       top: 0;

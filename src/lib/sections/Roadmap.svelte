@@ -1,92 +1,70 @@
 <script>
+  import { createClient } from '@sanity/client'
+
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="Roadmap"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+
+  setTimeout(() => {
+    console.log(data)
+  }, 1000)
 </script>
 
-<div class="roadmap">
-  <div class="container">
-    <div class="roadmap__wrapper">
-      <div class="roadmap__background">
-        <div class="roadmap__background-img-wrapper">
-          <img src="../images/roadmap-1.svg" alt="roadmap-1" class="roadmap__background-img" />
+{#if data}
+  <section class="roadmap">
+    <div class="container">
+      <div class="roadmap__wrapper">
+        <div class="roadmap__background">
+          <div class="roadmap__background-img-wrapper">
+            <img src="../images/roadmap-1.svg" alt="roadmap-1" class="roadmap__background-img" />
+          </div>
+          <div class="roadmap__background-img-wrapper">
+            <img src="../images/roadmap-2.svg" alt="roadmap-2" class="roadmap__background-img" />
+          </div>
+          <div class="roadmap__background-img-wrapper">
+            <img src="../images/roadmap-3.svg" alt="roadmap-3" class="roadmap__background-img" />
+          </div>
+          <div class="roadmap__background-img-wrapper">
+            <img src="../images/roadmap-4.svg" alt="roadmap-4" class="roadmap__background-img" />
+          </div>
+          <div class="roadmap__background-img-wrapper">
+            <img src="../images/roadmap-5.svg" alt="roadmap-5" class="roadmap__background-img" />
+          </div>
         </div>
-        <div class="roadmap__background-img-wrapper">
-          <img src="../images/roadmap-2.svg" alt="roadmap-2" class="roadmap__background-img" />
-        </div>
-        <div class="roadmap__background-img-wrapper">
-          <img src="../images/roadmap-3.svg" alt="roadmap-3" class="roadmap__background-img" />
-        </div>
-        <div class="roadmap__background-img-wrapper">
-          <img src="../images/roadmap-4.svg" alt="roadmap-4" class="roadmap__background-img" />
-        </div>
-        <div class="roadmap__background-img-wrapper">
-          <img src="../images/roadmap-5.svg" alt="roadmap-5" class="roadmap__background-img" />
-        </div>
-      </div>
-      <div class="roadmap__items">
-        <div class="roadmap__item">
-          <p class="roadmap__name">Since 2010,</p>
-          <p class="roadmap__text">
-            our specialists and CEO&founder have worked in a gamedev company. We were developing big
-            and small games, but occasionally engaged in software development. Time passed and the
-            number of digital projects increased.
-          </p>
-        </div>
-        <div class="roadmap__mobile-img-wrapper">
-          <img src="../images/roadmap-1.svg" alt="" class="roadmap__mobile-img" />
-        </div>
-        <div class="roadmap__item">
-          <p class="roadmap__name">In 2018,</p>
-          <p class="roadmap__text">
-            we formed a department that was not engaged in games, but in web development and
-            e-commerce. A year later, we made a joint decision to create a separate company, as we
-            were passionate about the idea of creating not only games, but also excellent
-            technological products.
-          </p>
-        </div>
-        <div class="roadmap__mobile-img-wrapper">
-          <img src="../images/roadmap-2.svg" alt="" class="roadmap__mobile-img" />
-        </div>
-        <div class="roadmap__item">
-          <p class="roadmap__name">Originally,</p>
-          <p class="roadmap__text">
-            the idea was to create high-quality code. We had clients, we did our job well, and they
-            were satisfied. Then we realized that it's not just about good code writing...
-          </p>
-        </div>
-        <div class="roadmap__mobile-img-wrapper">
-          <img src="../images/roadmap-3.svg" alt="" class="roadmap__mobile-img" />
-        </div>
-        <div class="roadmap__item">
-          <p class="roadmap__name">But what then?</p>
-          <p class="roadmap__text">
-            Conscientious cooperation with customers. Support for communication within the team. The
-            pleasure of work. Search for new and interesting solutions for various industries. This
-            is how Codedot appeared.
-          </p>
-        </div>
-        <div class="roadmap__mobile-img-wrapper">
-          <img src="../images/roadmap-4.svg" alt="" class="roadmap__mobile-img" />
-        </div>
-        <div class="roadmap__item">
-          <p class="roadmap__name">Our story</p>
-          <p class="roadmap__text">
-            began as an initiative of a couple of people, but now we have 20 software developers
-            working with us, who specialize in a variety of different technologies, without ceasing
-            to grow and improve.
-          </p>
-        </div>
-        <div class="roadmap__mobile-img-wrapper">
-          <img src="../images/roadmap-5.svg" alt="" class="roadmap__mobile-img" />
-        </div>
-        <div class="roadmap__item">
-          <p class="roadmap__name">What is Codedot for us now?</p>
-          <p class="roadmap__text">
-            This is a unique approach to each client and a constant opportunity for growth.
-          </p>
+        <div class="roadmap__items">
+          {#each data.roadmapItems as roadmap, index}
+            <div class="roadmap__item">
+              <p class="roadmap__name">{roadmap.roadmapName}</p>
+              <p class="roadmap__text">
+                {roadmap.roadmapText}
+              </p>
+            </div>
+            <div class="roadmap__mobile-img-wrapper">
+              <img src="../images/roadmap-{index + 1}.svg" alt="" class="roadmap__mobile-img" />
+            </div>
+          {/each}
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
@@ -418,6 +396,9 @@
 
     &__mobile-img-wrapper {
       @include media-breakpoint-down(lg) {
+        &:last-of-type {
+          margin: 0;
+        }
         width: 100%;
         height: 100%;
         margin: 37px 0;

@@ -31,103 +31,113 @@
   import ProjectGallery from '../lib/sections/ProjectPage/ProjectGallery.svelte'
   import Modal from '../lib/sections/Modal.svelte'
 
-  let activeModal = false
+  // let activeModal = false
 
-  function handleClick() {
-    activeModal = true
-  }
+  // function handleClick() {
+  //   activeModal = true
+  // }
 
-  function closeModal() {
-    activeModal = false
-  }
-
-  export let data
+  // function closeModal() {
+  //   activeModal = false
+  // }
 </script>
 
 <!-- <Header /> -->
 <main>
-  <Modal {activeModal} {closeModal} />
-  <!-- <Hero {handleClick} /> -->
-  <!-- ++ -->
+  <!-- HOMEPAGE -->
+  <!-- <Modal {activeModal} {closeModal} /> -->
 
-  <!-- <Dignity /> -->
-  <!-- ++ -->
+  <!--<Hero {handleClick} />
 
-  <!-- <Counters /> -->
-  <!-- ++ -->
+  <Dignity />
 
-  <!-- <Cases /> -->
-  <!-- ++ -->
+  <Cases />
 
-  <!-- <Text /> -->
-  <!-- ++ -->
+  <Counters />
 
-  <!-- <Services /> -->
+  <Text />
 
-  <!-- <Technologies /> -->
-  <!-- ++ -->
+  <Services />
 
-  <!-- <Review /> -->
-  <!-- ++ -->
+  <Technologies />
 
-  <!-- <Code /> -->
-  <!-- ++ -->
+  <Review />
 
-  <!-- <AboutHero /> -->
-  <!-- ++ -->
+  <Code /> -->
 
-  <!-- <Roadmap /> -->
-  <!-- ++ -->
+  <!-- END HOMEPAGE -->
 
-  <!--<OurMission /> -->
-  <!-- ++ -->
+  <!-- ABOUT US -->
+  <!-- 
+  <AboutHero />
 
-  <!-- <CasesPage /> -->
-  <!-- ++ -->
+  <Roadmap />
 
-  <!-- <Careers /> -->
-  <!-- ++ -->
+  <Counters />
 
-  <!-- <Jobs /> -->
-  <!-- ++ -->
+  <OurMission />
 
-  <!-- <Benefits /> -->
-  <!-- ++ -->
+  <Review /> -->
 
-  <!-- <ServiceHero /> -->
-  <!-- ++ -->
+  <!-- END ABOUT US -->
 
-  <!-- <Offer /> -->
-  <!-- ++ -->
+  <!-- CASES PAGE -->
+  <!-- 
+  <CasesPage />
+  <Code /> -->
 
-  <!-- <Digital /> -->
-  <!-- ++ -->
-  <!-- <JobHero /> -->
-  <!-- ++ -->
+  <!-- END CASES -->
 
-  <!-- <Expect /> -->
-  <!-- ++ -->
+  <!-- CAREERS PAGE -->
+
+  <!-- <Careers />
+
+  <Jobs />
+
+  <Benefits /> 
+
+  <Code /> -->
+
+  <!-- CAREERS END -->
+
+  <!-- SERVICE PAGE -->
+
+  <!-- <ServiceHero />
+
+  <Offer />
+
+  <Digital />
+
+  <Expect /> -->
+
+  <!-- END SERVICE PAGE -->
+
+  <!-- JOB PAGE -->
+
+  <!-- <JobHero /> 
+
+  <JobText /> -->
+
+  <!-- END JOB PAGE -->
+
+  <!-- OURSERVICE PAGE -->
 
   <!-- <OurService /> -->
-  <!-- ++ -->
+
+  <!-- END OURSERVICE PAGE -->
 
   <!-- <ProjectHero /> -->
-  <!-- ++ -->
 
   <!-- <ProjectImages /> -->
-  <!-- ++ -->
 
-  <ProjectTextImage />
+  <!-- <ProjectTextImage /> -->
 
   <!-- <ProjectText /> -->
 
   <!-- <ProjectGallery /> -->
-
-  <!-- <JobText /> -->
 </main>
 
 <!-- <Footer {handleClick} /> -->
-<!-- ++ -->
 
 <style global lang="scss">
   @import '../lib/styles/styles.scss';

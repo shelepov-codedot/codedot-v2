@@ -1,224 +1,166 @@
 <script>
   import { onMount } from 'svelte'
+  import { createClient } from '@sanity/client'
 
-  let fileInput, statusError
+  let fileInput, statusError, data
   let errorText,
     textName = ''
 
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="JobText"]`
+    const section = await client.fetch(query)
+
+    data = section[0]
+  }
+
   onMount(() => {
-    fileInput.addEventListener('change', () => {
-      const selectedFiles = fileInput.files[0]
-      const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
-      if (selectedFiles) {
-        if (
-          selectedFilesFormat != 'pdf' &&
-          selectedFilesFormat != 'docx' &&
-          selectedFilesFormat != 'doc'
-        ) {
-          textName = ''
-          errorText = 'Data format not supported'
-          fileInput.value = null
-          fileInput.disabled = !fileInput.disabled
-          statusError = !statusError
-
-          setTimeout(() => {
-            statusError = !statusError
-            fileInput.disabled = !fileInput.disabled
-          }, 4000)
-        } else {
-          if (selectedFiles.size >= 5 * 1024 * 1024) {
-            textName = ''
-            fileInput.value = null
-            fileInput.disabled = !fileInput.disabled
-            statusError = !statusError
-            errorText = 'File size is larger than allowed'
-
-            setTimeout(() => {
-              statusError = !statusError
+    _getProps().then(() => {
+      if (fileInput && data) {
+        fileInput.addEventListener('change', () => {
+          const selectedFiles = fileInput.files[0]
+          const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
+          if (selectedFiles) {
+            if (
+              selectedFilesFormat != 'pdf' &&
+              selectedFilesFormat != 'docx' &&
+              selectedFilesFormat != 'doc'
+            ) {
+              textName = ''
+              errorText = 'Data format not supported'
+              fileInput.value = null
               fileInput.disabled = !fileInput.disabled
-            }, 4000)
-          } else {
-            textName = fileInput.files[0].name
+              statusError = !statusError
+
+              setTimeout(() => {
+                statusError = !statusError
+                fileInput.disabled = !fileInput.disabled
+              }, 4000)
+            } else {
+              if (selectedFiles.size >= 5 * 1024 * 1024) {
+                textName = ''
+                fileInput.value = null
+                fileInput.disabled = !fileInput.disabled
+                statusError = !statusError
+                errorText = 'File size is larger than allowed'
+
+                setTimeout(() => {
+                  statusError = !statusError
+                  fileInput.disabled = !fileInput.disabled
+                }, 4000)
+              } else {
+                textName = fileInput.files[0].name
+              }
+            }
           }
-        }
+        })
       }
     })
   })
 </script>
 
-<section class="job-text">
-  <div class="container">
-    <div class="job-text__wrapper">
-      <div class="job-text__text-wrapper">
-        <div class="job-text__item">
-          <span class="job-text__name">Your responsibilities</span>
-          <ul class="job-text__list">
-            <li>
-              — Developing web applications with <b>TypeScript</b> in <b>Node.js</b> mostly using
-              <b>Nest.js</b>, and <b>React</b>, <b>NextJS </b>on frontend
-            </li>
-            <li>
-              — Creating apps for clients from various industries based mainly in Western and
-              Northern Europe and the States
-            </li>
-            <li>— Working at a company proud of its <b>mature coding culture</b></li>
-            <li>— Focusing on clean, readable code</li>
-            <li>
-              — Practicing Continuous Integration, Continuous Delivery, proper Scrum and regular
-              Code Review
-            </li>
-            <li>— Utilizing the best architectural patterns like DDD, Event Sourcing, CQRS</li>
-            <li>— Producing as a limited amount of documentation as possible</li>
-            <li>
-              — Being part of crucial project decisions: designing architecture, choosing frameworks
-              and tools
-            </li>
-          </ul>
-          <p />
-        </div>
-        <div class="job-text__item">
-          <span class="job-text__name">Required Skills</span>
-          <ul class="job-text__list">
-            <li>
-              — Developing web applications with <b>TypeScript</b> in <b>Node.js</b> mostly using
-              <b>Nest.js</b>, and <b>React</b>, <b>NextJS </b>on frontend
-            </li>
-            <li>
-              — Creating apps for clients from various industries based mainly in Western and
-              Northern Europe and the States
-            </li>
-            <li>— Working at a company proud of its <b>mature coding culture</b></li>
-            <li>— Focusing on clean, readable code</li>
-            <li>
-              — Practicing Continuous Integration, Continuous Delivery, proper Scrum and regular
-              Code Review
-            </li>
-            <li>— Utilizing the best architectural patterns like DDD, Event Sourcing, CQRS</li>
-            <li>— Producing as a limited amount of documentation as possible</li>
-            <li>
-              — Being part of crucial project decisions: designing architecture, choosing frameworks
-              and tools
-            </li>
-          </ul>
-          <p />
-        </div>
-        <div class="job-text__item">
-          <span class="job-text__name">Will be a bonus</span>
-          <ul class="job-text__list">
-            <li>
-              — Developing web applications with <b>TypeScript</b> in <b>Node.js</b> mostly using
-              <b>Nest.js</b>, and <b>React</b>, <b>NextJS </b>on frontend
-            </li>
-            <li>
-              — Creating apps for clients from various industries based mainly in Western and
-              Northern Europe and the States
-            </li>
-            <li>— Working at a company proud of its <b>mature coding culture</b></li>
-            <li>— Focusing on clean, readable code</li>
-            <li>
-              — Practicing Continuous Integration, Continuous Delivery, proper Scrum and regular
-              Code Review
-            </li>
-            <li>— Utilizing the best architectural patterns like DDD, Event Sourcing, CQRS</li>
-            <li>— Producing as a limited amount of documentation as possible</li>
-            <li>
-              — Being part of crucial project decisions: designing architecture, choosing frameworks
-              and tools
-            </li>
-          </ul>
-          <p />
-        </div>
-        <div class="job-text__item">
-          <span class="job-text__name">What we offer</span>
-          <ul class="job-text__list">
-            <li>
-              — Developing web applications with <b>TypeScript</b> in <b>Node.js</b> mostly using
-              <b>Nest.js</b>, and <b>React</b>, <b>NextJS </b>on frontend
-            </li>
-            <li>
-              — Creating apps for clients from various industries based mainly in Western and
-              Northern Europe and the States
-            </li>
-            <li>— Working at a company proud of its <b>mature coding culture</b></li>
-            <li>— Focusing on clean, readable code</li>
-            <li>
-              — Practicing Continuous Integration, Continuous Delivery, proper Scrum and regular
-              Code Review
-            </li>
-            <li>— Utilizing the best architectural patterns like DDD, Event Sourcing, CQRS</li>
-            <li>— Producing as a limited amount of documentation as possible</li>
-            <li>
-              — Being part of crucial project decisions: designing architecture, choosing frameworks
-              and tools
-            </li>
-          </ul>
-          <p />
-        </div>
-      </div>
-      <form class="job-text__form">
-        <span class="job-text__job-name">Senior Fullstack Developer</span>
-        <div class="job-text__inputs">
-          <div class="job-text__input-wrapper">
-            <label for="name" class="job-text__input-name">Name</label>
-            <input type="job-text__input" name="name" class="job-text__input" />
-          </div>
-          <div class="job-text__input-wrapper">
-            <label for="last-name" class="job-text__input-name">Last name</label>
-            <input type="job-text__input" name="last-name" class="job-text__input" />
-          </div>
-          <div class="job-text__input-wrapper">
-            <label for="email" class="job-text__input-name">Email</label>
-            <input type="email" name="email" class="job-text__input" />
-          </div>
-          <div class="job-text__input-wrapper">
-            <label for="phone" class="job-text__input-name">Phone number</label>
-            <input type="job-text__input" name="phone" class="job-text__input" />
-          </div>
-          <div class="job-text__input-wrapper job-text__input-wrapper--textarea">
-            <label for="comments" class="job-text__input-name">Comments</label>
-            <textarea name="comments" id="comments" rows="9" class="job-text__input" />
-          </div>
-          <div class="job-text__file-input">
-            <input
-              type="file"
-              bind:this={fileInput}
-              class="job-text__file"
-              accept=".doc, .docx,.pdf"
-              name="file"
-            />
-            <img src="../icons/Paper.svg" alt="" lass="job-text__file-icon" />
-            <div class="job-text__file-text-wrapper">
-              {#if textName === ''}
-                <span>DROP YOUR CV HERE, OR BROWSE</span>
-                <span>Supports: DOC, DOCX, PDF, max size 5 Mb</span>
-              {/if}
-              {#if textName !== ''}
-                <span>{textName}</span>
-              {/if}
+{#if data}
+  <section class="job-text">
+    <div class="container">
+      <div class="job-text__wrapper">
+        <div class="job-text__text-wrapper">
+          {#each data.jobTextItems as jobTextItem}
+            <div class="job-text__item">
+              <span class="job-text__name">{jobTextItem.itemName}</span>
+              <ul class="job-text__list">
+                {#each jobTextItem.richTextBlock as richItem}
+                  <li>{richItem.children[0].text}</li>
+                {/each}
+              </ul>
             </div>
-          </div>
-          <button type="submit" class="btn btn--fullwidth">Apply</button>
+          {/each}
         </div>
-      </form>
+        <form class="job-text__form">
+          <span class="job-text__job-name">Senior Fullstack Developer</span>
+          <div class="job-text__inputs">
+            <div class="job-text__input-wrapper">
+              <label for="name" class="job-text__input-name">Name</label>
+              <input type="job-text__input" name="name" class="job-text__input" />
+            </div>
+            <div class="job-text__input-wrapper">
+              <label for="last-name" class="job-text__input-name">Last name</label>
+              <input type="job-text__input" name="last-name" class="job-text__input" />
+            </div>
+            <div class="job-text__input-wrapper">
+              <label for="email" class="job-text__input-name">Email</label>
+              <input type="email" name="email" class="job-text__input" />
+            </div>
+            <div class="job-text__input-wrapper">
+              <label for="phone" class="job-text__input-name">Phone number</label>
+              <input type="job-text__input" name="phone" class="job-text__input" />
+            </div>
+            <div class="job-text__input-wrapper job-text__input-wrapper--textarea">
+              <label for="comments" class="job-text__input-name">Comments</label>
+              <textarea name="comments" id="comments" class="job-text__input" />
+            </div>
+            <div class="job-text__file-input">
+              <input
+                type="file"
+                bind:this={fileInput}
+                class="job-text__file"
+                accept=" .doc, .docx, .pdf"
+                name="file"
+              />
+              <img src="../icons/Paper.svg" alt="" lass="job-text__file-icon" />
+              <div class="job-text__file-text-wrapper">
+                {#if textName === ''}
+                  <span>DROP YOUR CV HERE, OR BROWSE</span>
+                  <span>Supports: DOC, DOCX, PDF, max size 5 Mb</span>
+                {/if}
+                {#if textName !== ''}
+                  <span>{textName}</span>
+                {/if}
+              </div>
+            </div>
+            <button type="submit" class="btn btn--fullwidth">Apply</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
-  <div class={statusError ? 'job-text__notice job-text__notice--active' : 'job-text__notice'}>
-    {errorText}
-  </div>
-</section>
+    <div class={statusError ? 'job-text__notice job-text__notice--active' : 'job-text__notice'}>
+      {errorText}
+    </div>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';
 
   .job-text {
-    padding: 250px 0;
+    @include media-breakpoint-down(lg) {
+      padding: 100px 0;
+    }
+    @include media-breakpoint-up(lg) {
+      padding: 207px 0;
+    }
     &__wrapper {
       position: relative;
       display: grid;
-      gap: 40px;
+
+      @include media-breakpoint-down(lg) {
+        gap: 21px;
+      }
+
+      @include media-breakpoint-between(lg, xl) {
+        gap: 10px;
+      }
 
       @include media-breakpoint-up(lg) {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include media-breakpoint-up(xl) {
+        gap: 40px;
       }
     }
 
@@ -253,7 +195,12 @@
 
     &__item {
       &:not(&:last-of-type) {
-        margin-bottom: 40px;
+        @include media-breakpoint-down(lg) {
+          margin-bottom: 39px;
+        }
+        @include media-breakpoint-up(lg) {
+          margin-bottom: 80px;
+        }
       }
     }
 
@@ -283,10 +230,29 @@
     }
 
     &__list li {
-      font-size: 18px;
+      @include media-breakpoint-down(md) {
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      @include media-breakpoint-between(md, xl) {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        font-size: 18px;
+        line-height: 27px;
+      }
 
       &:not(&:last-of-type) {
-        margin-bottom: 10px;
+        margin-bottom: 16px;
+      }
+    }
+
+    &__text-wrapper {
+      @include media-breakpoint-up(lg) {
+        margin-top: 42px;
       }
     }
 
@@ -321,7 +287,14 @@
     &__job-name {
       font-weight: 600;
       text-align: center;
-      margin-bottom: 40px;
+
+      @include media-breakpoint-down(lg) {
+        margin-bottom: 21px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 40px;
+      }
 
       @include media-breakpoint-down(md) {
         font-size: 24px;
@@ -334,9 +307,17 @@
 
     &__inputs {
       display: grid;
-      gap: 20px;
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-down(lg) {
+        row-gap: 22px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        row-gap: 35px;
+        column-gap: 20px;
+      }
+
+      @include media-breakpoint-up(xl) {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -359,9 +340,19 @@
     }
 
     &__input-wrapper--textarea {
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(xl) {
         grid-column-start: 1;
         grid-column-end: 3;
+      }
+
+      .job-text__input {
+        @include media-breakpoint-down(lg) {
+          height: 142px;
+        }
+
+        @include media-breakpoint-up(lg) {
+          height: 170px;
+        }
       }
     }
 
@@ -373,12 +364,16 @@
       resize: none;
       outline: 0;
 
-      @include media-breakpoint-down(md) {
-        padding: 15px 15px;
+      @include media-breakpoint-down(lg) {
+        padding: 20px 15px;
       }
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-between(lg, xl) {
         padding: 15px 25px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding: 19px 25px;
       }
     }
 
@@ -392,7 +387,6 @@
     &__file-input {
       position: relative;
       padding-top: 40px;
-      padding-bottom: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -403,7 +397,15 @@
         padding-right: 20px;
       }
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-down(lg) {
+        padding-bottom: 45px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        padding-bottom: 30px;
+      }
+
+      @include media-breakpoint-up(xl) {
         grid-column-start: 1;
         grid-column-end: 3;
       }
@@ -420,6 +422,7 @@
         font-weight: 480;
         @include media-breakpoint-down(sm) {
           font-size: 14px;
+          word-break: break-all;
         }
 
         @include media-breakpoint-up(sm) {
@@ -449,7 +452,8 @@
   }
 
   .btn {
-    @include media-breakpoint-up(md) {
+    padding: 17px 30px;
+    @include media-breakpoint-up(xl) {
       grid-column-start: 1;
       grid-column-end: 3;
     }

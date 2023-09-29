@@ -1,132 +1,58 @@
 <script>
+  import { createClient } from '@sanity/client'
+
+  let data
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    const query = `*[_type=="OurServices"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+
+  setTimeout(() => {
+    console.log(data)
+  }, 1090)
 </script>
 
-<section class="our-services">
-  <div class="container">
-    <div class="our-services__wrapper">
-      <h1 class="our-services__title">OUR SERVICES</h1>
-      <div class="our-services__items">
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">Web Development</span>
-            <p class="our-services__text">
-              We supply web development services to businesses and startups in different industries.
-            </p>
-          </div>
+{#if data}
+  <section class="our-services">
+    <div class="container">
+      <div class="our-services__wrapper">
+        <h1 class="our-services__title">{data.sectionTitle}</h1>
+        <div class="our-services__items">
+          {#each data.servicesItems as servicesItem}
+            <div class="our-services__item">
+              <div class="our-service__item-text-wrapper">
+                <span class="our-services__name">{servicesItem.serviceName}</span>
+                <p class="our-services__text">
+                  {servicesItem.serviceText}
+                </p>
+              </div>
 
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
-        </div>
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">Mobile Application</span>
-            <p class="our-services__text">
-              Our team will help your application become more advanced and popular.
-            </p>
-          </div>
-
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
-        </div>
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">Project management</span>
-            <p class="our-services__text">
-              We develop games for mobile devices, metaverse, PC and web platforms.
-            </p>
-          </div>
-
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
-        </div>
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">Game Development</span>
-            <p class="our-services__text">
-              We develop games for mobile devices, metaverse, PC and web platforms.
-            </p>
-          </div>
-
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
-        </div>
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">PWA Development Services</span>
-            <p class="our-services__text">
-              We develop games for mobile devices, metaverse, PC and web platforms.
-            </p>
-          </div>
-
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
-        </div>
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">Cross-Platform development</span>
-            <p class="our-services__text">
-              We develop games for mobile devices, metaverse, PC and web platforms.
-            </p>
-          </div>
-
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
-        </div>
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">Custom Software development</span>
-            <p class="our-services__text">
-              We develop games for mobile devices, metaverse, PC and web platforms.
-            </p>
-          </div>
-
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
-        </div>
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">Shopify/Shopify plus development</span>
-            <p class="our-services__text">
-              We develop games for mobile devices, metaverse, PC and web platforms.
-            </p>
-          </div>
-
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
-        </div>
-        <div class="our-services__item">
-          <div class="our-service__item-text-wrapper">
-            <span class="our-services__name">E-Commerce</span>
-            <p class="our-services__text">
-              We develop games for mobile devices, metaverse, PC and web platforms.
-            </p>
-          </div>
-
-          <a href="#" class="our-services__btn">
-            See more
-            <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
-          </a>
+              <a href={servicesItem.serviceLink} class="our-services__btn">
+                See more
+                <img src="../icons/arrow-btn.svg" alt="" class="our-services__icon" />
+              </a>
+            </div>
+          {/each}
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';
@@ -142,6 +68,7 @@
     }
 
     &__title {
+      text-transform: uppercase;
       @include media-breakpoint-down(md) {
         font-size: 40px;
       }

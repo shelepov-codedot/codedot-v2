@@ -1,20 +1,55 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<section class="digital">
-  <div class="digital__img-wrapper">
-    <img src="../images/digital.png" alt="" class="digital__img" />
-  </div>
-  <div class="digital__wrapper">
-    <div class="container">
-      <div class="digital__text-wrapper">
-        <h2 class="digital__text">Get started on your journey to Digital Transformation!</h2>
-        <a href="#" class="digital__link">
-          <img src="../icons/arrow-btn.svg" alt="#" class="digital__link-icon" />
-        </a>
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="Digital"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+
+  setTimeout(() => {
+    console.log(data)
+  }, 1000)
+</script>
+
+{#if data}
+  <section class="digital">
+    <div class="digital__img-wrapper">
+      <img src={urlFor(data.digaitalImage)} alt="" class="digital__img" />
+    </div>
+    <div class="digital__wrapper">
+      <div class="container">
+        <div class="digital__text-wrapper">
+          <h2 class="digital__text">{data.digitalText}</h2>
+          <a href="#" class="digital__link">
+            <img src="../icons/arrow-btn.svg" alt="#" class="digital__link-icon" />
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';

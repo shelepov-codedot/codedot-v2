@@ -1,61 +1,169 @@
-<section class="header">
-  <div class="header__wrapper">
-    <div class="header__logo">
-      <img src="../icons/logo.svg" alt="logo img" />
-    </div>
-    <div class="header__content">
-      <a target="_blank" href="https://shopify.com/" class="header__shopify">
-        <div class="header__shopify-logo">
-          <img src="../icons/shopify.svg" alt="shopify img" />
-        </div>
-        <div class="header__shopify-text">Shopify dev</div>
-      </a>
-      <div class="header__nav">
-        <a href="/" class="header__nav-item">Cases</a>
-        <div class="header__nav-item dropdown">
-          <p>Services</p>
-          <div class="header__nav-item-icon" />
-          <div class="header__nav-dropdown-content">
-            <div class="header__nav-dropdown-content-wrapper">
-              <div class="header__nav-dropdown-content-list">
-                <a href="/" class="header__nav-item">Web Development</a>
-                <a href="/" class="header__nav-item">E-Commerce</a>
-                <a href="/" class="header__nav-item">UI/UX design</a>
-                <a href="/" class="header__nav-item">Mobile Development</a>
-                <a href="/" class="header__nav-item"> Shopify/Shopify plus development </a>
-                <a href="/" class="header__nav-item">Jamstack</a>
-                <a href="/" class="header__nav-item">Cross-Platform development</a>
-                <a href="/" class="header__nav-item">Game development</a>
-                <a href="/" class="header__nav-item">Computer VisionDevelopment</a>
-                <a href="/" class="header__nav-item">Custom Software development</a>
-                <a href="/" class="header__nav-item">Project management</a>
-                <a href="/" class="header__nav-item">Startup and MVP Services</a>
-              </div>
-              <div class="header__nav-dropdown-link">
-                <p>All services</p>
-                <span class="arrow" />
-              </div>
+<script>
+  import { onMount } from 'svelte'
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
+
+  let active, curWidth, data, builder
+  let body
+
+  const openMenu = () => {
+    active = !active
+    body = document.querySelector('body')
+
+    active ? (body.style.overflow = 'hidden') : (body.style.overflow = 'auto')
+  }
+
+  onMount(() => {
+    curWidth = window.innerWidth
+
+    window.addEventListener('resize', () => {
+      curWidth = window.innerWidth
+
+      if (curWidth >= 1280 && active) {
+        active = !active
+      }
+    })
+  })
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="Header"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+<!-- svelte-ignore security-anchor-rel-noreferrer -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+
+{#if data}
+  <header class="header">
+    <div class="header__wrapper">
+      <div class="header__logo">
+        <img src={urlFor(data.logoHeader)} alt="logo img" />
+      </div>
+      {#if curWidth >= 1280}
+        <div class="header__content">
+          <a target="_blank" href={data.shopifyItem.shopifyLink} class="header__shopify">
+            <div class="header__shopify-logo">
+              <img src={urlFor(data.shopifyItem.shopifyIcon)} alt="shopify img" />
             </div>
+            <div class="header__shopify-text">{data.shopifyItem.shopifyText}</div>
+          </a>
+          <div class="header__nav">
+            {#each data.navItems as navItem}
+              {#if !navItem.navSubItems}
+                <a href={navItem.navItemLink} class="header__nav-item">{navItem.navItemName}</a>
+              {/if}
+              {#if navItem.navSubItems}
+                <div class="header__nav-item dropdown">
+                  <p>{navItem.navItemName}</p>
+                  <div class="header__nav-item-icon" />
+                  <div class="header__nav-dropdown-content">
+                    <div class="header__nav-dropdown-content-wrapper">
+                      <div class="header__nav-dropdown-content-list">
+                        {#each navItem.navSubItems as navSubItem}
+                          <a href={navSubItem.navSubItemLink} class="header__nav-item"
+                            >{navSubItem.navSubItemName}</a
+                          >
+                        {/each}
+                      </div>
+                      <div class="header__nav-dropdown-link">
+                        <p>All {navItem.navItemName.toLowerCase()}</p>
+                        <span class="arrow" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {/if}
+            {/each}
+          </div>
+          <div class="header__btn">
+            {data.button.buttonText} <span class="header__btn-icon" />
           </div>
         </div>
-        <a href="/" class="header__nav-item">About us</a>
-        <a href="/" class="header__nav-item">Careers</a>
-      </div>
-      <div class="header__btn">
-        Get in touch <span class="header__btn-icon" />
+      {/if}
+
+      <div class="header__mobile-btn-wrapper" on:click={openMenu}>
+        <div class="header__mobile-btn" />
       </div>
     </div>
-    <div class="header__mobile-btn" />
-  </div>
-</section>
+    {#if curWidth < 1280}
+      <div class={active ? 'header__content header__content--active' : 'header__content'}>
+        <span class="header__cross" on:click={openMenu}>
+          <span class="header__cross-btn" />
+        </span>
+        <a target="_blank" href={data.shopifyItem.shopifyLink} class="header__shopify">
+          <div class="header__shopify-logo">
+            <img src={urlFor(data.shopifyItem.shopifyIcon)} alt="shopify img" />
+          </div>
+          <div class="header__shopify-text">{data.shopifyItem.shopifyText}</div>
+        </a>
+        <div class="header__nav">
+          {#each data.navItems as navItem}
+            {#if !navItem.navSubItems}
+              <a href={navItem.navItemLink} class="header__nav-item">{navItem.navItemName}</a>
+            {/if}
+            {#if navItem.navSubItems}
+              <div class="header__nav-item dropdown">
+                <p>{navItem.navItemName}</p>
+                <div class="header__nav-item-icon" />
+                <div class="header__nav-dropdown-content">
+                  <div class="header__nav-dropdown-content-wrapper">
+                    <div class="header__nav-dropdown-content-list">
+                      {#each navItem.navSubItems as navSubItem}
+                        <a href={navSubItem.navSubItemLink} class="header__nav-item"
+                          >{navSubItem.navSubItemName}</a
+                        >
+                      {/each}
+                    </div>
+                    <div class="header__nav-dropdown-link">
+                      <p>All {navItem.navItemName.toLowerCase()}</p>
+                      <span class="arrow" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {/if}
+          {/each}
+        </div>
+        <div class="header__btn">
+          {data.button.buttonText} <span class="header__btn-icon" />
+        </div>
+      </div>
+      <div
+        class={active ? 'header__background header__background--active' : 'header__background'}
+        on:click={openMenu}
+      />
+    {/if}
+  </header>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
 
   .header {
-    position: relative;
+    position: sticky;
+    top: 0;
     margin: 0 auto;
-    z-index: 5;
+    z-index: 12;
     padding-top: 20px;
 
     @include media-breakpoint-down(md) {
@@ -86,6 +194,25 @@
     @include media-breakpoint-up(xl) {
       margin-left: 60px;
       margin-right: 60px;
+    }
+
+    &__background {
+      position: fixed;
+      background-color: #21212157;
+      height: 100%;
+      width: 100%;
+      transition: 0.3s ease-in-out;
+      top: 0;
+      opacity: 0;
+      left: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      &--active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+      }
     }
 
     &__wrapper {
@@ -124,21 +251,75 @@
       }
     }
 
-    &__content {
+    &__cross {
+      position: absolute;
+      top: 36px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    &__cross-btn {
+      position: relative;
+      width: 20px;
+      height: 2px;
+      background-color: black;
+      transform: rotate(45deg);
+
+      &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+        transform: rotate(90deg);
+      }
+    }
+
+    &__content {
+      display: flex;
+      border-radius: 20px 0px 0px 20px;
 
       @include media-breakpoint-down(xl) {
-        display: none;
+        width: 230px;
+        background-color: rgb(218 244 254);
+        top: 0px;
+        right: -100%;
+        z-index: 10;
+        position: fixed;
+        flex-direction: column;
+        align-items: flex-start;
+        transition: 0.5s ease-in-out;
+        overflow: auto;
+        height: 100%;
+        padding-top: 80px;
+        padding-left: 30px;
+        padding-right: 20px;
+        padding-bottom: 40px;
+
+        &--active {
+          right: 0px;
+        }
+      }
+
+      @include media-breakpoint-up(xl) {
+        align-items: center;
       }
     }
 
     &__shopify {
       display: flex;
       align-items: center;
-      margin-right: 60px;
       cursor: pointer;
-      padding: 20px;
+
+      @include media-breakpoint-up(xl) {
+        margin-right: 60px;
+        padding: 20px;
+      }
     }
 
     &__shopify-logo {
@@ -165,7 +346,18 @@
       align-items: center;
 
       .header__nav-item:not(:last-child) {
-        margin-right: 40px;
+        @include media-breakpoint-up(xl) {
+          margin-right: 40px;
+        }
+      }
+
+      @include media-breakpoint-down(xl) {
+        width: 100%;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
 
@@ -176,8 +368,17 @@
       font-weight: 400;
       line-height: 150%;
       cursor: pointer;
-      padding: 20px 0;
+
       z-index: 2;
+
+      @include media-breakpoint-down(xl) {
+        width: 100%;
+        padding: 5px 0;
+      }
+
+      @include media-breakpoint-up(xl) {
+        padding: 20px 0;
+      }
 
       &.dropdown {
         display: flex;
@@ -186,49 +387,77 @@
 
         &:hover {
           .header__nav-dropdown-content {
-            visibility: visible;
-            opacity: 1;
-            transform: translate(-37%, 0%);
+            @include media-breakpoint-up(xl) {
+              visibility: visible;
+              opacity: 1;
+              transform: translate(-37%, 0%);
+            }
           }
         }
 
         &:not(&:hover) {
           .header__nav-dropdown-content {
-            visibility: hidden;
-            opacity: 0;
-            pointer-events: none;
-            transform: translate(-37%, -50%);
+            @include media-breakpoint-up(xl) {
+              visibility: hidden;
+              opacity: 0;
+              pointer-events: none;
+              transform: translate(-37%, -50%);
+            }
           }
+        }
+
+        @include media-breakpoint-down(xl) {
+          justify-content: space-between;
         }
       }
     }
 
     &__nav-dropdown-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: auto;
-      padding-top: 107%;
-      z-index: 5;
-      transition: 0.5s;
+      @include media-breakpoint-down(xl) {
+        display: none;
+      }
+      @include media-breakpoint-up(xl) {
+        opacity: 1;
+        visibility: visible;
+        padding-top: 107%;
+        transform: translateY(-50%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: auto;
+        z-index: 5;
+        transition: 0.5s;
+      }
     }
 
     &__nav-dropdown-content-wrapper {
-      border-radius: 40px;
-      backdrop-filter: blur(10);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(25px);
-      padding: 20px;
+      @include media-breakpoint-down(xl) {
+        background-color: white;
+      }
+      @include media-breakpoint-up(xl) {
+        border-radius: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(25px);
+        padding: 20px;
+      }
     }
 
     &__nav-dropdown-content-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      margin-bottom: 40px;
+      @include media-breakpoint-down(xl) {
+        display: flex;
+        flex-direction: column;
+      }
+      @include media-breakpoint-up(xl) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 40px;
+      }
 
       .header__nav-item {
-        width: 261px;
+        @include media-breakpoint-up(xl) {
+          width: 261px;
+        }
       }
     }
 
@@ -247,17 +476,23 @@
     }
 
     &__nav-item-icon {
-      position: relative;
-      width: 7px;
-      height: 6px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      transform: rotate(270deg);
-      margin-top: 5px;
-      margin-left: 8px;
-      color: #212121;
+      @include media-breakpoint-down(xl) {
+        display: none;
+      }
 
+      @include media-breakpoint-up(xl) {
+        transform: rotate(270deg);
+        margin-top: 5px;
+        margin-left: 8px;
+        position: relative;
+        width: 7px;
+        height: 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        color: #212121;
+      }
       &::after {
         content: '';
         content: '';
@@ -284,10 +519,17 @@
       font-size: 16px;
       font-weight: 400;
       line-height: 24px;
-      margin-left: 60px;
       display: flex;
       align-items: center;
       cursor: pointer;
+
+      @include media-breakpoint-down(xl) {
+        margin-top: 50px;
+      }
+
+      @include media-breakpoint-up(xl) {
+        margin-left: 60px;
+      }
     }
 
     &__btn-icon {
@@ -327,6 +569,20 @@
       background: #006185;
       box-shadow: 0px -5px 0 0px #006185, 0px 5px 0 0px #006185;
 
+      @include media-breakpoint-up(xl) {
+        display: none;
+      }
+    }
+
+    &__mobile-btn-wrapper {
+      @include media-breakpoint-down(xl) {
+        display: flex;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        align-items: center;
+        justify-content: center;
+      }
       @include media-breakpoint-up(xl) {
         display: none;
       }

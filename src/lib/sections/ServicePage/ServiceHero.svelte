@@ -1,35 +1,64 @@
-<script></script>
+<script>
+  import { createClient } from '@sanity/client'
+  import imageUrlBuilder from '@sanity/image-url'
 
-<section class="service-hero">
-  <div class="container">
-    <div class="service-hero__wrapper">
-      <div class="service-hero__title-wrapper">
-        <h1 class="service-hero__title">MVP<br /> DEVELOPMENT</h1>
-        <div class="service-hero__subtext-wrapper">
-          <p class="service-hero__subtext">from idea to development and support</p>
-          <a href="#" class="btn service-hero__btn"
-            >Discuss the project <span class="btn__icon"
-              ><img src="../icons/arrow-btn.svg" alt="" /></span
-            ></a
-          >
+  let data, builder
+
+  export async function _getProps() {
+    const client = createClient({
+      projectId: 'c6ki8epl',
+      dataset: 'production',
+      useCdn: true,
+    })
+
+    builder = imageUrlBuilder(client)
+    const query = `*[_type=="ServiceHero"]`
+    const section = await client.fetch(query)
+
+    return {
+      body: {
+        section,
+      },
+    }
+  }
+
+  function urlFor(source) {
+    return builder.image(source)
+  }
+
+  _getProps().then((res) => (data = res.body.section[0]))
+</script>
+
+{#if data}
+  <section class="service-hero">
+    <div class="container">
+      <div class="service-hero__wrapper">
+        <div class="service-hero__title-wrapper">
+          <h1 class="service-hero__title">{data.serviceTitle}</h1>
+          <div class="service-hero__subtext-wrapper">
+            <p class="service-hero__subtext">{data.serviceHeroText}</p>
+            <a href="#" class="btn service-hero__btn">
+              {data.serviceBtn}
+              <span class="btn__icon">
+                <img src="../icons/arrow-btn.svg" alt="" />
+              </span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="service-hero__inner">
-        <div class="service-hero__img-wrapper">
-          <img src="../images/service-hero.png" alt="" class="service-hero__img" />
-        </div>
-        <div class="service-hero__text-wrapper">
-          <p class="service-hero__text">
-            An MVP is an important step in the software development process that allows you to
-            preview and test the product to make necessary adjustments before actually releasing the
-            final version with all features. In the future, your MVP product will be transformed
-            into a full-fledged product, as our skills help us work quickly and create stable code.
-          </p>
+        <div class="service-hero__inner">
+          <div class="service-hero__img-wrapper">
+            <img src={urlFor(data.serviceImage)} alt="" class="service-hero__img" />
+          </div>
+          <div class="service-hero__text-wrapper">
+            <p class="service-hero__text">
+              {data.serviceText}
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../../styles/base/mixins.scss';
@@ -39,7 +68,7 @@
       padding-top: 107px;
     }
     @include media-breakpoint-up(lg) {
-      padding-top: 155px;
+      padding-top: 72px;
     }
     &__title {
       @include media-breakpoint-down(sm) {
