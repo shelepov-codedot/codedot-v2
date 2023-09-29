@@ -4,6 +4,11 @@ export default {
   title: 'Expect',
   fields: [
     {
+      name: 'sectionTitle',
+      type: 'string',
+      title: 'Section Title',
+    },
+    {
       name: 'expectTitle',
       type: 'string',
       title: 'Expect Title',

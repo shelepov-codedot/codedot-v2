@@ -254,7 +254,7 @@
     &__cross {
       position: absolute;
       top: 36px;
-      right: 20px;
+      right: 37px;
       width: 30px;
       height: 30px;
       display: flex;

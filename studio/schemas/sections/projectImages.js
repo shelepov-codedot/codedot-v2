@@ -4,7 +4,7 @@ export default {
   title: 'ProjectImages',
   fields: [
     {
-      name: 'sectiontitle',
+      name: 'sectionTitle',
       type: 'string',
       title: 'Section Title',
     },
