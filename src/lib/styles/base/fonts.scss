@@ -1,67 +1,66 @@
-$font-base-url: "../fonts/WixMadeforDisplay/";
+$font-base-url: '../../fonts/WixMadeforDisplay/';
 
 @font-face {
-    font-family: 'Wix Madefor Display';
-    src: url('#{$font-base-url}WixMadeforDisplay-Regular.eot');
-    src: local('Wix Madefor Display Regular'), local('#{$font-base-url}WixMadeforDisplay-Regular'),
-        url('#{$font-base-url}WixMadeforDisplay-Regular.eot?#iefix') format('embedded-opentype'),
-        url('#{$font-base-url}WixMadeforDisplay-Regular.woff2') format('woff2'),
-        url('#{$font-base-url}WixMadeforDisplay-Regular.woff') format('woff'),
-        url('#{$font-base-url}WixMadeforDisplay-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Wix Madefor Display';
+  src: url('#{$font-base-url}WixMadeforDisplay-Regular.eot');
+  src: local('Wix Madefor Display Regular'), local('#{$font-base-url}WixMadeforDisplay-Regular'),
+    url('#{$font-base-url}WixMadeforDisplay-Regular.eot?#iefix') format('embedded-opentype'),
+    url('#{$font-base-url}WixMadeforDisplay-Regular.woff2') format('woff2'),
+    url('#{$font-base-url}WixMadeforDisplay-Regular.woff') format('woff'),
+    url('#{$font-base-url}WixMadeforDisplay-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Wix Madefor Display';
-    src: url('#{$font-base-url}WixMadeforDisplay-Medium.eot');
-    src: local('Wix Madefor Display Medium'), local('#{$font-base-url}WixMadeforDisplay-Medium'),
-        url('#{$font-base-url}WixMadeforDisplay-Medium.eot?#iefix') format('embedded-opentype'),
-        url('#{$font-base-url}WixMadeforDisplay-Medium.woff2') format('woff2'),
-        url('#{$font-base-url}WixMadeforDisplay-Medium.woff') format('woff'),
-        url('#{$font-base-url}WixMadeforDisplay-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Wix Madefor Display';
+  src: url('#{$font-base-url}WixMadeforDisplay-Medium.eot');
+  src: local('Wix Madefor Display Medium'), local('#{$font-base-url}WixMadeforDisplay-Medium'),
+    url('#{$font-base-url}WixMadeforDisplay-Medium.eot?#iefix') format('embedded-opentype'),
+    url('#{$font-base-url}WixMadeforDisplay-Medium.woff2') format('woff2'),
+    url('#{$font-base-url}WixMadeforDisplay-Medium.woff') format('woff'),
+    url('#{$font-base-url}WixMadeforDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Wix Madefor Display';
-    src: url('#{$font-base-url}WixMadeforDisplay-Bold.eot');
-    src: local('Wix Madefor Display Bold'), local('#{$font-base-url}WixMadeforDisplay-Bold'),
-        url('#{$font-base-url}WixMadeforDisplay-Bold.eot?#iefix') format('embedded-opentype'),
-        url('#{$font-base-url}WixMadeforDisplay-Bold.woff2') format('woff2'),
-        url('#{$font-base-url}WixMadeforDisplay-Bold.woff') format('woff'),
-        url('#{$font-base-url}WixMadeforDisplay-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Wix Madefor Display';
+  src: url('#{$font-base-url}WixMadeforDisplay-Bold.eot');
+  src: local('Wix Madefor Display Bold'), local('#{$font-base-url}WixMadeforDisplay-Bold'),
+    url('#{$font-base-url}WixMadeforDisplay-Bold.eot?#iefix') format('embedded-opentype'),
+    url('#{$font-base-url}WixMadeforDisplay-Bold.woff2') format('woff2'),
+    url('#{$font-base-url}WixMadeforDisplay-Bold.woff') format('woff'),
+    url('#{$font-base-url}WixMadeforDisplay-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Wix Madefor Display';
-    src: url('#{$font-base-url}WixMadeforDisplay-ExtraBold.eot');
-    src: local('Wix Madefor Display ExtraBold'), local('#{$font-base-url}WixMadeforDisplay-ExtraBold'),
-        url('#{$font-base-url}WixMadeforDisplay-ExtraBold.eot?#iefix') format('embedded-opentype'),
-        url('#{$font-base-url}WixMadeforDisplay-ExtraBold.woff2') format('woff2'),
-        url('#{$font-base-url}WixMadeforDisplay-ExtraBold.woff') format('woff'),
-        url('#{$font-base-url}WixMadeforDisplay-ExtraBold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Wix Madefor Display';
+  src: url('#{$font-base-url}WixMadeforDisplay-ExtraBold.eot');
+  src: local('Wix Madefor Display ExtraBold'), local('#{$font-base-url}WixMadeforDisplay-ExtraBold'),
+    url('#{$font-base-url}WixMadeforDisplay-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('#{$font-base-url}WixMadeforDisplay-ExtraBold.woff2') format('woff2'),
+    url('#{$font-base-url}WixMadeforDisplay-ExtraBold.woff') format('woff'),
+    url('#{$font-base-url}WixMadeforDisplay-ExtraBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Wix Madefor Display';
-    src: url('#{$font-base-url}WixMadeforDisplay-SemiBold.eot');
-    src: local('Wix Madefor Display SemiBold'), local('#{$font-base-url}WixMadeforDisplay-SemiBold'),
-        url('#{$font-base-url}WixMadeforDisplay-SemiBold.eot?#iefix') format('embedded-opentype'),
-        url('#{$font-base-url}WixMadeforDisplay-SemiBold.woff2') format('woff2'),
-        url('#{$font-base-url}WixMadeforDisplay-SemiBold.woff') format('woff'),
-        url('#{$font-base-url}WixMadeforDisplay-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Wix Madefor Display';
+  src: url('#{$font-base-url}WixMadeforDisplay-SemiBold.eot');
+  src: local('Wix Madefor Display SemiBold'), local('#{$font-base-url}WixMadeforDisplay-SemiBold'),
+    url('#{$font-base-url}WixMadeforDisplay-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('#{$font-base-url}WixMadeforDisplay-SemiBold.woff2') format('woff2'),
+    url('#{$font-base-url}WixMadeforDisplay-SemiBold.woff') format('woff'),
+    url('#{$font-base-url}WixMadeforDisplay-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
-

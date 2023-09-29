@@ -12,7 +12,7 @@ export default {
     {
       name: 'sectionTitle',
       type: 'string',
-      title: 'Title',
+      title: 'Section Title',
     },
     {
       name: 'Text',

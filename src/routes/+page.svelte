@@ -1,14 +1,35 @@
 <script>
-  //   import { _getProps } from './+page.js'
+  import * as Sections from '$lib/sections'
+  import { onMount } from 'svelte'
 
-  //   let pageData
+  import { _getProps } from './+page.js'
 
-  //   // Вызываем функцию _getProps и сохраняем результат в pageData
-  //   async function loadPageData() {
-  //     pageData = await _getProps()
-  //     console.log(pageData)
-  //   }
+  let pageData
 
-  //   // Вызываем функцию для загрузки данных при монтировании компонента
-  //   onMount(loadPageData)
+  async function loadPageData() {
+    pageData = await _getProps()
+    console.log(pageData)
+  }
+
+  onMount(() => {
+    loadPageData()
+  })
 </script>
+
+<svelte:head>
+  <title>Codedot v.2</title>
+</svelte:head>
+
+{#if pageData}
+  <svelte:component this={Sections.Modal} />
+
+  {#each pageData.content as section}
+    {#if section.sectionTitle in Sections}
+      <svelte:component this={Sections[section.sectionTitle]} />
+    {/if}
+  {/each}
+{/if}
+
+<style>
+  @import '../lib/styles/styles.scss';
+</style>

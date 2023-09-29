@@ -390,7 +390,7 @@
             @include media-breakpoint-up(xl) {
               visibility: visible;
               opacity: 1;
-              transform: translate(-37%, 0%);
+              transform: translate(-43%, 5%);
             }
           }
         }
@@ -401,7 +401,7 @@
               visibility: hidden;
               opacity: 0;
               pointer-events: none;
-              transform: translate(-37%, -50%);
+              transform: translate(-43%, -50%);
             }
           }
         }
