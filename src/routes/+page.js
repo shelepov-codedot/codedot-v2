@@ -7,12 +7,10 @@ export async function _getProps() {
     useCdn: true,
   })
 
-  const query = `*[title=="Homepage"]`
+  const query = `*[slug.current=="/"]`
   const section = await client.fetch(query)
 
   let pageData = section[0]
-
-  console.log(pageData)
 
   let dataExport = []
 
@@ -26,8 +24,6 @@ export async function _getProps() {
     ...pageData,
     content: [...dataExport],
   }
-
-  console.log(pageData)
 
   return pageData
 }

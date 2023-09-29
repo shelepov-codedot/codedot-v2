@@ -6,9 +6,13 @@
   let errorText,
     textName = ''
 
-  if (activeModal) {
-    console.log(document.querySelector('body'))
-  }
+  activeModal = false
+
+  // if (activeModal === true) {
+  //   document.querySelector('body').style.overflow = 'hidden'
+  // } else {
+  //   document.querySelector('body').style.overflow = 'hidden'
+  // }
 
   const selectFile = (e) => {
     const selectedFiles = e.target.files[0]
@@ -155,7 +159,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    z-index: 12;
+    z-index: 22;
     top: 0;
 
     &__notice {

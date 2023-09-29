@@ -4,6 +4,11 @@ export default {
   title: 'Cases',
   fields: [
     {
+      name: 'sectionTitle',
+      type: 'string',
+      title: 'Section Title',
+    },
+    {
       name: 'title',
       type: 'string',
       title: 'Case Title',

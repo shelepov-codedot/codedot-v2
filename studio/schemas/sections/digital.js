@@ -4,6 +4,11 @@ export default {
   title: 'Digital',
   fields: [
     {
+      name: 'sectionTitle',
+      type: 'string',
+      title: 'Section Title',
+    },
+    {
       name: 'digitalText',
       type: 'text',
       title: 'Digital Text',
