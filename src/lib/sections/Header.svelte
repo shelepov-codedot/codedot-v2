@@ -1,3 +1,6 @@
+<!-- svelte-ignore security-anchor-rel-noreferrer -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+
 <script>
   import { onMount } from 'svelte'
   import { createClient } from '@sanity/client'
@@ -49,9 +52,6 @@
 
   _getProps().then((res) => (data = res.body.section[0]))
 </script>
-
-<!-- svelte-ignore security-anchor-rel-noreferrer -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 
 {#if data}
   <header class="header">
