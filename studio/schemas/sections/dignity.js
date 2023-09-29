@@ -4,6 +4,11 @@ export default {
   title: 'Dignity',
   fields: [
     {
+      name: 'sectionTitle',
+      type: 'string',
+      title: 'Section Title',
+    },
+    {
       name: 'dignityItems',
       type: 'array',
       title: 'DignityItems',

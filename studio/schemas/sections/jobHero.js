@@ -4,6 +4,11 @@ export default {
   title: 'JobHero',
   fields: [
     {
+      name: 'sectionTitle',
+      type: 'string',
+      title: 'Section Title',
+    },
+    {
       name: 'jobHeroTitle',
       type: 'string',
       title: 'JobHero Title',

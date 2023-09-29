@@ -4,6 +4,11 @@ export default {
   title: 'ProjectText',
   fields: [
     {
+      name: 'sectionTitle',
+      type: 'string',
+      title: 'Section Title',
+    },
+    {
       name: 'projectTextTitle',
       type: 'string',
       title: 'Project Text Title',

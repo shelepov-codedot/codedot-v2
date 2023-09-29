@@ -3,7 +3,4 @@
 </script>
 
 <style>
-  * {
-    background-color: red;
-  }
 </style>
