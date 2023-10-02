@@ -56,9 +56,11 @@
 {#if data}
   <header class="header">
     <div class="header__wrapper">
-      <div class="header__logo">
-        <img src={urlFor(data.logoHeader)} alt="logo img" />
-      </div>
+      <a href="/">
+        <div class="header__logo">
+          <img src={urlFor(data.logoHeader)} alt="logo img" />
+        </div>
+      </a>
       {#if curWidth >= 1280}
         <div class="header__content">
           <a target="_blank" href={data.shopifyItem.shopifyLink} class="header__shopify">
