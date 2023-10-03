@@ -1,30 +1,12 @@
 <script>
-  import { createClient } from '@sanity/client'
   import { onMount } from 'svelte'
   import { register } from 'swiper/element/bundle'
-  import imageUrlBuilder from '@sanity/image-url'
+  import imageUrl from '../js/imageUrlBuilder'
 
-  let data, swiperElSecond, builder
+  export let data
+  let swiperElSecond
 
   register()
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="Review"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
 
   const swiperSecondParams = {
     observer: true,
@@ -37,14 +19,7 @@
     },
   }
 
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
   onMount(async () => {
-    const res = await _getProps()
-    data = res.body.section[0]
-
     if (data) {
       const initializeSwiper = () => {
         Object.assign(swiperElSecond, swiperSecondParams)
@@ -87,7 +62,7 @@
                 </p>
                 <div class="reviews__user-wrapper">
                   <div class="reviews__user-img-wrapper">
-                    <img src={urlFor(review.reviewImg)} alt="" class="reviews__user-img" />
+                    <img src={imageUrl(review.reviewImg)} alt="" class="reviews__user-img" />
                   </div>
                   <div class="reviews__user-data">
                     <span class="reviews__name"> {review.reviewAuthor}</span>

@@ -9,6 +9,11 @@ export default {
       title: 'Section Title',
     },
     {
+      name: 'title',
+      type: 'string',
+      title: 'Title',
+    },
+    {
       name: 'projectImages',
       type: 'array',
       title: 'Images',

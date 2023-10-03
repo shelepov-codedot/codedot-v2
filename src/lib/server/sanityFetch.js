@@ -1,12 +1,8 @@
 import { createClient } from '@sanity/client'
+import clientData from '../../sanityClient'
 
 const sanityFetch = async (query) => {
-  const client = createClient({
-    projectId: 'c6ki8epl',
-    dataset: 'production',
-    useCdn: true,
-  })
-
+  const client = createClient(clientData)
   const response = await client.fetch(query, {
     method: 'POST',
     headers: {
@@ -14,7 +10,6 @@ const sanityFetch = async (query) => {
     },
     body: JSON.stringify({ query }),
   })
-
   return response
 }
 

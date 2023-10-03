@@ -1,40 +1,12 @@
 <script>
-  import { createClient } from '@sanity/client'
-  import imageUrlBuilder from '@sanity/image-url'
-
-  let data, builder
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="ProjectHero"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
-  _getProps()
-    .then((res) => (data = res.body.section[0]))
-    .then((res) => console.log(res))
+  import imageUrl from '../../js/imageUrlBuilder'
+  export let data
 </script>
 
 {#if data}
   <section class="project-hero">
     <div class="project-hero__background-wrapper">
-      <img src={urlFor(data.backgroundImage)} alt="" class="project-hero__background" />
+      <img src={imageUrl(data.backgroundImage)} alt="" class="project-hero__background" />
     </div>
     <div class="project-hero__wrapper">
       <div class="project-hero__inner">

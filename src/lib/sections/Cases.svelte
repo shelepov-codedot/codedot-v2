@@ -1,32 +1,6 @@
 <script>
-  import { createClient } from '@sanity/client'
-  import imageUrlBuilder from '@sanity/image-url'
-
-  let data, builder
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="Cases"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
-  _getProps().then((res) => (data = res.body.section[0]))
+  import imageUrl from '../js/imageUrlBuilder'
+  export let data
 </script>
 
 {#if data}
@@ -40,7 +14,7 @@
               {#if index % 2 == 0}
                 <div class="cases__item">
                   <div class="cases__img-wrapper">
-                    <img src={urlFor(caseItem.image)} alt="cases" class="cases__img" />
+                    <img src={imageUrl(caseItem.image)} alt="cases" class="cases__img" />
                   </div>
                   <div class="cases__text-wrapper">
                     <div class="cases__text-inner">
@@ -60,7 +34,7 @@
               {#if index % 2 != 0}
                 <div class="cases__item">
                   <div class="cases__img-wrapper">
-                    <img src={urlFor(caseItem.image)} alt="cases" class="cases__img" />
+                    <img src={imageUrl(caseItem.image)} alt="cases" class="cases__img" />
                   </div>
                   <div class="cases__text-wrapper">
                     <div class="cases__text-inner">

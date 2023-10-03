@@ -3,28 +3,12 @@
   import { onMount } from 'svelte'
   import { register } from 'swiper/element/bundle'
 
-  let data, swiperEl
+  export let data
+  let swiperEl
 
   register()
 
   const spaceBetween = 40
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    const query = `*[_type=="Services"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
 
   const swiperParams = {
     observer: true,
@@ -49,9 +33,6 @@
   }
 
   onMount(async () => {
-    const res = await _getProps()
-    data = res.body.section[0]
-
     if (data) {
       const initializeSwiper = () => {
         Object.assign(swiperEl, swiperParams)

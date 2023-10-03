@@ -12,7 +12,7 @@
 
   {#each data.content as section}
     {#if section.sectionTitle in Sections}
-      <svelte:component this={Sections[section.sectionTitle]} />
+      <svelte:component this={Sections[section.sectionTitle]} data={section} />
     {/if}
   {/each}
 {/if}

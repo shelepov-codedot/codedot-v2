@@ -1,26 +1,5 @@
 <script>
-  import { createClient } from '@sanity/client'
-
-  let data
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    const query = `*[_type=="Code"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  _getProps().then((res) => (data = res.body.section[0]))
+  export let data
 </script>
 
 {#if data}

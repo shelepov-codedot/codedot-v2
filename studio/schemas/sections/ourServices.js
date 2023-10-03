@@ -9,6 +9,11 @@ export default {
       title: 'sectionTitle',
     },
     {
+      name: 'Title',
+      type: 'string',
+      title: 'title',
+    },
+    {
       name: 'servicesItems',
       type: 'array',
       title: 'Services Items',

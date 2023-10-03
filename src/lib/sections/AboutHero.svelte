@@ -1,32 +1,6 @@
 <script>
-  import { createClient } from '@sanity/client'
-  import imageUrlBuilder from '@sanity/image-url'
-
-  let data, builder
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="AboutHero"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
-  _getProps().then((res) => (data = res.body.section[0]))
+  import imageUrl from '../js/imageUrlBuilder'
+  export let data
 </script>
 
 {#if data}
@@ -37,7 +11,7 @@
           <div class="about-hero__title-inner">
             <h1 class="about-hero__title">{data.topName}</h1>
             <div class="about-hero__title-img-wrapper">
-              <img src={urlFor(data.topImage)} alt="" class="about-hero__title-img" />
+              <img src={imageUrl(data.topImage)} alt="" class="about-hero__title-img" />
             </div>
           </div>
           <div class="about-hero__title-inner">
@@ -48,7 +22,7 @@
           </div>
         </div>
         <div class="about-hero__img-wrapper">
-          <img src={urlFor(data.bottomImage)} alt="" class="about-hero__img" />
+          <img src={imageUrl(data.bottomImage)} alt="" class="about-hero__img" />
         </div>
       </div>
     </div>

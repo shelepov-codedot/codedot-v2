@@ -1,34 +1,6 @@
 <script>
-  import { createClient } from '@sanity/client'
-  import imageUrlBuilder from '@sanity/image-url'
-
-  let data, builder
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="ProjectTextImage"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
-  _getProps()
-    .then((res) => (data = res.body.section[0]))
-    .then((res) => console.log(res))
+  import imageUrl from '../../js/imageUrlBuilder'
+  export let data
 </script>
 
 {#if data}
@@ -42,7 +14,7 @@
           </p>
         </div>
         <div class="project-text-image__img-wrapper">
-          <img src={urlFor(data.projectImage)} alt="" class="project-text-image__img" />
+          <img src={imageUrl(data.projectImage)} alt="" class="project-text-image__img" />
         </div>
       </div>
     </div>

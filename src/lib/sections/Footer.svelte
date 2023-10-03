@@ -1,34 +1,7 @@
 <script>
-  import { createClient } from '@sanity/client'
-  import imageUrlBuilder from '@sanity/image-url'
+  import imageUrl from '../js/imageUrlBuilder'
 
-  export let handleClick
-
-  let data, builder
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="Footer"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
-  _getProps().then((res) => (data = res.body.section[0]))
+  export let handleClick, data
 </script>
 
 {#if data}
@@ -39,7 +12,7 @@
           <div class="footer__socials-nav">
             {#each data.socailItems as socialItem}
               <a href={socialItem.link} class="footer__socials-nav-item">
-                <img src={urlFor(socialItem.socialIcon)} alt="social image" />
+                <img src={imageUrl(socialItem.socialIcon)} alt="social image" />
               </a>
             {/each}
           </div>
@@ -53,7 +26,7 @@
         <div class="footer__right-side">
           <div class="footer__right-side-backgorund">
             <!-- svelte-ignore a11y-img-redundant-alt -->
-            <img src={urlFor(data.imageAside)} alt="image" />
+            <img src={imageUrl(data.imageAside)} alt="image" />
           </div>
           <div class="footer__blur-box">
             <div class="footer__blur-box-text">

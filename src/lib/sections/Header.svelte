@@ -2,12 +2,9 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <script>
+  import imageUrl from '../js/imageUrlBuilder'
   import { onMount } from 'svelte'
-  import { createClient } from '@sanity/client'
-  import imageUrlBuilder from '@sanity/image-url'
-
-  let active, curWidth, data, builder
-  let body
+  let active, curWidth, body
 
   const openMenu = () => {
     active = !active
@@ -28,29 +25,7 @@
     })
   })
 
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="Header"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
-  _getProps().then((res) => (data = res.body.section[0]))
+  export let data
 </script>
 
 {#if data}
@@ -58,14 +33,14 @@
     <div class="header__wrapper">
       <a href="/">
         <div class="header__logo">
-          <img src={urlFor(data.logoHeader)} alt="logo img" />
+          <img src={imageUrl(data.logoHeader)} alt="logo img" />
         </div>
       </a>
       {#if curWidth >= 1280}
         <div class="header__content">
           <a target="_blank" href={data.shopifyItem.shopifyLink} class="header__shopify">
             <div class="header__shopify-logo">
-              <img src={urlFor(data.shopifyItem.shopifyIcon)} alt="shopify img" />
+              <img src={imageUrl(data.shopifyItem.shopifyIcon)} alt="shopify img" />
             </div>
             <div class="header__shopify-text">{data.shopifyItem.shopifyText}</div>
           </a>
@@ -114,7 +89,7 @@
         </span>
         <a target="_blank" href={data.shopifyItem.shopifyLink} class="header__shopify">
           <div class="header__shopify-logo">
-            <img src={urlFor(data.shopifyItem.shopifyIcon)} alt="shopify img" />
+            <img src={imageUrl(data.shopifyItem.shopifyIcon)} alt="shopify img" />
           </div>
           <div class="header__shopify-text">{data.shopifyItem.shopifyText}</div>
         </a>

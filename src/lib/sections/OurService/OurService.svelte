@@ -1,37 +1,12 @@
 <script>
-  import { createClient } from '@sanity/client'
-
-  let data
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    const query = `*[_type=="OurServices"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  _getProps().then((res) => (data = res.body.section[0]))
-
-  setTimeout(() => {
-    console.log(data)
-  }, 1090)
+  export let data
 </script>
 
 {#if data}
   <section class="our-services">
     <div class="container">
       <div class="our-services__wrapper">
-        <h1 class="our-services__title">{data.sectionTitle}</h1>
+        <h1 class="our-services__title">{data.Title}</h1>
         <div class="our-services__items">
           {#each data.servicesItems as servicesItem}
             <div class="our-services__item">

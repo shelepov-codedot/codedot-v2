@@ -1,36 +1,6 @@
 <script>
-  import { createClient } from '@sanity/client'
-  import imageUrlBuilder from '@sanity/image-url'
-
-  let data, builder
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="ProjectImages"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
-  _getProps()
-    .then((res) => (data = res.body.section[0]))
-    .then((res) => {
-      console.log(res)
-    })
+  import imageUrl from '../../js/imageUrlBuilder'
+  export let data
 </script>
 
 {#if data}
@@ -46,7 +16,7 @@
             {#each data.projectImagesItems as image}
               <div class="project-images__item">
                 <div class="project-images__img-wrapper">
-                  <img src={urlFor(image)} alt="" class="project-images__img" />
+                  <img src={imageUrl(image)} alt="" class="project-images__img" />
                 </div>
               </div>
             {/each}
@@ -69,7 +39,7 @@
               {#if index <= 2}
                 <div class="project-images__item">
                   <div class="project-images__img-wrapper">
-                    <img src={urlFor(image)} alt="" class="project-images__img" />
+                    <img src={imageUrl(image)} alt="" class="project-images__img" />
                   </div>
                 </div>
               {/if}
@@ -133,7 +103,7 @@
               {#if index <= 2}
                 <div class="project-images__item">
                   <div class="project-images__img-wrapper">
-                    <img src={urlFor(image)} alt="" class="project-images__img" />
+                    <img src={imageUrl(image)} alt="" class="project-images__img" />
                   </div>
                 </div>
               {/if}
@@ -197,7 +167,7 @@
               {#if index <= 2}
                 <div class="project-images__item">
                   <div class="project-images__img-wrapper">
-                    <img src={urlFor(image)} alt="" class="project-images__img" />
+                    <img src={imageUrl(image)} alt="" class="project-images__img" />
                   </div>
                 </div>
               {/if}
