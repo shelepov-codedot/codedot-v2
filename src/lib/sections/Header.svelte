@@ -63,7 +63,9 @@
                         {/each}
                       </div>
                       <div class="header__nav-dropdown-link">
-                        <p>All {navItem.navItemName.toLowerCase()}</p>
+                        <a href="/services" class="header__nav-link">
+                          All {navItem.navItemName.toLowerCase()}
+                        </a>
                         <span class="arrow" />
                       </div>
                     </div>
@@ -112,7 +114,9 @@
                       {/each}
                     </div>
                     <div class="header__nav-dropdown-link">
-                      <p>All {navItem.navItemName.toLowerCase()}</p>
+                      <a href="/services" class="header__nav-link"
+                        >All {navItem.navItemName.toLowerCase()}</a
+                      >
                       <span class="arrow" />
                     </div>
                   </div>
@@ -387,6 +391,11 @@
           justify-content: space-between;
         }
       }
+    }
+
+    &__nav-link {
+      color: black;
+      text-decoration: underline;
     }
 
     &__nav-dropdown-content {

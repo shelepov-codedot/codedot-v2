@@ -4,6 +4,7 @@
   import { register } from 'swiper/element/bundle'
 
   export let data
+
   let swiperEl
 
   register()
@@ -27,8 +28,8 @@
       },
     },
     navigation: {
-      nextEl: '.services__btn--next',
-      prevEl: '.services__btn--prev',
+      nextEl: `.next${data._id}`,
+      prevEl: `.prev${data._id}`,
     },
   }
 
@@ -51,10 +52,10 @@
         <div class="services__title-wrapper">
           <h2 class="services__title">Services</h2>
           <div class="services__btns">
-            <button class="services__btn services__btn--prev">
+            <button class="services__btn services__btn--prev prev{data._id}">
               <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
             </button>
-            <button class="services__btn services__btn--next">
+            <button class="services__btn services__btn--next next{data._id}">
               <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />
             </button>
           </div>
