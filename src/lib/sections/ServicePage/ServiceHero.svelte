@@ -1,32 +1,6 @@
 <script>
-  import { createClient } from '@sanity/client'
-  import imageUrlBuilder from '@sanity/image-url'
-
-  let data, builder
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    builder = imageUrlBuilder(client)
-    const query = `*[_type=="ServiceHero"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  function urlFor(source) {
-    return builder.image(source)
-  }
-
-  _getProps().then((res) => (data = res.body.section[0]))
+  import imageUrl from '../../js/imageUrlBuilder'
+  export let data
 </script>
 
 {#if data}
@@ -47,7 +21,7 @@
         </div>
         <div class="service-hero__inner">
           <div class="service-hero__img-wrapper">
-            <img src={urlFor(data.serviceImage)} alt="" class="service-hero__img" />
+            <img src={imageUrl(data.serviceImage)} alt="" class="service-hero__img" />
           </div>
           <div class="service-hero__text-wrapper">
             <p class="service-hero__text">

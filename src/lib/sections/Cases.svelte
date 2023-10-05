@@ -1,6 +1,39 @@
 <script>
+  import { onMount } from 'svelte'
   import imageUrl from '../js/imageUrlBuilder'
   export let data
+
+  const editHeight = (array) => {
+    const sizes = {
+      desktop: ['930px', '800px', '1030px', '700px'],
+      desktopSM: ['600px', '700px', '570px', '730px'],
+    }
+    if (window.innerWidth >= 1280) {
+      array.forEach((el, index) => {
+        el.style.height = sizes.desktop[index]
+      })
+    } else if (window.innerWidth >= 992 && window.innerWidth <= 1279) {
+      array.forEach((el, index) => {
+        el.style.height = sizes.desktopSM[index]
+      })
+    } else {
+      array.forEach((el) => {
+        el.style.height = '450px'
+      })
+    }
+  }
+
+  onMount(() => {
+    const casesItems = document.querySelectorAll('.cases__item')
+
+    if (casesItems.length <= 4) {
+      editHeight(casesItems)
+
+      window.addEventListener('resize', () => {
+        editHeight(casesItems)
+      })
+    }
+  })
 </script>
 
 {#if data}
@@ -127,7 +160,6 @@
 
       @include media-breakpoint-down(lg) {
         width: 100%;
-        flex-direction: column;
       }
 
       @include media-breakpoint-up(lg) {

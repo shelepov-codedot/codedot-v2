@@ -10,7 +10,7 @@ export async function load({ params, url }) {
 
   let dataExport = []
 
-  for (let i = 0; i < pageData.content.length; i++) {
+  for (let i = 0; i < pageData?.content.length; i++) {
     if (pageData.content[i]) {
       await sanityFetch(`*[_id=='${pageData.content[i]._ref}']`).then((data) => {
         dataExport.push(data[0])

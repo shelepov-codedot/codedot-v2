@@ -1,6 +1,7 @@
 <script>
   import * as Sections from '$lib/sections'
   export let data
+  console.log(data)
 </script>
 
 <svelte:head>

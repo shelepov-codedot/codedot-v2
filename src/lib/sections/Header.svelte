@@ -79,7 +79,6 @@
           </div>
         </div>
       {/if}
-
       <div class="header__mobile-btn-wrapper" on:click={openMenu}>
         <div class="header__mobile-btn" />
       </div>
@@ -108,15 +107,15 @@
                   <div class="header__nav-dropdown-content-wrapper">
                     <div class="header__nav-dropdown-content-list">
                       {#each navItem.navSubItems as navSubItem}
-                        <a href={navSubItem.navSubItemLink} class="header__nav-item"
-                          >{navSubItem.navSubItemName}</a
-                        >
+                        <a href={navSubItem.navSubItemLink} class="header__nav-item">
+                          {navSubItem.navSubItemName}
+                        </a>
                       {/each}
                     </div>
                     <div class="header__nav-dropdown-link">
-                      <a href="/services" class="header__nav-link"
-                        >All {navItem.navItemName.toLowerCase()}</a
-                      >
+                      <a href="/services" class="header__nav-link">
+                        All {navItem.navItemName.toLowerCase()}
+                      </a>
                       <span class="arrow" />
                     </div>
                   </div>

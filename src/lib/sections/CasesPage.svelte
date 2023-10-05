@@ -1,7 +1,6 @@
 <script>
   import { onMount } from 'svelte'
   import { register } from 'swiper/element/bundle'
-  import Offer from './ServicePage/Offer.svelte'
 
   register()
 
