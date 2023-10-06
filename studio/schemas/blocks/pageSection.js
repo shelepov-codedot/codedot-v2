@@ -7,6 +7,7 @@ export default {
     {type: 'hero'},
     {type: 'Cases'},
     {type: 'Counters'},
+    {type: 'CasesPage'},
     {type: 'TextHero'},
     {type: 'Services'},
     {type: 'Technologies'},

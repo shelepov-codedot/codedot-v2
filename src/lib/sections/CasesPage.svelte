@@ -1,10 +1,28 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, beforeUpdate } from 'svelte'
   import { register } from 'swiper/element/bundle'
+  import imageUrl from '../js/imageUrlBuilder'
+  export let data
+
+  let categoryList = []
+  const categoryCounts = []
+
+  data.secondData.map((el) => {
+    categoryList.push(el.category)
+  })
+
+  data.secondData.forEach((el) => {
+    const categoryItem = el.category
+    console.log(categoryItem)
+  })
+
+  console.log(categoryCounts)
+
+  let setCategory = new Set(categoryList)
 
   register()
 
-  onMount(() => {
+  onMount(async () => {
     const swiperElTags = document.querySelector('.casespage__filtertag-wrapper')
 
     const swiperParams = {
@@ -29,205 +47,114 @@
       },
     }
 
-    Object.assign(swiperElTags, swiperParams)
+    if (data) {
+      const initializeSwiper = () => {
+        Object.assign(swiperElTags, swiperParams)
+        swiperElTags.initialize()
+      }
 
-    swiperElTags.initialize()
+      requestAnimationFrame(initializeSwiper)
+    }
   })
+
+  $: activeTags = []
+  $: arrayTest = []
+
+  beforeUpdate(() => {
+    if (data && activeTags?.length > 0) {
+      arrayTest = data.secondData.filter((el) => activeTags.includes(el.category))
+    } else {
+      arrayTest = data.secondData
+    }
+  })
+
+  $: clearActive = () => (activeTags = [])
+
+  $: handleTogleActive = (tag) => {
+    activeTags = activeTags.includes(tag)
+      ? activeTags.filter((el) => el !== tag)
+      : [...activeTags, tag]
+  }
 </script>
 
-<section class="casespage">
-  <div class="container">
-    <div class="casespage__wrapper">
-      <h2 class="casespage__title">OUR CASES</h2>
-      <div class="reviews__swiper-container">
-        <swiper-container class="casespage__filtertag-wrapper" init="false">
-          <swiper-slide class="casespage__filtertag casespage__filtertag--active">
-            All cases (27)
-          </swiper-slide>
-          <swiper-slide class="casespage__filtertag">MOBILE APPS (3)</swiper-slide>
-          <swiper-slide class="casespage__filtertag">ECOMMERCE (10)</swiper-slide>
-          <swiper-slide class="casespage__filtertag">Web dev (10)</swiper-slide>
-          <swiper-slide class="casespage__filtertag">Game dev (4)</swiper-slide>
-        </swiper-container>
-      </div>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 
-      <div class="casespage__items-wrapper">
-        <div class="casespage__items casespage__items--left">
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases1.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">TTSWTRS</p>
-                <p class="casespage__tag">Ecommerce Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
+{#if data}
+  <section class="casespage">
+    <div class="container">
+      <div class="casespage__wrapper">
+        <h2 class="casespage__title">{data.title}</h2>
+        <div class="reviews__swiper-container">
+          <swiper-container class="casespage__filtertag-wrapper" init="false">
+            <swiper-slide
+              on:click={clearActive}
+              type="button"
+              class={`casespage__filtertag ${
+                activeTags.length === 0 ? 'casespage__filtertag--active' : ''
+              }`}
+            >
+              All cases ({data.secondData.length + 1})
+            </swiper-slide>
+
+            {#each [...setCategory] as category}
+              <swiper-slide
+                type="button"
+                on:click={() => handleTogleActive(category)}
+                class={`casespage__filtertag ${
+                  activeTags.includes(category) ? 'casespage__filtertag--active' : ''
+                }`}
               >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases3.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">BRU beer</p>
-                <p class="casespage__tag">Ecommerce Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases5.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">Dunn’s</p>
-                <p class="casespage__tag">Web Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases1.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">TTSWTRS</p>
-                <p class="casespage__tag">Ecommerce Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases3.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">BRU beer</p>
-                <p class="casespage__tag">Ecommerce Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases5.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">Dunn’s</p>
-                <p class="casespage__tag">Web Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
+                {category}
+              </swiper-slide>
+            {/each}
+          </swiper-container>
         </div>
-        <div class="casespage__items casespage__items--right">
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases2.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">Spenco</p>
-                <p class="casespage__tag">Web Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
+        <div class="casespage__items-wrapper">
+          <div class="casespage__items casespage__items--left">
+            {#each arrayTest as item, idx}
+              {#if idx % 2 == 0}
+                <div class="casespage__item">
+                  <div class="casespage__img-wrapper">
+                    <img src={imageUrl(item.image)} alt="casespage" class="casespage__img" />
+                  </div>
+                  <div class="casespage__text-wrapper">
+                    <div class="casespage__text-inner">
+                      <p class="casespage__name">{item.name}</p>
+                      <p class="casespage__tag">{item.category}</p>
+                    </div>
+                    <a href={item.slug?.current}>
+                      <img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" />
+                    </a>
+                  </div>
+                </div>
+              {/if}
+            {/each}
           </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases4.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">Atomic</p>
-                <p class="casespage__tag">Web Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases6.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">YB</p>
-                <p class="casespage__tag">Mobile Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases2.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">Spenco</p>
-                <p class="casespage__tag">Web Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases4.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">Atomic</p>
-                <p class="casespage__tag">Web Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
-          </div>
-          <div class="casespage__item">
-            <div class="casespage__img-wrapper">
-              <img src="../images/cases6.png" alt="casespage" class="casespage__img" />
-            </div>
-            <div class="casespage__text-wrapper">
-              <div class="casespage__text-inner">
-                <p class="casespage__name">YB</p>
-                <p class="casespage__tag">Mobile Development</p>
-              </div>
-              <a href="#"
-                ><img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" /></a
-              >
-            </div>
+          <div class="casespage__items casespage__items--right">
+            {#each arrayTest as item, idx}
+              {#if idx % 2 != 0}
+                <div class="casespage__item">
+                  <div class="casespage__img-wrapper">
+                    <img src={imageUrl(item.image)} alt="casespage" class="casespage__img" />
+                  </div>
+                  <div class="casespage__text-wrapper">
+                    <div class="casespage__text-inner">
+                      <p class="casespage__name">{item.name}</p>
+                      <p class="casespage__tag">{item.category}</p>
+                    </div>
+                    <a href={item.slug?.current}>
+                      <img src="../icons/arrow-btn.svg" alt="" class="casespage__item-arrow" />
+                    </a>
+                  </div>
+                </div>
+              {/if}
+            {/each}
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{/if}
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
@@ -389,7 +316,7 @@
 
       .casespage__item:nth-of-type(4n + 1) {
         @include media-breakpoint-up(lg) {
-          height: 570px;
+          height: 635px;
         }
 
         @include media-breakpoint-between(lg, xl) {

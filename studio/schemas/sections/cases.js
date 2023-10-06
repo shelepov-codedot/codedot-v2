@@ -38,6 +38,15 @@ export default {
               type: 'image',
               title: 'Case Image',
             },
+            {
+              name: 'slug',
+              title: 'Slug',
+              type: 'slug',
+              options: {
+                source: 'title',
+                maxLength: 96,
+              },
+            },
           ],
         },
       ],

@@ -10,6 +10,7 @@ import careers from './sections/careers'
 
 //sections
 import cases from './sections/cases'
+import casesPage from './sections/casesPage'
 import code from './sections/code'
 import counters from './sections/counters'
 import digital from './sections/digital'
@@ -47,6 +48,7 @@ export const schemaTypes = [
   //sections
   hero,
   cases,
+  casesPage,
   counters,
   text,
   services,
