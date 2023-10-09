@@ -1,66 +1,51 @@
 <script>
   import { onMount } from 'svelte'
-  import { createClient } from '@sanity/client'
+  export let data
 
-  let fileInput, statusError, data
+  let fileInput, statusError
   let errorText,
     textName = ''
 
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    const query = `*[_type=="JobText"]`
-    const section = await client.fetch(query)
-
-    data = section[0]
-  }
-
   onMount(() => {
-    _getProps().then(() => {
-      if (fileInput && data) {
-        fileInput.addEventListener('change', () => {
-          const selectedFiles = fileInput.files[0]
-          const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
-          if (selectedFiles) {
-            if (
-              selectedFilesFormat != 'pdf' &&
-              selectedFilesFormat != 'docx' &&
-              selectedFilesFormat != 'doc'
-            ) {
+    if (fileInput && data) {
+      fileInput.addEventListener('change', () => {
+        const selectedFiles = fileInput.files[0]
+        const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
+        if (selectedFiles) {
+          if (
+            selectedFilesFormat != 'pdf' &&
+            selectedFilesFormat != 'docx' &&
+            selectedFilesFormat != 'doc'
+          ) {
+            textName = ''
+            errorText = 'Data format not supported'
+            fileInput.value = null
+            fileInput.disabled = !fileInput.disabled
+            statusError = !statusError
+
+            setTimeout(() => {
+              statusError = !statusError
+              fileInput.disabled = !fileInput.disabled
+            }, 4000)
+          } else {
+            if (selectedFiles.size >= 5 * 1024 * 1024) {
               textName = ''
-              errorText = 'Data format not supported'
               fileInput.value = null
               fileInput.disabled = !fileInput.disabled
               statusError = !statusError
+              errorText = 'File size is larger than allowed'
 
               setTimeout(() => {
                 statusError = !statusError
                 fileInput.disabled = !fileInput.disabled
               }, 4000)
             } else {
-              if (selectedFiles.size >= 5 * 1024 * 1024) {
-                textName = ''
-                fileInput.value = null
-                fileInput.disabled = !fileInput.disabled
-                statusError = !statusError
-                errorText = 'File size is larger than allowed'
-
-                setTimeout(() => {
-                  statusError = !statusError
-                  fileInput.disabled = !fileInput.disabled
-                }, 4000)
-              } else {
-                textName = fileInput.files[0].name
-              }
+              textName = fileInput.files[0].name
             }
           }
-        })
-      }
-    })
+        }
+      })
+    }
   })
 </script>
 
@@ -141,7 +126,8 @@
       padding: 100px 0;
     }
     @include media-breakpoint-up(lg) {
-      padding: 207px 0;
+      padding-top: 207px;
+      padding-bottom: 100px;
     }
     &__wrapper {
       position: relative;

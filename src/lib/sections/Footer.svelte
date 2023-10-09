@@ -1,7 +1,7 @@
 <script>
   import imageUrl from '../js/imageUrlBuilder'
 
-  export let handleClick, data
+  export let openModal, data
 </script>
 
 {#if data}
@@ -17,7 +17,7 @@
             {/each}
           </div>
           <div class="footer__text">{data.textFooter}</div>
-          <button class="footer__btn" on:click={handleClick}>Contact us</button>
+          <button class="footer__btn" on:click={openModal}>Contact us</button>
           <div class="footer__copyright">
             <span>© 2023 Codedot Agency.</span>
             <span>All Rights Reserved — <a href="/" class="link">Privacy policy</a></span>

@@ -67,7 +67,7 @@
       }
 
       @include media-breakpoint-up(md) {
-        padding-top: 50px;
+        padding-top: 80px;
       }
     }
     &__img {
@@ -94,6 +94,10 @@
       left: 0;
       width: 100%;
       height: 100%;
+
+      @include media-breakpoint-up(md) {
+        padding-top: 15px;
+      }
     }
 
     &__text {

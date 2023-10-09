@@ -1,18 +1,10 @@
 <script>
-  export let activeModal, closeModal
+  export let closeModal, activeModal
 
   let active, statusError
   let curValue = 'Select your industry'
   let errorText,
     textName = ''
-
-  activeModal = false
-
-  // if (activeModal === true) {
-  //   document.querySelector('body').style.overflow = 'hidden'
-  // } else {
-  //   document.querySelector('body').style.overflow = 'hidden'
-  // }
 
   const selectFile = (e) => {
     const selectedFiles = e.target.files[0]
@@ -67,7 +59,7 @@
 {#if activeModal}
   <section class="modal">
     <form action="#" class="modal__wrapper">
-      <span class="modal__cross" on:click={closeModal} />
+      <span class="modal__cross" on:click={closeModal(activeModal)} />
       <h2 class="modal__title">Let’s discuss your project</h2>
       <div class="modal__items">
         <div class="modal__input-wrapper">

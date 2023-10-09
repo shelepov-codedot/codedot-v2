@@ -54,7 +54,7 @@
                       <p class="cases__name">{caseItem.name}</p>
                       <p class="cases__tag">{caseItem.category}</p>
                     </div>
-                    <a href="#"
+                    <a href={caseItem.slug?.current}
                       ><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a
                     >
                   </div>
@@ -74,7 +74,7 @@
                       <p class="cases__name">{caseItem.name}</p>
                       <p class="cases__tag">{caseItem.category}</p>
                     </div>
-                    <a href="#"
+                    <a href={caseItem.slug?.current}
                       ><img src="../icons/arrow-btn.svg" alt="" class="cases__item-arrow" /></a
                     >
                   </div>
@@ -83,7 +83,7 @@
             {/each}
           </div>
         </div>
-        <a href="#" class="btn btn--fullwidth btn--cases">
+        <a href="/cases" class="btn btn--fullwidth btn--cases">
           View all cases
           <span class="btn__icon">
             <img

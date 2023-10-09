@@ -22,6 +22,9 @@
   @import '../styles/base/mixins.scss';
 
   .ourmission {
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 30px;
+    }
     &__wrapper {
       display: flex;
       justify-content: center;
@@ -35,7 +38,7 @@
       }
 
       @include media-breakpoint-up(lg) {
-        padding: 252px 0;
+        padding-bottom: 252px;
       }
     }
     &__text {

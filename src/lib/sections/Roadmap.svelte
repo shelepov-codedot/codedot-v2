@@ -49,15 +49,18 @@
     overflow: hidden;
 
     @include media-breakpoint-down(md) {
-      padding: 90px 0;
+      padding-top: 90px;
+      padding-bottom: 90px;
     }
 
     @include media-breakpoint-between(md, xl) {
-      padding: 170px 0;
+      padding-top: 170px;
+      padding-bottom: 125px;
     }
 
     @include media-breakpoint-up(xl) {
-      padding: 250px 0;
+      padding-top: 250px;
+      padding-bottom: 225px;
     }
 
     &__wrapper {
@@ -85,19 +88,6 @@
     &__item {
       display: flex;
       flex-direction: column;
-
-      &:not(&:last-of-type) {
-        @include media-breakpoint-between(lg, xl) {
-          margin-bottom: 145px;
-        }
-        @include media-breakpoint-between(xl, xxl) {
-          margin-bottom: 305px;
-        }
-
-        @include media-breakpoint-up(xxl) {
-          margin-bottom: 500px;
-        }
-      }
 
       &:nth-child(1) .roadmap__text {
         @include media-breakpoint-between(lg, xl) {
@@ -181,6 +171,7 @@
 
       &:nth-child(11) {
         @include media-breakpoint-up(lg) {
+          margin-bottom: 0 !important;
           align-self: flex-end;
         }
 
@@ -216,6 +207,19 @@
 
         @include media-breakpoint-up(xxl) {
           width: 440px;
+        }
+      }
+
+      &:not(:last-child) {
+        @include media-breakpoint-between(lg, xl) {
+          margin-bottom: 145px;
+        }
+        @include media-breakpoint-between(xl, xxl) {
+          margin-bottom: 305px;
+        }
+
+        @include media-breakpoint-up(xxl) {
+          margin-bottom: 500px;
         }
       }
     }

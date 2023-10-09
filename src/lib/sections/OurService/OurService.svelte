@@ -38,8 +38,8 @@
       padding-bottom: 108px;
     }
     @include media-breakpoint-up(lg) {
-      padding-top: 197px;
-      padding-bottom: 197px;
+      padding-top: 76px;
+      padding-bottom: 279px;
     }
 
     &__title {

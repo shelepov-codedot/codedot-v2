@@ -25,7 +25,7 @@
     })
   })
 
-  export let data
+  export let data, openModal, activeModal
 </script>
 
 {#if data}
@@ -74,7 +74,7 @@
               {/if}
             {/each}
           </div>
-          <div class="header__btn">
+          <div class="header__btn" on:click={openModal(activeModal)}>
             {data.button.buttonText} <span class="header__btn-icon" />
           </div>
         </div>
@@ -124,7 +124,7 @@
             {/if}
           {/each}
         </div>
-        <div class="header__btn">
+        <div class="header__btn" on:click={openModal(activeModal)}>
           {data.button.buttonText} <span class="header__btn-icon" />
         </div>
       </div>

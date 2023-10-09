@@ -50,7 +50,7 @@
     <div class="container">
       <div class="services__wrapper">
         <div class="services__title-wrapper">
-          <h2 class="services__title">Services</h2>
+          <h2 class="services__title">{data.title}</h2>
           <div class="services__btns">
             <button class="services__btn services__btn--prev prev{data._id}">
               <img src="../icons/arrow-btn.svg" alt="" class="services__btn-icon" />

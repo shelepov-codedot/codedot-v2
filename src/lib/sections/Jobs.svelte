@@ -48,8 +48,8 @@
     }
 
     @include media-breakpoint-up(xl) {
-      padding-top: 236px;
-      padding-bottom: 236px;
+      padding-top: 266px;
+      padding-bottom: 253px;
     }
     &__title {
       font-weight: 600;

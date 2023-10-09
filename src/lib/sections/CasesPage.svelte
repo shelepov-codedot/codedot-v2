@@ -4,21 +4,24 @@
   import imageUrl from '../js/imageUrlBuilder'
   export let data
 
-  let categoryList = []
-  const categoryCounts = []
+  let categoryCounts = []
 
-  data.secondData.map((el) => {
-    categoryList.push(el.category)
-  })
+  data.secondData.forEach((item) => {
+    const category = item.category
 
-  data.secondData.forEach((el) => {
-    const categoryItem = el.category
-    console.log(categoryItem)
+    const existingCategory = categoryCounts.find((c) => c.category === category)
+
+    if (existingCategory) {
+      existingCategory.count += 1
+    } else {
+      categoryCounts.push({
+        category: category,
+        count: 1,
+      })
+    }
   })
 
   console.log(categoryCounts)
-
-  let setCategory = new Set(categoryList)
 
   register()
 
@@ -96,15 +99,15 @@
               All cases ({data.secondData.length + 1})
             </swiper-slide>
 
-            {#each [...setCategory] as category}
+            {#each categoryCounts as categoryInfo}
               <swiper-slide
                 type="button"
-                on:click={() => handleTogleActive(category)}
+                on:click={() => handleTogleActive(categoryInfo.category)}
                 class={`casespage__filtertag ${
-                  activeTags.includes(category) ? 'casespage__filtertag--active' : ''
+                  activeTags.includes(categoryInfo.category) ? 'casespage__filtertag--active' : ''
                 }`}
               >
-                {category}
+                {categoryInfo.category} ({categoryInfo.count})
               </swiper-slide>
             {/each}
           </swiper-container>
@@ -160,6 +163,8 @@
   @import '../styles/base/mixins.scss';
 
   .casespage {
+    padding-top: 20px;
+    padding-bottom: 115px;
     margin-bottom: 40px;
     &__wrapper {
       display: flex;

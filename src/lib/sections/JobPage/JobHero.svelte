@@ -48,7 +48,8 @@
     }
 
     @include media-breakpoint-up(lg) {
-      padding-top: 205px;
+      padding-top: 87px;
+      padding-bottom: 169px;
     }
 
     &__exp {

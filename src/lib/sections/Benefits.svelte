@@ -35,6 +35,7 @@
 
     @include media-breakpoint-up(lg) {
       padding-top: 220px;
+      padding-bottom: 106px;
     }
     &__title {
       font-weight: 600;

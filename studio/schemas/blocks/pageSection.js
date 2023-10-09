@@ -9,6 +9,7 @@ export default {
     {type: 'Counters'},
     {type: 'CasesPage'},
     {type: 'TextHero'},
+    {type: 'Dignity'},
     {type: 'Services'},
     {type: 'Technologies'},
     {type: 'Review'},

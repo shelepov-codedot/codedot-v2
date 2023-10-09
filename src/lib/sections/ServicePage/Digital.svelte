@@ -1,6 +1,6 @@
 <script>
   import imageUrl from '../../js/imageUrlBuilder'
-  export let data
+  export let data, openModal
 </script>
 
 {#if data}
@@ -12,9 +12,9 @@
       <div class="container">
         <div class="digital__text-wrapper">
           <h2 class="digital__text">{data.digitalText}</h2>
-          <a href="#" class="digital__link">
+          <btn class="digital__link" on:click={openModal}>
             <img src="../icons/arrow-btn.svg" alt="#" class="digital__link-icon" />
-          </a>
+          </btn>
         </div>
       </div>
     </div>
@@ -116,6 +116,10 @@
       @include media-breakpoint-up(xxl) {
         font-size: 100px;
       }
+    }
+
+    &__link {
+      cursor: pointer;
     }
 
     &__link-icon {

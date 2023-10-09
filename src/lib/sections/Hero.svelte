@@ -1,6 +1,6 @@
 <script>
   import imageUrl from '../js/imageUrlBuilder'
-  export let handleClick, data
+  export let openModal, data
 </script>
 
 {#if data}
@@ -50,7 +50,7 @@
           </div>
           <div class="hero__discuss-inner">
             <p class="hero__discuss-text">Creative Design and <br />Development Agency.</p>
-            <button class="btn" on:click={handleClick}>
+            <button class="btn" on:click={openModal}>
               Discuss the project
               <span class="btn__icon">
                 <img src="../icons/arrow-btn.svg" alt="" />

@@ -1,26 +1,5 @@
 <script>
-  import { createClient } from '@sanity/client'
-
-  let data
-
-  export async function _getProps() {
-    const client = createClient({
-      projectId: 'c6ki8epl',
-      dataset: 'production',
-      useCdn: true,
-    })
-
-    const query = `*[_type=="Dignity"]`
-    const section = await client.fetch(query)
-
-    return {
-      body: {
-        section,
-      },
-    }
-  }
-
-  _getProps().then((res) => (data = res.body.section[0]))
+  export let data
 </script>
 
 {#if data}
@@ -43,30 +22,19 @@
         </svg>
       </div>
       <div class="dignity__text-wrapper">
-        <div class="dignity__item">
-          <p class="dignity__name">{data.dignityItems[0].Name}</p>
-          <p class="dignity__text">
-            {data.dignityItems[0].Text}
-          </p>
-        </div>
-        <div class="dignity__item-img-wrapper">
-          <img src="../images/dignity.svg" alt="" class="dignity__item-img" />
-        </div>
-        <div class="dignity__item">
-          <p class="dignity__name">{data.dignityItems[1].Name}</p>
-          <p class="dignity__text">
-            {data.dignityItems[1].Text}
-          </p>
-        </div>
-        <div class="dignity__item-img-wrapper">
-          <img src="../images/dignity2.svg" alt="" class="dignity__item-img" />
-        </div>
-        <div class="dignity__item">
-          <p class="dignity__name">{data.dignityItems[2].Name}</p>
-          <p class="dignity__text">
-            {data.dignityItems[2].Text}
-          </p>
-        </div>
+        {#each data.dignityItems as item, idx}
+          <div class="dignity__item">
+            <p class="dignity__name">{item.Name}</p>
+            <p class="dignity__text">
+              {item.Text}
+            </p>
+          </div>
+          {#if idx < 2}
+            <div class="dignity__item-img-wrapper">
+              <img src="../images/dignity{idx + 1}.svg" alt="" class="dignity__item-img" />
+            </div>
+          {/if}
+        {/each}
       </div>
     </div>
   </section>

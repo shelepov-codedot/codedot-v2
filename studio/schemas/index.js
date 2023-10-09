@@ -50,6 +50,7 @@ export const schemaTypes = [
   cases,
   casesPage,
   counters,
+  dignity,
   text,
   services,
   techologies,
