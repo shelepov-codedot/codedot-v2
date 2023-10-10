@@ -4,13 +4,23 @@
 <script>
   import imageUrl from '../js/imageUrlBuilder'
   import { onMount } from 'svelte'
-  let active, curWidth, body
+  let active, curWidth, body, dropdown
 
   const openMenu = () => {
     active = !active
     body = document.querySelector('body')
 
     active ? (body.style.overflow = 'hidden') : (body.style.overflow = 'auto')
+  }
+
+  const showDropdown = (element) => {
+    element.style.visibility = 'visible'
+    element.style.top = '70px'
+
+    element.addEventListener('mouseleave', () => {
+      element.style.top = '-500px'
+      element.style.visibility = 'hidden'
+    })
   }
 
   onMount(() => {
@@ -30,6 +40,28 @@
 
 {#if data}
   <header class="header">
+    {#each data.navItems as navItem}
+      {#if navItem.navSubItems}
+        <div class="header__nav-dropdown-content" bind:this={dropdown}>
+          <div class="header__nav-dropdown-content-wrapper">
+            <div class="header__nav-dropdown-content-list">
+              {#each navItem.navSubItems as navSubItem}
+                <a href={navSubItem.navSubItemLink} class="header__nav-item">
+                  {navSubItem.navSubItemName}
+                </a>
+              {/each}
+            </div>
+            <div class="header__nav-dropdown-link">
+              <a href="/services" class="header__nav-link">
+                All {navItem.navItemName.toLowerCase()}
+              </a>
+              <span class="arrow" />
+            </div>
+          </div>
+          <div class="header__nav-dropdown-content-blur" />
+        </div>
+      {/if}
+    {/each}
     <div class="header__wrapper">
       <a href="/">
         <div class="header__logo">
@@ -50,27 +82,14 @@
                 <a href={navItem.navItemLink} class="header__nav-item">{navItem.navItemName}</a>
               {/if}
               {#if navItem.navSubItems}
-                <div class="header__nav-item dropdown">
+                <a
+                  href="/services"
+                  class="header__nav-item dropdown"
+                  on:mouseenter={showDropdown(dropdown)}
+                >
                   <p>{navItem.navItemName}</p>
                   <div class="header__nav-item-icon" />
-                  <div class="header__nav-dropdown-content">
-                    <div class="header__nav-dropdown-content-wrapper">
-                      <div class="header__nav-dropdown-content-list">
-                        {#each navItem.navSubItems as navSubItem}
-                          <a href={navSubItem.navSubItemLink} class="header__nav-item"
-                            >{navSubItem.navSubItemName}</a
-                          >
-                        {/each}
-                      </div>
-                      <div class="header__nav-dropdown-link">
-                        <a href="/services" class="header__nav-link">
-                          All {navItem.navItemName.toLowerCase()}
-                        </a>
-                        <span class="arrow" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </a>
               {/if}
             {/each}
           </div>
@@ -100,27 +119,10 @@
               <a href={navItem.navItemLink} class="header__nav-item">{navItem.navItemName}</a>
             {/if}
             {#if navItem.navSubItems}
-              <div class="header__nav-item dropdown">
+              <a href="/services" class="header__nav-item dropdown">
                 <p>{navItem.navItemName}</p>
                 <div class="header__nav-item-icon" />
-                <div class="header__nav-dropdown-content">
-                  <div class="header__nav-dropdown-content-wrapper">
-                    <div class="header__nav-dropdown-content-list">
-                      {#each navItem.navSubItems as navSubItem}
-                        <a href={navSubItem.navSubItemLink} class="header__nav-item">
-                          {navSubItem.navSubItemName}
-                        </a>
-                      {/each}
-                    </div>
-                    <div class="header__nav-dropdown-link">
-                      <a href="/services" class="header__nav-link">
-                        All {navItem.navItemName.toLowerCase()}
-                      </a>
-                      <span class="arrow" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </a>
             {/if}
           {/each}
         </div>
@@ -403,14 +405,14 @@
       }
       @include media-breakpoint-up(xl) {
         opacity: 1;
-        visibility: visible;
-        padding-top: 107%;
-        transform: translateY(-50%);
+        visibility: hidden;
+        pointer-events: all;
+        padding-top: 45px;
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -500px;
+        right: 0;
         width: auto;
-        z-index: 5;
+        z-index: 15;
         transition: 0.5s;
       }
     }
@@ -419,16 +421,20 @@
       @include media-breakpoint-down(xl) {
         background-color: white;
       }
+
       @include media-breakpoint-up(xl) {
         border-radius: 40px;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        background: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(25px);
+        border: 1px solid #ffffff80;
+        background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+          linear-gradient(0deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3));
         padding: 20px;
+        backdrop-filter: blur(10px);
       }
     }
 
     &__nav-dropdown-content-list {
+      position: relative;
+      z-index: 20;
       @include media-breakpoint-down(xl) {
         display: flex;
         flex-direction: column;
@@ -450,6 +456,8 @@
       display: flex;
       align-items: center;
       width: fit-content;
+      position: relative;
+      z-index: 20;
 
       p {
         text-decoration: underline;
