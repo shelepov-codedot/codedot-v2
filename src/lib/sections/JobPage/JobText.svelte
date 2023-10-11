@@ -123,7 +123,8 @@
 
   .job-text {
     @include media-breakpoint-down(lg) {
-      padding: 100px 0;
+      padding-top: 140px;
+      padding-bottom: 100px;
     }
     @include media-breakpoint-up(lg) {
       padding-top: 207px;
@@ -249,7 +250,10 @@
       border-radius: 40px;
       height: fit-content;
       @include media-breakpoint-down(md) {
-        padding: 20px;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 35px;
       }
 
       @include media-breakpoint-up(md) {
@@ -381,6 +385,7 @@
       @include media-breakpoint-down(md) {
         padding-left: 20px;
         padding-right: 20px;
+        height: 156px;
       }
 
       @include media-breakpoint-down(lg) {

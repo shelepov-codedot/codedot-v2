@@ -26,6 +26,10 @@
   .careers {
     position: relative;
 
+    @include media-breakpoint-down(lg) {
+      margin-top: 9px;
+    }
+
     &__title {
       font-weight: 600;
       text-transform: uppercase;
@@ -55,7 +59,7 @@
       position: relative;
 
       @include media-breakpoint-down(sm) {
-        padding: 81px 0 130px 0;
+        padding: 81px 0 125px 0;
       }
 
       @include media-breakpoint-between(sm, md) {

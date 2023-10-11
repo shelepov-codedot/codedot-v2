@@ -33,7 +33,7 @@
 
       @include media-breakpoint-up(lg) {
         padding-top: 250px;
-        padding-bottom: 250px;
+        padding-bottom: 123px;
       }
     }
 

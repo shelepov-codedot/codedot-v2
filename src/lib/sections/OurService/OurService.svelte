@@ -34,8 +34,8 @@
 
   .our-services {
     @include media-breakpoint-down(lg) {
-      padding-top: 108px;
-      padding-bottom: 108px;
+      padding-top: 10px;
+      padding-bottom: 187px;
     }
     @include media-breakpoint-up(lg) {
       padding-top: 76px;

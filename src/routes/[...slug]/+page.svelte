@@ -18,7 +18,7 @@
 </svelte:head>
 
 {#if data}
-  <svelte:component this={Sections.Modal} {closeModal} {activeModal} />
+  <svelte:component this={Sections.Modal} {closeModal} {activeModal} {data} />
 
   {#each data.content as section}
     {#if section.sectionTitle in Sections}

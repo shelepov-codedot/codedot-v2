@@ -44,7 +44,15 @@
   @import '../styles/base/mixins.scss';
 
   .footer {
-    padding: 112px 0;
+    @include media-breakpoint-down(lg) {
+      padding-top: 100px;
+      padding-bottom: 40px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 112px;
+      padding-bottom: 112px;
+    }
 
     &__wrapper {
       display: grid;

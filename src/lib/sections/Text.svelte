@@ -52,6 +52,9 @@
   }
 
   .text {
+    @include media-breakpoint-down(lg) {
+      padding-top: 40px;
+    }
     @include media-breakpoint-up(lg) {
       padding-top: 40px;
       padding-bottom: 30px;
@@ -84,7 +87,7 @@
 
     &__svg {
       @include media-breakpoint-down(sm) {
-        padding: 290px 0 370px 0;
+        padding: 251px 0 366px 0;
       }
 
       @include media-breakpoint-between(sm, md) {

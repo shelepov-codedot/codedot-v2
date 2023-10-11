@@ -43,6 +43,10 @@
 <style lang="scss">
   @import '../styles/base/mixins.scss';
   .dignity {
+    @include media-breakpoint-down(lg) {
+      margin-top: 75px;
+      margin-bottom: 165px;
+    }
     @include media-breakpoint-up(lg) {
       margin-top: 80px;
       margin-bottom: 385px;

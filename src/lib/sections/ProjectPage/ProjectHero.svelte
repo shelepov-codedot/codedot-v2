@@ -80,7 +80,7 @@
       }
 
       @include media-breakpoint-up(lg) {
-        height: 100vh;
+        height: 1080px;
       }
     }
 
@@ -108,7 +108,7 @@
 
       @include media-breakpoint-up(md) {
         padding-top: 60px;
-        padding-bottom: 75px;
+        padding-bottom: 60px;
         border-radius: 40px 40px 0px 0px;
       }
     }

@@ -189,8 +189,8 @@
     }
 
     @include media-breakpoint-up(lg) {
-      padding-top: 220px;
-      padding-bottom: 220px;
+      padding-top: 104px;
+      padding-bottom: 248px;
     }
     &__wrapper {
       display: flex;

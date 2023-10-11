@@ -43,8 +43,8 @@
 
   .jobs {
     @include media-breakpoint-down(xl) {
-      padding-top: 90px;
-      padding-bottom: 90px;
+      padding-top: 128px;
+      padding-bottom: 133px;
     }
 
     @include media-breakpoint-up(xl) {

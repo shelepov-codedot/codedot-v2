@@ -34,7 +34,7 @@
 
   .about-hero {
     @include media-breakpoint-down(lg) {
-      padding-top: 109px;
+      padding-top: 9px;
     }
 
     @include media-breakpoint-up(lg) {
@@ -93,7 +93,7 @@
       }
 
       @include media-breakpoint-down(lg) {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
 
       @include media-breakpoint-between(lg, xl) {

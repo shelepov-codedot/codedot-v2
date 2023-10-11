@@ -103,7 +103,8 @@
 
   .cases {
     @include media-breakpoint-down(lg) {
-      margin-top: 89px;
+      margin-top: 190px;
+      margin-bottom: 218px;
     }
 
     @include media-breakpoint-up(lg) {

@@ -3,7 +3,8 @@ import sanityFetch from '$lib/server/sanityFetch'
 export async function load({ params }) {
   const { slug } = params
   let dataExport = [],
-    secondData = []
+    secondData = [],
+    industries = []
 
   const query = `*[slug.current=="/${slug}"]`
   const response = await sanityFetch(query)
@@ -38,16 +39,26 @@ export async function load({ params }) {
     }
   }
 
+  let industriesQuery = `*[_type == "OurServices"] {
+    servicesItems[_type=="serviceItem"] {
+       serviceName,
+       _key,
+     }
+   }`
+
+  let industriesResponse = await sanityFetch(industriesQuery)
+
+  industries = industriesResponse[0].servicesItems
+
   secondData.length > 0
-    ? (pageData = { ...pageData, content: [...dataExport], secondData })
-    : (pageData = { ...pageData, content: [...dataExport] })
+    ? (pageData = { ...pageData, content: [...dataExport], secondData, industries })
+    : (pageData = { ...pageData, content: [...dataExport], industries })
+
   const casesPage = pageData?.content.find((item) => item._type === 'CasesPage')
 
-  if (casesPage) {
-    casesPage.secondData = secondData
-  }
+  casesPage ? (casesPage.secondData = secondData) : secondData
 
-  pageData = { ...pageData, content: [...dataExport] }
+  pageData = { ...pageData, content: [...dataExport], industries }
 
   return pageData
 }

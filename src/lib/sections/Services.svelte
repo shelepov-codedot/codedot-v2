@@ -88,7 +88,8 @@
 
   .services {
     @include media-breakpoint-down(lg) {
-      padding: 90px 0;
+      padding-top: 190px;
+      padding-bottom: 97px;
     }
 
     @include media-breakpoint-up(lg) {

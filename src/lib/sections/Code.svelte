@@ -12,6 +12,12 @@
   @import '../styles/base/mixins.scss';
 
   .code {
+    @include media-breakpoint-down(lg) {
+      padding-top: 37px;
+      padding-bottom: 19px;
+      padding-left: 20px;
+    }
+
     @include media-breakpoint-up(lg) {
       padding-top: 23px;
       padding-bottom: 40px;

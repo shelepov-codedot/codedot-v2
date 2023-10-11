@@ -22,6 +22,9 @@
   @import '../styles/base/mixins.scss';
 
   .ourmission {
+    @include media-breakpoint-down(lg) {
+      padding-bottom: 88px;
+    }
     @include media-breakpoint-up(lg) {
       margin-bottom: 30px;
     }

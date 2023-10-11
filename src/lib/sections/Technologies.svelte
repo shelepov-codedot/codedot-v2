@@ -31,6 +31,10 @@
     background-color: #e9f6fb;
     border-radius: 40px;
 
+    @include media-breakpoint-down(lg) {
+      margin-bottom: 90px;
+    }
+
     &__wrapper {
       @include media-breakpoint-down(md) {
         padding-top: 90px;

@@ -163,9 +163,16 @@
   @import '../styles/base/mixins.scss';
 
   .casespage {
-    padding-top: 20px;
-    padding-bottom: 115px;
-    margin-bottom: 40px;
+    @include media-breakpoint-down(lg) {
+      padding-top: 10px;
+      padding-bottom: 57px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 20px;
+      padding-bottom: 115px;
+      margin-bottom: 40px;
+    }
     &__wrapper {
       display: flex;
       flex-direction: column;

@@ -82,6 +82,10 @@
   @import '../styles/base/mixins.scss';
 
   .reviews {
+    @include media-breakpoint-down(lg) {
+      padding-bottom: 85px;
+    }
+
     @include media-breakpoint-up(lg) {
       padding-top: 223px;
       padding-bottom: 30px;

@@ -49,8 +49,8 @@
     overflow: hidden;
 
     @include media-breakpoint-down(md) {
-      padding-top: 90px;
-      padding-bottom: 90px;
+      padding-top: 119px;
+      padding-bottom: 201px;
     }
 
     @include media-breakpoint-between(md, xl) {
@@ -380,7 +380,8 @@
         }
         width: 100%;
         height: 100%;
-        margin: 37px 0;
+        margin-top: 37px;
+        margin-bottom: 30px;
       }
 
       @include media-breakpoint-up(lg) {

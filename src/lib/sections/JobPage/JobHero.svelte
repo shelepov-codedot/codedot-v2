@@ -44,7 +44,7 @@
 
   .job-hero {
     @include media-breakpoint-down(lg) {
-      padding-top: 124px;
+      padding-top: 25px;
     }
 
     @include media-breakpoint-up(lg) {

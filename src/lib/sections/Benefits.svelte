@@ -31,6 +31,7 @@
   .benefits {
     @include media-breakpoint-down(lg) {
       padding-top: 90px;
+      padding-bottom: 68px;
     }
 
     @include media-breakpoint-up(lg) {

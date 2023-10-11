@@ -1,5 +1,5 @@
 <script>
-  export let closeModal, activeModal
+  export let closeModal, activeModal, data
 
   let active, statusError
   let curValue = 'Select your industry'
@@ -52,6 +52,8 @@
   const selectValue = () => {
     active = !active
   }
+
+  console.log(data.industries)
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -64,30 +66,37 @@
       <div class="modal__items">
         <div class="modal__input-wrapper">
           <label for="industry" class="modal__label">Industry</label>
-          <input type="hidden" name="industry" id="industry" value={curValue.toLocaleLowerCase()} />
+          <input
+            type="hidden"
+            name="industry"
+            id="industry"
+            value={curValue.toLocaleLowerCase()}
+            required
+          />
           <div class="modal__input" on:click={selectValue}>
             <span class="modal__input-value" name="industry">{curValue}</span>
             <span class="modal__input-icon" />
           </div>
           <div class={active ? 'modal__input-list modal__input-list--active' : 'modal__input-list'}>
-            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>E-commerce</span>
-            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>
-              Web-development
-            </span>
-            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>UI,UX design</span>
+            {#each data.industries as industry}
+              <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>
+                {industry.serviceName}
+              </span>
+            {/each}
+            <span class="modal__input-list-item" on:click={(e) => useSelect(e)}> Other... </span>
           </div>
         </div>
         <div class="modal__input-wrapper">
           <label for="name" class="modal__label">Name</label>
-          <input type="text" name="name" class="modal__input" />
+          <input type="text" name="name" class="modal__input" required />
         </div>
         <div class="modal__input-wrapper">
           <label for="phone" class="modal__label">Phone</label>
-          <input type="text" name="phone" class="modal__input" />
+          <input type="text" name="phone" class="modal__input" required />
         </div>
         <div class="modal__input-wrapper">
           <label for="email" class="modal__label">Corporate Email</label>
-          <input type="email" name="email" class="modal__input" />
+          <input type="email" name="email" class="modal__input" required />
         </div>
         <div class="modal__input-wrapper">
           <label for="requirements" class="modal__label">Project requirements</label>
@@ -425,7 +434,8 @@
     &__input-list-item {
       user-select: none;
       cursor: pointer;
-      padding: 15px 25px;
+      padding: 10px 25px;
+      font-size: 14px;
 
       &:first-of-type {
         border-top: 1px solid rgb(186, 186, 186);
