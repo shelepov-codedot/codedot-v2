@@ -18,7 +18,7 @@
       })
     } else {
       array.forEach((el) => {
-        el.style.height = '450px'
+        el.style.height = '360px'
       })
     }
   }

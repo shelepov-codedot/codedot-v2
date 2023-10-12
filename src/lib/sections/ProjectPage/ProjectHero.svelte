@@ -34,8 +34,19 @@
   @import '../../styles/base/mixins.scss';
 
   .project-hero {
-    top: -118px;
     position: relative;
+
+    @include media-breakpoint-down(md) {
+      top: -100px;
+    }
+
+    @include media-breakpoint-between(md, lg) {
+      top: -105px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      top: -118px;
+    }
     &__title {
       text-transform: uppercase;
       @include media-breakpoint-down(md) {
@@ -72,7 +83,7 @@
       width: 100%;
 
       @include media-breakpoint-down(sm) {
-        height: 767px;
+        height: 602px;
       }
 
       @include media-breakpoint-between(sm, lg) {
@@ -94,7 +105,14 @@
     &__wrapper {
       position: absolute;
       width: 100%;
-      bottom: 0;
+
+      @include media-breakpoint-down(lg) {
+        bottom: -125px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        bottom: 0;
+      }
     }
 
     &__description {

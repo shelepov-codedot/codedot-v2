@@ -39,7 +39,8 @@
 
   .service-hero {
     @include media-breakpoint-down(lg) {
-      padding-top: 107px;
+      padding-top: 9px;
+      padding-bottom: 99px;
     }
     @include media-breakpoint-up(lg) {
       padding-top: 72px;
@@ -168,7 +169,7 @@
       align-self: flex-end;
 
       @include media-breakpoint-down(md) {
-        padding-top: 40px;
+        padding-top: 36px;
       }
 
       @include media-breakpoint-up(md) {

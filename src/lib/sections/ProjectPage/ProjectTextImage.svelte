@@ -26,8 +26,8 @@
 
   .project-text-image {
     @include media-breakpoint-down(lg) {
-      padding-top: 89px;
-      padding-bottom: 89px;
+      padding-top: 189px;
+      padding-bottom: 100px;
     }
     @include media-breakpoint-up(lg) {
       padding-top: 219px;

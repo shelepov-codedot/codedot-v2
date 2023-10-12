@@ -28,7 +28,7 @@
   .offer {
     @include media-breakpoint-down(xl) {
       padding-top: 90px;
-      padding-bottom: 90px;
+      padding-bottom: 100px;
     }
 
     @include media-breakpoint-up(xl) {

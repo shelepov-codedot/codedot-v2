@@ -185,7 +185,7 @@
   .project-images {
     @include media-breakpoint-down(lg) {
       padding-top: 90px;
-      padding-bottom: 90px;
+      padding-bottom: 200px;
     }
 
     @include media-breakpoint-up(lg) {
@@ -253,17 +253,14 @@
         display: flex;
         @include media-breakpoint-down(md) {
           width: 100%;
-          &:nth-child(odd) {
-            height: 280px;
-          }
-
-          &:nth-child(even) {
-            height: 320px;
-          }
         }
 
         &:nth-of-type(1) {
           align-self: flex-end;
+
+          @include media-breakpoint-down(md) {
+            height: 280px;
+          }
 
           @include media-breakpoint-between(md, lg) {
             height: 320px;
@@ -287,6 +284,10 @@
         }
 
         &:nth-of-type(2) {
+          @include media-breakpoint-down(md) {
+            height: 320px;
+          }
+
           @include media-breakpoint-between(md, lg) {
             width: 69%;
             height: 410px;
@@ -310,6 +311,10 @@
 
         &:nth-of-type(3),
         &:nth-of-type(4) {
+          @include media-breakpoint-down(md) {
+            height: 280px;
+          }
+
           @include media-breakpoint-between(md, lg) {
             width: 47.2%;
             height: 400px;
@@ -333,6 +338,11 @@
 
         &:nth-of-type(5) {
           width: 100%;
+
+          @include media-breakpoint-down(md) {
+            height: 320px;
+          }
+
           @include media-breakpoint-between(md, lg) {
             height: 400px;
           }
