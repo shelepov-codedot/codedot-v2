@@ -102,7 +102,11 @@
             </div>
           {/each}
         </div>
-        <form class="job-text__form">
+        <form
+          class="job-text__form"
+          on:submit|preventDefault={handleSubmit}
+          enctype="multipart/form-data"
+        >
           <span class="job-text__job-name">Senior Fullstack Developer</span>
           <div class="job-text__inputs">
             <div class="job-text__input-wrapper">
