@@ -42,48 +42,44 @@
     }
   }
 
-  onMount(() => {
-    if (fileInput && data) {
-      fileInput.addEventListener('change', () => {
-        const selectedFiles = fileInput.files[0]
-        const selectedFilesFormat = fileInput.files[0].name.split('.').splice(-1, 1)[0]
-        if (selectedFiles) {
-          if (
-            selectedFilesFormat != 'pdf' &&
-            selectedFilesFormat != 'docx' &&
-            selectedFilesFormat != 'doc'
-          ) {
-            textName = ''
-            errorText = 'Data format not supported'
-            fileInput.value = null
-            fileInput.disabled = !fileInput.disabled
+  const selectFile = (e) => {
+    const selectedFiles = e.target.files[0]
+    const selectedFilesFormat = e.target.files[0].name.split('.').splice(-1, 1)[0]
+    if (selectedFiles) {
+      if (
+        selectedFilesFormat != 'pdf' &&
+        selectedFilesFormat != 'docx' &&
+        selectedFilesFormat != 'doc'
+      ) {
+        textName = ''
+        errorText = 'Data format not supported'
+        e.target.value = null
+        e.target.disabled = !e.target.disabled
+        statusError = !statusError
+
+        setTimeout(() => {
+          statusError = !statusError
+          e.target.disabled = !e.target.disabled
+        }, 4000)
+      } else {
+        if (selectedFiles.size >= 5 * 1024 * 1024) {
+          textName = ''
+          e.target.value = null
+          e.target.disabled = !e.target.disabled
+          statusError = !statusError
+          errorText = 'File size is larger than allowed'
+
+          setTimeout(() => {
             statusError = !statusError
-
-            setTimeout(() => {
-              statusError = !statusError
-              fileInput.disabled = !fileInput.disabled
-            }, 4000)
-          } else {
-            if (selectedFiles.size >= 5 * 1024 * 1024) {
-              textName = ''
-              fileInput.value = null
-              fileInput.disabled = !fileInput.disabled
-              statusError = !statusError
-              errorText = 'File size is larger than allowed'
-
-              setTimeout(() => {
-                statusError = !statusError
-                fileInput.disabled = !fileInput.disabled
-              }, 4000)
-            } else {
-              textName = e.target.files[0].name
-              file = e.target.files[0]
-            }
-          }
+            e.target.disabled = !e.target.disabled
+          }, 4000)
+        } else {
+          textName = e.target.files[0].name
+          file = e.target.files[0]
         }
-      })
+      }
     }
-  })
+  }
 </script>
 
 {#if data}
@@ -148,7 +144,7 @@
               <input
                 type="file"
                 bind:value={file}
-                bind:this={fileInput}
+                on:change={(e) => selectFile(e)}
                 class="job-text__file"
                 accept=" .doc, .docx, .pdf"
                 name="file"
