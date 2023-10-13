@@ -34,6 +34,7 @@
         email = ''
         industry = ''
         phone = ''
+        requirements = ''
         file = null
       }
     } catch (error) {
@@ -75,6 +76,7 @@
           }, 4000)
         } else {
           textName = e.target.files[0].name
+          file = e.target.files[0]
         }
       }
     }
@@ -99,7 +101,12 @@
 
 {#if activeModal}
   <section class="modal">
-    <form action="#" class="modal__wrapper" on:submit|preventDefault={handleSubmit}>
+    <form
+      action="#"
+      class="modal__wrapper"
+      on:submit|preventDefault={handleSubmit}
+      enctype="multipart/form-data"
+    >
       <span class="modal__cross" on:click={closeModal(activeModal)} />
       <h2 class="modal__title">Let’s discuss your project</h2>
       <div class="modal__items">
