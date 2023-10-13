@@ -101,13 +101,7 @@
       <div class="modal__items">
         <div class="modal__input-wrapper">
           <label for="industry" class="modal__label">Industry</label>
-          <input
-            type="hidden"
-            name="industry"
-            id="industry"
-            value={curValue.toLocaleLowerCase()}
-            required
-          />
+          <input type="hidden" name="industry" id="industry" bind:value={curValue} required />
           <div class="modal__input" on:click={selectValue}>
             <span class="modal__input-value" name="industry">{curValue}</span>
             <span class="modal__input-icon" />
