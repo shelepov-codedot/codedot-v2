@@ -13,17 +13,17 @@
 
   const handleSubmit = async () => {
     try {
-      const formData = new FormData()
-      formData.append('cv-name', name)
-      formData.append('cv-last-name', lastName)
-      formData.append('cv-email', email)
-      formData.append('cv-phone', phone)
-      formData.append('cv-comments', comments)
-      formData.append('cv-file', file)
+      const formDataa = new FormData()
+      formDataa.append('cv-name', name)
+      formDataa.append('cv-last-name', lastName)
+      formDataa.append('cv-email', email)
+      formDataa.append('cv-phone', phone)
+      formDataa.append('cv-comments', comments)
+      formDataa.append('cv-file', file)
 
       const response = await fetch('/netlifycvform', {
         method: 'POST',
-        body: formData,
+        body: formDataa,
       })
 
       if (response.ok) {
