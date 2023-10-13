@@ -10,7 +10,7 @@
   netlify-honeypot="infoo"
   style="opacity:0; height:0; overflow: hidden; width:0;"
 >
-  <input type="hidden" name="form-name" value="contact-form-form-netlify" />
+  <!-- <input type="hidden" name="form-name" value="contact-form-form-netlify" /> -->
   <div class="contact-form__form-wrapper">
     <div class="contact-form__input-wrapper">
       <label for="name" class="contact-form__label">Your name</label>
