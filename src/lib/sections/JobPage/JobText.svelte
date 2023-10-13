@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte'
   export let data
 
   let errorText,
@@ -82,6 +81,8 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+
 {#if data}
   <section class="job-text">
     <div class="container">
@@ -99,6 +100,7 @@
           {/each}
         </div>
         <form
+          action="#"
           class="job-text__form"
           on:submit|preventDefault={handleSubmit}
           enctype="multipart/form-data"

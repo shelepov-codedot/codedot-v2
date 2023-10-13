@@ -1,6 +1,4 @@
 <script>
-  import { text } from 'svelte/internal'
-
   export let closeModal, activeModal, data
 
   let active, statusError
@@ -96,8 +94,6 @@
   const selectValue = () => {
     active = !active
   }
-
-  console.log(data.industries)
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
