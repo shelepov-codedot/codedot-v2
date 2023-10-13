@@ -4,7 +4,6 @@
   let active, statusError
   let curValue = 'Select your industry'
 
-  $: industry = curValue.toLocaleLowerCase()
   let errorText,
     textName = '',
     name = '',
@@ -16,6 +15,8 @@
   const handleInput = (e) => {
     curValue = e.target.value
   }
+
+  $: industry = curValue.toLocaleLowerCase()
 
   const handleSubmit = async () => {
     try {
@@ -162,7 +163,7 @@
 
           <label for="file" class="modal__file-text-wrapper">
             {#if textName == ''}
-              <span>DROP YOUR CV HERE, OR BROWSE</span>
+              <span>DROP YOUR TASK HERE, OR BROWSE</span>
               <span>Supports: DOC, DOCX, PDF, max size 5 Mb</span>
             {/if}
             {#if textName}

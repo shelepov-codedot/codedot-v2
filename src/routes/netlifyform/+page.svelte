@@ -12,7 +12,18 @@
 >
   <div class="contact-form__form-wrapper">
     <div class="contact-form__input-wrapper">
-      <label for="project-name" class="contact-form__label">Your name</label>
+      <label for="project-industry" class="contact-form__label">Industry</label>
+      <input
+        type="text"
+        id="project-industry"
+        name="project-industry"
+        placeholder="name*"
+        class="contact-form__input"
+        required
+      />
+    </div>
+    <div class="contact-form__input-wrapper">
+      <label for="project-name" class="contact-form__label">Name</label>
       <input
         type="text"
         id="project-name"
@@ -23,7 +34,7 @@
       />
     </div>
     <div class="contact-form__input-wrapper">
-      <label for="project-phone" class="contact-form__label">Your name</label>
+      <label for="project-phone" class="contact-form__label">Phone</label>
       <input
         type="text"
         id="project-phone"
@@ -34,7 +45,7 @@
       />
     </div>
     <div class="contact-form__input-wrapper">
-      <label for="project-email" class="contact-form__label">Your email</label>
+      <label for="project-email" class="contact-form__label">Email</label>
       <input
         type="text"
         id="project-email"
@@ -45,7 +56,7 @@
       />
     </div>
     <div class="contact-form__input-wrapper">
-      <label for="project-requirements" class="contact-form__label">Your email</label>
+      <label for="project-requirements" class="contact-form__label">Requirements</label>
       <input
         type="text"
         id="project-requirements"
@@ -56,7 +67,7 @@
       />
     </div>
     <div class="contact-form__input-wrapper">
-      <label for="project-file" class="contact-form__label">Your email</label>
+      <label for="project-file" class="contact-form__label">Task File</label>
       <input
         type="file"
         id="project-file"
