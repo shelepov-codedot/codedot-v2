@@ -3,6 +3,7 @@
 
   let active, statusError
   $: curValue = 'Select your industry'
+
   let errorText,
     textName = '',
     industry = curValue,
@@ -81,6 +82,9 @@
 
   const useSelect = (e) => {
     curValue = e.target.textContent
+    industry = curValue
+    console.log(industry)
+
     active = !active
   }
 
