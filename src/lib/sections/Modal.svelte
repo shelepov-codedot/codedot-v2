@@ -2,10 +2,10 @@
   export let closeModal, activeModal, data
 
   let active, statusError
-  let curValue = 'Select your industry'
+  $: curValue = 'Select your industry'
   let errorText,
     textName = '',
-    industry = curValue.toLocaleLowerCase(),
+    industry = curValue,
     name = '',
     phone = '',
     email = '',
