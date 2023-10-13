@@ -3,8 +3,48 @@
 
   let active, statusError
   let curValue = 'Select your industry'
+
+  $: industry = curValue.toLocaleLowerCase()
   let errorText,
-    textName = ''
+    textName = '',
+    name = '',
+    phone = '',
+    email = '',
+    requirements = '',
+    file
+
+  const handleInput = (e) => {
+    curValue = e.target.value
+  }
+
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData()
+      formData.append('project-name', name)
+      formData.append('project-email', email)
+      formData.append('project-industry', industry)
+      formData.append('form-name', 'discucc-your-project')
+      formData.append('project-phone', phone)
+      formData.append('project-file', file)
+      formData.append('project-requirements', requirements)
+
+      const response = await fetch('/netlifyform', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (response.ok) {
+        name = ''
+        email = ''
+        industry = ''
+        phone = ''
+        file = null
+      }
+    } catch (error) {
+      console.log(error)
+      return null
+    }
+  }
 
   const selectFile = (e) => {
     const selectedFiles = e.target.files[0]
@@ -60,7 +100,7 @@
 
 {#if activeModal}
   <section class="modal">
-    <form action="#" class="modal__wrapper">
+    <form action="#" class="modal__wrapper" on:submit|preventDefault={handleSubmit}>
       <span class="modal__cross" on:click={closeModal(activeModal)} />
       <h2 class="modal__title">Let’s discuss your project</h2>
       <div class="modal__items">
@@ -70,7 +110,8 @@
             type="hidden"
             name="industry"
             id="industry"
-            value={curValue.toLocaleLowerCase()}
+            bind:value={curValue}
+            on:input={handleInput}
             required
           />
           <div class="modal__input" on:click={selectValue}>
@@ -88,15 +129,15 @@
         </div>
         <div class="modal__input-wrapper">
           <label for="name" class="modal__label">Name</label>
-          <input type="text" name="name" class="modal__input" required />
+          <input type="text" name="name" class="modal__input" required bind:value={name} />
         </div>
         <div class="modal__input-wrapper">
           <label for="phone" class="modal__label">Phone</label>
-          <input type="text" name="phone" class="modal__input" required />
+          <input type="text" name="phone" class="modal__input" required bind:value={phone} />
         </div>
         <div class="modal__input-wrapper">
           <label for="email" class="modal__label">Corporate Email</label>
-          <input type="email" name="email" class="modal__input" required />
+          <input type="email" name="email" class="modal__input" required bind:value={email} />
         </div>
         <div class="modal__input-wrapper">
           <label for="requirements" class="modal__label">Project requirements</label>
@@ -104,6 +145,7 @@
             name="requirements"
             id="requirements"
             class="modal__input modal__input--textarea"
+            bind:value={requirements}
           />
         </div>
         <div class="modal__file-input">
@@ -113,6 +155,7 @@
             id="file"
             class="modal__file"
             accept=".doc, .docx,.pdf"
+            bind:value={file}
             on:change={(e) => selectFile(e)}
           />
           <img src="../icons/Paper.svg" alt="" class="modal__file-icon" />

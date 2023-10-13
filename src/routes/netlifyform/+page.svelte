@@ -12,36 +12,59 @@
 >
   <div class="contact-form__form-wrapper">
     <div class="contact-form__input-wrapper">
-      <label for="name" class="contact-form__label">Your name</label>
+      <label for="project-name" class="contact-form__label">Your name</label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="project-name"
+        name="project-name"
         placeholder="name*"
         class="contact-form__input"
         required
       />
     </div>
     <div class="contact-form__input-wrapper">
-      <label for="email" class="contact-form__label">Your email</label>
+      <label for="project-phone" class="contact-form__label">Your name</label>
       <input
         type="text"
-        id="email"
-        name="email"
+        id="project-phone"
+        name="project-phone"
+        placeholder="name*"
+        class="contact-form__input"
+        required
+      />
+    </div>
+    <div class="contact-form__input-wrapper">
+      <label for="project-email" class="contact-form__label">Your email</label>
+      <input
+        type="text"
+        id="project-email"
+        name="project-email"
         placeholder="email*"
         class="contact-form__input"
         required
       />
     </div>
-  </div>
-  <div class="contact-form__form-wrapper contact-form__form-wrapper--column">
     <div class="contact-form__input-wrapper">
-      <label for="message" class="contact-form__label">Tell us about your project</label>
-      <textarea name="message" id="message" rows="5" placeholder="ss" class="contact-form__input" />
+      <label for="project-requirements" class="contact-form__label">Your email</label>
+      <input
+        type="text"
+        id="project-requirements"
+        name="project-requirements"
+        placeholder="email*"
+        class="contact-form__input"
+        required
+      />
     </div>
-    <div class="contact-form__button-wrapper">
-      <input type="submit" value="ss" class="btn" />
-      <p class="contact-form__form-policy">ss</p>
+    <div class="contact-form__input-wrapper">
+      <label for="project-file" class="contact-form__label">Your email</label>
+      <input
+        type="file"
+        id="project-file"
+        name="project-file"
+        placeholder="email*"
+        class="contact-form__input"
+        required
+      />
     </div>
   </div>
 </form>
