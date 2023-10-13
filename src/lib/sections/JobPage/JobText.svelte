@@ -3,7 +3,6 @@
   export let data
 
   let errorText,
-    fileInput,
     statusError,
     textName = '',
     name = '',
@@ -34,7 +33,7 @@
         email = ''
         phone = ''
         comments = ''
-        file = ''
+        file = null
         textName = ''
       }
     } catch (error) {
@@ -145,6 +144,7 @@
               <input
                 type="file"
                 name="file"
+                if="file"
                 bind:value={file}
                 on:change={(e) => selectFile(e)}
                 class="job-text__file"

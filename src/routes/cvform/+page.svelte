@@ -7,7 +7,7 @@
   class="contact-form__form"
   name="cv-form"
   data-netlify="true"
-  netlify-honeypot="cv-form"
+  netlify-honeypot="infoo"
   style="opacity:0; height:0; overflow: hidden; width:0;"
 >
   <div class="contact-form__form-wrapper">
