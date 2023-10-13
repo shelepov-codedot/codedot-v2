@@ -37,10 +37,9 @@
       }
     } catch (error) {
       console.log(error)
-      return null
+      return error
     }
   }
-
   const selectFile = (e) => {
     const selectedFiles = e.target.files[0]
     const selectedFilesFormat = e.target.files[0].name.split('.').splice(-1, 1)[0]
@@ -109,7 +108,13 @@
           <div class="job-text__inputs">
             <div class="job-text__input-wrapper">
               <label for="name" class="job-text__input-name">Name</label>
-              <input type="job-text__input" name="name" class="job-text__input" bind:value={name} />
+              <input
+                type="job-text__input"
+                name="name"
+                class="job-text__input"
+                bind:value={name}
+                required
+              />
             </div>
             <div class="job-text__input-wrapper">
               <label for="last-name" class="job-text__input-name">Last name</label>
@@ -118,11 +123,18 @@
                 name="last-name"
                 class="job-text__input"
                 bind:value={lastName}
+                required
               />
             </div>
             <div class="job-text__input-wrapper">
               <label for="email" class="job-text__input-name">Email</label>
-              <input type="email" name="email" class="job-text__input" bind:value={email} />
+              <input
+                type="email"
+                name="email"
+                class="job-text__input"
+                bind:value={email}
+                required
+              />
             </div>
             <div class="job-text__input-wrapper">
               <label for="phone" class="job-text__input-name">Phone number</label>
@@ -131,6 +143,7 @@
                 name="phone"
                 class="job-text__input"
                 bind:value={phone}
+                required
               />
             </div>
             <div class="job-text__input-wrapper job-text__input-wrapper--textarea">
@@ -140,6 +153,7 @@
                 id="comments"
                 class="job-text__input"
                 bind:value={comments}
+                required
               />
             </div>
             <div class="job-text__file-input">
