@@ -22,7 +22,7 @@
       formData.append('cv-comments', comments)
       formData.append('cv-file', file)
 
-      const response = await fetch('/netlifyform', {
+      const response = await fetch('/cvform', {
         method: 'POST',
         body: formData,
       })
