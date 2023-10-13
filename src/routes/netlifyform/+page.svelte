@@ -5,7 +5,7 @@
 <form
   method="POST"
   class="contact-form__form"
-  name="contact-form-form-netlify"
+  name="discucc-your-project"
   data-netlify="true"
   netlify-honeypot="infoo"
   style="opacity:0; height:0; overflow: hidden; width:0;"
