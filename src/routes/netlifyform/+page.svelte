@@ -90,36 +90,34 @@
 >
   <div class="contact-form__form-wrapper">
     <div class="contact-form__input-wrapper">
-      <label for="name" class="contact-form__label">Your name</label>
+      <label for="cv-name" class="contact-form__label">Name</label>
+      <input type="text" id="cv-name" name="cv-name" class="contact-form__input" required />
+    </div>
+    <div class="contact-form__input-wrapper">
+      <label for="cv-last-name" class="contact-form__label">Last Name</label>
       <input
         type="text"
-        id="name"
-        name="name"
-        placeholder="name*"
+        id="cv-last-name"
+        name="cv-last-name"
         class="contact-form__input"
         required
       />
     </div>
     <div class="contact-form__input-wrapper">
-      <label for="email" class="contact-form__label">Your email</label>
-      <input
-        type="text"
-        id="email"
-        name="email"
-        placeholder="email*"
-        class="contact-form__input"
-        required
-      />
+      <label for="cv-email" class="contact-form__label">Email</label>
+      <input type="text" id="cv-email" name="cv-email" class="contact-form__input" required />
     </div>
-  </div>
-  <div class="contact-form__form-wrapper contact-form__form-wrapper--column">
     <div class="contact-form__input-wrapper">
-      <label for="message" class="contact-form__label">Tell us about your project</label>
-      <textarea name="message" id="message" rows="5" placeholder="ss" class="contact-form__input" />
+      <label for="cv-phone" class="contact-form__label">Phone Number</label>
+      <input type="text" id="cv-email" name="cv-phone" class="contact-form__input" required />
     </div>
-    <div class="contact-form__button-wrapper">
-      <input type="submit" value="ss" class="btn" />
-      <p class="contact-form__form-policy">ss</p>
+    <div class="contact-form__input-wrapper">
+      <label for="cv-comments" class="contact-form__label">Comments</label>
+      <input type="text" id="cv-comments" name="cv-comments" class="contact-form__input" required />
+    </div>
+    <div class="contact-form__input-wrapper">
+      <label for="cv-file" class="contact-form__label">CV File</label>
+      <input type="file" id="cv-file" name="cv-file" class="contact-form__input" required />
     </div>
   </div>
 </form>

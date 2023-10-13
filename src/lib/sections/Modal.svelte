@@ -1,4 +1,6 @@
 <script>
+  import { text } from 'svelte/internal'
+
   export let closeModal, activeModal, data
 
   let active, statusError
@@ -36,6 +38,8 @@
         phone = ''
         requirements = ''
         file = null
+        textName = ''
+        curValue = 'Select your industry'
       }
     } catch (error) {
       console.log(error)
@@ -85,7 +89,6 @@
   const useSelect = (e) => {
     curValue = e.target.textContent
     industry = curValue
-    console.log(industry)
 
     active = !active
   }

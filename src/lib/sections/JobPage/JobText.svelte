@@ -4,7 +4,43 @@
 
   let fileInput, statusError
   let errorText,
-    textName = ''
+    textName = '',
+    name,
+    lastName,
+    email,
+    phone,
+    comments,
+    file
+
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData()
+      formData.append('cv-name', name)
+      formData.append('cv-last-name', lastName)
+      formData.append('cv-email', email)
+      formData.append('cv-phone', phone)
+      formData.append('cv-comments', comments)
+      formData.append('cv-file', file)
+
+      const response = await fetch('/netlifyform', {
+        method: 'POST',
+        body: formData,
+      })
+
+      if (response.ok) {
+        name = ''
+        lastName = ''
+        email = ''
+        phone = ''
+        comments = ''
+        file = ''
+        textName = ''
+      }
+    } catch (error) {
+      console.log(error)
+      return null
+    }
+  }
 
   onMount(() => {
     if (fileInput && data) {
@@ -40,7 +76,8 @@
                 fileInput.disabled = !fileInput.disabled
               }, 4000)
             } else {
-              textName = fileInput.files[0].name
+              textName = e.target.files[0].name
+              file = e.target.files[0]
             }
           }
         }
@@ -70,27 +107,43 @@
           <div class="job-text__inputs">
             <div class="job-text__input-wrapper">
               <label for="name" class="job-text__input-name">Name</label>
-              <input type="job-text__input" name="name" class="job-text__input" />
+              <input type="job-text__input" name="name" class="job-text__input" bind:value={name} />
             </div>
             <div class="job-text__input-wrapper">
               <label for="last-name" class="job-text__input-name">Last name</label>
-              <input type="job-text__input" name="last-name" class="job-text__input" />
+              <input
+                type="job-text__input"
+                name="last-name"
+                class="job-text__input"
+                bind:value={lastName}
+              />
             </div>
             <div class="job-text__input-wrapper">
               <label for="email" class="job-text__input-name">Email</label>
-              <input type="email" name="email" class="job-text__input" />
+              <input type="email" name="email" class="job-text__input" bind:value={email} />
             </div>
             <div class="job-text__input-wrapper">
               <label for="phone" class="job-text__input-name">Phone number</label>
-              <input type="job-text__input" name="phone" class="job-text__input" />
+              <input
+                type="job-text__input"
+                name="phone"
+                class="job-text__input"
+                bind:value={phone}
+              />
             </div>
             <div class="job-text__input-wrapper job-text__input-wrapper--textarea">
               <label for="comments" class="job-text__input-name">Comments</label>
-              <textarea name="comments" id="comments" class="job-text__input" />
+              <textarea
+                name="comments"
+                id="comments"
+                class="job-text__input"
+                bind:value={comments}
+              />
             </div>
             <div class="job-text__file-input">
               <input
                 type="file"
+                bind:value={file}
                 bind:this={fileInput}
                 class="job-text__file"
                 accept=" .doc, .docx, .pdf"
