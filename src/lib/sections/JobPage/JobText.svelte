@@ -21,7 +21,7 @@
       formData.append('cv-comments', comments)
       formData.append('cv-file', file)
 
-      const response = await fetch('/netlifycvform', {
+      const response = await fetch('https://codedot-v2.netlify.app/netlifycvform', {
         method: 'POST',
         body: formData,
       })
