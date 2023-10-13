@@ -3,12 +3,13 @@
 </svelte:head>
 
 <form
+  method="POST"
   class="contact-form__form"
   name="cv-form"
   data-netlify="true"
   netlify-honeypot="infoo"
-  method="POST"
 >
+  <input type="hidden" name="form-name" value="cv-form" />
   <div class="contact-form__form-wrapper">
     <div class="contact-form__input-wrapper">
       <label for="cv-name" class="contact-form__label">Name</label>
