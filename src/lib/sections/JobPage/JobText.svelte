@@ -2,14 +2,15 @@
   import { onMount } from 'svelte'
   export let data
 
-  let fileInput, statusError
   let errorText,
+    fileInput,
+    statusError,
     textName = '',
-    name,
-    lastName,
-    email,
-    phone,
-    comments,
+    name = '',
+    lastName = '',
+    email = '',
+    phone = '',
+    comments = '',
     file
 
   const handleSubmit = async () => {
@@ -143,11 +144,11 @@
             <div class="job-text__file-input">
               <input
                 type="file"
+                name="file"
                 bind:value={file}
                 on:change={(e) => selectFile(e)}
                 class="job-text__file"
                 accept=" .doc, .docx, .pdf"
-                name="file"
               />
               <img src="../icons/Paper.svg" alt="" lass="job-text__file-icon" />
               <div class="job-text__file-text-wrapper">
