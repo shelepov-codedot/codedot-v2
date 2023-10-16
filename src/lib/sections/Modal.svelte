@@ -362,11 +362,9 @@
       position: relative;
       padding-top: 80px;
       padding-bottom: 40px;
-
       border-radius: 40px;
       background-color: #e9f6fb;
       z-index: 10;
-      overflow-y: auto;
       height: 100%;
 
       @include media-breakpoint-down(md) {
@@ -436,6 +434,9 @@
     &__items {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      height: calc(100% - 220px);
+      overflow-y: auto;
+      overflow-x: hidden;
 
       @include media-breakpoint-down(md) {
         column-gap: 20px;
@@ -446,6 +447,19 @@
         column-gap: 30px;
         row-gap: 36px;
       }
+    }
+
+    &__items::-webkit-scrollbar {
+      width: 2px;
+    }
+
+    &__items::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &__items::-webkit-scrollbar-thumb {
+      border-radius: 20px;
+      border: 3px solid #006185;
     }
 
     &__label {
