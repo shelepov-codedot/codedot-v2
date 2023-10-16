@@ -14,6 +14,7 @@
   const handleSubmit = async () => {
     try {
       const formDataa = new FormData()
+      formDataa.append('form-name', 'cv-form')
       formDataa.append('cv-name', name)
       formDataa.append('cv-last-name', lastName)
       formDataa.append('cv-email', email)
@@ -32,8 +33,8 @@
         email = ''
         phone = ''
         comments = ''
-        file = null
         textName = ''
+        file = null
       }
     } catch (error) {
       console.log(error)
