@@ -108,13 +108,15 @@
       on:submit|preventDefault={handleSubmit}
       enctype="multipart/form-data"
     >
-      <div class="modal__success">
-        <div class="modal__succes-icon-wrapper">
-          <img src="../icons/success.svg" alt="succes-icon" class="modal__succes-icon" />
+      {#if succes}
+        <div class="modal__success">
+          <div class="modal__succes-icon-wrapper">
+            <img src="../icons/success.svg" alt="succes-icon" class="modal__succes-icon" />
+          </div>
+          <p class="modal__succes-title">Thank you</p>
+          <p class="modal__succes-text">Your CV has been successfully submitted</p>
         </div>
-        <p class="modal__succes-title">Thank you</p>
-        <p class="modal__succes-text">Your CV has been successfully submitted</p>
-      </div>
+      {/if}
       <span class="modal__cross" on:click={closeModal(activeModal)} />
       <h2 class="modal__title">Let’s discuss your project</h2>
       <div class="modal__items">
