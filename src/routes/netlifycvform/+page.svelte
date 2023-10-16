@@ -31,7 +31,7 @@
     </div>
     <div class="contact-form__input-wrapper">
       <label for="cv-phone" class="contact-form__label">Phone Number</label>
-      <input type="text" id="cv-email" name="cv-phone" class="contact-form__input" required />
+      <input type="text" id="cv-phone" name="cv-phone" class="contact-form__input" required />
     </div>
     <div class="contact-form__input-wrapper">
       <label for="cv-comments" class="contact-form__label">Comments</label>
