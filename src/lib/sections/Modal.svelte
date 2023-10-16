@@ -11,7 +11,8 @@
     phone = '',
     email = '',
     requirements = '',
-    file
+    file,
+    succes = false
 
   const handleSubmit = async () => {
     try {
@@ -38,6 +39,7 @@
         file = null
         textName = ''
         curValue = 'Select your industry'
+        succes = true
       }
     } catch (error) {
       console.log(error)
@@ -102,10 +104,17 @@
   <section class="modal">
     <form
       action="#"
-      class="modal__wrapper"
+      class={succes ? 'modal__wrapper' : 'modal__wrapper noscroll'}
       on:submit|preventDefault={handleSubmit}
       enctype="multipart/form-data"
     >
+      <div class="modal__success">
+        <div class="modal__succes-icon-wrapper">
+          <img src="../icons/success.svg" alt="succes-icon" class="modal__succes-icon" />
+        </div>
+        <p class="modal__succes-title">Thank you</p>
+        <p class="modal__succes-text">Your CV has been successfully submitted</p>
+      </div>
       <span class="modal__cross" on:click={closeModal(activeModal)} />
       <h2 class="modal__title">Let’s discuss your project</h2>
       <div class="modal__items">
@@ -233,6 +242,73 @@
       }
     }
 
+    &__success {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(25px);
+      top: 0;
+      left: 0;
+      z-index: 6;
+      border-radius: 40px;
+    }
+
+    &__succes-icon-wrapper {
+      position: relative;
+
+      @include media-breakpoint-down(sm) {
+        width: 250px;
+        height: 250px;
+      }
+
+      @include media-breakpoint-up(sm) {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    &__succes-icon {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    &__succes-title {
+      text-transform: uppercase;
+      color: #006185;
+      font-weight: bold;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 32x;
+      }
+
+      @include media-breakpoint-up(sm) {
+        font-size: 48px;
+      }
+    }
+
+    &__succes-text {
+      text-transform: uppercase;
+      color: #006185;
+      font-weight: bold;
+      text-align: center;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+
+      @include media-breakpoint-up(sm) {
+        font-size: 18px;
+      }
+    }
+
     &__cross {
       cursor: pointer;
       position: absolute;
@@ -241,6 +317,7 @@
       width: 40px;
       height: 40px;
       display: flex;
+      z-index: 7;
       align-items: center;
       justify-content: center;
 
@@ -631,5 +708,9 @@
         padding: 18px 30px;
       }
     }
+  }
+
+  .modal__wrapper.noscroll {
+    overflow-y: hidden;
   }
 </style>

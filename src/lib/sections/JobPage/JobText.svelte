@@ -362,9 +362,17 @@
     }
 
     &__succes-icon-wrapper {
-      width: 300px;
-      height: 300px;
       position: relative;
+
+      @include media-breakpoint-down(sm) {
+        width: 250px;
+        height: 250px;
+      }
+
+      @include media-breakpoint-up(sm) {
+        width: 300px;
+        height: 300px;
+      }
     }
 
     &__succes-icon {
@@ -376,18 +384,32 @@
     }
 
     &__succes-title {
-      font-size: 48px;
       text-transform: uppercase;
       color: #006185;
       font-weight: bold;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 32x;
+      }
+
+      @include media-breakpoint-up(sm) {
+        font-size: 48px;
+      }
     }
 
     &__succes-text {
-      font-size: 18px;
       text-transform: uppercase;
       color: #006185;
       font-weight: bold;
       text-align: center;
+
+      @include media-breakpoint-down(sm) {
+        font-size: 14px;
+      }
+
+      @include media-breakpoint-up(sm) {
+        font-size: 18px;
+      }
     }
 
     &__file {
