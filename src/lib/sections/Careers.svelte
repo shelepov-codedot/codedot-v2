@@ -15,7 +15,20 @@
       </div>
     </div>
     <div class="careers__img-wrapper">
-      <img src="../images/careers.svg" alt="" class="careers__img" />
+      <!-- <img src="../images/careers.svg" alt="" class="careers__img" /> -->
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 1920 838"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          id="animated-path"
+          d="M-156.5 529.986C-89.4765 425.13 597.36 245.742 628.5 349.986C733.5 701.486 745.036 967.797 641.5 768.986C537.964 570.176 -82.614 706.309 242 566.5C566.614 426.691 797.402 59.914 1075 302.014C1352.6 544.113 893.524 817.406 1034 566.5C1214 245 1308.18 149.562 1538.5 230C2061 412.477 1463.06 690.443 1622.62 427.5C1782.17 164.557 1211 -147.5 1931 79.5"
+          stroke="black"
+        />
+      </svg>
     </div>
   </section>
 {/if}
@@ -129,5 +142,17 @@
         padding-bottom: 45px;
       }
     }
+  }
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  #animated-path {
+    stroke-dasharray: 15000;
+    stroke-dashoffset: 15000;
+    animation: draw 4s ease-in-out forwards;
   }
 </style>

@@ -1,4 +1,17 @@
 <script>
+  import { onMount } from 'svelte'
+  let showDignity
+
+  const checkVisibility = () => {
+    const elem = document.querySelector('.dignity__background')
+    const rect = elem.getBoundingClientRect()
+    const windowHeight = window.innerWidth
+    showDignity = rect.top * 4 < windowHeight
+  }
+
+  onMount(() => {
+    window.addEventListener('scroll', checkVisibility)
+  })
   export let data
 </script>
 
@@ -13,12 +26,15 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path
-            id="animated-path"
-            d="M370 232.813C1060 421.964 1047.49 89.2251 1007.49 320.277C967.494 551.329 1026 1873.49 508.501 1069C-9.00046 264.508 60 648 596.5 772.5C1134.74 897.404 1721.55 -869.626 1226 566C735.5 1987 860.743 2167.5 624 1590.5C261.499 706.995 -223.803 670.975 116.198 1125.9L508.501 1611.94"
-            stroke="#212121"
-            stroke-linecap="round"
-          />
+          {#if showDignity}
+            <path
+              class="anima"
+              id="animated-path"
+              d="M370 232.813C1060 421.964 1047.49 89.2251 1007.49 320.277C967.494 551.329 1026 1873.49 508.501 1069C-9.00046 264.508 60 648 596.5 772.5C1134.74 897.404 1721.55 -869.626 1226 566C735.5 1987 860.743 2167.5 624 1590.5C261.499 706.995 -223.803 670.975 116.198 1125.9L508.501 1611.94"
+              stroke="#212121"
+              stroke-linecap="round"
+            />
+          {/if}
         </svg>
       </div>
       <div class="dignity__text-wrapper">
@@ -208,6 +224,6 @@
   #animated-path {
     stroke-dasharray: 10000;
     stroke-dashoffset: 10000;
-    animation: draw 2s ease-in-out forwards;
+    animation: draw 4s ease-in-out forwards;
   }
 </style>
