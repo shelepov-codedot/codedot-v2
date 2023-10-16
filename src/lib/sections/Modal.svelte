@@ -104,7 +104,7 @@
   <section class="modal">
     <form
       action="#"
-      class={succes ? 'modal__wrapper' : 'modal__wrapper noscroll'}
+      class={succes ? 'modal__wrapper noscroll' : 'modal__wrapper'}
       on:submit|preventDefault={handleSubmit}
       enctype="multipart/form-data"
     >
