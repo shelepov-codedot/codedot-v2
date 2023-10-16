@@ -9,7 +9,8 @@
     email = '',
     phone = '',
     comments = '',
-    file
+    file,
+    succes = false
 
   const handleSubmit = async () => {
     try {
@@ -35,6 +36,7 @@
         comments = ''
         textName = ''
         file = null
+        succes = true
       }
     } catch (error) {
       console.log(error)
@@ -105,6 +107,15 @@
           on:submit|preventDefault={handleSubmit}
           enctype="multipart/form-data"
         >
+          {#if succes == true}
+            <div class="job-text__success">
+              <div class="job-text__succes-icon-wrapper">
+                <img src="../icons/success.svg" alt="succes-icon" class="job-text__succes-icon" />
+              </div>
+              <p class="job-text__succes-title">Thank you</p>
+              <p class="job-text__succes-text">Your CV has been successfully submitted</p>
+            </div>
+          {/if}
           <span class="job-text__job-name">Senior Fullstack Developer</span>
           <div class="job-text__inputs">
             <div class="job-text__input-wrapper">
@@ -183,6 +194,7 @@
         </form>
       </div>
     </div>
+
     <div class={statusError ? 'job-text__notice job-text__notice--active' : 'job-text__notice'}>
       {errorText}
     </div>
@@ -320,6 +332,7 @@
       background-color: #b3dfef4d;
       border-radius: 40px;
       height: fit-content;
+      position: relative;
       @include media-breakpoint-down(md) {
         padding-top: 20px;
         padding-left: 20px;
@@ -330,6 +343,51 @@
       @include media-breakpoint-up(md) {
         padding: 40px;
       }
+    }
+
+    &__success {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(25px);
+      top: 0;
+      left: 0;
+      z-index: 2;
+      border-radius: 40px;
+    }
+
+    &__succes-icon-wrapper {
+      width: 300px;
+      height: 300px;
+      position: relative;
+    }
+
+    &__succes-icon {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    &__succes-title {
+      font-size: 48px;
+      text-transform: uppercase;
+      color: #006185;
+      font-weight: bold;
+    }
+
+    &__succes-text {
+      font-size: 18px;
+      text-transform: uppercase;
+      color: #006185;
+      font-weight: bold;
+      text-align: center;
     }
 
     &__file {
