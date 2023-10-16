@@ -114,7 +114,7 @@
             <img src="../icons/success.svg" alt="succes-icon" class="modal__succes-icon" />
           </div>
           <p class="modal__succes-title">Thank you</p>
-          <p class="modal__succes-text">Your CV has been successfully submitted</p>
+          <p class="modal__succes-text">Your application has been successfully submitted</p>
         </div>
       {/if}
       <span class="modal__cross" on:click={closeModal(activeModal)} />
@@ -171,7 +171,7 @@
 
           <label for="file" class="modal__file-text-wrapper">
             {#if textName == ''}
-              <span>DROP YOUR CV HERE, OR BROWSE</span>
+              <span>DROP YOUR TASK HERE, OR BROWSE</span>
               <span>Supports: DOC, DOCX, PDF, max size 5 Mb</span>
             {/if}
             {#if textName}
