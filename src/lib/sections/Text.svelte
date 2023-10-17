@@ -5,9 +5,11 @@
 
   const checkVisibility = () => {
     const elem = document.querySelector('.text')
-    const rect = elem.getBoundingClientRect()
-    const windowHeight = window.innerWidth
-    showText = rect.top * 2 < windowHeight
+    if (elem) {
+      const rect = elem.getBoundingClientRect()
+      const windowHeight = window.innerWidth
+      showText = rect.top * 2 < windowHeight
+    }
   }
 
   onMount(() => {

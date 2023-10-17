@@ -1,4 +1,21 @@
 <script>
+  import { onMount } from 'svelte'
+
+  let showBenefits
+
+  const checkVisibility = () => {
+    const elem = document.querySelector('.benefits__wrapper')
+    if (elem) {
+      const rect = elem.getBoundingClientRect()
+      const windowHeight = window.innerWidth
+      showBenefits = rect.top * 2 < windowHeight
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener('scroll', checkVisibility)
+  })
+
   export let data
 </script>
 
@@ -7,7 +24,22 @@
     <div class="container">
       <div class="benefits__wrapper">
         <div class="benefits__img-wrapper">
-          <img src="../images/Benefits.svg" alt="" class="benefits__img" />
+          <svg
+            width="1333"
+            height="384"
+            viewBox="0 0 1333 384"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="benefits__img"
+          >
+            {#if showBenefits}
+              <path
+                id="animated-path"
+                d="M1 156C43.8333 132.5 187 58.9 261 92.5C353.5 134.5 246.5 179 213.5 232C180.5 285 165.654 379.826 204.5 352C275 301.5 324 389.5 364 382.5C404 375.5 479.5 377 513 252C524.626 208.62 551.461 125.804 578.5 92.5002C619.5 42.0002 686.5 13.5002 737.5 13.5002C842 13.5002 769 131 817.5 155.5C866 180 1098 -39.9998 1182 8.50021C1266 57.0002 1272.7 251.589 1240 195.5C1096 -51.4998 1377.5 254.5 1325.5 381.5"
+                stroke="#212121"
+              />
+            {/if}
+          </svg>
         </div>
         <h2 class="benefits__title">{data.title}</h2>
         <div class="benefits__items">
@@ -27,6 +59,18 @@
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  #animated-path {
+    stroke-dasharray: 10000;
+    stroke-dashoffset: 10000;
+    animation: draw 4s ease-in-out forwards;
+  }
 
   .benefits {
     @include media-breakpoint-down(lg) {

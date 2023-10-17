@@ -15,7 +15,6 @@
       </div>
     </div>
     <div class="careers__img-wrapper">
-      <!-- <img src="../images/careers.svg" alt="" class="careers__img" /> -->
       <svg
         width="100%"
         height="100%"

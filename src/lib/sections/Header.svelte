@@ -143,6 +143,7 @@
 
   .header {
     position: sticky;
+    overflow: hidden;
     top: 0;
     margin: 0 auto;
     z-index: 12;
@@ -263,8 +264,8 @@
     }
 
     &__content {
-      display: flex;
       border-radius: 20px 0px 0px 20px;
+      display: flex;
 
       @include media-breakpoint-down(xl) {
         width: 230px;
@@ -289,6 +290,7 @@
       }
 
       @include media-breakpoint-up(xl) {
+        display: flex;
         align-items: center;
       }
     }

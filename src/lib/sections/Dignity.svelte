@@ -4,9 +4,11 @@
 
   const checkVisibility = () => {
     const elem = document.querySelector('.dignity__background')
-    const rect = elem.getBoundingClientRect()
-    const windowHeight = window.innerWidth
-    showDignity = rect.top * 4 < windowHeight
+    if (elem) {
+      const rect = elem.getBoundingClientRect()
+      const windowHeight = window.innerWidth
+      showDignity = rect.top * 4 < windowHeight
+    }
   }
 
   onMount(() => {

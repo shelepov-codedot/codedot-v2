@@ -7,9 +7,11 @@
 
   const checkVisibility = () => {
     const elem = document.querySelector('.expect__img-wrapper')
-    const rect = elem.getBoundingClientRect()
-    const windowHeight = window.innerWidth
-    showExpect = rect.top * 2 < windowHeight
+    if (elem) {
+      const rect = elem.getBoundingClientRect()
+      const windowHeight = window.innerWidth
+      showExpect = rect.top < windowHeight
+    }
   }
 
   onMount(() => {
