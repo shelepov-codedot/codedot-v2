@@ -23,9 +23,9 @@
     })
   }
 
-  afterUpdate(() => {
-    body.style.overflow = 'hidden'
-  })
+  // afterUpdate(() => {
+  //   body.style.overflow = 'hidden'
+  // })
 
   onMount(() => {
     curWidth = window.innerWidth
@@ -147,7 +147,6 @@
 
   .header {
     position: sticky;
-    overflow: hidden;
     top: 0;
     margin: 0 auto;
     z-index: 12;
@@ -176,6 +175,10 @@
     @include media-breakpoint-between(lg, xl) {
       margin-left: 40px;
       margin-right: 40px;
+    }
+
+    @include media-breakpoint-down(xl) {
+      overflow: hidden;
     }
 
     @include media-breakpoint-up(xl) {
