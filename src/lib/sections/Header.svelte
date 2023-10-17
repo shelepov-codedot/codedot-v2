@@ -3,7 +3,7 @@
 
 <script>
   import imageUrl from '../js/imageUrlBuilder'
-  import { onMount } from 'svelte'
+  import { onMount, afterUpdate } from 'svelte'
   let active, curWidth, body, dropdown
 
   const openMenu = () => {
@@ -22,6 +22,10 @@
       element.style.visibility = 'hidden'
     })
   }
+
+  afterUpdate(() => {
+    body.style.overflow = 'hidden'
+  })
 
   onMount(() => {
     curWidth = window.innerWidth
