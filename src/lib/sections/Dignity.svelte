@@ -3,17 +3,26 @@
 
   onMount(() => {
     let scrollPosition = 0
-    let svgPath
+    let svgPath, svgPathLength
+    const section = document.querySelector('.dignity__text-wrapper')
+    const svgPathId = 'animated-path'
 
     window.addEventListener('scroll', () => {
       scrollPosition = window.scrollY
+      if (section.getBoundingClientRect().top + 100 <= window.scrollY) {
+        if (!svgPath) {
+          svgPath = document.getElementById(svgPathId)
+          svgPathLength = svgPath.getTotalLength()
+          svgPath.style.strokeDasharray = svgPathLength
+          svgPath.style.strokeDashoffset = svgPathLength
+        }
 
-      if (!svgPath) {
-        svgPath = document.getElementById('animated-path')
-      }
-
-      if (scrollPosition >= 0) {
-        svgPath.style.strokeDashoffset = svgPath.getTotalLength() - scrollPosition + 1200
+        if (scrollPosition >= 0) {
+          const dashoffset =
+            svgPathLength -
+            (scrollPosition * svgPathLength) / section.getBoundingClientRect().height
+          svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
+        }
       }
     })
   })
@@ -82,7 +91,7 @@
     }
 
     @include media-breakpoint-up(lg) {
-      height: 9500px;
+      // height: 9500px;
     }
 
     @include media-breakpoint-down(lg) {

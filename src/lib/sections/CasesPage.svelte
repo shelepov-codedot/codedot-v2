@@ -87,31 +87,34 @@
     <div class="container">
       <div class="casespage__wrapper">
         <h2 class="casespage__title">{data.title}</h2>
-        <div class="reviews__swiper-container">
-          <swiper-container class="casespage__filtertag-wrapper" init="false">
-            <swiper-slide
-              on:click={clearActive}
-              type="button"
-              class={`casespage__filtertag ${
-                activeTags.length === 0 ? 'casespage__filtertag--active' : ''
-              }`}
-            >
-              All cases ({data.secondData.length + 1})
-            </swiper-slide>
-
-            {#each categoryCounts as categoryInfo}
+        <div class="casespage__tag-wrapper-con">
+          <div class="reviews__swiper-container">
+            <swiper-container class="casespage__filtertag-wrapper" init="false">
               <swiper-slide
+                on:click={clearActive}
                 type="button"
-                on:click={() => handleTogleActive(categoryInfo.category)}
                 class={`casespage__filtertag ${
-                  activeTags.includes(categoryInfo.category) ? 'casespage__filtertag--active' : ''
+                  activeTags.length === 0 ? 'casespage__filtertag--active' : ''
                 }`}
               >
-                {categoryInfo.category} ({categoryInfo.count})
+                All cases ({data.secondData.length + 1})
               </swiper-slide>
-            {/each}
-          </swiper-container>
+
+              {#each categoryCounts as categoryInfo}
+                <swiper-slide
+                  type="button"
+                  on:click={() => handleTogleActive(categoryInfo.category)}
+                  class={`casespage__filtertag ${
+                    activeTags.includes(categoryInfo.category) ? 'casespage__filtertag--active' : ''
+                  }`}
+                >
+                  {categoryInfo.category} ({categoryInfo.count})
+                </swiper-slide>
+              {/each}
+            </swiper-container>
+          </div>
         </div>
+
         <div class="casespage__items-wrapper">
           <div class="casespage__items casespage__items--left">
             {#each arrayTest as item, idx}
@@ -163,6 +166,7 @@
   @import '../styles/base/mixins.scss';
 
   .casespage {
+    overflow: hidden;
     @include media-breakpoint-down(lg) {
       padding-top: 10px;
       padding-bottom: 57px;
@@ -176,6 +180,10 @@
     &__wrapper {
       display: flex;
       flex-direction: column;
+    }
+
+    &__tag-wrapper-con {
+      width: calc(100% + (100vw - var(--container-width)) / 2 + var(--spacing-container));
     }
 
     &__title {
@@ -205,6 +213,7 @@
     &__filtertag-wrapper {
       display: flex;
       overflow-x: auto;
+      padding-right: 50px;
 
       @include media-breakpoint-down(lg) {
         overflow-y: hidden;
@@ -224,6 +233,7 @@
       border: 1px solid black;
       text-wrap: nowrap;
       user-select: none;
+      cursor: pointer;
       text-align: center;
       width: max-content;
 

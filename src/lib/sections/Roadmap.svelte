@@ -1,4 +1,34 @@
 <script>
+  import { onMount } from 'svelte'
+
+  onMount(() => {
+    const section = document.querySelectorAll('.roadmap__background-img-wrapper')
+
+    window.addEventListener('scroll', () => {
+      let scrollPosition = 0
+
+      scrollPosition = window.scrollY
+      section.forEach((el, idx) => {
+        if (el.getBoundingClientRect() <= window.scrollY) {
+          let svgPathText, svgPathTextLength
+          if (!svgPathText) {
+            svgPathText = el.querySelector(`.anima-${idx}`)
+
+            console.log(svgPathText)
+            svgPathTextLength = svgPathText.getTotalLength()
+            svgPathText.style.strokeDasharray = svgPathTextLength
+            svgPathText.style.strokeDashoffset = svgPathTextLength * -1
+          }
+          const dashoffset =
+            svgPathTextLength -
+            (scrollPosition * svgPathTextLength) / el.getBoundingClientRect().height
+
+          svgPathText.style.strokeDashoffset = dashoffset > 0 ? dashoffset : dashoffset
+        }
+      })
+    })
+  })
+
   export let data
 </script>
 
@@ -8,19 +38,74 @@
       <div class="roadmap__wrapper">
         <div class="roadmap__background">
           <div class="roadmap__background-img-wrapper">
-            <img src="../images/roadmap-1.svg" alt="roadmap-1" class="roadmap__background-img" />
+            <svg
+              viewBox="0 0 1448 1145"
+              class="roadmap__background-img"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="anima-roadmap anima-0"
+                d="M429.658 150C440.658 -233.5 1799.22 471.709 1339.66 119.5C836.658 -266 1584.66 400 1373.66 505C1162.66 610 716.158 840.5 732.158 608C744.374 430.48 -75.5001 398 67.1582 608C203.966 809.388 -111.342 856 46.6577 952.5C204.658 1049 239.158 1233.5 494.158 1093C749.158 952.5 661.658 777.5 889.658 865C1208.66 987.424 1420.66 471 1447.16 901"
+                stroke="#212121"
+              />
+            </svg>
           </div>
           <div class="roadmap__background-img-wrapper">
-            <img src="../images/roadmap-2.svg" alt="roadmap-2" class="roadmap__background-img" />
+            <svg
+              viewBox="0 0 1072 735"
+              class="roadmap__background-img"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="anima-roadmap anima-1"
+                d="M1071 1C977 12.8333 848.142 42.3 855.742 165.5C865.242 319.5 1063.74 479.5 788.242 438C512.742 396.5 386.56 297.463 204.743 396.5C28.4998 492.5 -92.0001 673.5 93.9999 734.5"
+                stroke="#212121"
+              />
+            </svg>
           </div>
           <div class="roadmap__background-img-wrapper">
-            <img src="../images/roadmap-3.svg" alt="roadmap-3" class="roadmap__background-img" />
+            <svg
+              class="roadmap__background-img"
+              viewBox="0 0 1056 854"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="anima-roadmap anima-2"
+                d="M1 172.643C243.5 148.643 366.5 -105.826 572 52.6743C777.5 211.174 1232.5 26.6743 956.5 246.674C680.5 466.674 456.5 130.674 331.5 380.674C206.5 630.674 -48 654 353 717.5C754 781 990 726 1055 853"
+                stroke="#212121"
+              />
+            </svg>
           </div>
           <div class="roadmap__background-img-wrapper">
-            <img src="../images/roadmap-4.svg" alt="roadmap-4" class="roadmap__background-img" />
+            <svg
+              class="roadmap__background-img"
+              viewBox="0 0 1450 919"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="anima-roadmap anima-3"
+                d="M825 127C501 50.0001 395.5 -74.4999 224.5 60.5001C53.4999 195.5 -113.5 135.5 105.5 339.5C324.5 543.5 631.5 506 872 535.5C1112.5 565 1377.5 363.5 1370.5 575C1363.5 786.5 1651 958 1166.5 910.5C682 863 779.5 670 499 626.5C218.5 583 -37.5 605 160.5 805"
+                stroke="#212121"
+              />
+            </svg>
           </div>
           <div class="roadmap__background-img-wrapper">
-            <img src="../images/roadmap-5.svg" alt="roadmap-5" class="roadmap__background-img" />
+            <svg
+              class="roadmap__background-img"
+              viewBox="0 0 1487 1097"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                class="anima-roadmap anima-4"
+                d="M320.002 0.5C421.502 7.5 893.5 319 1120.5 220C1336.38 125.849 1766.03 219.152 1222 465C998.5 566 758.001 364.5 389.501 364.5C21.0013 364.5 23.4999 424.5 4.49989 615C-30.6045 966.966 191.501 1242.5 389.501 1009C587.501 775.5 537 720.311 434 698.906C331 677.5 247.184 708.354 233.001 842C226.157 906.5 189 1103 522 1081.5C855 1060 1068.5 943 1068.5 836.5"
+                stroke="#212121"
+              />
+            </svg>
           </div>
         </div>
         <div class="roadmap__items">
@@ -43,6 +128,11 @@
 
 <style lang="scss">
   @import '../styles/base/mixins.scss';
+
+  .anima-roadmap {
+    stroke-dashoffset: 8800;
+    stroke-dasharray: 8800;
+  }
 
   .roadmap {
     position: relative;
