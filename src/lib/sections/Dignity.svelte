@@ -73,6 +73,7 @@
   @import '../styles/base/mixins.scss';
 
   .dignity {
+    overflow: hidden;
     .anima {
       stroke-dashoffset: 8800;
       stroke-dasharray: 8800;

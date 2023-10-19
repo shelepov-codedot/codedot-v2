@@ -2,31 +2,34 @@
   import { onMount } from 'svelte'
 
   onMount(() => {
-    const section = document.querySelectorAll('.roadmap__background-img-wrapper')
+    const svgElements = document.querySelectorAll('.roadmap__background-img')
 
-    window.addEventListener('scroll', () => {
-      let scrollPosition = 0
+    const animateSVG = () => {
+      const scrollPosition = window.scrollY
 
-      scrollPosition = window.scrollY
-      section.forEach((el, idx) => {
-        if (el.getBoundingClientRect() <= window.scrollY) {
-          let svgPathText, svgPathTextLength
-          if (!svgPathText) {
-            svgPathText = el.querySelector(`.anima-${idx}`)
+      svgElements.forEach((el, idx) => {
+        const svgPath = el.querySelector('.anima-' + idx)
+        const svgPathLength = svgPath.getTotalLength()
+        const boundingBox = svgPath.getBoundingClientRect()
 
-            console.log(svgPathText)
-            svgPathTextLength = svgPathText.getTotalLength()
-            svgPathText.style.strokeDasharray = svgPathTextLength
-            svgPathText.style.strokeDashoffset = svgPathTextLength * -1
-          }
+        if (boundingBox.top + 250 <= window.innerHeight && boundingBox.bottom >= 0) {
           const dashoffset =
-            svgPathTextLength -
-            (scrollPosition * svgPathTextLength) / el.getBoundingClientRect().height
+            svgPathLength +
+            500 -
+            ((scrollPosition - boundingBox.top) * svgPathLength) / boundingBox.height
 
-          svgPathText.style.strokeDashoffset = dashoffset > 0 ? dashoffset : dashoffset
+          svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset + 1500 : 0
+          svgPath.style.strokeDasharray = svgPathLength
+        } else {
+          svgPath.style.strokeDashoffset = svgPathLength
+          svgPath.style.strokeDasharray = svgPathLength
         }
       })
-    })
+
+      requestAnimationFrame(animateSVG)
+    }
+
+    animateSVG()
   })
 
   export let data
@@ -132,6 +135,7 @@
   .anima-roadmap {
     stroke-dashoffset: 8800;
     stroke-dasharray: 8800;
+    transition: 0.3s ease-in-out;
   }
 
   .roadmap {

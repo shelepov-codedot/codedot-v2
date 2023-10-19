@@ -22,7 +22,6 @@
           svgPathTextLength -
           (scrollPosition * svgPathTextLength) / section.getBoundingClientRect().height
 
-        console.log(dashoffset)
         svgPathText.style.strokeDashoffset = dashoffset > 0 ? dashoffset : dashoffset * 1
       }
     })
