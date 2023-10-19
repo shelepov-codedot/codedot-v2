@@ -23,13 +23,17 @@
     })
   }
 
-  // afterUpdate(() => {
-  //   body.style.overflow = 'hidden'
-  // })
+  afterUpdate(() => {
+    body = document.querySelector('body')
+    body.style.overflow = 'auto'
+  })
 
   onMount(() => {
     curWidth = window.innerWidth
 
+    if (curWidth >= 1280 && active) {
+      active = !active
+    }
     window.addEventListener('resize', () => {
       curWidth = window.innerWidth
 

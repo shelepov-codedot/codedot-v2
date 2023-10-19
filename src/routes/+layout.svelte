@@ -4,7 +4,7 @@
   import { beforeNavigate, afterNavigate } from '$app/navigation'
 
   export let data
-  const duration = 300
+  const duration = 500
   const delay = duration + 100
   const y = 1
 
