@@ -135,7 +135,7 @@
   .anima-roadmap {
     stroke-dashoffset: 8800;
     stroke-dasharray: 8800;
-    transition: 0.2s ease-in-out;
+    transition: 1s ease-in-out;
   }
 
   .roadmap {

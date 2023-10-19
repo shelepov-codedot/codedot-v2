@@ -1,7 +1,7 @@
 <script>
   import { fly } from 'svelte/transition'
   import { cubicIn, cubicOut } from 'svelte/easing'
-  import { beforeNavigate, afterNavigate } from '$app/navigation'
+  import { afterNavigate, beforeNavigate, disableScrollHandling } from '$app/navigation'
 
   export let data
   const duration = 500
@@ -14,7 +14,12 @@
   let isLoading = false
 
   beforeNavigate(({ to }) => (isLoading = !!to.route.id))
-  afterNavigate(() => (isLoading = false))
+  afterNavigate(() => {
+    disableScrollHandling()
+    setTimeout(() => {
+      scrollTo({ top: 0, behavior: 'instant' }), (isLoading = false)
+    }, 500)
+  })
 </script>
 
 {#key data.pathname}

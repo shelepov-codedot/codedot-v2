@@ -26,6 +26,14 @@
   afterUpdate(() => {
     body = document.querySelector('body')
     body.style.overflow = 'auto'
+
+    const links = document.querySelectorAll('a[href]')
+    console.log(links)
+    links.forEach((a) => {
+      a.addEventListener('click', (event) => {
+        event.target.preventDefault
+      })
+    })
   })
 
   onMount(() => {
