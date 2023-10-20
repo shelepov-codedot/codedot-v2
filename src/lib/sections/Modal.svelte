@@ -12,7 +12,27 @@
     email = '',
     requirements = '',
     file,
-    succes = false
+    succes = false,
+    errors = {}
+
+  const validateForm = () => {
+    errors = {}
+    if (!name) {
+      errors.name = 'Name is required'
+    }
+    if (!email) {
+      errors.email = 'Email is required'
+    }
+    if (!phone) {
+      errors.phone = 'Phone is required'
+    }
+    if (!industry) {
+      errors.industry = 'Industry is required'
+    }
+    if (!file) {
+      errors.file = 'File is required'
+    }
+  }
 
   const handleSubmit = async () => {
     try {
@@ -25,21 +45,24 @@
       formData.append('project-file', file)
       formData.append('project-requirements', requirements)
 
-      const response = await fetch('/netlifyform', {
-        method: 'POST',
-        body: formData,
-      })
+      validateForm()
 
-      if (response.ok) {
-        name = ''
-        email = ''
-        industry = ''
-        phone = ''
-        requirements = ''
-        file = null
-        textName = ''
-        curValue = 'Select your industry'
-        succes = true
+      if (Object.keys(errors).length === 0) {
+        const response = await fetch('/netlifyform', {
+          method: 'POST',
+          body: formData,
+        })
+
+        if (response.ok) {
+          name = ''
+          email = ''
+          industry = ''
+          phone = ''
+          requirements = ''
+          file = null
+          ;(textName = ''), (curValue = 'Select your industry')
+          succes = true
+        }
       }
     } catch (error) {
       console.log(error)
@@ -122,11 +145,17 @@
       <div class="modal__items">
         <div class="modal__input-wrapper">
           <label for="industry" class="modal__label">Industry</label>
-          <input type="hidden" name="industry" id="industry" bind:value={curValue} required />
-          <div class="modal__input" on:click={selectValue}>
+          <input type="hidden" name="industry" id="industry" bind:value={curValue} />
+          <div
+            class={errors.name ? 'modal__input modal__input--error' : 'modal__input'}
+            on:click={selectValue}
+          >
             <span class="modal__input-value" name="industry">{curValue}</span>
             <span class="modal__input-icon" />
           </div>
+          {#if errors.industry}
+            <span class="modal__error-text">{errors.industry}</span>
+          {/if}
           <div class={active ? 'modal__input-list modal__input-list--active' : 'modal__input-list'}>
             {#each data.industries as industry}
               <span class="modal__input-list-item" on:click={(e) => useSelect(e)}>
@@ -138,15 +167,40 @@
         </div>
         <div class="modal__input-wrapper">
           <label for="name" class="modal__label">Name</label>
-          <input type="text" name="name" class="modal__input" required bind:value={name} />
+          <input
+            type="text"
+            name="name"
+            class={errors.name ? 'modal__input modal__input--error' : 'modal__input'}
+            bind:value={name}
+          />
+          {#if errors.name}
+            <span class="modal__error-text">{errors.name}</span>
+          {/if}
         </div>
+
         <div class="modal__input-wrapper">
           <label for="phone" class="modal__label">Phone</label>
-          <input type="text" name="phone" class="modal__input" required bind:value={phone} />
+          <input
+            type="text"
+            name="phone"
+            class={errors.name ? 'modal__input modal__input--error' : 'modal__input'}
+            bind:value={phone}
+          />
+          {#if errors.phone}
+            <span class="modal__error-text">{errors.phone}</span>
+          {/if}
         </div>
         <div class="modal__input-wrapper">
           <label for="email" class="modal__label">Corporate Email</label>
-          <input type="email" name="email" class="modal__input" required bind:value={email} />
+          <input
+            type="email"
+            name="email"
+            class={errors.name ? 'modal__input modal__input--error' : 'modal__input'}
+            bind:value={email}
+          />
+          {#if errors.email}
+            <span class="modal__error-text">{errors.email}</span>
+          {/if}
         </div>
         <div class="modal__input-wrapper">
           <label for="requirements" class="modal__label">Project requirements</label>
@@ -178,7 +232,11 @@
               <span>{textName}</span>
             {/if}
           </label>
+          {#if errors.file}
+            <span class="modal__error-text">{errors.file}</span>
+          {/if}
         </div>
+
         <div class="modal__checkbox-wrapper">
           <div class="modal__checkbox">
             <input type="checkbox" name="checkbox" id="checkbox" />
@@ -190,6 +248,7 @@
         </div>
       </div>
       <button type="submit" class="btn btn--fullwidth">Send request</button>
+
       <span class="modal__text">
         This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service
         apply.
@@ -309,6 +368,13 @@
       @include media-breakpoint-up(sm) {
         font-size: 18px;
       }
+    }
+
+    &__error-text {
+      color: red;
+      position: absolute;
+      bottom: -20px;
+      left: 0;
     }
 
     &__cross {
@@ -437,6 +503,8 @@
       height: calc(100% - 220px);
       overflow-y: auto;
       overflow-x: hidden;
+      padding-right: 5px;
+      padding-left: 5px;
 
       @include media-breakpoint-down(md) {
         column-gap: 20px;
@@ -470,6 +538,7 @@
     }
 
     &__input-wrapper {
+      position: relative;
       display: flex;
       flex-direction: column;
       grid-column-start: 1;
@@ -521,10 +590,10 @@
       padding: 15px 25px;
       border-radius: 40px;
       font-size: 16px;
+      border: 1px solid rgba(255, 255, 255, 0);
       border: none;
       outline: none;
       background-color: white;
-
       &--textarea {
         @include media-breakpoint-down(lg) {
           height: 140px;
@@ -532,6 +601,18 @@
         @include media-breakpoint-up(lg) {
           height: 170px;
         }
+      }
+
+      &--error {
+        border: 1px solid red;
+
+        &:focus {
+          border: 1px solid rgba(255, 255, 255, 0);
+        }
+      }
+
+      &:focus {
+        border: 1px solid rgba(255, 255, 255, 0);
       }
     }
 

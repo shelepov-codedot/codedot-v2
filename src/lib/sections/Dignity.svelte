@@ -1,10 +1,10 @@
 <script>
   import { onMount } from 'svelte'
-  let svgPath, svgPathLength, showBenefits
+  let svgPath, svgPathLength, showDignity
 
   onMount(() => {
     let scrollPosition = 0
-    const section = document.querySelector('.dignity__text-wrapper')
+    const section = document.querySelector('.dignity')
     const svgPathId = 'animated-path'
 
     const checkVisibility = () => {
@@ -13,15 +13,16 @@
         if (elem) {
           elem.forEach((el) => {
             const rect = el.getBoundingClientRect()
-            showBenefits = rect.top - 1500 < window.scrollY
+            showDignity = rect.top - 400 < window.scrollY
           })
         }
       }
     }
 
     window.addEventListener('scroll', () => {
-      scrollPosition = window.scrollY
-      if (section.getBoundingClientRect().top + 100 <= window.scrollY) {
+      scrollPosition = window.scrollY - 1093
+      console.log(section)
+      if (section.getBoundingClientRect().top <= window.scrollY) {
         if (!svgPath) {
           svgPath = document.getElementById(svgPathId)
           svgPathLength = svgPath.getTotalLength()
@@ -32,14 +33,12 @@
         if (scrollPosition >= 0) {
           const dashoffset =
             svgPathLength -
-            (scrollPosition * svgPathLength) / section.getBoundingClientRect().height
+            (scrollPosition * svgPathLength) / (section.getBoundingClientRect().height - 600)
           svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
         }
       }
 
-      if (window.innerWidth <= 992) {
-        checkVisibility()
-      }
+      checkVisibility()
     })
   })
 
@@ -56,13 +55,14 @@
           viewBox="0 0 1644 1898"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          shape-rendering="geometricPrecision"
         >
           <path
             class="anima"
             id="animated-path"
             d="M370 232.813C1060 421.964 1047.49 89.2251 1007.49 320.277C967.494 551.329 1026 1873.49 508.501 1069C-9.00046 264.508 60 648 596.5 772.5C1134.74 897.404 1721.55 -869.626 1226 566C735.5 1987 860.743 2167.5 624 1590.5C261.499 706.995 -223.803 670.975 116.198 1125.9L508.501 1611.94"
             stroke="#212121"
-            stroke-linecap="round"
+            vector-effect="non-scaling-stroke"
           />
         </svg>
       </div>
@@ -82,7 +82,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 class="dignity__item-img"
               >
-                {#if showBenefits}
+                {#if showDignity}
                   <path
                     d="M48.8427 52.839C202.43 95.095 199.646 20.7618 190.742 72.3783C181.839 123.995 194.862 419.363 79.6715 239.641C-35.519 59.9196 -20.1602 145.591 99.2592 173.404C219.066 201.307 349.683 -193.443 239.379 127.272"
                     stroke="#212121"
@@ -101,7 +101,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 class="dignity__item-img"
               >
-                {#if showBenefits}
+                {#if showDignity}
                   <path
                     d="M281 1C168.895 325.462 197.52 366.676 143.411 234.928C60.5607 33.194 -50.3565 24.9692 27.3516 128.843L117.014 239.824"
                     stroke="#212121"
@@ -121,16 +121,17 @@
 <style lang="scss">
   @import '../styles/base/mixins.scss';
 
-  @include media-breakpoint-down(lg) {
-    @keyframes draw {
-      to {
-        stroke-dashoffset: 0;
-      }
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
     }
+  }
 
+  @include media-breakpoint-down(lg) {
     .animated-path {
-      stroke-dasharray: 10000;
-      stroke-dashoffset: 10000;
+      stroke-dasharray: 8000;
+      stroke-dashoffset: 8000;
+      stroke-width: 10px;
       animation: draw 4s ease-in-out forwards;
     }
   }
@@ -140,6 +141,7 @@
     .anima {
       stroke-dashoffset: 8800;
       stroke-dasharray: 8800;
+      stroke-width: 1px;
     }
 
     .container {

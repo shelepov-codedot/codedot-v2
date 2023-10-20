@@ -213,7 +213,6 @@
     &__filtertag-wrapper {
       display: flex;
       overflow-x: auto;
-      padding-right: 50px;
 
       @include media-breakpoint-down(lg) {
         overflow-y: hidden;
