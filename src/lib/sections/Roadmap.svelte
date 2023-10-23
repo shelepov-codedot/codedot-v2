@@ -16,9 +16,9 @@
           const dashoffset =
             svgPathLength +
             500 -
-            ((scrollPosition - boundingBox.top) * svgPathLength) / boundingBox.height
+            ((scrollPosition - boundingBox.top) * svgPathLength) / (boundingBox.height - 200)
 
-          svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset + 1500 : 0
+          svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset + 700 : 0
           svgPath.style.strokeDasharray = svgPathLength
         } else {
           svgPath.style.strokeDashoffset = svgPathLength
