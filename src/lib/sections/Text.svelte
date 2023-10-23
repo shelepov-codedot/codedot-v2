@@ -1,18 +1,31 @@
 <script>
   import { onMount } from 'svelte'
-  let showText
-
-  const checkVisibility = () => {
-    const elem = document.querySelector('.text')
-    if (elem) {
-      const rect = elem.getBoundingClientRect()
-      const windowHeight = window.innerWidth
-      showText = rect.top < windowHeight
-    }
-  }
+  let svgPath, svgPathLength, showDignity
 
   onMount(() => {
-    window.addEventListener('scroll', checkVisibility)
+    let scrollPosition = 0
+    const section = document.querySelector('.text')
+    const svgPathId = 'animated-path-text'
+
+    window.addEventListener('scroll', () => {
+      scrollPosition = window.scrollY - 6800
+      if (section.getBoundingClientRect().top <= window.scrollY && scrollPosition <= 1250) {
+        if (!svgPath) {
+          svgPath = document.getElementById(svgPathId)
+          svgPathLength = svgPath.getTotalLength()
+          svgPath.style.strokeDasharray = svgPathLength
+          svgPath.style.strokeDashoffset = svgPathLength
+        }
+
+        if (scrollPosition >= 0) {
+          const dashoffset =
+            svgPathLength -
+            (scrollPosition * svgPathLength) / section.getBoundingClientRect().height -
+            600
+          svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
+        }
+      }
+    })
   })
 
   export let data
@@ -28,13 +41,12 @@
       xmlns="http://www.w3.org/2000/svg"
       class="text__svg"
     >
-      {#if showText}
-        <path
-          class="animated-path-text"
-          d="M-57.5 172.5C48.6667 90.1667 361.3 -66.2998 530.5 32.5002C742 156 736.5 255 898.5 172.5C1060.5 90 1096.5 -69.4996 1261 134C1425.5 337.5 1354 469 1565.5 299C1777 129 2420 109.693 1986 299C1508 507.5 1387 -85.4996 1675.5 219.5C1911.58 469.08 1593 441.5 1326.5 428C1060 414.5 892.5 788 415 604C45.0184 461.431 676 1029.5 596.5 793.5C422.881 278.104 244.911 571.682 124 738.5C30.5 867.5 115.543 1050.71 371 969C791.5 834.5 783 1062.5 1063 947C1343 831.5 1202.55 721.841 1480.5 947C1609.5 1051.5 1856.5 1051 1953 892"
-          stroke="#212121"
-        />
-      {/if}
+      <path
+        class="animated-path-text"
+        id="animated-path-text"
+        d="M-57.5 172.5C48.6667 90.1667 361.3 -66.2998 530.5 32.5002C742 156 736.5 255 898.5 172.5C1060.5 90 1096.5 -69.4996 1261 134C1425.5 337.5 1354 469 1565.5 299C1777 129 2420 109.693 1986 299C1508 507.5 1387 -85.4996 1675.5 219.5C1911.58 469.08 1593 441.5 1326.5 428C1060 414.5 892.5 788 415 604C45.0184 461.431 676 1029.5 596.5 793.5C422.881 278.104 244.911 571.682 124 738.5C30.5 867.5 115.543 1050.71 371 969C791.5 834.5 783 1062.5 1063 947C1343 831.5 1202.55 721.841 1480.5 947C1609.5 1051.5 1856.5 1051 1953 892"
+        stroke="#212121"
+      />
     </svg>
     <div class="text__wrapper">
       <div class="container container--text">
@@ -60,9 +72,8 @@
   }
 
   .animated-path-text {
-    stroke-dasharray: 10000;
-    stroke-dashoffset: 10000;
-    animation: draw 4s ease-in-out forwards;
+    stroke-dashoffset: 8800;
+    stroke-dasharray: 8800;
   }
 
   .container--text {

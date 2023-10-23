@@ -3,7 +3,6 @@
 
   let active, statusError
   $: curValue = 'Select your industry'
-
   let errorText,
     textName = '',
     industry = curValue,
@@ -12,8 +11,8 @@
     email = '',
     requirements = '',
     file,
-    succes = false,
-    errors = {}
+    errors = {},
+    succes = false
 
   const validateForm = () => {
     errors = {}
@@ -23,15 +22,31 @@
     if (!email) {
       errors.email = 'Email is required'
     }
+    if (email) {
+      let emailReg = /^\S+@\S+\.\S+$/
+      if (emailReg.test(email) == false) {
+        errors.email = 'Email does not pass verification'
+      }
+    }
+
     if (!phone) {
-      errors.phone = 'Phone is required'
+      errors.phone = 'Phone number is required'
+    }
+
+    if (phone) {
+      let phoneReg = /^\d+$/
+      if (phoneReg.test(phone) == false) {
+        errors.phone = 'Phone does not pass verification'
+      }
     }
     if (!industry) {
       errors.industry = 'Industry is required'
     }
+
     if (!file) {
       errors.file = 'File is required'
     }
+    console.log(errors.phone)
   }
 
   const handleSubmit = async () => {
@@ -60,7 +75,8 @@
           phone = ''
           requirements = ''
           file = null
-          ;(textName = ''), (curValue = 'Select your industry')
+          textName = ''
+          curValue = 'Select your industry'
           succes = true
         }
       }
@@ -102,6 +118,7 @@
             e.target.disabled = !e.target.disabled
           }, 4000)
         } else {
+          validateForm()
           textName = e.target.files[0].name
           file = e.target.files[0]
         }
@@ -112,7 +129,7 @@
   const useSelect = (e) => {
     curValue = e.target.textContent
     industry = curValue
-
+    validateForm()
     active = !active
   }
 
@@ -147,7 +164,7 @@
           <label for="industry" class="modal__label">Industry</label>
           <input type="hidden" name="industry" id="industry" bind:value={curValue} />
           <div
-            class={errors.name ? 'modal__input modal__input--error' : 'modal__input'}
+            class={errors.industry ? 'modal__input modal__input--error' : 'modal__input'}
             on:click={selectValue}
           >
             <span class="modal__input-value" name="industry">{curValue}</span>
@@ -172,8 +189,9 @@
             name="name"
             class={errors.name ? 'modal__input modal__input--error' : 'modal__input'}
             bind:value={name}
+            on:input={() => validateForm()}
           />
-          {#if errors.name}
+          {#if errors.name && name === ''}
             <span class="modal__error-text">{errors.name}</span>
           {/if}
         </div>
@@ -183,8 +201,9 @@
           <input
             type="text"
             name="phone"
-            class={errors.name ? 'modal__input modal__input--error' : 'modal__input'}
+            class={errors.phone ? 'modal__input modal__input--error' : 'modal__input'}
             bind:value={phone}
+            on:input={() => validateForm()}
           />
           {#if errors.phone}
             <span class="modal__error-text">{errors.phone}</span>
@@ -195,8 +214,9 @@
           <input
             type="email"
             name="email"
-            class={errors.name ? 'modal__input modal__input--error' : 'modal__input'}
+            class={errors.email ? 'modal__input modal__input--error' : 'modal__input'}
             bind:value={email}
+            on:input={() => validateForm()}
           />
           {#if errors.email}
             <span class="modal__error-text">{errors.email}</span>

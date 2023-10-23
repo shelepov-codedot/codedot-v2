@@ -10,7 +10,41 @@
     phone = '',
     comments = '',
     file,
+    errors = {},
     succes = false
+
+  const validateForm = () => {
+    errors = {}
+    if (!name) {
+      errors.name = 'Name is required'
+    }
+    if (!email) {
+      errors.email = 'Email is required'
+    }
+    if (email) {
+      let emailReg = /^\S+@\S+\.\S+$/
+      if (emailReg.test(email) == false) {
+        errors.email = 'Email does not pass verification'
+      }
+    }
+    if (!lastName) {
+      errors.lastName = 'Last name is required'
+    }
+    if (!phone) {
+      errors.phone = 'Phone number is required'
+    }
+    if (phone) {
+      let phoneReg = /^\d+$/
+      if (phoneReg.test(phone) == false) {
+        errors.phone = 'Phone does not pass verification'
+      }
+    }
+
+    if (!file) {
+      errors.file = 'File is required'
+    }
+    console.log(errors.phone)
+  }
 
   const handleSubmit = async () => {
     try {
@@ -23,20 +57,24 @@
       formDataa.append('cv-comments', comments)
       formDataa.append('cv-file', file)
 
-      const response = await fetch('/netlifycvform', {
-        method: 'POST',
-        body: formDataa,
-      })
+      validateForm()
 
-      if (response.ok) {
-        name = ''
-        lastName = ''
-        email = ''
-        phone = ''
-        comments = ''
-        textName = ''
-        file = null
-        succes = true
+      if (Object.keys(errors).length === 0) {
+        const response = await fetch('/netlifycvform', {
+          method: 'POST',
+          body: formDataa,
+        })
+
+        if (response.ok) {
+          name = ''
+          lastName = ''
+          email = ''
+          phone = ''
+          comments = ''
+          textName = ''
+          file = null
+          succes = true
+        }
       }
     } catch (error) {
       console.log(error)
@@ -75,6 +113,7 @@
             e.target.disabled = !e.target.disabled
           }, 4000)
         } else {
+          validateForm()
           textName = e.target.files[0].name
           file = e.target.files[0]
         }
@@ -123,40 +162,54 @@
               <input
                 type="job-text__input"
                 name="name"
-                class="job-text__input"
+                class={errors.name ? 'job-text__input job-text__input--error' : 'job-text__input'}
                 bind:value={name}
-                required
+                on:input={() => validateForm()}
               />
+              {#if errors.name}
+                <span class="job-text__error-text">{errors.name}</span>
+              {/if}
             </div>
             <div class="job-text__input-wrapper">
               <label for="last-name" class="job-text__input-name">Last name</label>
               <input
                 type="job-text__input"
                 name="last-name"
-                class="job-text__input"
+                class={errors.lastName
+                  ? 'job-text__input job-text__input--error'
+                  : 'job-text__input'}
                 bind:value={lastName}
-                required
+                on:input={() => validateForm()}
               />
+              {#if errors.lastName && lastName === ''}
+                <span class="job-text__error-text">{errors.lastName}</span>
+              {/if}
             </div>
             <div class="job-text__input-wrapper">
               <label for="email" class="job-text__input-name">Email</label>
               <input
-                type="email"
+                type="text"
                 name="email"
-                class="job-text__input"
+                class={errors.email ? 'job-text__input job-text__input--error' : 'job-text__input'}
                 bind:value={email}
-                required
+                on:input={() => validateForm()}
               />
+              {#if errors.email}
+                <span class="job-text__error-text">{errors.email}</span>
+              {/if}
             </div>
             <div class="job-text__input-wrapper">
               <label for="phone" class="job-text__input-name">Phone number</label>
               <input
-                type="job-text__input"
                 name="phone"
-                class="job-text__input"
+                type="tel"
+                class={errors.phone ? 'job-text__input job-text__input--error' : 'job-text__input'}
                 bind:value={phone}
-                required
+                on:input={() => validateForm()}
               />
+              {#if errors.phone}
+                <span class="job-text__error-text">{errors.phone}</span>
+              {/if}
             </div>
             <div class="job-text__input-wrapper job-text__input-wrapper--textarea">
               <label for="comments" class="job-text__input-name">Comments</label>
@@ -165,7 +218,6 @@
                 id="comments"
                 class="job-text__input"
                 bind:value={comments}
-                required
               />
             </div>
             <div class="job-text__file-input">
@@ -175,6 +227,7 @@
                 if="file"
                 bind:value={file}
                 on:change={(e) => selectFile(e)}
+                on:input={() => validateForm()}
                 class="job-text__file"
                 accept=" .doc, .docx, .pdf"
               />
@@ -188,6 +241,9 @@
                   <span>{textName}</span>
                 {/if}
               </div>
+              {#if errors.file}
+                <span class="job-text__error-text">{errors.file}</span>
+              {/if}
             </div>
             <button type="submit" class="btn btn--fullwidth">Apply</button>
           </div>
@@ -272,6 +328,13 @@
           margin-bottom: 80px;
         }
       }
+    }
+
+    &__error-text {
+      color: red;
+      position: absolute;
+      bottom: -20px;
+      left: 0;
     }
 
     &__name {
@@ -466,6 +529,7 @@
     &__input-wrapper {
       display: flex;
       flex-direction: column;
+      position: relative;
       gap: 5px;
 
       &:not(&:nth-child(5)) {
@@ -501,7 +565,8 @@
       display: flex;
       border-radius: 40px;
       background-color: white;
-      border: 0;
+      border: 1px solid rgba(255, 255, 255, 0);
+
       resize: none;
       outline: 0;
 
@@ -515,6 +580,18 @@
 
       @include media-breakpoint-up(xl) {
         padding: 19px 25px;
+      }
+
+      &--error {
+        border: 1px solid red;
+
+        &:focus {
+          border: 1px solid rgba(255, 255, 255, 0);
+        }
+      }
+
+      &:focus {
+        border: 1px solid rgba(255, 255, 255, 0);
       }
     }
 

@@ -21,8 +21,7 @@
 
     window.addEventListener('scroll', () => {
       scrollPosition = window.scrollY - 1093
-      console.log(section)
-      if (section.getBoundingClientRect().top <= window.scrollY) {
+      if (section.getBoundingClientRect().top <= window.scrollY && window.scrollY <= 2600) {
         if (!svgPath) {
           svgPath = document.getElementById(svgPathId)
           svgPathLength = svgPath.getTotalLength()
