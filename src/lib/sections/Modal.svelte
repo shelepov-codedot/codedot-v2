@@ -395,6 +395,8 @@
       position: absolute;
       bottom: -20px;
       left: 0;
+      width: max-content;
+      font-size: 14px;
     }
 
     &__cross {
