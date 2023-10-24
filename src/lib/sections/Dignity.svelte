@@ -130,7 +130,6 @@
     .animated-path {
       stroke-dasharray: 8000;
       stroke-dashoffset: 8000;
-      stroke-width: 10px;
       animation: draw 4s ease-in-out forwards;
     }
   }

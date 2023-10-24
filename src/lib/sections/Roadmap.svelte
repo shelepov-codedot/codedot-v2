@@ -2,34 +2,11 @@
   import { onMount } from 'svelte'
 
   onMount(() => {
-    const svgElements = document.querySelectorAll('.roadmap__background-img')
+    const svgList = document.querySelectorAll('path')
 
-    const animateSVG = () => {
-      const scrollPosition = window.scrollY
-
-      svgElements.forEach((el, idx) => {
-        const svgPath = el.querySelector('.anima-' + idx)
-        const svgPathLength = svgPath.getTotalLength()
-        const boundingBox = svgPath.getBoundingClientRect()
-
-        if (boundingBox.top + 250 <= window.innerHeight && boundingBox.bottom >= 0) {
-          const dashoffset =
-            svgPathLength +
-            500 -
-            ((scrollPosition - boundingBox.top) * svgPathLength) / (boundingBox.height - 200)
-
-          svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset + 700 : 0
-          svgPath.style.strokeDasharray = svgPathLength
-        } else {
-          svgPath.style.strokeDashoffset = svgPathLength
-          svgPath.style.strokeDasharray = svgPathLength
-        }
-      })
-
-      requestAnimationFrame(animateSVG)
-    }
-
-    animateSVG()
+    svgList.forEach((el) => {
+      const svgElLength = el.getTotalLength()
+    })
   })
 
   export let data
@@ -135,7 +112,6 @@
   .anima-roadmap {
     stroke-dashoffset: 8800;
     stroke-dasharray: 8800;
-    transition: 1s ease-in-out;
   }
 
   .roadmap {
