@@ -21,8 +21,6 @@
     }
   })
 
-  console.log(categoryCounts)
-
   register()
 
   onMount(async () => {

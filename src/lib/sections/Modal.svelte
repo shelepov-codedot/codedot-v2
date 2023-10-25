@@ -46,7 +46,6 @@
     if (!file) {
       errors.file = 'File is required'
     }
-    console.log(errors.phone)
   }
 
   const handleSubmit = async () => {

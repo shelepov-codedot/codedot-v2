@@ -2,10 +2,32 @@
   import { onMount } from 'svelte'
 
   onMount(() => {
-    const svgList = document.querySelectorAll('path')
+    const svgList = document.querySelectorAll('.roadmap__background-img')
 
     svgList.forEach((el) => {
-      const svgElLength = el.getTotalLength()
+      const path = el.querySelector('path')
+      const svgElLength = path.getTotalLength()
+      const svgBack = el
+
+      window.addEventListener('scroll', () => {
+        const svgBackRect = svgBack.getBoundingClientRect()
+        const scrollPosition = window.scrollY - svgBackRect.top
+
+        if (svgBackRect.top <= window.innerHeight && svgBackRect.bottom >= 0) {
+          const svgBackHeight = svgBack.clientHeight - 400
+          const scrollPercentage = scrollPosition / svgBackHeight
+
+          const drawLength = svgElLength * (1 - scrollPercentage)
+
+          if (svgElLength >= 0) {
+            path.style.strokeDasharray = svgElLength
+            path.style.strokeDashoffset = drawLength
+          }
+        } else {
+          path.style.strokeDasharray = 8800
+          path.style.strokeDashoffset = 8800
+        }
+      })
     })
   })
 
@@ -20,7 +42,7 @@
           <div class="roadmap__background-img-wrapper">
             <svg
               viewBox="0 0 1448 1145"
-              class="roadmap__background-img"
+              class="roadmap__background-img svg-0"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -34,7 +56,7 @@
           <div class="roadmap__background-img-wrapper">
             <svg
               viewBox="0 0 1072 735"
-              class="roadmap__background-img"
+              class="roadmap__background-img svg-1"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -47,7 +69,7 @@
           </div>
           <div class="roadmap__background-img-wrapper">
             <svg
-              class="roadmap__background-img"
+              class="roadmap__background-img svg-2"
               viewBox="0 0 1056 854"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +83,7 @@
           </div>
           <div class="roadmap__background-img-wrapper">
             <svg
-              class="roadmap__background-img"
+              class="roadmap__background-img svg-3"
               viewBox="0 0 1450 919"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +97,7 @@
           </div>
           <div class="roadmap__background-img-wrapper">
             <svg
-              class="roadmap__background-img"
+              class="roadmap__background-img svg-4"
               viewBox="0 0 1487 1097"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
