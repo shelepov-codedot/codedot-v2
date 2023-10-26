@@ -1,8 +1,9 @@
 <script>
   import { onMount } from 'svelte'
-  let svgPath, svgPathLength, showDignity
+  let showDignity
 
   onMount(() => {
+    let svgPath, svgPathLength
     let scrollPositionDignity = 0
     const section = document.querySelector('.dignity')
     const svgPathId = 'animated-path'

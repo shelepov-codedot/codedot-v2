@@ -1,25 +1,23 @@
 <script>
   import { onMount } from 'svelte'
   export let data
+
   onMount(() => {
     const svgList = document.querySelectorAll('.roadmap__background-img')
-
     svgList.forEach((el) => {
       const path = el.querySelector('path')
-      console.log(path)
       const svgElLength = path.getTotalLength()
-      console.log(svgElLength)
-      const svgBack = el
-      const svgBackRect = svgBack.getBoundingClientRect()
+      const svgBackRect = el.getBoundingClientRect()
 
       const startY = svgBackRect.top + window.scrollY - 400
       const endY = startY + svgBackRect.height
 
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY
-        console.log(scrollY)
+
         if (scrollY >= startY && scrollY <= endY) {
-          const svgBackHeight = svgBack.clientHeight
+          console.log(1)
+          const svgBackHeight = el.clientHeight
           const scrollPercentage = (scrollY - startY) / svgBackHeight
 
           const drawLength = svgElLength * (1 - scrollPercentage)

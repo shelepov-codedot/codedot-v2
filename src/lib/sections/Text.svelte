@@ -29,7 +29,9 @@
               600
             svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
           } else {
-            svgPath.style.strokeDashoffset = 8800
+            if (svgPath) {
+              svgPath.style.strokeDashoffset = 8800
+            }
           }
         }
       })
