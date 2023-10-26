@@ -1,6 +1,6 @@
 import sanityFetch from '$lib/server/sanityFetch'
 
-export async function load({ params }) {
+export async function load({ params, url }) {
   const { slug } = params
   let dataExport = [],
     secondData = [],

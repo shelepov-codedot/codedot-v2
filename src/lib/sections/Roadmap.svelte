@@ -1,40 +1,54 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onMount, onDestroy } from 'svelte'
   export let data
 
-  onMount(() => {
-    const svgList = document.querySelectorAll('.roadmap__background-img')
+  let svgList = null
+
+  function scrollHandler() {
+    if (!svgList || typeof window === 'undefined') return
+
     svgList.forEach((el) => {
       const path = el.querySelector('path')
       const svgElLength = path.getTotalLength()
       const svgBackRect = el.getBoundingClientRect()
-
       const startY = svgBackRect.top + window.scrollY - 400
       const endY = startY + svgBackRect.height
+      const scrollY = window.scrollY
 
-      window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY
+      if (scrollY >= startY && scrollY <= endY) {
+        const svgBackHeight = el.clientHeight
+        const scrollPercentage = (scrollY - startY) / svgBackHeight
+        const drawLength = svgElLength * (1 - scrollPercentage)
 
-        if (scrollY >= startY && scrollY <= endY) {
-          console.log(1)
-          const svgBackHeight = el.clientHeight
-          const scrollPercentage = (scrollY - startY) / svgBackHeight
-
-          const drawLength = svgElLength * (1 - scrollPercentage)
-
-          if (svgElLength >= 0) {
-            path.style.strokeDasharray = svgElLength
-            path.style.strokeDashoffset = drawLength
-          }
+        if (svgElLength >= 0) {
+          path.style.strokeDasharray = svgElLength
+          path.style.strokeDashoffset = drawLength
         }
+      }
 
-        if (scrollY <= startY) {
-          path.style.strokeDasharray = 8800
-          path.style.strokeDashoffset = 8800
-        }
-      })
+      if (scrollY <= startY) {
+        path.style.strokeDasharray = 8800
+        path.style.strokeDashoffset = 8800
+      }
     })
-  })
+  }
+
+  function addScrollListener() {
+    if (typeof window === 'undefined') return
+
+    svgList = document.querySelectorAll('.roadmap__background-img')
+    window.addEventListener('scroll', scrollHandler)
+  }
+
+  function removeScrollListener() {
+    if (typeof window === 'undefined') return
+
+    svgList = null
+    window.removeEventListener('scroll', scrollHandler)
+  }
+
+  onMount(addScrollListener)
+  onDestroy(removeScrollListener)
 </script>
 
 {#if data}

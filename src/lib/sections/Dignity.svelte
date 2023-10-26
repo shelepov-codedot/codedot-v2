@@ -6,42 +6,46 @@
     let svgPath, svgPathLength
     let scrollPositionDignity = 0
     const section = document.querySelector('.dignity')
-    const svgPathId = 'animated-path'
 
-    const checkVisibility = () => {
-      if (window.innerWidth <= 992) {
-        const elem = document.querySelectorAll('.dignity__item')
-        if (elem) {
-          elem.forEach((el) => {
-            const rect = el.getBoundingClientRect()
-            showDignity = rect.top - 400 < window.scrollY
-          })
+    if (section) {
+      const svgPathId = 'animated-path'
+
+      const checkVisibility = () => {
+        if (window.innerWidth <= 992) {
+          const elem = document.querySelectorAll('.dignity__item')
+          if (elem) {
+            elem.forEach((el) => {
+              const rect = el.getBoundingClientRect()
+              showDignity = rect.top - 400 < window.scrollY
+            })
+          }
         }
       }
+
+      window.addEventListener('scroll', () => {
+        scrollPositionDignity = window.scrollY - 1093
+        if (section.getBoundingClientRect().top <= window.scrollY && window.scrollY <= 2600) {
+          if (!svgPath) {
+            svgPath = document.getElementById(svgPathId)
+            svgPathLength = svgPath.getTotalLength()
+            svgPath.style.strokeDasharray = svgPathLength
+            svgPath.style.strokeDashoffset = svgPathLength
+          }
+
+          if (scrollPositionDignity >= 0) {
+            const dashoffset =
+              svgPathLength -
+              (scrollPositionDignity * svgPathLength) /
+                (section.getBoundingClientRect().height - 600)
+            svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
+          } else {
+            svgPath.style.strokeDashoffset = 8800
+          }
+        }
+
+        checkVisibility()
+      })
     }
-
-    window.addEventListener('scroll', () => {
-      scrollPositionDignity = window.scrollY - 1093
-      if (section.getBoundingClientRect().top <= window.scrollY && window.scrollY <= 2600) {
-        if (!svgPath) {
-          svgPath = document.getElementById(svgPathId)
-          svgPathLength = svgPath.getTotalLength()
-          svgPath.style.strokeDasharray = svgPathLength
-          svgPath.style.strokeDashoffset = svgPathLength
-        }
-
-        if (scrollPositionDignity >= 0) {
-          const dashoffset =
-            svgPathLength -
-            (scrollPositionDignity * svgPathLength) / (section.getBoundingClientRect().height - 600)
-          svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
-        } else {
-          svgPath.style.strokeDashoffset = 8800
-        }
-      }
-
-      checkVisibility()
-    })
   })
 
   export let data
