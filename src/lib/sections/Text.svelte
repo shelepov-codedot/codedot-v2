@@ -1,31 +1,39 @@
 <script>
   import { onMount } from 'svelte'
-  let svgPath, svgPathLength, showDignity
+  let svgPath, svgPathLength
 
   onMount(() => {
-    let scrollPosition = 0
     const section = document.querySelector('.text')
-    const svgPathId = 'animated-path-text'
 
-    window.addEventListener('scroll', () => {
-      scrollPosition = window.scrollY - 6800
-      if (section.getBoundingClientRect().top <= window.scrollY && scrollPosition <= 1250) {
-        if (!svgPath) {
-          svgPath = document.getElementById(svgPathId)
-          svgPathLength = svgPath.getTotalLength()
-          svgPath.style.strokeDasharray = svgPathLength
-          svgPath.style.strokeDashoffset = svgPathLength
-        }
+    if (section) {
+      let scrollPositionText = 0
 
-        if (scrollPosition >= 0) {
-          const dashoffset =
-            svgPathLength -
-            (scrollPosition * svgPathLength) / section.getBoundingClientRect().height -
-            600
-          svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
+      const svgPathId = 'animated-path-text'
+      window.addEventListener('scroll', () => {
+        scrollPositionText = window.scrollY - 6800
+        if (section.getBoundingClientRect().top <= window.scrollY && scrollPositionText <= 1250) {
+          if (!svgPath) {
+            svgPath = document.getElementById(svgPathId)
+          }
+
+          if (svgPath) {
+            svgPathLength = svgPath?.getTotalLength()
+            svgPath.style.strokeDasharray = svgPathLength
+            svgPath.style.strokeDashoffset = svgPathLength
+          }
+
+          if (scrollPositionText >= 0) {
+            const dashoffset =
+              svgPathLength -
+              (scrollPositionText * svgPathLength) / section.getBoundingClientRect().height -
+              600
+            svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
+          } else {
+            svgPath.style.strokeDashoffset = 8800
+          }
         }
-      }
-    })
+      })
+    }
   })
 
   export let data

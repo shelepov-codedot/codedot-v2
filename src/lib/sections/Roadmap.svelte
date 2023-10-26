@@ -1,21 +1,26 @@
 <script>
   import { onMount } from 'svelte'
-
+  export let data
   onMount(() => {
     const svgList = document.querySelectorAll('.roadmap__background-img')
 
     svgList.forEach((el) => {
       const path = el.querySelector('path')
+      console.log(path)
       const svgElLength = path.getTotalLength()
+      console.log(svgElLength)
       const svgBack = el
+      const svgBackRect = svgBack.getBoundingClientRect()
+
+      const startY = svgBackRect.top + window.scrollY - 400
+      const endY = startY + svgBackRect.height
 
       window.addEventListener('scroll', () => {
-        const svgBackRect = svgBack.getBoundingClientRect()
-        const scrollPosition = window.scrollY - svgBackRect.top
-
-        if (svgBackRect.top <= window.innerHeight && svgBackRect.bottom >= 0) {
-          const svgBackHeight = svgBack.clientHeight - 400
-          const scrollPercentage = scrollPosition / svgBackHeight
+        const scrollY = window.scrollY
+        console.log(scrollY)
+        if (scrollY >= startY && scrollY <= endY) {
+          const svgBackHeight = svgBack.clientHeight
+          const scrollPercentage = (scrollY - startY) / svgBackHeight
 
           const drawLength = svgElLength * (1 - scrollPercentage)
 
@@ -23,15 +28,15 @@
             path.style.strokeDasharray = svgElLength
             path.style.strokeDashoffset = drawLength
           }
-        } else {
+        }
+
+        if (scrollY <= startY) {
           path.style.strokeDasharray = 8800
           path.style.strokeDashoffset = 8800
         }
       })
     })
   })
-
-  export let data
 </script>
 
 {#if data}

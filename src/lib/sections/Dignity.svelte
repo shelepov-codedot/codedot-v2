@@ -3,7 +3,7 @@
   let svgPath, svgPathLength, showDignity
 
   onMount(() => {
-    let scrollPosition = 0
+    let scrollPositionDignity = 0
     const section = document.querySelector('.dignity')
     const svgPathId = 'animated-path'
 
@@ -20,7 +20,7 @@
     }
 
     window.addEventListener('scroll', () => {
-      scrollPosition = window.scrollY - 1093
+      scrollPositionDignity = window.scrollY - 1093
       if (section.getBoundingClientRect().top <= window.scrollY && window.scrollY <= 2600) {
         if (!svgPath) {
           svgPath = document.getElementById(svgPathId)
@@ -29,11 +29,13 @@
           svgPath.style.strokeDashoffset = svgPathLength
         }
 
-        if (scrollPosition >= 0) {
+        if (scrollPositionDignity >= 0) {
           const dashoffset =
             svgPathLength -
-            (scrollPosition * svgPathLength) / (section.getBoundingClientRect().height - 600)
+            (scrollPositionDignity * svgPathLength) / (section.getBoundingClientRect().height - 600)
           svgPath.style.strokeDashoffset = dashoffset > 0 ? dashoffset : 0
+        } else {
+          svgPath.style.strokeDashoffset = 8800
         }
       }
 
