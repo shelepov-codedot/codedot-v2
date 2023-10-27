@@ -68,6 +68,7 @@ declare module '$env/static/private' {
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
 	export const npm_node_execpath: string;
+	export const npm_package_dependencies_svelte_tel_input: string;
 	export const npm_package_dependencies_swiper: string;
 	export const npm_package_dependencies__sanity_cli: string;
 	export const npm_package_dependencies__sanity_client: string;
@@ -198,6 +199,7 @@ declare module '$env/dynamic/private' {
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
 		npm_node_execpath: string;
+		npm_package_dependencies_svelte_tel_input: string;
 		npm_package_dependencies_swiper: string;
 		npm_package_dependencies__sanity_cli: string;
 		npm_package_dependencies__sanity_client: string;
