@@ -1,21 +1,20 @@
 <script>
   import { TelInput, normalizedCountries } from 'svelte-tel-input'
-  // import { DetailedValue, CountryCode, E164Number } from 'svelte-tel-input/types'
+  console.log(normalizedCountries)
 
   export let closeModal, activeModal, data
 
-  let selectedCountry = 'BY'
-  let value = '+36301234567'
+  let selectedCountry = 'PL'
+  let value = ''
   let classInput = 'tel-input'
   let valid = true
   let detailedValue = null
 
-  let active, statusError, openList
+  let active, statusError
   $: curValue = 'Select your industry'
-  $: curMask = ''
   let errorText,
-    flag = '',
-    prefix = '',
+    flag = 'pl',
+    prefix = '+(48)',
     textName = '',
     industry = curValue,
     name = '',
@@ -24,7 +23,8 @@
     requirements = '',
     file,
     errors = {},
-    succes = false
+    succes = false,
+    openList = false
 
   const validateForm = () => {
     errors = {}
@@ -45,12 +45,6 @@
       errors.phone = 'Phone number is required'
     }
 
-    if (phone) {
-      let phoneReg = /^\d+$/
-      if (phoneReg.test(phone) == false) {
-        errors.phone = 'Phone does not pass verification'
-      }
-    }
     if (!industry) {
       errors.industry = 'Industry is required'
     }
@@ -80,6 +74,7 @@
         })
 
         if (response.ok) {
+          console.log(response)
           name = ''
           email = ''
           industry = ''
@@ -153,14 +148,15 @@
   }
 
   const selectMask = (e) => {
-    curMask = e.target.textContent
-    let index = curMask.split('').indexOf(' ')
-    prefix = curMask.substring(index)
-
-    flag = curMask.substring(0, index).toLowerCase()
-    phone = curMask
+    flag = e.target.dataset.flag
+    prefix = e.target.dataset.prefix
+    selectedCountry = flag.toUpperCase()
     validateForm()
     openList = !openList
+  }
+
+  const handleInput = (e) => {
+    phone = prefix + e.target.value
   }
 </script>
 
@@ -228,36 +224,47 @@
             <div class="modal__phone-list">
               <div class="modal__phone-item">
                 <span class={`modal__phone-flag flag flag-${flag}`} on:click={handleList} />
-                {prefix}
+                <span class="modal__phone-prefix">
+                  {prefix}
+                </span>
+                <input type="hidden" id="phone" name="phone" bind:value={phone} />
                 <TelInput
                   bind:country={selectedCountry}
                   bind:value
                   bind:valid
                   bind:detailedValue
                   bind:class={classInput}
+                  on:change={(e) => handleInput(e)}
                 />
               </div>
 
               <div
                 class={openList
-                  ? 'modal__phone-list-items'
-                  : 'modal__phone-list-items modal__phone-list-items--active'}
+                  ? 'modal__phone-list-items modal__phone-list-items--active'
+                  : 'modal__phone-list-items '}
               >
                 {#each normalizedCountries as currentCountry (currentCountry.id)}
-                  <span class="modal__phone-list-item" on:click={(e) => selectMask(e)}>
+                  <span
+                    class="modal__phone-list-item"
+                    on:click={(e) => selectMask(e)}
+                    data-flag={currentCountry.iso2.toLowerCase()}
+                    data-prefix="+({currentCountry.dialCode})"
+                  >
                     <span
                       class={`modal__phone-flag flag flag-${currentCountry.iso2.toLowerCase()}`}
                     />
-                    <span>{currentCountry.iso2} (+{currentCountry.dialCode})</span>
+                    <span class="modal__phone-prefix">
+                      {currentCountry.name} (+{currentCountry.dialCode})
+                    </span>
                   </span>
                 {/each}
               </div>
             </div>
           </div>
 
-          {#if errors.phone}
+          <!-- {#if errors.phone}
             <span class="modal__error-text">{errors.phone}</span>
-          {/if}
+          {/if} -->
         </div>
         <div class="modal__input-wrapper">
           <label for="email" class="modal__label">Corporate Email</label>
@@ -347,8 +354,13 @@
     &__phone-input {
       display: flex;
       align-items: center;
-      height: 100%;
+      height: 50px;
       position: relative;
+    }
+
+    &__phone-prefix {
+      font-size: 12px;
+      width: max-content;
     }
 
     &__phone-list-items {
@@ -387,8 +399,7 @@
     &__phone-item {
       display: flex;
       align-items: center;
-
-      gap: 10px;
+      gap: 2px;
     }
 
     &__phone-list-item {
@@ -399,6 +410,14 @@
 
       &:hover {
         background-color: rgba(0, 0, 0, 0.055);
+      }
+
+      .modal__phone-flag {
+        pointer-events: none;
+      }
+
+      .modal__phone-prefix {
+        pointer-events: none;
       }
     }
 
@@ -635,7 +654,7 @@
       overflow-x: hidden;
       margin-right: -10px;
       padding-right: 5px;
-      padding-left: 0px;
+      padding-left: 5px;
       @include media-breakpoint-down(md) {
         column-gap: 20px;
         row-gap: 24px;
@@ -758,21 +777,35 @@
     }
 
     &__input-list {
-      overflow: hidden;
+      overflow: auto;
       display: none;
-      padding-top: 50px;
       z-index: 2;
       background-color: rgb(255, 255, 255);
       left: 0;
+      height: 195px;
+
       flex-direction: column;
       position: absolute;
       width: 100%;
-      top: 30px;
+      top: 90px;
       border-radius: 20px;
       box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.488);
 
       &--active {
         display: flex;
+      }
+
+      &::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        border: 3px solid #006185;
       }
     }
 
@@ -942,7 +975,7 @@
   }
 
   span.flag {
-    width: 28px;
+    min-width: 28px;
     height: 19px;
     display: inline-block;
     cursor: pointer;
