@@ -1,6 +1,5 @@
 <script>
   import { TelInput, normalizedCountries } from 'svelte-tel-input'
-  console.log(normalizedCountries)
 
   export let closeModal, activeModal, data
 
@@ -380,7 +379,7 @@
       box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.196);
       left: 0;
       border-radius: 10px;
-      top: 55px;
+      top: 85px;
       position: absolute;
       z-index: 5;
       background-color: white;
@@ -791,7 +790,6 @@
       background-color: rgb(255, 255, 255);
       left: 0;
       height: 195px;
-
       flex-direction: column;
       position: absolute;
       width: 100%;
