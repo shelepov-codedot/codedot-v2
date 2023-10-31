@@ -825,7 +825,7 @@
     width: 30px;
   }
   .flag {
-    background-image: url('../icons/flags_responsive.png');
+    background-image: url('/icons/flags_responsive.png');
     background-repeat: no-repeat;
     background-size: 100%;
   }
