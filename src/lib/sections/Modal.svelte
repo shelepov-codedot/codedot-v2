@@ -45,6 +45,12 @@
       errors.phone = 'Phone number is required'
     }
 
+    if (phone) {
+      if (phone.length <= 8) {
+        errors.phone = 'Phone length is min'
+      }
+    }
+
     if (!industry) {
       errors.industry = 'Industry is required'
     }
@@ -157,6 +163,8 @@
 
   const handleInput = (e) => {
     phone = prefix + e.target.value
+    console.log(phone)
+    validateForm()
   }
 </script>
 
@@ -220,7 +228,7 @@
 
         <div class="modal__input-wrapper">
           <label for="phone" class="modal__label">Phone</label>
-          <div class="modal__input modal__phone-input">
+          <div class={errors.phone ? 'modal__input modal__input--error' : 'modal__input'}>
             <div class="modal__phone-list">
               <div class="modal__phone-item">
                 <span class={`modal__phone-flag flag flag-${flag}`} on:click={handleList} />
@@ -262,9 +270,9 @@
             </div>
           </div>
 
-          <!-- {#if errors.phone}
+          {#if errors.phone}
             <span class="modal__error-text">{errors.phone}</span>
-          {/if} -->
+          {/if}
         </div>
         <div class="modal__input-wrapper">
           <label for="email" class="modal__label">Corporate Email</label>
