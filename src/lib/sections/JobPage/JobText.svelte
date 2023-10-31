@@ -40,16 +40,16 @@
     if (!lastName) {
       errors.lastName = 'Last name is required'
     }
+
     if (!phone) {
       errors.phone = 'Phone number is required'
     }
+
     if (phone) {
-      let phoneReg = /^\d+$/
-      if (phoneReg.test(phone) == false) {
-        errors.phone = 'Phone does not pass verification'
+      if (phone.length <= 8) {
+        errors.phone = 'Phone length is min'
       }
     }
-
     if (!file) {
       errors.file = 'File is required'
     }
