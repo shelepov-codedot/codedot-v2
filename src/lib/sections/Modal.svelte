@@ -992,7 +992,7 @@
     width: 30px;
   }
   .flag {
-    background: url('../images/flags_responsive.png') no-repeat;
+    background: url('../icons/flags_responsive.png') no-repeat;
     background-size: 100%;
   }
   .flag-ad {
