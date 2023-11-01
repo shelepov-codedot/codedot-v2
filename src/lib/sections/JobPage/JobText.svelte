@@ -152,6 +152,7 @@
   }
 
   const handleFilter = (e) => {
+    phone = prefix + e.target.value
     filter = e.target.value
     validateForm()
   }
