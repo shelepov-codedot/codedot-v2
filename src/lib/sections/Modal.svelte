@@ -164,7 +164,6 @@
 
   const handleInput = (e) => {
     phone = prefix + e.target.value
-    console.log(phone)
     validateForm()
   }
 
