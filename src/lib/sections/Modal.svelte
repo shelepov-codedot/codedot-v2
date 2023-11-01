@@ -18,6 +18,7 @@
     industry = curValue,
     name = '',
     phone = '',
+    filter = '',
     email = '',
     requirements = '',
     file,
@@ -85,6 +86,7 @@
           industry = ''
           phone = ''
           requirements = ''
+
           file = null
           textName = ''
           curValue = 'Select your industry'
@@ -164,6 +166,10 @@
     phone = prefix + e.target.value
     console.log(phone)
     validateForm()
+  }
+
+  const handleFilter = (e) => {
+    filter = e.target.value
   }
 </script>
 
@@ -250,20 +256,30 @@
                   ? 'modal__phone-list-items modal__phone-list-items--active'
                   : 'modal__phone-list-items '}
               >
+                <div class="modal__phone-search-wrapper">
+                  <span class="modal__phone-search-icon">🔎</span>
+                  <input
+                    type="search"
+                    class="modal__phone-search-input"
+                    on:input={(e) => handleFilter(e)}
+                  />
+                </div>
                 {#each normalizedCountries as currentCountry (currentCountry.id)}
-                  <span
-                    class="modal__phone-list-item"
-                    on:click={(e) => selectMask(e)}
-                    data-flag={currentCountry.iso2.toLowerCase()}
-                    data-prefix="+({currentCountry.dialCode})"
-                  >
+                  {#if currentCountry.name.toLowerCase().includes(filter.toLowerCase())}
                     <span
-                      class={`modal__phone-flag flag flag-${currentCountry.iso2.toLowerCase()}`}
-                    />
-                    <span class="modal__phone-prefix">
-                      {currentCountry.name} (+{currentCountry.dialCode})
+                      class="modal__phone-list-item"
+                      on:click={selectMask}
+                      data-flag={currentCountry.iso2.toLowerCase()}
+                      data-prefix={`+${currentCountry.dialCode}`}
+                    >
+                      <span
+                        class={`modal__phone-flag flag flag-${currentCountry.iso2.toLowerCase()}`}
+                      />
+                      <span class="modal__phone-prefix">
+                        {currentCountry.name} (+{currentCountry.dialCode})
+                      </span>
                     </span>
-                  </span>
+                  {/if}
                 {/each}
               </div>
             </div>
@@ -426,6 +442,25 @@
       .modal__phone-prefix {
         pointer-events: none;
       }
+    }
+
+    &__phone-search-wrapper {
+      position: sticky;
+      top: 0;
+      background-color: white;
+      left: 0;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &__phone-search-input {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid black;
+      outline: none;
+      padding: 3px 10px;
     }
 
     &__notice {
