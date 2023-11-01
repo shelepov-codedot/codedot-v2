@@ -170,6 +170,7 @@
 
   const handleFilter = (e) => {
     filter = e.target.value
+    validateForm()
   }
 </script>
 
