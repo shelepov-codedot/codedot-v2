@@ -76,7 +76,6 @@ declare module '$env/static/private' {
 	export const npm_package_dependencies__sanity_default_layout: string;
 	export const npm_package_dependencies__sanity_default_login: string;
 	export const npm_package_dependencies__sanity_image_url: string;
-	export const npm_package_description: string;
 	export const npm_package_devDependencies_sass: string;
 	export const npm_package_devDependencies_svelte: string;
 	export const npm_package_devDependencies_svelte_preprocess: string;
@@ -207,7 +206,6 @@ declare module '$env/dynamic/private' {
 		npm_package_dependencies__sanity_default_layout: string;
 		npm_package_dependencies__sanity_default_login: string;
 		npm_package_dependencies__sanity_image_url: string;
-		npm_package_description: string;
 		npm_package_devDependencies_sass: string;
 		npm_package_devDependencies_svelte: string;
 		npm_package_devDependencies_svelte_preprocess: string;
