@@ -1,56 +1,64 @@
+import sanityFetch from '$lib/server/sanityFetch'
 
-import {createClient} from "@sanity/client";
-import { headerQuery } from '$lib/graphql/sections/header'
+export async function load({ params, url }) {
+  const { slug } = params
+  let dataExport = [],
+    secondData = [],
+    industries = []
 
-const client = createClient({
-  projectId: "c6ki8epl",
-  dataset: "production",
-  apiVersion: "2021-10-21",
-  useCdn: false
-});
+  const query = `*[slug.current=="/${slug}"]`
+  const response = await sanityFetch(query)
 
-const query = (slug) => `
-{
-  pageCollection(where: {
-    url: "${slug}"
-  } limit: 1) {
-    items {
-      seo {
-        titleTemplate
-        title
-        description
-        keywords
-        image {
-          url
-          fileName
-          description
-          width
-          height
-        }
-        ogype
-        twittercard
-      }
-      name
-      url
-      sectionsCollection (limit:90) {
-         items{
-          ${headerQuery}
-        }
-      }
+  let pageData = response[0]
+
+  for (let i = 0; i < pageData?.content.length; i++) {
+    if (pageData.content[i]) {
+      await sanityFetch(`*[_id=='${pageData.content[i]._ref}']`).then((data) => {
+        dataExport.push(data[0])
+      })
     }
   }
+
+  if (slug == 'cases') {
+    if (pageData) {
+      let secondQuery = `*[_type == "Cases"] {
+        casesList[_type=="casesItem"] {
+          name, 
+          category,
+          image,
+          _key,
+          slug
+        }
+      }`
+
+      let secondResponse = await sanityFetch(secondQuery)
+      secondData = secondResponse.reduce((accumulator, current) => {
+        accumulator.push(...current.casesList)
+        return accumulator
+      }, [])
+    }
+  }
+
+  let industriesQuery = `*[_type == "OurServices"] {
+    servicesItems[_type=="serviceItem"] {
+       serviceName,
+       _key,
+     }
+   }`
+
+  let industriesResponse = await sanityFetch(industriesQuery)
+
+  industries = industriesResponse[0].servicesItems
+
+  secondData.length > 0
+    ? (pageData = { ...pageData, content: [...dataExport], secondData, industries })
+    : (pageData = { ...pageData, content: [...dataExport], industries })
+
+  const casesPage = pageData?.content.find((item) => item._type === 'CasesPage')
+
+  casesPage ? (casesPage.secondData = secondData) : secondData
+
+  pageData = { ...pageData, content: [...dataExport], industries }
+
+  return pageData
 }
-`
-
-// export async function load({ params }) {
-//   const data = await client.fetch(`*[_type == "pet"]`);
-//   const data = await client.fetch(query(`/${params.slug}`));
-
-//   if (data) {
-//     return data;
-//   }
-//   return {
-//     status: 500,
-//     body: new Error("Internal Server Error")
-//   };
-// }
